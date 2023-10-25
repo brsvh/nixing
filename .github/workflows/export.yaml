@@ -19,7 +19,7 @@ jobs:
           list-files: shell
           filters: |
             org:
-              - 'README.org'
+              - 'docs/README.org'
       - name: Emacs setup
         if: steps.changes.outputs.org == 'true'
         uses: purcell/setup-emacs@master
