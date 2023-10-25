@@ -1,0 +1,44 @@
+name: Export
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  export-markdown:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Checkout changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          list-files: shell
+          filters: |
+            org:
+              - 'README.org'
+      - name: Emacs setup
+        if: steps.changes.outputs.org == 'true'
+        uses: purcell/setup-emacs@master
+        with:
+          version: snapshot
+      - name: Export Markdown
+        if: steps.changes.outputs.org == 'true'
+        run: |
+          for org in ${{ steps.changes.outputs.org_files }}
+          do
+            emacs $org --no-init-file --no-site-file --kill --batch \
+              --load ox \
+              --load ox-md \
+              --eval "(advice-add 'org-md-template :around \#'(lambda (orig-fun &rest args) (let* ((res (apply orig-fun args)) (title (org-element-interpret-data (plist-get (nth 1 args) :title)))) (concat \"# \" title \"\n\n\" res))))"
+              --eval "(setq org-export-allow-bind-keywords t)"
+              --funcall org-md-export-to-markdown
+          done
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: |-
+            chore: apply automatic changes
