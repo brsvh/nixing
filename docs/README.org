@@ -1,6 +1,6 @@
 #+OPTIONS: toc:nil
 #+STARTUP: noindent fnadjust
-#+EXPORT_FILE_NAME: .github/README.md
+#+EXPORT_FILE_NAME: ../.github/README.md
 #+TITLE: Nixing
 #+AUTHOR: Burgess Chang
 #+EMAIL: (concat bsc at-sign brsvh dot org)
