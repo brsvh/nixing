@@ -8,6 +8,7 @@ with lib;
 let
   inherit (inputs.haumea.lib) load loaders;
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
+  inherit (inputs) nixpkgs;
 
   profiles = load {
     src = ../home;
@@ -15,11 +16,6 @@ let
   };
 in
 {
-  # imports =
-  #   [
-  #     self.flakeModules.home-manager
-  #   ];
-
   flake = {
     homeConfigurations = {
       "bsc@eustoma" = withSystem "x86_64-linux" (
