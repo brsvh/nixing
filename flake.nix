@@ -141,6 +141,7 @@
           [
             ./flake-modules
             ./nixos
+            ./home
           ];
 
         systems =
