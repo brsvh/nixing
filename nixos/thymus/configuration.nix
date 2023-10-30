@@ -233,7 +233,7 @@ with lib;
 
   networking = {
     domain = "brsvh.org";
-    hostName = "eustoma";
+    hostName = "thymus";
     networkmanager = {
       enable = true;
     };

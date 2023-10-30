@@ -16,7 +16,7 @@ in
 {
   flake = {
     nixosConfigurations = {
-      eustoma = withSystem "x86_64-linux" (
+      thymus = withSystem "x86_64-linux" (
         { system
         , ...
         }:
@@ -25,7 +25,7 @@ in
           modules =
             [
               inputs.disko.nixosModules.disko
-              hosts.eustoma.configuration
+              hosts.thymus.configuration
             ];
           specialArgs = {
             inherit (inputs) hardware;
