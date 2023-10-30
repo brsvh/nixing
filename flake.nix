@@ -101,7 +101,7 @@
       {
         imports =
           [
-            ./flake-parts/flake-module.nix
+            ./parts
           ];
 
         systems =
