@@ -1,18 +1,18 @@
-{
-  config,
-  flake-parts-lib,
-  lib,
-  ...
+{ config
+, flake-parts-lib
+, lib
+, ...
 }:
 with lib;
 let
   inherit (flake-parts-lib) mkSubmoduleOptions;
-in {
+in
+{
   options = {
     flake = mkSubmoduleOptions {
       homeConfigurations = mkOption {
         type = types.lazyAttrsOf types.raw;
-        default = {};
+        default = { };
         description = ''
           Instantiated home-manager configurations.
 
