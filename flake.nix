@@ -62,6 +62,25 @@
         };
       };
     };
+    home-manager = {
+      follows = "home-manager-stable";
+    };
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-23.05";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
     gitignore = {
       url = "github:hercules-ci/gitignore.nix/master";
       inputs = {
