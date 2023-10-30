@@ -7,6 +7,9 @@
   home = {
     homeDirectory = "/home/bsc";
     username = "bsc";
+    sessionVariables = {
+      GNUPGHOME = "${config.xdg.stateHome}/gnupg";
+    };
     stateVersion = "23.05";
   };
 
@@ -32,16 +35,12 @@
     git = {
       enable = true;
       signing = {
+        gpgPath = "/usr/bin/gpg2";
         key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
         signByDefault = true;
       };
       userEmail = "bsc@brsvh.org";
       userName = "Burgess Chang";
-    };
-
-    gpg = {
-      enable = true;
-      homedir = "${config.xdg.stateHome}/gnupg";
     };
 
     home-manager = {
