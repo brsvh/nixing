@@ -23,6 +23,14 @@
         };
       };
     };
+    disko = {
+      url = "github:nix-community/disko/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
     flake-compat = {
       url = "github:edolstra/flake-compat/master";
       flake = false;
@@ -40,6 +48,17 @@
       inputs = {
         systems = {
           follows = "systems";
+        };
+      };
+    };
+    hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+    haumea = {
+      url = "github:nix-community/haumea/main";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
         };
       };
     };
@@ -102,6 +121,7 @@
         imports =
           [
             ./flake-modules
+            ./nixos
           ];
 
         systems =
