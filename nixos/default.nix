@@ -1,5 +1,7 @@
-{ inputs
+{ config
+, inputs
 , lib
+, self
 , withSystem
 , ...
 }:
@@ -14,24 +16,45 @@ let
   };
 in
 {
-  flake = {
-    nixosConfigurations = {
-      thymus = withSystem "x86_64-linux" (
-        { system
-        , ...
-        }:
-        nixosSystem {
-          inherit system;
-          modules =
-            [
-              inputs.disko.nixosModules.disko
-              hosts.thymus.configuration
-            ];
-          specialArgs = {
-            inherit (inputs) hardware;
-          };
-        }
-      );
+  configurations = {
+    default = {
+      nixos = {
+        inherit (inputs) nixpkgs;
+        system = "x86_64-linux";
+        stateVersion = "23.05";
+      };
     };
+
+    global = {
+      nixos = {
+        modules =
+          [
+            inputs.disko.nixosModules.disko
+            inputs.home-manager.nixosModules.home-manager
+            inputs.lanzaboote.nixosModules.lanzaboote
+          ];
+        specialArgs = {
+          inherit (inputs) hardware;
+        };
+      };
+    };
+
+    nixos = {
+      "eustoma" = {
+        domain = "brsvh.org";
+        modules =
+          [
+            hosts.eustoma.configuration
+            hosts.eustoma.disko
+          ];
+      };
+    };
+  };
+
+  flake = {
+    nixosConfigurations =
+      mapAttrs
+        (_: cfg: cfg.finalNixOSConfiguration)
+        config.configurations.nixos;
   };
 }
