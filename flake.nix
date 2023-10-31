@@ -12,6 +12,14 @@
   };
 
   inputs = {
+    crane = {
+      url = "github:ipetkov/crane/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
     devshell = {
       url = "github:numtide/devshell/main";
       inputs = {
@@ -89,6 +97,26 @@
         };
       };
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs = {
+        crane = {
+          follows = "crane";
+        };
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        pre-commit-hooks-nix = {
+          follows = "pre-commit";
+        };
+      };
+    };
     nixpkgs = {
       follows = "nixpkgs-stable";
     };
@@ -115,6 +143,17 @@
         };
         nixpkgs-stable = {
           follows = "nixpkgs-stable";
+        };
+      };
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay/master";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
         };
       };
     };
