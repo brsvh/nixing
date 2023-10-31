@@ -66,12 +66,21 @@ with lib;
 
     systemPackages = with pkgs; [
       any-nix-shell
+      emacs-pgtk
+      ((emacsPackagesFor emacs-pgtk).emacsWithPackages
+        (
+          epkgs:
+            with epkgs;
+            [
+              nix-mode
+            ]
+        ))
       fish
       gnome.adwaita-icon-theme
     ];
 
     variables = {
-      "EDITOR" = "jmacs";
+      "EDITOR" = "emacs";
     };
 
     profiles = [
@@ -197,6 +206,7 @@ with lib;
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
+        any-nix-shell fish --info-right | source
       '';
     };
   };
