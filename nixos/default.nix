@@ -56,6 +56,8 @@ in
             hosts.eustoma.configuration
             hosts.eustoma.disko
           ];
+        nixpkgs = inputs.nixpkgs-unstable;
+        stateVersion = "23.11";
       };
     };
   };
