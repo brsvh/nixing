@@ -37,6 +37,7 @@ in
                 overlays =
                   [
                     inputs.emacs-overlay.overlays.default
+                    inputs.rust-overlay.overlays.default
                   ];
               };
             }
