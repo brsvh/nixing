@@ -39,6 +39,20 @@
         };
       };
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay/master";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+      };
+    };
     flake-compat = {
       url = "github:edolstra/flake-compat/master";
       flake = false;

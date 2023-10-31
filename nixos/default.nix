@@ -32,6 +32,14 @@ in
             inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.lanzaboote.nixosModules.lanzaboote
+            {
+              nixpkgs = {
+                overlays =
+                  [
+                    inputs.emacs-overlay.overlays.default
+                  ];
+              };
+            }
           ];
         specialArgs = {
           inherit (inputs) hardware;
