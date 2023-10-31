@@ -16,7 +16,7 @@
                 };
                 name = "efi";
                 priority = 1;
-                size = "1GiB";
+                size = "1G";
                 type = "EF00";
               };
               bsp = {
@@ -27,7 +27,7 @@
                 };
                 name = "boot";
                 priority = 2;
-                size = "1GiB";
+                size = "1G";
                 type = "EF02";
               };
               swap = {
@@ -38,7 +38,7 @@
                 };
                 name = "swap";
                 priority = 3;
-                size = "16GiB";
+                size = "16G";
                 type = "8200";
               };
               lsp = {
