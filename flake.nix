@@ -139,7 +139,7 @@
       {
         imports =
           [
-            ./flake-modules
+            ./flakes
             ./nixos
             ./home
           ];
