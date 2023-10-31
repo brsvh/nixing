@@ -42,6 +42,11 @@ with lib;
         enable = mkForce false;
       };
     };
+
+    plymouth = {
+      enable = true;
+      theme = "bgrt";
+    };
   };
 
   console = {
