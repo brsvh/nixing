@@ -1,4 +1,5 @@
-{ inputs
+{ config
+, inputs
 , lib
 , self
 , withSystem
@@ -16,23 +17,38 @@ let
   };
 in
 {
-  flake = {
-    homeConfigurations = {
-      "bsc@eustoma" = withSystem "x86_64-linux" (
-        ctx @
-        { system
-        , ...
-        }:
-        homeManagerConfiguration {
-          extraSpecialArgs =
-            { inherit (inputs) home-manager; };
-          modules =
-            [
-              profiles.bsc.home
-            ];
-          pkgs = nixpkgs.legacyPackages."${system}";
-        }
-      );
+  configurations = {
+    default = {
+      home = {
+        inherit (inputs) home-manager nixpkgs;
+        system = "x86_64-linux";
+        stateVersion = "23.05";
+      };
     };
+
+    global = {
+      home = {
+        modules =
+          [ ];
+        specialArgs =
+          { inherit (inputs) home-manager; };
+      };
+    };
+
+    home = {
+      "bsc@eustoma" = {
+        modules =
+          [
+            profiles.bsc.home
+          ];
+      };
+    };
+  };
+
+  flake = {
+    homeConfigurations =
+      mapAttrs
+        (_: cfg: cfg.finalHomeConfiguration)
+        config.configurations.home;
   };
 }
