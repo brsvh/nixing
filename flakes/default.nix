@@ -3,14 +3,14 @@
   imports =
     [
       ./devshell.nix
-      ./home-manager.nix
+      ./homeConfigurations.nix
       ./pre-commit.nix
       ./treefmt.nix
     ];
 
   flake = {
     flakeModules = {
-      home-manager = ./home-manager.nix;
+      homeConfigurations = ./homeConfigurations.nix;
     };
   };
 }
