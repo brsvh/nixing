@@ -2,6 +2,7 @@
 {
   imports =
     [
+      ./configurations.nix
       ./devshell.nix
       ./homeConfigurations.nix
       ./pre-commit.nix
@@ -10,6 +11,7 @@
 
   flake = {
     flakeModules = {
+      configurations = ./configurations.nix;
       homeConfigurations = ./homeConfigurations.nix;
     };
   };
