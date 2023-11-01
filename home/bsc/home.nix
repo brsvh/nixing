@@ -60,6 +60,11 @@ with lib;
       userName = "Burgess Chang";
     };
 
+    gpg = {
+      enable = true;
+      homedir = "${config.xdg.stateHome}/gnupg";
+    };
+
     home-manager = {
       enable = true;
       path = mkForce "${home-manager}";
