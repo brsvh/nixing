@@ -76,14 +76,14 @@ with lib;
     userDirs = {
       enable = true;
       createDirectories = true;
-      desktop = "${config.xdg.dataHome}/desktop";
-      documents = "${config.xdg.dataHome}/documents";
-      download = "${config.xdg.dataHome}/downloads";
-      music = "${config.xdg.dataHome}/music";
-      pictures = "${config.xdg.dataHome}/pictures";
-      publicShare = "${config.xdg.dataHome}/public";
-      templates = "${config.xdg.dataHome}/templates";
-      videos = "${config.xdg.dataHome}/videos";
+      desktop = "${config.xdg.dataHome}/Desktop";
+      documents = "${config.xdg.dataHome}/Documents";
+      download = "${config.xdg.dataHome}/Downloads";
+      music = "${config.xdg.dataHome}/Music";
+      pictures = "${config.xdg.dataHome}/Pictures";
+      publicShare = "${config.xdg.dataHome}/Public";
+      templates = "${config.xdg.dataHome}/Templates";
+      videos = "${config.xdg.dataHome}/Videos";
     };
   };
 }
