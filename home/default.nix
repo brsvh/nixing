@@ -42,6 +42,9 @@ in
           [
             profiles.bsc.home
           ];
+        nixpkgs = inputs.nixpkgs-unstable;
+        specialArgs =
+          { home-manager = inputs.home-manager-unstable; };
         stateVersion = "23.11";
       };
     };
