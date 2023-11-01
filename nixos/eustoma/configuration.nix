@@ -83,6 +83,7 @@ with lib;
       fish
       git
       gnome.adwaita-icon-theme
+      home-manager
       sbctl
     ];
 
