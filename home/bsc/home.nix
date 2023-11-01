@@ -5,12 +5,19 @@
 }:
 {
   home = {
-    homeDirectory = "/home/bsc";
-    username = "bsc";
+    packages = with pkgs;
+      [
+        any-nix-shell
+      ];
+
+    sessionPath =
+      [
+        "${config.home.sessionVariables.XDG_BIN_HOME}"
+      ];
+
     sessionVariables = {
-      GNUPGHOME = "${config.xdg.stateHome}/gnupg";
+      XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin";
     };
-    stateVersion = "23.05";
   };
 
   nix = {
@@ -30,12 +37,20 @@
   programs = {
     emacs = {
       enable = true;
+      package = pkgs.emacs-pgtk;
+    };
+
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting
+        any-nix-shell fish --info-right | source
+      '';
     };
 
     git = {
       enable = true;
       signing = {
-        gpgPath = "/usr/bin/gpg2";
         key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
         signByDefault = true;
       };
