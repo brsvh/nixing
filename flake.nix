@@ -91,7 +91,7 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs = {
         nixpkgs = {
-          follows = "nixpkgs";
+          follows = "nixpkgs-stable";
         };
       };
     };
@@ -99,7 +99,7 @@
       url = "github:nix-community/home-manager/master";
       inputs = {
         nixpkgs = {
-          follows = "nixpkgs";
+          follows = "nixpkgs-unstable";
         };
       };
     };
