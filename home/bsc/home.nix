@@ -71,6 +71,17 @@ with lib;
     };
   };
 
+  services = {
+    gpg-agent = {
+      enable = true;
+      enableBashIntegration = config.programs.bash.enable;
+      enableExtraSocket = true;
+      enableSshSupport = true;
+      enableFishIntegration = config.programs.fish.enable;
+      pinentryFlavor = "gnome3";
+    };
+  };
+
   xdg = {
     enable = true;
     userDirs = {
