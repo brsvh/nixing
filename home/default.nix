@@ -29,7 +29,17 @@ in
     global = {
       home = {
         modules =
-          [ ];
+          [
+            {
+              nixpkgs = {
+                overlays =
+                  [
+                    inputs.emacs-overlay.overlays.default
+                    inputs.rust-overlay.overlays.default
+                  ];
+              };
+            }
+          ];
         specialArgs =
           { inherit (inputs) home-manager; };
       };
