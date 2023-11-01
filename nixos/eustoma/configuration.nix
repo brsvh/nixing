@@ -81,7 +81,9 @@ with lib;
             ]
         ))
       fish
+      git
       gnome.adwaita-icon-theme
+      sbctl
     ];
 
     variables = {
