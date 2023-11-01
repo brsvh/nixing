@@ -37,10 +37,12 @@ in
 
     home = {
       "bsc@eustoma" = {
+        home-manager = inputs.home-manager-unstable;
         modules =
           [
             profiles.bsc.home
           ];
+        stateVersion = "23.11";
       };
     };
   };
