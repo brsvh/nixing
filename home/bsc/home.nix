@@ -1,8 +1,10 @@
 { config
 , home-manager
+, lib
 , pkgs
 , ...
 }:
+with lib;
 {
   home = {
     packages = with pkgs;
@@ -60,7 +62,7 @@
 
     home-manager = {
       enable = true;
-      path = "${home-manager}";
+      path = mkForce "${home-manager}";
     };
   };
 
