@@ -33,6 +33,10 @@ in
             inputs.home-manager.nixosModules.home-manager
             inputs.lanzaboote.nixosModules.lanzaboote
             {
+              home-manager = {
+                useGlobalPkgs = mkDefault true;
+                useUserPackages = mkDefault true;
+              };
               nixpkgs = {
                 overlays =
                   [
