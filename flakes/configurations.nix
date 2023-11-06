@@ -1,4 +1,5 @@
 { config
+, flake-parts-lib
 , lib
 , withSystem
 , ...
@@ -6,6 +7,7 @@
 with builtins;
 with lib;
 let
+  inherit (flake-parts-lib) mkPerSystemOption;
   cfg = config.configurations;
 in
 {
@@ -41,6 +43,13 @@ in
               home-manager state version.
             '';
           };
+        };
+
+        nixago = mkOption {
+          type = types.unspecified;
+          description = ''
+            The default nixago input.
+          '';
         };
 
         nixos = {
@@ -354,5 +363,73 @@ in
         '';
       };
     };
+
+    perSystem = mkPerSystemOption
+      (
+        { config
+        , system
+        , ...
+        }:
+        {
+          options = {
+            configurations = {
+              nixago = {
+                configs = mkOption {
+                  type = types.listOf (types.submodule (
+                    { ... }:
+                    {
+                      options = {
+                        data = mkOption {
+                          type = types.anything;
+                          description = ''
+                            Data of the configuration file.
+                          '';
+                        };
+                        output = mkOption {
+                          type = types.str;
+                          description = ''
+                            Name of output file.
+                          '';
+                        };
+                        format = mkOption {
+                          type = types.str;
+                          description = ''
+                            Format of the configuration file.
+                          '';
+                        };
+                        engine = mkOption {
+                          type = types.unspecified;
+                          default =
+                            cfg.default.nixago.engines.${system}.nix
+                              { };
+                          description = ''
+                            Engine used to generate configuration file.
+                          '';
+                        };
+                      };
+                    }
+                  ));
+                  default = [ ];
+                  description = ''
+                    List of nixago configurations.
+                  '';
+                };
+                shellHook = mkOption {
+                  type = types.str;
+                  default =
+                    (
+                      cfg.default.nixago.lib.${system}.makeAll
+                        config.configurations.nixago.configs
+                    ).shellHook;
+                  readOnly = true;
+                  description = ''
+                    Shell hook string of nixago.
+                  '';
+                };
+              };
+            };
+          };
+        }
+      );
   };
 }

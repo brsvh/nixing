@@ -32,6 +32,7 @@ in
             inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.lanzaboote.nixosModules.lanzaboote
+            inputs.sops.nixosModules.sops
             {
               home-manager = {
                 useGlobalPkgs = mkDefault true;

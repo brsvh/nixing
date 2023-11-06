@@ -30,6 +30,7 @@ in
       home = {
         modules =
           [
+            inputs.sops.homeManagerModules.sops
             {
               nixpkgs = {
                 overlays =

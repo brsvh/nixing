@@ -17,6 +17,10 @@
           name = "nixing:default";
           commands = [
             {
+              package = pkgs.age;
+              category = "secrets";
+            }
+            {
               package = pkgs.git;
               category = "development";
             }
@@ -27,6 +31,14 @@
             {
               package = pkgs.joe;
               category = "development";
+            }
+            {
+              package = pkgs.sops;
+              category = "secrets";
+            }
+            {
+              package = pkgs.ssh-to-age;
+              category = "secrets";
             }
           ];
           env = [
