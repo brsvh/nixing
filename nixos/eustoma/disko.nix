@@ -30,38 +30,49 @@
                 size = "1G";
                 type = "EF02";
               };
-              swap = {
-                content = {
-                  randomEncryption = true;
-                  resumeDevice = true;
-                  type = "swap";
-                };
-                name = "swap";
-                priority = 3;
-                size = "16G";
-                type = "8200";
-              };
               lsp = {
                 content = {
                   extraArgs = [ "-f" ];
                   subvolumes = {
                     "/gnu" = {
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions =
+                        [
+                          "compress=zstd"
+                          "noatime"
+                          "space_cache=v1"
+                          "ssd"
+                        ];
                       mountpoint = "/gnu";
                       name = "gnu";
                     };
                     "/home" = {
-                      mountOptions = [ "compress=zstd" ];
+                      mountOptions =
+                        [
+                          "compress=zstd:1"
+                          "space_cache=v1"
+                          "ssd"
+                        ];
                       mountpoint = "/home";
                       name = "home";
                     };
                     "/nix" = {
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions =
+                        [
+                          "compress=zstd:1"
+                          "noatime"
+                          "space_cache=v1"
+                          "ssd"
+                        ];
                       mountpoint = "/nix";
                       name = "nix";
                     };
                     "/nixos" = {
-                      mountOptions = [ "compress=zstd" ];
+                      mountOptions =
+                        [
+                          "compress=zstd:1"
+                          "space_cache=v1"
+                          "ssd"
+                        ];
                       mountpoint = "/";
                       name = "nixos";
                     };
