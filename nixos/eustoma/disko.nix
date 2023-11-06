@@ -39,7 +39,6 @@
                         [
                           "compress=zstd"
                           "noatime"
-                          "space_cache=v1"
                           "ssd"
                         ];
                       mountpoint = "/gnu";
@@ -49,7 +48,6 @@
                       mountOptions =
                         [
                           "compress=zstd:1"
-                          "space_cache=v1"
                           "ssd"
                         ];
                       mountpoint = "/home";
@@ -60,7 +58,6 @@
                         [
                           "compress=zstd:1"
                           "noatime"
-                          "space_cache=v1"
                           "ssd"
                         ];
                       mountpoint = "/nix";
@@ -70,7 +67,6 @@
                       mountOptions =
                         [
                           "compress=zstd:1"
-                          "space_cache=v1"
                           "ssd"
                         ];
                       mountpoint = "/";
