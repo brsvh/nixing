@@ -131,6 +131,34 @@
         };
       };
     };
+    nixago = {
+      url = "github:nix-community/nixago/master";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        nixago-exts = {
+          follows = "nixago-extensions";
+        };
+      };
+    };
+    nixago-extensions = {
+      url = "github:nix-community/nixago-extensions";
+      inputs = {
+        flake-utils = {
+          follows = "nixago/flake-utils";
+        };
+        nixago = {
+          follows = "nixago";
+        };
+        nixpkgs = {
+          follows = "nixago/nixpkgs";
+        };
+      };
+    };
     nixpkgs = {
       follows = "nixpkgs-stable";
     };
@@ -168,6 +196,17 @@
         };
         nixpkgs = {
           follows = "nixpkgs";
+        };
+      };
+    };
+    sops = {
+      url = "github:Mic92/sops-nix/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
         };
       };
     };

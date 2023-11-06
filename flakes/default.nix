@@ -5,6 +5,7 @@
       ./configurations.nix
       ./devshell.nix
       ./homeConfigurations.nix
+      ./nixago.nix
       ./pre-commit.nix
       ./treefmt.nix
     ];
