@@ -232,6 +232,7 @@
         imports =
           [
             ./flakes
+            ./modules
             ./nixos
             ./home
           ];
