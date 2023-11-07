@@ -82,7 +82,6 @@ with lib;
         ))
       fish
       git
-      gnome.adwaita-icon-theme
       home-manager
       sbctl
     ];
@@ -283,28 +282,7 @@ with lib;
       };
     };
 
-    udev = {
-      packages = with pkgs; [
-        gnome.gnome-settings-daemon
-      ];
-    };
-
     xserver = {
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
-
-      displayManager = {
-        gdm = {
-          enable = true;
-        };
-      };
-
-      enable = true;
-      layout = "us";
-
       libinput = {
         enable = true;
       };
@@ -332,6 +310,13 @@ with lib;
         description = "Burgess Chang";
         extraGroups = [ "wheel" "networkmanager" ];
       };
+    };
+  };
+
+  workstation = {
+    desktop = {
+      flavour = "gnome3";
+      keyboardLayout = "us";
     };
   };
 

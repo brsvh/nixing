@@ -33,6 +33,7 @@ in
             inputs.home-manager.nixosModules.home-manager
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.sops.nixosModules.sops
+            self.nixosModules.workstation
             {
               home-manager = {
                 useGlobalPkgs = mkDefault true;
