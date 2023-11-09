@@ -270,6 +270,17 @@ with lib;
     };
   };
 
+  sops = {
+    age = {
+      keyFile = "/var/lib/sops/key.txt";
+      sshKeyPaths =
+        [
+          "/etc/ssh/ssh_host_ed25519_key"
+        ];
+    };
+    defaultSopsFile = ./secrets.yaml;
+  };
+
   swapDevices = [
     {
       device = "/var/lib/swapfile";
@@ -307,6 +318,60 @@ with lib;
     desktop = {
       flavour = "gnome3";
       keyboardLayout = "us";
+    };
+    networking = {
+      proxy = {
+        client = "dae";
+        config = ''
+          global {
+            allow_insecure: false
+            auto_config_kernel_parameter: true
+            log_level: info
+            wan_interface: auto
+          }
+
+          subscription {
+            \"${config.sops.secrets."dae/subscription"}\"
+          }
+
+          dns {
+            upstream {
+              googledns: 'tcp+udp://dns.google.com:53'
+              alidns: 'udp://dns.alidns.com:53'
+            }
+            routing {
+              request {
+                fallback: alidns
+              }
+              response {
+                upstream(googledns) -> accept
+                ip(geoip:private) && !qname(geosite:cn) -> googledns
+                fallback: accept
+              }
+            }
+          }
+
+          group {
+            proxy {
+              filter: name(keyword: '美国')
+              policy: min_moving_avg
+            }
+          }
+
+          routing {
+            pname(NetworkManager, systemd-resolved, dnsmasq) -> must_direct
+            dip(224.0.0.0/3, 'ff00::/8') -> direct
+
+            dip(geoip:private) -> direct
+            dip(geoip:cn) -> direct
+            domain(geosite:cn) -> direct
+
+            fallback: us_proxy
+          }
+
+        '';
+        enable = true;
+      };
     };
   };
 
