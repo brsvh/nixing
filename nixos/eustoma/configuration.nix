@@ -72,14 +72,16 @@ with lib;
     systemPackages = with pkgs; [
       any-nix-shell
       emacs-pgtk
-      ((emacsPackagesFor emacs-pgtk).emacsWithPackages
-        (
-          epkgs:
+      (
+        (emacsPackagesFor emacs-pgtk).emacsWithPackages
+          (
+            epkgs:
             with epkgs;
             [
               nix-mode
             ]
-        ))
+          )
+      )
       fish
       git
       home-manager
