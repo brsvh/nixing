@@ -76,10 +76,10 @@ with lib;
         (emacsPackagesFor emacs-pgtk).emacsWithPackages
           (
             epkgs:
-            with epkgs;
-            [
-              nix-mode
-            ]
+              with epkgs;
+              [
+                nix-mode
+              ]
           )
       )
       fish
@@ -100,12 +100,6 @@ with lib;
           "\${XDG_STATE_HOME:-$HOME/.local/state}/nix/profile"
       )
     ];
-  };
-
-  hardware = {
-    pulseaudio = {
-      enable = mkForce (! config.services.pipewire.enable);
-    };
   };
 
   i18n = {
@@ -267,23 +261,6 @@ with lib;
       enable = true;
     };
 
-    pipewire = {
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-
-      enable = true;
-
-      jack = {
-        enable = true;
-      };
-
-      pulse = {
-        enable = true;
-      };
-    };
-
     xserver = {
       libinput = {
         enable = true;
@@ -310,12 +287,23 @@ with lib;
       bsc = {
         isNormalUser = true;
         description = "Burgess Chang";
-        extraGroups = [ "wheel" "networkmanager" ];
+        extraGroups =
+          [
+            "audio"
+            "jackaudio"
+            "wheel"
+            "networkmanager"
+          ];
       };
     };
   };
 
   workstation = {
+    audio = {
+      system = "pipewire";
+      enableAlsa = true;
+      enableJack = true;
+    };
     desktop = {
       flavour = "gnome3";
       keyboardLayout = "us";

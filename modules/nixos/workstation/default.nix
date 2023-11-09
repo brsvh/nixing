@@ -2,7 +2,8 @@
 {
   imports =
     [
+      ./audio
       ./desktop
-      ./networking/proxy
+      ./networking
     ];
 }
