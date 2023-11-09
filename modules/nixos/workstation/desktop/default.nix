@@ -11,12 +11,16 @@ let
   withX11 = cfg.displayServer == "x11";
 
   withGnome3 = cfg.flavour == "gnome3";
-  withPlasma5 = cfg.flavour == "plasma5";
 
   withDisplayServer = withWayland || withX11;
-  withFlavour = withGnome3 || withPlasma5;
+  withFlavour = withGnome3;
 in
 {
+  imports =
+    [
+      ./gnome3.nix
+    ];
+
   options = {
     workstation = {
       desktop = {
@@ -24,7 +28,6 @@ in
           type = types.enum
             [
               "gnome3"
-              "plasma5"
             ];
           default = "gnome3";
           description = ''
