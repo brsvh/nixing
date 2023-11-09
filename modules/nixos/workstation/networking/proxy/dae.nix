@@ -17,7 +17,7 @@ in
       services = {
         dae = {
           enable = true;
-          config = "${cfg.config}";
+          config = "${cfg.client.config}";
         };
       };
     };
