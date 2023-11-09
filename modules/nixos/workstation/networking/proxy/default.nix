@@ -14,11 +14,24 @@ let
   withV2rayA = withClient && cfg.client.flavour == "v2raya";
 in
 {
+  imports =
+    [
+      ./dae.nix
+    ];
+
   options = {
     workstation = {
       networking = {
         proxy = {
           client = {
+            config = mkOption {
+              type = with types; (nullOr str);
+              default = null;
+              description = ''
+                The configuration of proxy client.
+              '';
+            };
+
             enable = mkOption {
               type = types.bool;
               default = false;

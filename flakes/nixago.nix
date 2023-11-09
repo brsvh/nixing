@@ -44,7 +44,7 @@
                           ];
                         }
                         {
-                          path_regex = "^secrets/eustoma\.yaml$";
+                          path_regex = "^nixos/eustoma/secrets\.yaml$";
                           key_groups = [
                             {
                               age = [ eustoma.age ];
