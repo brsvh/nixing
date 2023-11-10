@@ -25,7 +25,7 @@ in
         proxy = {
           client = {
             config = mkOption {
-              type = with types; (nullOr str);
+              type = with types; (nullOr path);
               default = null;
               description = ''
                 The configuration of proxy client.
