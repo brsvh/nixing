@@ -72,6 +72,12 @@ in
   config = mkMerge
     [
       {
+        programs = {
+          dconf = {
+            enable = true;
+          };
+        };
+
         services = {
           xserver = {
             xkb = {
