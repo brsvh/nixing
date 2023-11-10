@@ -14,6 +14,7 @@ let
 
   withDisplayServer = withWayland || withX11;
   withFlavour = withGnome3;
+  withTouchpad = cfg.touchpad;
 in
 {
   imports =
@@ -55,6 +56,14 @@ in
             separated by commas.
           '';
         };
+
+        touchpad = mkOption {
+          type = types.bool;
+          default = true;
+          description = ''
+            Touchpad support.
+          '';
+        };
       };
     };
   };
@@ -76,6 +85,18 @@ in
             services = {
               xserver = {
                 enable = true;
+              };
+            };
+          }
+      )
+      (
+        mkIf withTouchpad
+          {
+            services = {
+              xserver = {
+                libinput = {
+                  enable = true;
+                };
               };
             };
           }
