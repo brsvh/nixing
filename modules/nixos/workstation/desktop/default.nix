@@ -20,6 +20,7 @@ in
   imports =
     [
       ./gnome3.nix
+      ./xdg.nix
     ];
 
   options = {
