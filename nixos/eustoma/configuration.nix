@@ -18,11 +18,6 @@ with lib;
     extraModulePackages = [ ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_zen;
-
-    plymouth = {
-      enable = true;
-      theme = "bgrt";
-    };
   };
 
   environment = {
@@ -222,6 +217,9 @@ with lib;
               "sd_mod"
             ];
         };
+      };
+      startup = {
+        plymouth = true;
       };
       swap = {
         enable = true;
