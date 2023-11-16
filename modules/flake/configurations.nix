@@ -318,6 +318,15 @@ in
                 default = cfg.default.nixos.stateVersion;
               };
 
+              zone = mkOption {
+                type = types.nullOr types.str;
+                default = null;
+                example = "Asia/Shanghai";
+                description = ''
+                  The time region.
+                '';
+              };
+
               finalNixOSConfiguration = mkOption {
                 type = types.unspecified;
                 description = ''
@@ -345,6 +354,9 @@ in
                             };
                             system = {
                               inherit (config) stateVersion;
+                            };
+                            time = {
+                              timeZone = config.zone;
                             };
                           }
                         ]

@@ -64,6 +64,7 @@ in
           ];
         nixpkgs = inputs.nixpkgs-unstable;
         stateVersion = "23.11";
+        zone = "Asia/Shanghai";
       };
     };
   };
