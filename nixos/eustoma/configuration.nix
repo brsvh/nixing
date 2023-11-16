@@ -17,16 +17,7 @@ with lib;
   boot = {
     extraModulePackages = [ ];
     kernelModules = [ "kvm-intel" ];
-    initrd = {
-      availableKernelModules = [
-        "xhci_pci"
-        "thunderbolt"
-        "nvme"
-        "usb_storage"
-        "sd_mod"
-      ];
-      kernelModules = [ ];
-    };
+    kernelPackages = pkgs.linuxPackages_zen;
 
     lanzaboote = {
       enable = true;
@@ -227,6 +218,18 @@ with lib;
         default = "english";
         chinese = {
           enable = true;
+        };
+      };
+      initrd = {
+        modules = {
+          implication =
+            [
+              "xhci_pci"
+              "thunderbolt"
+              "nvme"
+              "usb_storage"
+              "sd_mod"
+            ];
         };
       };
       swap = {
