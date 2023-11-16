@@ -22,45 +22,40 @@ in
         };
 
         binHome = mkOption {
-          type = types.path;
-          defaultText = "~/.local/bin";
-          apply = toString;
+          type = types.str;
+          default = "$HOME/.local/bin";
           description = ''
             Absolute path to directory holding application binary files.
           '';
         };
 
         cacheHome = mkOption {
-          type = types.path;
-          defaultText = "~/.cache";
-          apply = toString;
+          type = types.str;
+          default = "$HOME/.cache";
           description = ''
             Absolute path to directory holding application caches.
           '';
         };
 
         configHome = mkOption {
-          type = types.path;
-          defaultText = "~/.config";
-          apply = toString;
+          type = types.str;
+          default = "$HOME/.config";
           description = ''
             Absolute path to directory holding application configurations.
           '';
         };
 
         dataHome = mkOption {
-          type = types.path;
-          defaultText = "~/.local/share";
-          apply = toString;
+          type = types.str;
+          default = "$HOME/.local/share";
           description = ''
             Absolute path to directory holding application data.
           '';
         };
 
         stateHome = mkOption {
-          type = types.path;
-          defaultText = "~/.local/state";
-          apply = toString;
+          type = types.str;
+          default = "$HOME/.local/state";
           description = ''
             Absolute path to directory holding application states.
           '';
@@ -73,36 +68,18 @@ in
     [
       (
         let
-          defaultBinHome = "$HOME/.local/bin";
-          defaultCacheHome = "$HOME/.cache";
-          defaultConfigHome = "$HOME/.config";
-          defaultDataHome = "$HOME/.local/share";
-          defaultStateHome = "$HOME/.local/state";
-
           sessionVariables = {
-            XDG_BIN_HOME = cfg.XDGBaseDirectory.binHome;
-            XDG_CACHE_HOME = cfg.XDGBaseDirectory.cacheHome;
-            XDG_CONFIG_HOME = cfg.XDGBaseDirectory.configHome;
-            XDG_DATA_HOME = cfg.XDGBaseDirectory.dataHome;
-            XDG_STATE_HOME = cfg.XDGBaseDirectory.stateHome;
+            XDG_BIN_HOME = cfg.binHome;
+            XDG_CACHE_HOME = cfg.cacheHome;
+            XDG_CONFIG_HOME = cfg.configHome;
+            XDG_DATA_HOME = cfg.dataHome;
+            XDG_STATE_HOME = cfg.stateHome;
           };
         in
         mkIf cfg.XDGBaseDirectory.enable
           {
             environment = {
               inherit sessionVariables;
-            };
-
-            workstation = {
-              desktop = {
-                XDGBaseDirectory = {
-                  binHome = mkDefault defaultBinHome;
-                  cacheHome = mkDefault defaultCacheHome;
-                  configHome = mkDefault defaultConfigHome;
-                  dataHome = mkDefault defaultDataHome;
-                  stateHome = mkDefault defaultStateHome;
-                };
-              };
             };
           }
       )
