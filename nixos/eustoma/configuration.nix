@@ -19,21 +19,6 @@ with lib;
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_zen;
 
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
-
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
-      systemd-boot = {
-        enable = mkForce false;
-      };
-    };
-
     plymouth = {
       enable = true;
       theme = "bgrt";
@@ -210,6 +195,12 @@ with lib;
       };
     };
     system = {
+      bootloader = {
+        efiSupport = true;
+        efiSysMountPoint = "/boot/efi";
+        flavour = "systemd-boot";
+        secureboot = true;
+      };
       console = {
         font = "eurlatgr";
         keymap = "us";
@@ -247,11 +238,5 @@ with lib;
         percent = 100;
       };
     };
-  };
-
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-    memoryPercent = 100;
   };
 }
