@@ -182,13 +182,6 @@ with lib;
     };
   };
 
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024;
-    }
-  ];
-
   users = {
     defaultUserShell = pkgs.fish;
     users = {
@@ -235,6 +228,20 @@ with lib;
         chinese = {
           enable = true;
         };
+      };
+      swap = {
+        enable = true;
+        devices =
+          [
+            {
+              device = "/var/lib/swapfile";
+              size = 16 * 1024;
+            }
+          ];
+      };
+      zram = {
+        enable = true;
+        percent = 100;
       };
     };
   };
