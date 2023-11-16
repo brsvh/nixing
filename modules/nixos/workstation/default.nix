@@ -5,5 +5,6 @@
       ./audio
       ./desktop
       ./networking
+      ./system
     ];
 }
