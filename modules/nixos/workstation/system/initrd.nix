@@ -12,6 +12,14 @@ in
     workstation = {
       system = {
         initrd = {
+          quiet = mkOption {
+            type = types.bool;
+            default = false;
+            description = ''
+              Limit the verbosity of stage 1 boot process.
+            '';
+          };
+
           modules = {
             implication = mkOption {
               type = types.listOf types.str;
@@ -36,12 +44,16 @@ in
     };
   };
 
-  config = {
-    boot = {
-      initrd = {
-        availableKernelModules = cfg.initrd.modules.implication;
-        kernelModules = cfg.initrd.modules.explicitness;
-      };
-    };
-  };
+  config = mkMerge
+    [
+      {
+        boot = {
+          initrd = {
+            verbose = cfg.cfg.initrd.quiet;
+            availableKernelModules = cfg.initrd.modules.implication;
+            kernelModules = cfg.initrd.modules.explicitness;
+          };
+        };
+      }
+    ];
 }

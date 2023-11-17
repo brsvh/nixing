@@ -12,6 +12,14 @@ in
     workstation = {
       system = {
         startup = {
+          quiet = mkOption {
+            type = types.bool;
+            default = false;
+            description = ''
+              Limit the verbosity of startup process.
+            '';
+          };
+
           plymouth = mkOption {
             type = types.bool;
             default = false;
@@ -28,6 +36,27 @@ in
 
   config = mkMerge
     [
+      (
+        mkIf cfg.startup.quiet
+          {
+            workstation = {
+              system = {
+                console = {
+                  quiet = true;
+                };
+                initrd = {
+                  quiet = true;
+                };
+                kernel = {
+                  quiet = true;
+                };
+                startup = {
+                  plymouth = true;
+                };
+              };
+            };
+          }
+      )
       (
         mkIf cfg.startup.plymouth
           {

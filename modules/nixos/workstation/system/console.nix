@@ -12,6 +12,14 @@ in
     workstation = {
       system = {
         console = {
+          quiet = mkOption {
+            type = types.bool;
+            default = false;
+            description = ''
+              Limit the verbosity of startup process.
+            '';
+          };
+
           font = mkOption {
             type = types.str;
             default = "eurlatgr";
@@ -32,20 +40,30 @@ in
     };
   };
 
-  config = {
-    console = mkMerge
-      [
-        {
+  config = mkMerge
+    [
+      {
+        console = {
           earlySetup = true;
           font = cfg.console.font;
           keyMap = mkDefault cfg.console.keymap;
-        }
-        (
-          mkIf config.services.xserver.enable
-            {
+        };
+      }
+      (
+        mkIf config.services.xserver.enable
+          {
+            console = {
               useXkbConfig = true;
-            }
-        )
-      ];
-  };
+            };
+          }
+      )
+      (
+        mkIf cfg.console.quiet
+          {
+            boot = {
+              consoleLogLevel = 3;
+            };
+          }
+      )
+    ];
 }
