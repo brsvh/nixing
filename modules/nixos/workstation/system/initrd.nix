@@ -49,7 +49,7 @@ in
       {
         boot = {
           initrd = {
-            verbose = cfg.cfg.initrd.quiet;
+            verbose = cfg.initrd.quiet;
             availableKernelModules = cfg.initrd.modules.implication;
             kernelModules = cfg.initrd.modules.explicitness;
           };
