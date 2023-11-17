@@ -14,12 +14,6 @@ with lib;
       hardware.nixosModules.lenovo-thinkpad-x1-nano-gen1
     ];
 
-  boot = {
-    extraModulePackages = [ ];
-    kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_zen;
-  };
-
   environment = {
     systemPackages = with pkgs; [
       any-nix-shell
@@ -202,6 +196,13 @@ with lib;
               "sd_mod"
             ];
         };
+      };
+      kernel = {
+        package = pkgs.linuxPackages_zen;
+        modules =
+          [
+            "kvm-intel"
+          ];
       };
       startup = {
         plymouth = true;
