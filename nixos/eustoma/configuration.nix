@@ -110,16 +110,6 @@ with lib;
     };
   };
 
-  security = {
-    polkit = {
-      enable = true;
-    };
-
-    rtkit = {
-      enable = true;
-    };
-  };
-
   services = {
     openssh = {
       enable = true;

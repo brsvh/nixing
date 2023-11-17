@@ -12,6 +12,7 @@ in
     [
       ./proxy
 
+      ./firewall.nix
       ./network-manager.nix
     ];
 

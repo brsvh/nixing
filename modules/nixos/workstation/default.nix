@@ -6,6 +6,7 @@
       ./bootloaders
       ./desktop
       ./networking
+      ./security
       ./system
     ];
 }
