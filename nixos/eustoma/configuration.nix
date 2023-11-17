@@ -45,12 +45,6 @@ with lib;
     };
   };
 
-  networking = {
-    networkmanager = {
-      enable = true;
-    };
-  };
-
   nix = {
     gc = {
       automatic = true;
@@ -181,6 +175,7 @@ with lib;
       keyboardLayout = "us";
     };
     networking = {
+      manager = "network-manager";
       proxy = {
         client = {
           config = config.sops.secrets."dae/config.dae".path;
