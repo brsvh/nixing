@@ -40,6 +40,14 @@ in
               The Kernel parameters will be used.
             '';
           };
+
+          quiet = mkOption {
+            type = types.bool;
+            default = false;
+            description = ''
+              Limit the verbosity of startup process.
+            '';
+          };
         };
       };
     };
@@ -54,5 +62,19 @@ in
           kernelParams = cfg.kernel.params;
         };
       }
+      (
+        mkIf cfg.kernel.quiet
+          {
+            boot = {
+              kernelParams =
+                [
+                  "quiet"
+                  "loglevel=3"
+                  "systemd.show_status=auto"
+                  "rd.udev.log_level=3"
+                ];
+            };
+          }
+      )
     ];
 }

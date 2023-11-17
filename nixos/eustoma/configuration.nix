@@ -205,7 +205,7 @@ with lib;
           ];
       };
       startup = {
-        plymouth = true;
+        quiet = true;
       };
       swap = {
         enable = true;
