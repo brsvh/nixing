@@ -77,12 +77,6 @@ with lib;
     };
   };
 
-  services = {
-    openssh = {
-      enable = true;
-    };
-  };
-
   sops = {
     age = {
       keyFile = "/var/lib/sops/key.txt";
@@ -130,6 +124,11 @@ with lib;
 
     networking = {
       manager = "network-manager";
+
+      openssh = {
+        enable = true;
+      };
+
       proxy = {
         client = {
           config = config.sops.secrets."dae/config.dae".path;
