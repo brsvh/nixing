@@ -7,6 +7,7 @@
       ./desktop
       ./networking
       ./security
+      ./shell
       ./system
     ];
 }
