@@ -81,10 +81,6 @@ with lib;
     openssh = {
       enable = true;
     };
-
-    xserver = {
-      videoDrivers = [ "modesetting" ];
-    };
   };
 
   sops = {
@@ -203,6 +199,14 @@ with lib;
         enable = true;
         percent = 100;
       };
+    };
+
+    video = {
+      drivers =
+        [
+          "modesetting"
+          "fbdev"
+        ];
     };
   };
 }
