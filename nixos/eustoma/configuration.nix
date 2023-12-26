@@ -154,10 +154,12 @@ with lib;
       enableAlsa = true;
       enableJack = true;
     };
+
     desktop = {
       flavour = "gnome3";
       keyboardLayout = "us";
     };
+
     networking = {
       manager = "network-manager";
       proxy = {
@@ -168,6 +170,7 @@ with lib;
         };
       };
     };
+
     system = {
       bootloader = {
         efiSupport = true;
@@ -175,16 +178,19 @@ with lib;
         flavour = "systemd-boot";
         secureboot = true;
       };
+
       console = {
         font = "eurlatgr";
         keymap = "us";
       };
+
       i18n = {
         default = "english";
         chinese = {
           enable = true;
         };
       };
+
       initrd = {
         modules = {
           implication =
@@ -197,6 +203,7 @@ with lib;
             ];
         };
       };
+
       kernel = {
         package = pkgs.linuxPackages_zen;
         modules =
@@ -204,9 +211,11 @@ with lib;
             "kvm-intel"
           ];
       };
+
       startup = {
         quiet = true;
       };
+
       swap = {
         enable = true;
         devices =
@@ -217,6 +226,7 @@ with lib;
             }
           ];
       };
+
       zram = {
         enable = true;
         percent = 100;
