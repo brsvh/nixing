@@ -22,7 +22,7 @@ in
       home = {
         inherit (inputs) home-manager nixpkgs;
         system = "x86_64-linux";
-        stateVersion = "23.05";
+        stateVersion = "23.11";
       };
     };
 
