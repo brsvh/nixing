@@ -42,6 +42,10 @@ with lib;
       package = pkgs.emacs-pgtk;
     };
 
+    firefox = {
+      enable = true;
+    };
+
     fish = {
       enable = true;
       interactiveShellInit = ''
