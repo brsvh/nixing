@@ -9,5 +9,6 @@
       ./security
       ./shell
       ./system
+      ./video
     ];
 }
