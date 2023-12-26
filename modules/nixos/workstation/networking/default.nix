@@ -14,6 +14,7 @@ in
 
       ./firewall.nix
       ./network-manager.nix
+      ./openssh.nix
     ];
 
   options = {
