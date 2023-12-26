@@ -31,6 +31,7 @@ in
         modules =
           [
             inputs.sops.homeManagerModules.sops
+            self.homeModules.workstation
             {
               nixpkgs = {
                 overlays =

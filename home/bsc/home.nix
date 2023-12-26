@@ -8,9 +8,7 @@ with lib;
 {
   home = {
     packages = with pkgs;
-      [
-        any-nix-shell
-      ];
+      [ ];
 
     sessionPath =
       [
@@ -50,7 +48,6 @@ with lib;
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
-        any-nix-shell fish --info-right | source
       '';
     };
 

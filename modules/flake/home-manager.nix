@@ -1,6 +1,7 @@
 { config
 , flake-parts-lib
 , lib
+, self
 , ...
 }:
 with lib;
@@ -33,6 +34,17 @@ in
               # to pass through arguments to home.nix
             };
           }
+        '';
+      };
+
+      homeModules = mkOption {
+        type = types.lazyAttrsOf types.unspecified;
+        default = { };
+        apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
+        description = ''
+          Home Manager modules.
+
+          You may use this for reusable pieces of configuration, service modules, etc.
         '';
       };
     };
