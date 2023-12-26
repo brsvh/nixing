@@ -134,11 +134,11 @@ with lib;
         };
 
         fossil_branch = {
-          symbol = " ";
+          symbol = " ";
         };
 
         git_branch = {
-          symbol = " ";
+          symbol = " ";
         };
 
         git_status = {
@@ -174,8 +174,7 @@ with lib;
         };
 
         hg_branch = {
-
-          symbol = " ";
+          symbol = " ";
         };
 
         hostname = {
@@ -265,7 +264,7 @@ with lib;
         };
 
         pijul_channel = {
-          symbol = " ";
+          symbol = " ";
         };
 
         python = {
