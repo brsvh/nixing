@@ -21,7 +21,7 @@ in
       nixos = {
         inherit (inputs) nixpkgs;
         system = "x86_64-linux";
-        stateVersion = "23.05";
+        stateVersion = "23.11";
       };
     };
 
