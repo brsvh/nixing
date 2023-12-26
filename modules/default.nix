@@ -4,5 +4,6 @@
     [
       ./flake
       ./nixos
+      ./home-manager
     ];
 }
