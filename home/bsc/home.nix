@@ -35,6 +35,11 @@ with lib;
   };
 
   programs = {
+    any-nix-shell = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     emacs = {
       enable = true;
       package = pkgs.emacs-pgtk;
