@@ -306,6 +306,12 @@ with lib;
     };
   };
 
+  systemd = {
+    user = {
+      sessionVariables = config.home.sessionVariables;
+    };
+  };
+
   xdg = {
     enable = true;
     userDirs = {
