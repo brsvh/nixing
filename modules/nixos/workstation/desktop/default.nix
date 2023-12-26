@@ -26,6 +26,14 @@ in
   options = {
     workstation = {
       desktop = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = ''
+            Whether the graphical user interface is used.
+          '';
+        };
+
         flavour = mkOption {
           type = types.enum
             [

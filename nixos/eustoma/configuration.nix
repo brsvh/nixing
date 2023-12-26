@@ -16,7 +16,6 @@ with lib;
 
   environment = {
     systemPackages = with pkgs; [
-      any-nix-shell
       emacs-pgtk
       (
         (emacsPackagesFor emacs-pgtk).emacsWithPackages
@@ -28,7 +27,6 @@ with lib;
               ]
           )
       )
-      fish
       git
       home-manager
       sbctl
@@ -79,31 +77,6 @@ with lib;
     };
   };
 
-  programs = {
-    bash = {
-      interactiveShellInit = ''
-        case :$SHELLOPTS: in
-          *:posix:*)
-            _bash_type="sh"
-            ;;
-          *)
-            _bash_type="bash"
-            ;;
-        esac
-        export HISTFILE=''${XDG_CACHE_HOME:-$HOME/.cache}/''${_bash_type}/history
-        mkdir -p $(dirname $HISTFILE)
-      '';
-    };
-
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        set fish_greeting
-        any-nix-shell fish --info-right | source
-      '';
-    };
-  };
-
   services = {
     openssh = {
       enable = true;
@@ -132,7 +105,6 @@ with lib;
   };
 
   users = {
-    defaultUserShell = pkgs.fish;
     users = {
       bsc = {
         isNormalUser = true;
