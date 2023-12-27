@@ -82,7 +82,7 @@ in
           modules = mkOption {
             type = types.unspecified;
             description = ''
-              List of modules to include in all homeConfigurations.
+              List of modules to include in all homeManagerConfigurations.
             '';
             default = [ ];
           };
@@ -90,7 +90,7 @@ in
           specialArgs = mkOption {
             type = types.attrsOf types.unspecified;
             description = ''
-              `extraSpecialArgs` passed to all homeConfigurations.
+              `extraSpecialArgs` passed to all homeManagerConfigurations.
             '';
             default = { };
           };
@@ -127,7 +127,7 @@ in
                 type = types.unspecified;
                 description = ''
                   home-manager input to use for building the
-                  homeConfiguration.
+                  homeManagerConfiguration.
 
                   Required to be set per-profile or using
                   `configurations.default.home.home-manager`.
@@ -138,7 +138,7 @@ in
               modules = mkOption {
                 type = types.listOf types.unspecified;
                 description = ''
-                  List of modules to include in the homeConfiguration.
+                  List of modules to include in the homeManagerConfiguration.
                 '';
                 default = [ ];
               };
@@ -146,7 +146,7 @@ in
               nixpkgs = mkOption {
                 type = types.unspecified;
                 description = ''
-                  nixpkgs input to use for building the homeConfiguration.
+                  nixpkgs input to use for building the homeManagerConfiguration.
 
                   Required to be set per-profile or using
                   `configurations.default.home.nixpkgs`.
@@ -157,7 +157,7 @@ in
               specialArgs = mkOption {
                 type = types.attrsOf types.unspecified;
                 description = ''
-                  `extraSpecialArgs` passed to the homeConfiguration.
+                  `extraSpecialArgs` passed to the homeManagerConfiguration.
                 '';
                 default = { };
               };
@@ -165,7 +165,7 @@ in
               system = mkOption {
                 type = types.enum platforms.all;
                 description = ''
-                  system used for building the homeConfiguration.
+                  system used for building the homeManagerConfiguration.
                 '';
                 default = cfg.default.home.system;
               };
@@ -184,7 +184,7 @@ in
                   The username passed to home-manager, or `home.username`.
 
                   Defaults to read from the first name of
-                  homeConfiguration, like:
+                  homeManagerConfiguration, like:
                      foo     -> foo
                      foo@bar -> foo
                 '';
@@ -207,10 +207,10 @@ in
                   else "/home/${config.username}";
               };
 
-              finalHomeConfiguration = mkOption {
+              finalHomeManagerConfiguration = mkOption {
                 type = types.unspecified;
                 description = ''
-                  The final homeConfiguration.
+                  The final homeManagerConfiguration.
                 '';
               };
             };
@@ -245,7 +245,7 @@ in
           }
         ));
         description = ''
-          The collection of all homeConfigurations.
+          The collection of all homeManagerConfigurations.
         '';
       };
 

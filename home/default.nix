@@ -31,7 +31,7 @@ in
         modules =
           [
             inputs.sops.homeManagerModules.sops
-            self.homeModules.workstation
+            self.homeManagerModules.home-manager
             {
               nixpkgs = {
                 overlays =
@@ -63,9 +63,9 @@ in
   };
 
   flake = {
-    homeConfigurations =
+    homeManagerConfigurations =
       mapAttrs
-        (_: cfg: cfg.finalHomeConfiguration)
+        (_: cfg: cfg.finalHomeManagerConfiguration)
         config.configurations.home;
   };
 }

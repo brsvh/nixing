@@ -11,7 +11,7 @@ in
 {
   options = {
     flake = mkSubmoduleOptions {
-      homeConfigurations = mkOption {
+      homeManagerConfigurations = mkOption {
         type = types.lazyAttrsOf types.raw;
         default = { };
         description = ''
@@ -19,7 +19,7 @@ in
 
            Used by `home-manager`.
 
-          `homeConfigurations` is for specific users.
+          `homeManagerConfigurations` is for specific users.
         '';
         example = literalExpression ''
           {
@@ -37,10 +37,17 @@ in
         '';
       };
 
-      homeModules = mkOption {
+      homeManagerModules = mkOption {
         type = types.lazyAttrsOf types.unspecified;
         default = { };
-        apply = mapAttrs (k: v: { _file = "${toString self.outPath}/flake.nix#homeModules.${k}"; imports = [ v ]; });
+        apply =
+          mapAttrs
+            (k: v:
+              {
+                _file = "${toString self.outPath}/flake.nix#homeManagerModules.${k}";
+                imports = [ v ];
+              }
+            );
         description = ''
           Home Manager modules.
 
