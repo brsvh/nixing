@@ -138,6 +138,10 @@ with lib;
       };
     };
 
+    shell = {
+      flavour = "fish";
+    };
+
     system = {
       bootloader = {
         efiSupport = true;
