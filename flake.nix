@@ -73,6 +73,14 @@
         };
       };
     };
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
     hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
@@ -100,14 +108,6 @@
       inputs = {
         nixpkgs = {
           follows = "nixpkgs-unstable";
-        };
-      };
-    };
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
         };
       };
     };
