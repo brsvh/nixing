@@ -1,8 +1,7 @@
 { ... }:
 {
-  flake = {
-    homeModules = {
-      workstation = import ./workstation;
-    };
-  };
+  imports =
+    [
+      ./programs
+    ];
 }

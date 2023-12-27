@@ -4,6 +4,11 @@
     [
       ./flake
       ./nixos
-      ./home-manager
     ];
+
+  flake = {
+    homeManagerModules = {
+      home-manager = import ./home-manager;
+    };
+  };
 }
