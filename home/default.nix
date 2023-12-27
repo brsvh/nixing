@@ -62,10 +62,12 @@ in
     };
   };
 
-  flake = {
+  flake = rec {
     homeManagerConfigurations =
       mapAttrs
         (_: cfg: cfg.finalHomeManagerConfiguration)
         config.configurations.home;
+
+    homeConfigurations = homeManagerConfigurations;
   };
 }
