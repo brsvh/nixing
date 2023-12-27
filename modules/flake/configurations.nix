@@ -216,7 +216,7 @@ in
             };
 
             config = {
-              finalHomeConfiguration =
+              finalHomeManagerConfiguration =
                 withSystem config.system
                   (
                     ctx @ { system, ... }:
