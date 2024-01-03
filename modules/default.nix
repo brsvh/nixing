@@ -7,7 +7,7 @@
     ];
 
   flake = {
-    homeManagerModules = {
+    homeModules = {
       home-manager = import ./home-manager;
     };
   };
