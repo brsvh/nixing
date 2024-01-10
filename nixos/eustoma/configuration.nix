@@ -51,6 +51,11 @@ with lib;
     };
 
     settings = {
+      access-tokens =
+        [
+          (readFile config.sops.secrets."tokens/github".path)
+        ];
+
       allowed-users =
         [
           "@users"
@@ -86,11 +91,14 @@ with lib;
           "/etc/ssh/ssh_host_ed25519_key"
         ];
     };
+
+    defaultSopsFile = ./secrets.yaml;
+
     secrets = {
       "dae/config.dae" = {
-        sopsFile = ./secrets.yaml;
         restartUnits = [ "dae.service" ];
       };
+      "tokens/github" = { };
     };
   };
 
