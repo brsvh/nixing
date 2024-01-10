@@ -56,9 +56,8 @@ with lib;
       enableFishIntegration = true;
     };
 
-    emacs = {
+    emacs-twist = {
       enable = true;
-      package = pkgs.emacs-pgtk;
     };
 
     firefox = {

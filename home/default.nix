@@ -52,6 +52,7 @@ in
         home-manager = inputs.home-manager-unstable;
         modules =
           [
+            inputs.brsvh-emacs.homeModules.twist
             profiles.bsc.home
           ];
         nixpkgs = inputs.nixpkgs-unstable;
