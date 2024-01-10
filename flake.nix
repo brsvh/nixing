@@ -12,6 +12,44 @@
   };
 
   inputs = {
+    brsvh-emacs = {
+      url = "github:brsvh/emacs.d/develop";
+      inputs = {
+        devshell = {
+          follows = "devshell";
+        };
+        emacs-overlay = {
+          follows = "emacs-overlay";
+        };
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        gitignore = {
+          follows = "gitignore";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+        nixpkgs-unstable = {
+          follows = "nixpkgs-unstable";
+        };
+        pre-commit = {
+          follows = "pre-commit";
+        };
+        systems = {
+          follows = "systems";
+        };
+        treefmt = {
+          follows = "treefmt";
+        };
+      };
+    };
     crane = {
       url = "github:ipetkov/crane/master";
       inputs = {
@@ -25,9 +63,6 @@
       inputs = {
         nixpkgs = {
           follows = "nixpkgs";
-        };
-        systems = {
-          follows = "systems";
         };
       };
     };
