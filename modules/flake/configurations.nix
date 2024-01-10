@@ -220,7 +220,7 @@ in
                 withSystem config.system
                   (
                     ctx @ { system, ... }:
-                    config.home-manager.lib.homeConfiguration {
+                    config.home-manager.lib.homeManagerConfiguration {
                       pkgs = config.nixpkgs.legacyPackages."${system}";
                       extraSpecialArgs =
                         recursiveUpdate
