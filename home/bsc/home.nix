@@ -6,6 +6,11 @@
 }:
 with lib;
 {
+  emacs.d = {
+    enable = true;
+    platform = "wayland";
+  };
+
   fonts = {
     fontconfig = {
       enable = true;
@@ -54,10 +59,6 @@ with lib;
     any-nix-shell = {
       enable = true;
       enableFishIntegration = true;
-    };
-
-    emacs-twist = {
-      enable = true;
     };
 
     firefox = {
