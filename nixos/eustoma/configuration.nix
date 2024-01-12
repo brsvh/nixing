@@ -16,24 +16,14 @@ with lib;
 
   environment = {
     systemPackages = with pkgs; [
-      emacs-pgtk
-      (
-        (emacsPackagesFor emacs-pgtk).emacsWithPackages
-          (
-            epkgs:
-              with epkgs;
-              [
-                nix-mode
-              ]
-          )
-      )
       git
       home-manager
+      nano
       sbctl
     ];
 
     variables = {
-      "EDITOR" = "emacs";
+      "EDITOR" = "nano";
     };
   };
 
