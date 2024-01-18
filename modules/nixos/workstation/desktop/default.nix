@@ -20,6 +20,7 @@ in
   imports =
     [
       ./gnome3.nix
+      ./plasma5.nix
       ./xdg.nix
     ];
 
@@ -38,6 +39,7 @@ in
           type = types.enum
             [
               "gnome3"
+              "plasma5"
             ];
           default = "gnome3";
           description = ''
