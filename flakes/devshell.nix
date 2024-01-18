@@ -29,7 +29,8 @@
               category = "development";
             }
             {
-              package = pkgs.joe;
+              package = inputs'.brsvh-emacs.packages.nogui.wrappers.tmpdir;
+              help = "The extensible, customizable GNU text editor";
               category = "development";
             }
             {
@@ -44,7 +45,7 @@
           env = [
             {
               name = "EDITOR";
-              value = "jmacs";
+              value = "emacs";
             }
           ];
         };
