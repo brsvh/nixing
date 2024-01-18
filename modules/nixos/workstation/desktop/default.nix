@@ -20,6 +20,7 @@ in
   imports =
     [
       ./gnome3.nix
+      ./input-method.nix
       ./plasma5.nix
       ./xdg.nix
     ];
