@@ -10,6 +10,7 @@ let
   withClient = cfg.client.enable;
 
   withClash = withClient && cfg.client.flavour == "clash";
+  withSingbox = withClient && cfg.client.flavour == "singbox";
   withV2ray = withClient && cfg.client.flavour == "v2ray";
   withV2rayA = withClient && cfg.client.flavour == "v2raya";
 in
@@ -17,6 +18,8 @@ in
   imports =
     [
       ./dae.nix
+      ./singbox.nix
+      ./v2ray.nix
     ];
 
   options = {
@@ -43,14 +46,21 @@ in
             flavour = mkOption {
               type = types.enum
                 [
-                  "clash"
                   "dae"
+                  "singbox"
                   "v2ray"
-                  "v2raya"
                 ];
-              default = "clash";
+              default = "dae";
               description = ''
                 The flavour of proxy client.
+              '';
+            };
+
+            port = mkOption {
+              type = types.str;
+              default = "1080";
+              description = ''
+                The port of proxy client.
               '';
             };
           };
@@ -58,37 +68,4 @@ in
       };
     };
   };
-
-  config = mkMerge [
-    (
-      mkIf withClash
-        {
-          networking = {
-            proxy = {
-              default = "socks5h://127.0.0.1:7891";
-            };
-          };
-        }
-    )
-    (
-      mkIf withV2ray
-        {
-          networking = {
-            proxy = {
-              default = "socks5h://127.0.0.1:1080";
-            };
-          };
-        }
-    )
-    (
-      mkIf withV2rayA
-        {
-          networking = {
-            proxy = {
-              default = "socks5h://127.0.0.1:20170";
-            };
-          };
-        }
-    )
-  ];
 }

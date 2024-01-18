@@ -3,24 +3,25 @@
 , pkgs
 , ...
 }:
+with builtins;
 with lib;
 let
   cfg = config.workstation.networking.proxy;
 
   withClient = cfg.client.enable;
 
-  withDae = withClient && cfg.client.flavour == "dae";
+  withSingbox = withClient && cfg.client.flavour == "singbox";
 in
 {
   options = {
     workstation = {
       networking = {
         proxy = {
-          dae = mkOption {
+          singbox = mkOption {
             type = types.package;
-            default = "dae";
+            default = "sing-box";
             description = ''
-              The package of dae.
+              The package of sing-box.
             '';
           };
         };
@@ -28,13 +29,13 @@ in
     };
   };
 
-  config = mkIf (withClient && withDae)
+  config = mkIf (withClient && withSingbox)
     {
       services = {
-        dae = {
+        sing-box = {
           enable = true;
-          configFile = "${cfg.client.config}";
-          package = cfg.dae;
+          package = cfg.singbox;
+          settings = fromJSON (readFile cfg.client.config);
         };
       };
     };

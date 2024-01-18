@@ -33,4 +33,15 @@ in
       };
     };
   };
+
+  config = mkMerge
+    [
+      {
+        services = {
+          resolved = {
+            enable = true;
+          };
+        };
+      }
+    ];
 }
