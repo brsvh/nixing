@@ -19,6 +19,7 @@ in
 {
   imports =
     [
+      ./fonts.nix
       ./gnome3.nix
       ./input-method.nix
       ./plasma5.nix
