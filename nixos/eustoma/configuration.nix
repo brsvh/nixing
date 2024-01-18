@@ -3,6 +3,7 @@
 , lib
 , modulesPath
 , pkgs
+, pkgs-stable
 , ...
 }:
 with builtins;
@@ -18,6 +19,7 @@ with lib;
     systemPackages = with pkgs; [
       git
       home-manager
+      jq
       nano
       sbctl
     ];
@@ -41,11 +43,6 @@ with lib;
     };
 
     settings = {
-      access-tokens =
-        [
-          (readFile config.sops.secrets."tokens/github".path)
-        ];
-
       allowed-users =
         [
           "@users"
@@ -88,7 +85,6 @@ with lib;
       "dae/config.dae" = {
         restartUnits = [ "dae.service" ];
       };
-      "tokens/github" = { };
     };
   };
 
@@ -133,6 +129,9 @@ with lib;
           enable = true;
           flavour = "dae";
         };
+
+        dae = pkgs-stable.dae;
+        singbox = pkgs-stable.sing-box;
       };
     };
 

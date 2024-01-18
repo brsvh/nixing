@@ -55,7 +55,7 @@ in
     };
 
     nixos = {
-      "eustoma" = {
+      "eustoma" = rec {
         domain = "brsvh.org";
         modules =
           [
@@ -63,7 +63,13 @@ in
             hosts.eustoma.disko
           ];
         nixpkgs = inputs.nixpkgs-unstable;
+        specialArgs = {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+          };
+        };
         stateVersion = "23.11";
+        system = "x86_64-linux";
         zone = "Asia/Shanghai";
       };
     };
