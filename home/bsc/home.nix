@@ -92,6 +92,18 @@ with lib;
       path = mkForce "${home-manager}";
     };
 
+    ssh = {
+      enable = true;
+
+      matchBlocks = {
+        "github.com" = {
+          hostname = "ssh.github.com";
+          user = "git";
+          port = 443;
+        };
+      };
+    };
+
     starship = {
       enable = true;
       enableBashIntegration = true;
