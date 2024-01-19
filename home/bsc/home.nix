@@ -20,6 +20,7 @@ with lib;
   home = {
     packages = with pkgs;
       [
+        cachix
         ibm-plex
         (
           nerdfonts.override {
