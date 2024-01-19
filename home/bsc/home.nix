@@ -96,6 +96,11 @@ with lib;
     ssh = {
       enable = true;
 
+      includes =
+        [
+          "isrc/*"
+        ];
+
       matchBlocks = {
         "github.com" = {
           hostname = "ssh.github.com";
