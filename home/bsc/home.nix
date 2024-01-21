@@ -12,8 +12,15 @@ with lib;
   };
 
   fonts = {
-    fontconfig = {
+    english = {
       enable = true;
+      flavour = "Source";
+    };
+
+    chinese = {
+      enable = true;
+      flavour = "Source";
+      variant = "SC";
     };
   };
 
@@ -332,6 +339,7 @@ with lib;
 
   xdg = {
     enable = true;
+
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -344,6 +352,35 @@ with lib;
       templates = "${config.xdg.dataHome}/Templates";
       videos = "${config.xdg.dataHome}/Videos";
     };
+
+    configFile = {
+      "fontconfig/conf.d/99-bsc-fonts.conf".text = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+          <its:rules xmlns:its="http://www.w3.org/2005/11/its" version="1.0">
+            <its:translateRule
+                translate="no"
+                selector="/fontconfig/*[not(self::description)]"
+                />
+          </its:rules>
+
+          <description>BSC Font Config</description>
+
+          <match target="font">
+            <edit name="embeddedbitmap" mode="assign">
+              <bool>false</bool>
+            </edit>
+          </match>
+
+          <config>
+            <!-- Rescan configuration every 30 seconds when FcFontSetList is called -->
+            <rescan>
+              <int>30</int>
+            </rescan>
+          </config>
+        </fontconfig>
+      '';
+    };
   };
 }
-
