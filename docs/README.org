@@ -1,9 +1,16 @@
+#+BIND: org-md-toplevel-hlevel 2
 #+OPTIONS: toc:nil
 #+STARTUP: noindent fnadjust
-#+EXPORT_FILE_NAME: ../.github/README.md
+#+EXPORT_FILE_NAME: ../.github/README
+
 #+TITLE: Nixing
 #+AUTHOR: Burgess Chang
 #+EMAIL: (concat bsc at-sign brsvh dot org)
+
+#+begin_center
+[[https://brsvh.cachix.org][file:https://img.shields.io/badge/cachix-brsvh-blue.svg]]
+[[https://github.com/brsvh/emacs.d/actions][file:https://github.com/brsvh/nixing/actions/workflows/ci.yaml/badge.svg]]
+#+end_center
 
 A place to collect things about Nix, it is also where to keep my
 dotfiles[fn:1].
