@@ -9,7 +9,7 @@
 
 #+begin_center
 [[https://brsvh.cachix.org][file:https://img.shields.io/badge/cachix-brsvh-blue.svg]]
-[[https://github.com/brsvh/emacs.d/actions][file:https://github.com/brsvh/nixing/actions/workflows/ci.yaml/badge.svg]]
+[[https://github.com/brsvh/nixing/actions][file:https://github.com/brsvh/nixing/actions/workflows/check.yaml/badge.svg]]
 #+end_center
 
 A place to collect things about Nix, it is also where to keep my
