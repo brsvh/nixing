@@ -3,7 +3,7 @@
 <div class="org-center">
 <p>
 <a href="https://brsvh.cachix.org"><img src="https://img.shields.io/badge/cachix-brsvh-blue.svg" alt="cachix-brsvh-blue.svg" class="org-svg" /></a>
-<a href="https://github.com/brsvh/emacs.d/actions"><img src="https://github.com/brsvh/nixing/actions/workflows/ci.yaml/badge.svg" alt="badge.svg" class="org-svg" /></a>
+<a href="https://github.com/brsvh/nixing/actions"><img src="https://github.com/brsvh/nixing/actions/workflows/check.yaml/badge.svg" alt="badge.svg" class="org-svg" /></a>
 </p>
 </div>
 
