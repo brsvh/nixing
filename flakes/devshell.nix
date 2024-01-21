@@ -29,7 +29,7 @@
               category = "development";
             }
             {
-              package = inputs'.brsvh-emacs.packages.nogui.wrappers.tmpdir;
+              package = inputs'.brsvh-emacs.packages.nogui;
               help = "The extensible, customizable GNU text editor";
               category = "development";
             }
