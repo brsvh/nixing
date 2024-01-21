@@ -2,6 +2,7 @@
 {
   imports =
     [
+      ./fonts
       ./programs
     ];
 }
