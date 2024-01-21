@@ -381,6 +381,10 @@ with lib;
           </config>
         </fontconfig>
       '';
+
+      "ibus/rime/default.custom.yaml".source = ./rime/rime.yaml;
+      "ibus/rime/ibus_rime.custom.yaml".source = ./rime/ibus.yaml;
+      "ibus/rime/luna_pinyin_simp.custom.yaml".source = ./rime/luna_pinyin_simp.yaml;
     };
   };
 }
