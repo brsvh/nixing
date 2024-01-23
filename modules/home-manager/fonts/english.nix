@@ -6,6 +6,10 @@
 with lib;
 let
   cfg = config.fonts.english;
+
+  enableFonts = config.fonts.enable;
+
+  enableEnglish = enableFonts && cfg.enable;
 in
 {
   options = {
@@ -15,7 +19,7 @@ in
           type = types.bool;
           default = true;
           description = ''
-            Whether to use Chinese Fonts.
+            Whether to use English Fonts.
           '';
         };
 
@@ -24,16 +28,6 @@ in
           default = false;
           description = ''
             Whether to use Nerd Fonts.
-          '';
-        };
-
-        nerdFontName = mkOption {
-          type = types.str;
-          default = "";
-          description = ''
-            Which Nerd Font will be used.
-
-            See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/data/fonts/nerdfonts/shas.nix.
           '';
         };
 
@@ -49,11 +43,29 @@ in
           '';
         };
 
+        monoFontName = mkOption {
+          type = types.str;
+          default = "Source Code Pro";
+          description = ''
+            The font name of default monospace fonts.
+          '';
+        };
+
+        nerdFontName = mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            Which Nerd Font will be used.
+
+            See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/data/fonts/nerdfonts/shas.nix.
+          '';
+        };
+
         sansFontName = mkOption {
           type = types.str;
           default = "Source Sans Pro";
           description = ''
-            The font name of default Sans fonts.
+            The font name of default sans-serif fonts.
           '';
         };
 
@@ -61,15 +73,23 @@ in
           type = types.str;
           default = "Source Serif Pro";
           description = ''
-            The font name of default Serif fonts.
+            The font name of default serif fonts.
           '';
         };
 
-        monoFontName = mkOption {
+        systemUIFontName = mkOption {
           type = types.str;
-          default = "Source Code Pro";
+          default = "Source Sans Pro";
           description = ''
-            The font name of default monospace fonts.
+            The font name of default system-ui fonts.
+          '';
+        };
+
+        uiSansFontName = mkOption {
+          type = types.str;
+          default = "Source Sans Pro";
+          description = ''
+            The font name of default ui-sans-serif fonts.
           '';
         };
       };
@@ -79,7 +99,7 @@ in
   config = mkMerge
     [
       (
-        mkIf (cfg.enable && cfg.flavour == "Source")
+        mkIf (enableEnglish && cfg.flavour == "Source")
           {
             home = {
               packages = with pkgs;
@@ -96,12 +116,14 @@ in
                 nerdFontName = "SourceCodePro";
                 sansFontName = "Source Sans Pro";
                 serifFontName = "Source Serif Pro";
+                systemUIFontName = "Source Sans Pro";
+                uiSansFontName = "Source Sans Pro";
               };
             };
           }
       )
       (
-        mkIf (cfg.enable && cfg.flavour == "Plex")
+        mkIf (enableEnglish && cfg.flavour == "Plex")
           {
             home = {
               packages = with pkgs;
@@ -116,12 +138,14 @@ in
                 nerdFontName = "IBMPlexMono";
                 sansFontName = "IBM Plex Sans";
                 serifFontName = "IBM Plex Serif";
+                systemUIFontName = "IBM Plex Sans";
+                uiSansFontName = "IBM Plex Sans";
               };
             };
           }
       )
       (
-        mkIf (cfg.enable && cfg.enableNerdFontIntegration)
+        mkIf (enableEnglish && cfg.enableNerdFontIntegration)
           {
             home = {
               packages = with pkgs;
@@ -131,6 +155,7 @@ in
                       fonts =
                         [
                           cfg.nerdFontName
+                          "NerdFontsSymbolsOnly"
                         ];
                     }
                   )
@@ -138,47 +163,67 @@ in
             };
           }
       )
-      {
+      (
+        mkIf enableEnglish
+          {
+            xdg = {
+              configFile = {
+                "fontconfig/conf.d/50-english-fonts.conf".text = ''
+                  <?xml version='1.0'?>
+                  <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+                  <fontconfig>
+                    <description>${cfg.flavour} fonts</description>
 
-        xdg = {
-          configFile = {
-            "fontconfig/conf.d/50-english-fonts.conf".text = ''
-              <?xml version='1.0'?>
-              <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-              <fontconfig>
-                <description>${cfg.flavour} fonts</description>
+                    <match>
+                      <test qual="any" name="family">
+                        <string>serif</string>
+                      </test>
+                      <edit name="family" mode="prepend" binding="strong">
+                        <string>${cfg.serifFontName}</string>
+                      </edit>
+                    </match>
 
-                <match>
-                  <test qual="any" name="family">
-                    <string>serif</string>
-                  </test>
-                  <edit name="family" mode="prepend" binding="strong">
-                    <string>${cfg.serifFontName}</string>
-                  </edit>
-                </match>
+                    <match target="pattern">
+                      <test qual="any" name="family">
+                        <string>sans-serif</string>
+                      </test>
+                      <edit name="family" mode="prepend" binding="strong">
+                        <string>${cfg.sansFontName}</string>
+                      </edit>
+                    </match>
 
-                <match target="pattern">
-                  <test qual="any" name="family">
-                    <string>sans-serif</string>
-                  </test>
-                  <edit name="family" mode="prepend" binding="strong">
-                    <string>${cfg.sansFontName}</string>
-                  </edit>
-                </match>
+                    <match target="pattern">
+                      <test qual="any" name="family">
+                        <string>monospace</string>
+                      </test>
+                      <edit name="family" mode="prepend" binding="strong">
+                        <string>${cfg.monoFontName}</string>
+                      </edit>
+                    </match>
 
-                <match target="pattern">
-                  <test qual="any" name="family">
-                    <string>monospace</string>
-                  </test>
-                  <edit name="family" mode="prepend" binding="strong">
-                    <string>${cfg.monoFontName}</string>
-                  </edit>
-                </match>
+                    <match target="pattern">
+                      <test qual="any" name="family">
+                        <string>system-ui</string>
+                      </test>
+                      <edit name="family" mode="prepend" binding="strong">
+                        <string>${cfg.systemUIFontName}</string>
+                      </edit>
+                    </match>
 
-              </fontconfig>
-            '';
-          };
-        };
-      }
+                    <match target="pattern">
+                      <test qual="any" name="family">
+                        <string>ui-sans-serif</string>
+                      </test>
+                      <edit name="family" mode="prepend" binding="strong">
+                        <string>${cfg.uiSansFontName}</string>
+                      </edit>
+                    </match>
+
+                  </fontconfig>
+                '';
+              };
+            };
+          }
+      )
     ];
 }
