@@ -6,14 +6,55 @@
 }:
 with lib;
 {
+  accounts = {
+    email = {
+      accounts = {
+        "bsc" = {
+          primary = true;
+          realName = "Burgess Chang";
+          address = "bsc@brsvh.org";
+          userName = "bsc@brsvh.org";
+
+          imap = {
+            host = "imappro.zoho.com";
+            port = 993;
+            tls = {
+              enable = true;
+            };
+          };
+
+          smtp = {
+            host = "smtppro.zoho.com";
+            port = 465;
+            tls = {
+              enable = true;
+            };
+          };
+
+          thunderbird = {
+            enable = true;
+            profiles = [ "bsc" ];
+          };
+        };
+      };
+      maildirBasePath = "${config.xdg.dataHome}/Mail/";
+    };
+  };
+
   emacs.d = {
     enable = true;
     platform = "wayland";
   };
 
   fonts = {
+    emoji = {
+      enable = true;
+      flavour = "Noto";
+    };
+
     english = {
       enable = true;
+      enableNerdFontIntegration = true;
       flavour = "Source";
     };
 
@@ -28,15 +69,6 @@ with lib;
     packages = with pkgs;
       [
         cachix
-        ibm-plex
-        (
-          nerdfonts.override {
-            fonts =
-              [
-                "IBMPlexMono"
-              ];
-          }
-        )
       ];
 
     sessionPath =
@@ -321,6 +353,12 @@ with lib;
 
     thunderbird = {
       enable = true;
+      profiles = {
+        "bsc" = {
+          isDefault = true;
+          withExternalGnupg = true;
+        };
+      };
     };
   };
 
