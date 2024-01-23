@@ -8,10 +8,23 @@ with lib;
   imports =
     [
       ./chinese.nix
+      ./emoji.nix
       ./english.nix
     ];
 
-  config =
+  options = {
+    fonts = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Whether to use Fonts Modules.
+        '';
+      };
+    };
+  };
+
+  config = mkIf config.fonts.enable
     {
       fonts = {
         fontconfig = {
