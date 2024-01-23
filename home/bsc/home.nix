@@ -318,6 +318,10 @@ with lib;
         };
       };
     };
+
+    thunderbird = {
+      enable = true;
+    };
   };
 
   services = {
