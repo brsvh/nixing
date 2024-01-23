@@ -19,6 +19,24 @@ in
           '';
         };
 
+        enableNerdFontIntegration = mkOption {
+          type = types.bool;
+          default = false;
+          description = ''
+            Whether to use Nerd Fonts.
+          '';
+        };
+
+        nerdFontName = mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            Which Nerd Font will be used.
+
+            See https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/data/fonts/nerdfonts/shas.nix.
+          '';
+        };
+
         flavour = mkOption {
           type = types.enum
             [
@@ -74,9 +92,10 @@ in
 
             fonts = {
               english = {
+                monoFontName = "Source Code Pro";
+                nerdFontName = "SourceCodePro";
                 sansFontName = "Source Sans Pro";
                 serifFontName = "Source Serif Pro";
-                monoFontName = "Source Code Pro";
               };
             };
           }
@@ -93,10 +112,29 @@ in
 
             fonts = {
               english = {
+                monoFontName = "IBM Plex Mono";
+                nerdFontName = "IBMPlexMono";
                 sansFontName = "IBM Plex Sans";
                 serifFontName = "IBM Plex Serif";
-                monoFontName = "IBM Plex Mono";
               };
+            };
+          }
+      )
+      (
+        mkIf (cfg.enable && cfg.enableNerdFontIntegration)
+          {
+            home = {
+              packages = with pkgs;
+                [
+                  (
+                    nerdfonts.override {
+                      fonts =
+                        [
+                          cfg.nerdFontName
+                        ];
+                    }
+                  )
+                ];
             };
           }
       )
