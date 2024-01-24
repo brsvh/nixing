@@ -61,6 +61,18 @@ in
           [
             hosts.eustoma.configuration
             hosts.eustoma.disko
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                };
+
+                overlays =
+                  [
+                    self.overlays.unfree
+                  ];
+              };
+            }
           ];
         nixpkgs = inputs.nixpkgs-unstable;
         specialArgs = {

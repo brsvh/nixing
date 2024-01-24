@@ -54,6 +54,18 @@ in
           [
             inputs.brsvh-emacs.homeModules.twist
             profiles.bsc.home
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                };
+
+                overlays =
+                  [
+                    self.overlays.unfree
+                  ];
+              };
+            }
           ];
         nixpkgs = inputs.nixpkgs-unstable;
         specialArgs =
