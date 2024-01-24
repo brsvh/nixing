@@ -10,11 +10,6 @@
         "repl-flake"
       ];
 
-    substituters =
-      [
-        "https://cache.nixos.org"
-      ];
-
     extra-substituters =
       [
         "https://nix-community.cachix.org"
@@ -275,7 +270,11 @@
     };
   };
 
-  outputs = inputs @ { flake-parts, ... }:
+  outputs =
+    { flake-parts
+    , self
+    , ...
+    } @ inputs:
     flake-parts.lib.mkFlake
       {
         inherit inputs;
@@ -293,5 +292,12 @@
           [
             "x86_64-linux"
           ];
+
+        flake = {
+          overlays = {
+            unfree = final: prev:
+              import ./pkgs/unfree.nix final prev;
+          };
+        };
       };
 }
