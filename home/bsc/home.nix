@@ -69,6 +69,23 @@ with lib;
     packages = with pkgs;
       [
         cachix
+        (
+          foundertype-fonts.override {
+            fonts =
+              [
+                "FZSSK" # 方正书宋
+                "FZXBSK" # 方正小标宋
+                "FZKTK" # 方正楷体
+                "FZXH1K" # 方正细黑一
+                "FZHTK" # 方正黑体
+                "FZFSK" # 方正仿宋
+                "FZLSK" # 方正隶书
+                "FZY1K" # 方正细圆
+                "FZY3K" # 方正准圆
+                "FZY4K" # 方正粗圆
+              ];
+          }
+        )
       ];
 
     sessionPath =
