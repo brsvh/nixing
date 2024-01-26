@@ -296,7 +296,7 @@
         flake = {
           overlays = {
             unfree = final: prev:
-              import ./pkgs/unfree.nix final prev;
+              import ./pkgs/unfree final prev;
           };
         };
       };
