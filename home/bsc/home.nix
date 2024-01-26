@@ -4,16 +4,26 @@
 , pkgs
 , ...
 }:
+with builtins;
 with lib;
+let
+  currentUser = config.home.username;
+in
 {
   accounts = {
     email = {
       accounts = {
-        "bsc" = {
+        "${currentUser}" = {
           primary = true;
           realName = "Burgess Chang";
           address = "bsc@brsvh.org";
           userName = "bsc@brsvh.org";
+
+          aliases =
+            [
+              "open@brsvh.org"
+              "register@brsvh.org"
+            ];
 
           imap = {
             host = "imappro.zoho.com";
@@ -44,6 +54,17 @@ with lib;
   emacs.d = {
     enable = true;
     platform = "wayland";
+    extraInitConfig = ''
+      (setq mail-host-address "${
+        elemAt
+          (
+            strings.split
+              "@"
+              config.accounts.email.accounts."${currentUser}".address
+          )
+          2
+      }")
+    '';
   };
 
   fonts = {
@@ -69,23 +90,7 @@ with lib;
     packages = with pkgs;
       [
         cachix
-        (
-          foundertype-fonts.override {
-            fonts =
-              [
-                "FZSSK" # 方正书宋
-                "FZXBSK" # 方正小标宋
-                "FZKTK" # 方正楷体
-                "FZXH1K" # 方正细黑一
-                "FZHTK" # 方正黑体
-                "FZFSK" # 方正仿宋
-                "FZLSK" # 方正隶书
-                "FZY1K" # 方正细圆
-                "FZY3K" # 方正准圆
-                "FZY4K" # 方正粗圆
-              ];
-          }
-        )
+        foundertype-fonts
       ];
 
     sessionPath =
