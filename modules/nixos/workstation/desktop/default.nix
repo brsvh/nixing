@@ -42,6 +42,7 @@ in
             [
               "gnome3"
               "plasma5"
+              "plasma6"
             ];
           default = "gnome3";
           description = ''

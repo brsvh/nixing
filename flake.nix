@@ -25,7 +25,7 @@
 
   inputs = {
     brsvh-emacs = {
-      url = "github:brsvh/emacs.d/main";
+      url = "/home/bsc/emacs.d";
     };
     crane = {
       url = "github:ipetkov/crane/master";
@@ -120,6 +120,20 @@
       inputs = {
         nixpkgs = {
           follows = "nixpkgs-unstable";
+        };
+      };
+    };
+    kde = {
+      url = "github:nix-community/kde2nix/main";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+        pre-commit-hooks = {
+          follows = "pre-commit";
         };
       };
     };

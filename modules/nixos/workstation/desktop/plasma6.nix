@@ -10,34 +10,33 @@ let
   withWayland = cfg.displayServer == "wayland";
   withX11 = cfg.displayServer == "x11";
 
-  withPlasma5 = cfg.flavour == "plasma5";
+  withPlasma6 = cfg.flavour == "plasma6";
 in
 {
   config = mkMerge
     [
       (
-        mkIf withPlasma5
-          {
-            services = {
-              xserver = {
-                desktopManager = {
-                  plasma5 = {
-                    enable = true;
-                  };
+        mkIf withPlasma6 {
+          services = {
+            xserver = {
+              desktopManager = {
+                plasma6 = {
+                  enable = true;
                 };
+              };
 
-                displayManager = {
-                  sddm = {
-                    enable = true;
+              displayManager = {
+                sddm = {
+                  enable = true;
 
-                    wayland = {
-                      enable = withWayland;
-                    };
+                  wayland = {
+                    enable = withWayland;
                   };
                 };
               };
             };
-          }
+          };
+        }
       )
       (
         mkIf (withPlasma5 && withWayland)
