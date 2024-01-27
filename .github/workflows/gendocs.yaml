@@ -1,0 +1,68 @@
+name: Genreate Docs
+
+on:
+  push:
+    paths:
+      - 'org/**.org'
+    branches:
+      - main
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-markdown:
+    name: Generate Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Nix
+        uses: nixbuild/nix-quick-install-action@v26
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache Nix Store
+        uses: nix-community/cache-nix-action@v5
+        with:
+          primary-key: ${{ runner.os }}-nix-${{ hashFiles('**/*.nix') }}
+          restore-prefixes-first-match: ${{ runner.os }}-build-
+          purge: true
+          purge-created: 604800
+
+      - name: Checkout docs changes
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        files: 'org/**.org'
+
+      - name: Generate Markdown
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ORGS: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          for org in ORGS
+          do
+             nix run github:brsvh/emacs.d#batch -- $org --funcall org-md-export-to-markdown
+          done
+          
+      - name: Import GPG key
+        if: steps.check-changed-md.outputs.files_changed == 'true'
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Publish Markdown
+        if: steps.check-changed-md.outputs.files_changed == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: auto update"
+          commit_author: Burgess Chang <bsc@brsvh.org>
+          commit_user_name: Burgess Chang
+          commit_user_email: bsc@brsvh.org
+          commit_options: '--gpg-sign=7B740DB9F2AC6D3B226BC53078D74502D92E0218'
+          file_pattern: 'docs/**.md'

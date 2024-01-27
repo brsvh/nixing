@@ -1,15 +1,14 @@
-#+BIND: org-md-toplevel-hlevel 2
-#+OPTIONS: toc:nil
-#+STARTUP: noindent fnadjust
-#+EXPORT_FILE_NAME: ../.github/README
+#+bind: org-md-toplevel-hlevel 2
+#+options: toc:nil
+#+startup: noindent fnadjust
+#+export_file_name: ../docs/README
 
-#+TITLE: Nixing
-#+AUTHOR: Burgess Chang
-#+EMAIL: (concat bsc at-sign brsvh dot org)
+#+title: Nixing
+#+author: Burgess Chang
+#+email: (concat bsc at-sign brsvh dot org)
 
 #+begin_center
-[[https://brsvh.cachix.org][file:https://img.shields.io/badge/cachix-brsvh-blue.svg]]
-[[https://github.com/brsvh/nixing/actions][file:https://github.com/brsvh/nixing/actions/workflows/check.yaml/badge.svg]]
+[[https://brsvh.cachix.org][file:https://img.shields.io/badge/cachix-brsvh-blue.svg ]][[https://github.com/brsvh/nixing/actions][file:https://github.com/brsvh/nixing/actions/workflows/ci.yaml/badge.svg]]
 #+end_center
 
 A place to collect things about Nix, it is also where to keep my
