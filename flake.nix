@@ -25,7 +25,7 @@
 
   inputs = {
     brsvh-emacs = {
-      url = "/home/bsc/emacs.d";
+      url = "github:brsvh/emacs.d/main";
     };
     crane = {
       url = "github:ipetkov/crane/master";
@@ -38,6 +38,9 @@
     devshell = {
       url = "github:numtide/devshell/main";
       inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
         nixpkgs = {
           follows = "nixpkgs";
         };
@@ -146,6 +149,9 @@
         flake-compat = {
           follows = "flake-compat";
         };
+        flake-parts = {
+          follows = "flake-parts";
+        };
         flake-utils = {
           follows = "flake-utils";
         };
@@ -154,6 +160,9 @@
         };
         pre-commit-hooks-nix = {
           follows = "pre-commit";
+        };
+        rust-overlay = {
+          follows = "rust-overlay";
         };
       };
     };
