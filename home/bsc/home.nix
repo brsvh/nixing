@@ -86,6 +86,20 @@ in
     };
   };
 
+  gtk = {
+    enable = true;
+
+    cursorTheme = {
+      name = "Vanilla-DMZ";
+      package = pkgs.vanilla-dmz;
+      size = 16;
+    };
+
+    gtk2 = {
+      configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    };
+  };
+
   home = {
     packages = with pkgs;
       [
@@ -449,6 +463,12 @@ in
       "ibus/rime/default.custom.yaml".source = ./rime/rime.yaml;
       "ibus/rime/ibus_rime.custom.yaml".source = ./rime/ibus.yaml;
       "ibus/rime/luna_pinyin_simp.custom.yaml".source = ./rime/luna_pinyin_simp.yaml;
+    };
+
+    dataFile = {
+      "fcitx5/rime/default.custom.yaml".source = ./rime/rime.yaml;
+      "fcitx5/rime/ibus_rime.custom.yaml".source = ./rime/ibus.yaml;
+      "fcitx5/rime/luna_pinyin_simp.custom.yaml".source = ./rime/luna_pinyin_simp.yaml;
     };
   };
 }
