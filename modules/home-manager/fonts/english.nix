@@ -36,6 +36,7 @@ in
             [
               "Plex"
               "Source"
+              "Libertinus"
             ];
           default = "Source";
           description = ''
@@ -140,6 +141,28 @@ in
                 serifFontName = "IBM Plex Serif";
                 systemUIFontName = "IBM Plex Sans";
                 uiSansFontName = "IBM Plex Sans";
+              };
+            };
+          }
+      )
+      (
+        mkIf (enableEnglish && cfg.flavour == "Libertinus")
+          {
+            home = {
+              packages = with pkgs;
+                [
+                  libertinus
+                ];
+            };
+
+            fonts = {
+              english = {
+                monoFontName = "Libertinus Mono";
+                nerdFontName = "NerdFontsSymbolsOnly";
+                sansFontName = "Libertinus Sans";
+                serifFontName = "Libertinus Serif";
+                systemUIFontName = "Libertinus Sans";
+                uiSansFontName = "Libertinus Sans";
               };
             };
           }
