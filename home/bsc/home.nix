@@ -95,17 +95,34 @@ in
         (setq mail-source-directory
               "${config.accounts.email.maildirBasePath}"))
 
+      (use-package nnimap
+        :config
+        (setq nnimap-address "${currentEMail.imap.host}"
+              nnimap-server-port ${toString currentEMail.imap.port}
+              nnimap-user "${currentEMail.userName}"
+              nnimap-stream ${
+                if currentEMail.smtp.tls.enable
+                then "'ssl"
+                else "'undecided"
+              }))
+
       (use-package smtpmail
         :config
         (setq
          send-mail-function 'smtpmail-send-it
          smtpmail-smtp-server "${currentEMail.smtp.host}"
-         smtpmail-smtp-service "${toString currentEMail.smtp.port}"
+         smtpmail-smtp-service ${toString currentEMail.smtp.port}
+         smtpmail-smtp-user "${currentEMail.userName}"
          smtpmail-stream-type ${
            if currentEMail.smtp.tls.enable
            then "'ssl"
            else "nil"
-         }))
+         }
+         smtpmail-local-domain "localdmain"))
+
+      (use-package gnus
+        :config
+        (setq gnus-select-method '(nnimap "${currentEMail.imap.host}")))
     '';
 
     overrides = {
