@@ -4,5 +4,6 @@
     [
       ./fonts
       ./programs
+      ./services
     ];
 }
