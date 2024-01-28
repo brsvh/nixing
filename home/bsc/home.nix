@@ -8,6 +8,8 @@ with builtins;
 with lib;
 let
   currentUser = config.home.username;
+  currentEMail = config.accounts.email.accounts."${currentUser}";
+  currentHost = elemAt (strings.split "@" currentEMail.address) 2;
 in
 {
   accounts = {
@@ -18,12 +20,19 @@ in
           realName = "Burgess Chang";
           address = "bsc@brsvh.org";
           userName = "bsc@brsvh.org";
+          passwordCommand =
+            "pass ${currentHost}/mail/${currentEMail.userName}";
 
           aliases =
             [
               "open@brsvh.org"
               "register@brsvh.org"
             ];
+
+          gpg = {
+            key = "78D74502D92E0218";
+            signByDefault = true;
+          };
 
           imap = {
             host = "imappro.zoho.com";
@@ -41,12 +50,35 @@ in
             };
           };
 
-          thunderbird = {
+          offlineimap = {
             enable = true;
-            profiles = [ "bsc" ];
+            extraConfig = {
+              account = {
+                autorefresh = 5;
+                quick = 10;
+              };
+
+              local = {
+                sync_deletes = true;
+              };
+
+              remote = {
+                maxconnections = 2;
+              };
+            };
+          };
+
+          mu = {
+            enable = true;
+          };
+
+          thunderbird = {
+            enable = false;
+            profiles = [ "${currentUser}" ];
           };
         };
       };
+
       maildirBasePath = "${config.xdg.dataHome}/Mail/";
     };
   };
@@ -54,17 +86,33 @@ in
   emacs.d = {
     enable = true;
     platform = "wayland";
+
     extraInitConfig = ''
-      (setq mail-host-address "${
-        elemAt
-          (
-            strings.split
-              "@"
-              config.accounts.email.accounts."${currentUser}".address
-          )
-          2
-      }")
+      (setq mail-host-address "${currentHost}")
+
+      (use-package mail-source
+        :config
+        (setq mail-source-directory
+              "${config.accounts.email.maildirBasePath}"))
+
+      (use-package smtpmail
+        :config
+        (setq
+         send-mail-function 'smtpmail-send-it
+         smtpmail-smtp-server "${currentEMail.smtp.host}"
+         smtpmail-smtp-service "${toString currentEMail.smtp.port}"
+         smtpmail-stream-type ${
+           if currentEMail.smtp.tls.enable
+           then "'ssl"
+           else "nil"
+         }))
     '';
+
+    overrides = {
+      mu4e = _: _: {
+        src = pkgs.mu.mu4e;
+      };
+    };
   };
 
   fonts = {
@@ -166,6 +214,17 @@ in
     home-manager = {
       enable = true;
       path = mkForce "${home-manager}";
+    };
+
+    offlineimap = {
+      enable = currentEMail.offlineimap.enable;
+    };
+
+    password-store = {
+      enable = true;
+      settings = {
+        PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
+      };
     };
 
     ssh = {
@@ -388,9 +447,9 @@ in
     };
 
     thunderbird = {
-      enable = true;
+      enable = currentEMail.thunderbird.enable;
       profiles = {
-        "bsc" = {
+        "${currentUser}" = {
           isDefault = true;
           withExternalGnupg = true;
         };
@@ -406,6 +465,10 @@ in
       enableSshSupport = true;
       enableFishIntegration = config.programs.fish.enable;
       pinentryFlavor = "gnome3";
+    };
+
+    offlineimap = {
+      enable = currentEMail.offlineimap.enable;
     };
   };
 
