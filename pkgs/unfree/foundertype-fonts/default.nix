@@ -1,7 +1,7 @@
 { fetchurl
-, fonts ? [ ]
 , lib
 , stdenv
+, symlinkJoin
 , ...
 }:
 with builtins;
@@ -21,81 +21,54 @@ let
 
   version = import ./version.nix;
 
-  knownFonts = attrNames shas;
+  mkFontDerivation = font: sha256:
+    mkDerivation {
+      inherit version;
 
-  selectedFonts =
-    if (fonts == [ ])
-    then knownFonts
-    else
-      let
-        unknown = subtractLists knownFonts fonts;
-      in
-      if (unknown != [ ])
-      then throw "Unknown font(s): ${concatStringsSep " " unknown}"
-      else
-        fonts;
+      pname = "foundertype-${font}";
 
-  selectedFontsShas =
-    attrsets.genAttrs
-      selectedFonts
-      (
-        name:
-        shas."${name}"
-      );
+      src = fetchurl {
+        inherit sha256;
+        url = "https://cdn1.foundertype.com/Public/Uploads/ttf/${font}.TTF";
+      };
 
-  srcs =
-    attrsets.mapAttrsToList
-      (
-        name:
-        sha:
-        (
-          fetchurl {
-            url = "https://cdn1.foundertype.com/Public/Uploads/ttf/${name}.TTF";
-            sha256 = sha;
-          }
-        )
-      )
-      selectedFontsShas;
+      unpackPhase = ''
+        :
+      '';
+
+      installPhase = ''
+        runHook preInstall        
+
+        install -Dm444 $src $out/share/fonts/truetype/foundertype/${font}.ttf;
+
+        runHook postInstall
+      '';
+
+      meta = {
+        inherit license;
+
+        description = "${font} font distributed by FounderType";
+
+        longDescription = ''
+          ${font} font a unfree font distributed by Founder Type.
+
+          This package does not give you any rights to any of its included
+          fonts, and only allows users who have obtained a license for
+          FounderType to use them.
+        '';
+
+        homepage = "https://foundertype.com";
+      };
+    };
+
+  fontDerivations =
+    mapAttrsToList
+      (font: sha: (mkFontDerivation font sha))
+      shas;
 in
-mkDerivation {
-  inherit srcs version;
-
+symlinkJoin rec {
+  inherit version;
   pname = "foundertype-fonts";
-
-  sourceRoot = ".";
-
-  buildPhase = ''
-    echo "selected fonts are ${toString selectedFonts}"
-  '';
-
-  unpackPhase = ''
-    :
-  '';
-
-  installPhase = ''
-    mkdir -p $out/share/fonts/truetype/foundertype
-
-    for src in $srcs; do
-      cp $src $out/share/fonts/truetype/foundertype/
-    done
-
-  '';
-
-  passthru = {
-    updateScript = ./update.sh;
-  };
-
-  meta = {
-    inherit license;
-    description = "Simplify Chinese fonts distributed by FounderType";
-    longDescription = ''
-      FounderType Fonts is a unofficial collection of the fonts
-      distributed by Founder Type.
-
-      This package does not give you any rights to any of its included
-      fonts, and only allows users who have obtained a license for
-      FounderType to use them.
-    '';
-    homepage = "https://foundertype.com";
-  };
+  name = "${pname}-${version}";
+  paths = fontDerivations;
 }
