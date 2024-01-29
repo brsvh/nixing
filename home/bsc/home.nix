@@ -88,7 +88,10 @@ in
     platform = "wayland";
 
     extraInitConfig = ''
-      (setq mail-host-address "${currentHost}")
+      (use-package startup
+        :no-require t
+        :init
+        (setq mail-host-address "${currentHost}"))
 
       (use-package mail-source
         :config
@@ -170,6 +173,7 @@ in
       [
         cachix
         foundertype-fonts
+        iosevka-source-code-pro
       ];
 
     sessionPath =
