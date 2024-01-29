@@ -98,14 +98,6 @@
     hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
-    haumea = {
-      url = "github:nix-community/haumea/main";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
     home-manager = {
       follows = "home-manager-stable";
     };
@@ -258,34 +250,166 @@
   };
 
   outputs =
-    { flake-parts
+    { devshell
+    , flake-parts
+    , nixago
+    , nixpkgs
+    , pre-commit
+    , treefmt
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake
       {
         inherit inputs;
       }
-      {
-        imports =
-          [
-            ./flakes
-            ./modules
-            ./nixos
-            ./home
-          ];
+      (
+        { config
+        , ...
+        }:
+          with builtins;
+          with nixpkgs.lib;
+          {
+            imports =
+              [
+                devshell.flakeModule
+                pre-commit.flakeModule
+                treefmt.flakeModule
 
-        systems =
-          [
-            "x86_64-linux"
-          ];
+                ./flakeModules/configurations
+                ./flakeModules/homeOptions.nix
+                ./flakeModules/nixago.nix
 
-        flake = {
-          overlays = {
-            unfree = final: prev:
-              import ./pkgs/unfree final prev;
-            default = final: prev:
-              import ./pkgs final prev;
-          };
-        };
-      };
+                ./nixos
+                ./home
+              ];
+
+            perSystem =
+              { config
+              , inputs'
+              , pkgs
+              , system
+              , ...
+              }: {
+                devshells = {
+                  default = {
+                    name = "nixing:default";
+
+                    commands = [
+                      {
+                        package = pkgs.age;
+                        category = "secrets";
+                      }
+                      {
+                        package = pkgs.git;
+                        category = "development";
+                      }
+                      {
+                        package = pkgs.nixUnstable;
+                        category = "development";
+                      }
+                      {
+                        package = inputs'.brsvh-emacs.packages.nogui;
+                        help = "The extensible, customizable GNU text editor";
+                        category = "development";
+                      }
+                      {
+                        package = pkgs.sops;
+                        category = "secrets";
+                      }
+                      {
+                        package = pkgs.ssh-to-age;
+                        category = "secrets";
+                      }
+                    ];
+
+                    devshell = {
+                      startup = {
+                        nixago = {
+                          text = (
+                            nixago.lib."${system}".makeAll
+                              (attrValues config.nixago.configs)
+                          ).shellHook;
+                        };
+
+                        pre-commit-hook = {
+                          text = config.pre-commit.installationScript;
+                        };
+                      };
+                    };
+
+                    env = [
+                      {
+                        name = "EDITOR";
+                        value = "emacs";
+                      }
+                    ];
+                  };
+                };
+
+                pre-commit = {
+                  check = {
+                    enable = true;
+                  };
+
+                  settings = {
+                    hooks = {
+                      nixpkgs-fmt = {
+                        enable = true;
+                      };
+                    };
+                  };
+                };
+
+                treefmt = {
+                  flakeFormatter = true;
+
+                  projectRootFile = "flake.nix";
+
+                  programs = {
+                    nixpkgs-fmt = {
+                      enable = true;
+                    };
+                  };
+                };
+              };
+
+            systems =
+              [
+                "x86_64-linux"
+              ];
+
+            flake = {
+              flakeModules = {
+                configurations = ./configurations.nix;
+                homeOptions = ./homeOptions.nix;
+                nixago = ./nixago.nix;
+              };
+
+              homeConfigurations =
+                mapAttrs
+                  (_: cfg: cfg.finalHomeConfiguration)
+                  config.configurations.home;
+
+              homeModules = {
+                fonts = import ./homeModules/fonts;
+                programs = import ./homeModules/programs;
+                services = import ./homeModules/services;
+              };
+
+              nixosConfigurations =
+                mapAttrs
+                  (_: cfg: cfg.finalNixOSConfiguration)
+                  config.configurations.nixos;
+
+              nixosModules = {
+                workstation = import ./nixosModules/workstation;
+              };
+
+              overlays = {
+                free = import ./overlays/free.nix;
+                unfree = import ./overlays/unfree.nix;
+              };
+            };
+          }
+      );
 }
