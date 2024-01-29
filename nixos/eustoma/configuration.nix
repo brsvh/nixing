@@ -153,7 +153,11 @@ with lib;
       };
 
       i18n = {
-        default = "english";
+        english = {
+          enable = true;
+          primary = true;
+        };
+
         chinese = {
           enable = true;
         };

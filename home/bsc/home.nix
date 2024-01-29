@@ -83,54 +83,56 @@ in
     };
   };
 
-  emacs.d = {
-    enable = true;
-    platform = "wayland";
+  brsvh = {
+    emacs = {
+      enable = true;
+      platform = "wayland";
 
-    extraInitConfig = ''
-      (use-package startup
-        :no-require t
-        :init
-        (setq mail-host-address "${currentHost}"))
+      extraInitConfig = ''
+        (use-package startup
+          :no-require t
+          :init
+          (setq mail-host-address "${currentHost}"))
 
-      (use-package mail-source
-        :config
-        (setq mail-source-directory
-              "${config.accounts.email.maildirBasePath}"))
+        (use-package mail-source
+          :config
+          (setq mail-source-directory
+                "${config.accounts.email.maildirBasePath}"))
 
-      (use-package nnimap
-        :config
-        (setq nnimap-address "${currentEMail.imap.host}"
-              nnimap-server-port ${toString currentEMail.imap.port}
-              nnimap-user "${currentEMail.userName}"
-              nnimap-stream ${
-                if currentEMail.smtp.tls.enable
-                then "'ssl"
-                else "'undecided"
-              }))
+        (use-package nnimap
+          :config
+          (setq nnimap-address "${currentEMail.imap.host}"
+                nnimap-server-port ${toString currentEMail.imap.port}
+                nnimap-user "${currentEMail.userName}"
+                nnimap-stream ${
+                  if currentEMail.smtp.tls.enable
+                  then "'ssl"
+                  else "'undecided"
+                }))
 
-      (use-package smtpmail
-        :config
-        (setq
-         send-mail-function 'smtpmail-send-it
-         smtpmail-smtp-server "${currentEMail.smtp.host}"
-         smtpmail-smtp-service ${toString currentEMail.smtp.port}
-         smtpmail-smtp-user "${currentEMail.userName}"
-         smtpmail-stream-type ${
-           if currentEMail.smtp.tls.enable
-           then "'ssl"
-           else "nil"
-         }
-         smtpmail-local-domain "localdmain"))
+        (use-package smtpmail
+          :config
+          (setq
+           send-mail-function 'smtpmail-send-it
+           smtpmail-smtp-server "${currentEMail.smtp.host}"
+           smtpmail-smtp-service ${toString currentEMail.smtp.port}
+           smtpmail-smtp-user "${currentEMail.userName}"
+           smtpmail-stream-type ${
+             if currentEMail.smtp.tls.enable
+             then "'ssl"
+             else "nil"
+           }
+           smtpmail-local-domain "localdmain"))
 
-      (use-package gnus
-        :config
-        (setq gnus-select-method '(nnimap "${currentEMail.imap.host}")))
-    '';
+        (use-package gnus
+          :config
+          (setq gnus-select-method '(nnimap "${currentEMail.imap.host}")))
+      '';
 
-    overrides = {
-      mu4e = _: _: {
-        src = pkgs.mu.mu4e;
+      overrides = {
+        mu4e = _: _: {
+          src = pkgs.mu.mu4e;
+        };
       };
     };
   };

@@ -8,18 +8,25 @@
 with builtins;
 with lib;
 let
-  inherit (inputs.haumea.lib) load loaders;
+  inherit (inputs)
+    disko
+    emacs-overlay
+    home-manager-stable
+    home-manager-unstable
+    lanzaboote
+    nixago
+    nixpkgs-stable
+    nixpkgs-unstable
+    rust-overlay
+    sops;
 
-  hosts = load {
-    src = ../nixos;
-    loader = loaders.path;
-  };
+  nixing = self;
 in
 {
   configurations = {
     default = {
       nixos = {
-        inherit (inputs) nixpkgs;
+        nixpkgs = nixpkgs-stable;
         system = "x86_64-linux";
         stateVersion = "23.11";
       };
@@ -29,11 +36,10 @@ in
       nixos = {
         modules =
           [
-            inputs.disko.nixosModules.disko
-            inputs.home-manager.nixosModules.home-manager
-            inputs.lanzaboote.nixosModules.lanzaboote
-            inputs.sops.nixosModules.sops
-            self.nixosModules.workstation
+            disko.nixosModules.disko
+            lanzaboote.nixosModules.lanzaboote
+            sops.nixosModules.sops
+            nixing.nixosModules.workstation
             {
               home-manager = {
                 useGlobalPkgs = mkDefault true;
@@ -42,8 +48,9 @@ in
               nixpkgs = {
                 overlays =
                   [
-                    inputs.emacs-overlay.overlays.default
-                    inputs.rust-overlay.overlays.default
+                    emacs-overlay.overlays.default
+                    rust-overlay.overlays.default
+                    nixing.overlays.free
                   ];
               };
             }
@@ -59,8 +66,9 @@ in
         domain = "brsvh.org";
         modules =
           [
-            hosts.eustoma.configuration
-            hosts.eustoma.disko
+            home-manager-unstable.nixosModules.home-manager
+            ./eustoma/configuration.nix
+            ./eustoma/disko.nix
             {
               nixpkgs = {
                 config = {
@@ -69,14 +77,14 @@ in
 
                 overlays =
                   [
-                    self.overlays.unfree
+                    nixing.overlays.unfree
                   ];
               };
             }
           ];
-        nixpkgs = inputs.nixpkgs-unstable;
+        nixpkgs = nixpkgs-unstable;
         specialArgs = {
-          pkgs-stable = import inputs.nixpkgs-stable {
+          pkgs-stable = import nixpkgs-stable {
             inherit system;
           };
         };
@@ -87,10 +95,40 @@ in
     };
   };
 
-  flake = {
-    nixosConfigurations =
-      mapAttrs
-        (_: cfg: cfg.finalNixOSConfiguration)
-        config.configurations.nixos;
-  };
+  perSystem =
+    { config
+    , system
+    , ...
+    }:
+    {
+      nixago = {
+        configs = mkMerge
+          [
+            {
+              ".sops.yaml" = {
+                output = ".sops.yaml";
+                format = "yaml";
+                data =
+                  let
+                    eustoma = {
+                      age = "age1lgy77wf7vxlvvv8lzsgmq6wgf43c4hl93ls2mw8pspmdcuzqvems7svu6t";
+                    };
+                  in
+                  {
+                    creation_rules = {
+                      "nixos/eustoma/secrets.yaml" = {
+                        path_regex = "^nixos/eustoma/secrets\.yaml$";
+                        key_groups = [
+                          {
+                            age = [ eustoma.age ];
+                          }
+                        ];
+                      };
+                    };
+                  };
+              };
+            }
+          ];
+      };
+    };
 }

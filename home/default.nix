@@ -7,20 +7,25 @@
 }:
 with lib;
 let
-  inherit (inputs.haumea.lib) load loaders;
-  inherit (inputs.home-manager.lib) homeManagerConfiguration;
-  inherit (inputs) nixpkgs;
+  inherit (inputs)
+    brsvh-emacs
+    emacs-overlay
+    home-manager-stable
+    home-manager-unstable
+    nixago
+    nixpkgs-stable
+    nixpkgs-unstable
+    rust-overlay
+    sops;
 
-  profiles = load {
-    src = ../home;
-    loader = loaders.path;
-  };
+  nixing = self;
 in
 {
   configurations = {
     default = {
       home = {
-        inherit (inputs) home-manager nixpkgs;
+        home-manager = home-manager-stable;
+        nixpkgs = nixpkgs-stable;
         system = "x86_64-linux";
         stateVersion = "23.11";
       };
@@ -30,30 +35,31 @@ in
       home = {
         modules =
           [
-            inputs.sops.homeManagerModules.sops
-            self.homeModules.home-manager
+            sops.homeManagerModules.sops
+            nixing.homeModules.fonts
+            nixing.homeModules.programs
+            nixing.homeModules.services
             {
               nixpkgs = {
                 overlays =
                   [
-                    inputs.emacs-overlay.overlays.default
-                    inputs.rust-overlay.overlays.default
+                    emacs-overlay.overlays.default
+                    rust-overlay.overlays.default
+                    nixing.overlays.free
                   ];
               };
             }
           ];
-        specialArgs =
-          { inherit (inputs) home-manager; };
       };
     };
 
     home = {
       "bsc@eustoma" = {
-        home-manager = inputs.home-manager-unstable;
+        home-manager = home-manager-unstable;
         modules =
           [
-            inputs.brsvh-emacs.homeModules.twist
-            profiles.bsc.home
+            brsvh-emacs.homeModules.twist
+            ./bsc/home.nix
             {
               nixpkgs = {
                 config = {
@@ -62,24 +68,55 @@ in
 
                 overlays =
                   [
-                    self.overlays.default
-                    self.overlays.unfree
+                    nixing.overlays.unfree
                   ];
               };
             }
           ];
-        nixpkgs = inputs.nixpkgs-unstable;
+        nixpkgs = nixpkgs-unstable;
         specialArgs =
-          { home-manager = inputs.home-manager-unstable; };
+          { home-manager = home-manager-unstable; };
         stateVersion = "23.11";
       };
     };
   };
 
-  flake = rec {
-    homeConfigurations =
-      mapAttrs
-        (_: cfg: cfg.finalHomeConfiguration)
-        config.configurations.home;
-  };
+  perSystem =
+    { config
+    , system
+    , ...
+    }:
+    {
+      nixago = {
+        configs = mkMerge
+          [
+            {
+              ".sops.yaml" = {
+                output = ".sops.yaml";
+                format = "yaml";
+                data =
+                  let
+                    bsc = {
+                      age = "age1h8jgr473q6vj9e8kannr0ljzreu7whc46qhjfpjxxkl4w38ny5esz6mk0v";
+                      pgp = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
+                    };
+                  in
+                  {
+                    creation_rules = {
+                      "secrets/bsc.yaml" = {
+                        path_regex = "^secrets/bsc\.yaml$";
+                        key_groups = [
+                          {
+                            pgp = [ bsc.pgp ];
+                            age = [ bsc.age ];
+                          }
+                        ];
+                      };
+                    };
+                  };
+              };
+            }
+          ];
+      };
+    };
 }
