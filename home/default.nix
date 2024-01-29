@@ -62,6 +62,7 @@ in
 
                 overlays =
                   [
+                    self.overlays.default
                     self.overlays.unfree
                   ];
               };

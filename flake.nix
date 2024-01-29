@@ -4,7 +4,6 @@
   nixConfig = {
     experimental-features =
       [
-        "ca-derivations"
         "flakes"
         "nix-command"
         "repl-flake"
@@ -260,7 +259,6 @@
 
   outputs =
     { flake-parts
-    , self
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake
@@ -285,6 +283,8 @@
           overlays = {
             unfree = final: prev:
               import ./pkgs/unfree final prev;
+            default = final: prev:
+              import ./pkgs final prev;
           };
         };
       };
