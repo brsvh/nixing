@@ -197,7 +197,7 @@ in
                   <fontconfig>
                     <description>${cfg.flavour} fonts</description>
 
-                    <match>
+                    <match target="pattern">
                       <test qual="any" name="family">
                         <string>serif</string>
                       </test>

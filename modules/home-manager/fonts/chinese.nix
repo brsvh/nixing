@@ -127,7 +127,7 @@ in
                   <fontconfig>
                     <description>${cfg.flavour} fonts</description>
 
-                    <match>
+                    <match target="pattern">
                       <test name="lang" compare="contains">
                         <string>zh</string>
                       </test>
@@ -139,7 +139,7 @@ in
                       </edit>
                     </match>
 
-                    <match>
+                    <match target="pattern">
                       <test name="lang" compare="contains">
                         <string>zh</string>
                       </test>
@@ -151,7 +151,7 @@ in
                       </edit>
                     </match>
 
-                    <match>
+                    <match target="pattern">
                       <test name="lang" compare="contains">
                         <string>zh</string>
                       </test>
