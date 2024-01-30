@@ -24,6 +24,7 @@ in
     flavour = mkOption {
       type = types.enum
         [
+          "Noto"
           "Plex"
           "Source"
         ];
@@ -76,8 +77,37 @@ in
   config = mkMerge
     [
       (
+        mkIf (enableChinese && cfg.flavour == "Noto")
+          {
+            fonts = {
+              chinese = {
+                sansFontName = mkDefault "Noto Sans CJK ${cfg.variant}";
+                serifFontName = mkDefault "Noto Seif CJK ${cfg.variant}";
+                monoFontName = mkDefault "Noto Sans Mono CJK ${cfg.variant}";
+              };
+            };
+
+            home = {
+              packages = with pkgs;
+                [
+                  noto-fonts
+                  noto-fonts-cjk-sans
+                  noto-fonts-cjk-serif
+                ];
+            };
+          }
+      )
+      (
         mkIf (enableChinese && cfg.flavour == "Source")
           {
+            fonts = {
+              chinese = {
+                sansFontName = mkDefault "Source Han Sans ${cfg.variant}";
+                serifFontName = mkDefault "Source Han Seif ${cfg.variant}";
+                monoFontName = mkDefault "Source Han Mono ${cfg.variant}";
+              };
+            };
+
             home = {
               packages = with pkgs;
                 [
@@ -85,30 +115,6 @@ in
                   source-han-serif
                   source-han-mono
                 ];
-            };
-          }
-      )
-      (
-        mkIf (enableChinese && cfg.flavour == "Source" && cfg.variant == "SC")
-          {
-            fonts = {
-              chinese = {
-                sansFontName = mkDefault "Source Han Sans SC";
-                serifFontName = mkDefault "Source Han Seif SC";
-                monoFontName = mkDefault "Source Han Mono SC";
-              };
-            };
-          }
-      )
-      (
-        mkIf (enableChinese && cfg.flavour == "Source" && cfg.variant == "TC")
-          {
-            fonts = {
-              chinese = {
-                sansFontName = mkDefault "Source Han Sans TC";
-                serifFontName = mkDefault "Source Han Seif TC";
-                monoFontName = mkDefault "Source Han Mono TC";
-              };
             };
           }
       )
