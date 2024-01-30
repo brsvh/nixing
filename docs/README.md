@@ -9,6 +9,9 @@ dotfiles[^1].
 
 This work is still in progress.
 
+This project encompasses the home-manager and NixOS configurations I am
+currently using, in addition to the **nixosModules** and **homeModules**
+that they depend upon, which I have created.
 
 ## License
 
@@ -19,8 +22,6 @@ received a copy of it, see the *COPYING.WTFPL* file for more details. If
 you did not recive it, see <http://www.wtfpl.net> for more details.
 
 
----
-
-[^1] What is dotfiles, <https://dotfiles.github.io>
+[^1]: What is dotfiles, <https://dotfiles.github.io>
 
 
