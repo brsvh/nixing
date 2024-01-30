@@ -89,6 +89,16 @@ in
       platform = "wayland";
 
       extraInitConfig = ''
+        (use-package emacs
+          :no-require t
+          :init
+          (set-fontset-font t 'cjk-misc "${config.fonts.chinese.monoFontName} ${toString config.fonts.size}")
+          (set-fontset-font t 'han "${config.fonts.chinese.monoFontName} ${toString config.fonts.size}")
+          (set-fontset-font t 'hangul "${config.fonts.korean.monoFontName} ${toString config.fonts.size}")
+          (set-fontset-font t 'kana "${config.fonts.japanese.monoFontName} ${toString config.fonts.size}")
+          (set-fontset-font t 'latin "${config.fonts.english.monoFontName} ${toString config.fonts.size}")
+          (set-fontset-font t 'symbol "${config.fonts.english.monoFontName} ${toString config.fonts.size}"))
+
         (use-package startup
           :no-require t
           :init
@@ -143,16 +153,26 @@ in
       flavour = "Noto";
     };
 
+    chinese = {
+      enable = true;
+      flavour = "Noto";
+      variant = "SC";
+    };
+
     english = {
       enable = true;
       enableNerdFontIntegration = true;
       flavour = "Plex";
     };
 
-    chinese = {
+    japanese = {
       enable = true;
-      flavour = "Source";
-      variant = "SC";
+      flavour = "Noto";
+    };
+
+    korean = {
+      enable = true;
+      flavour = "Noto";
     };
   };
 
@@ -176,6 +196,7 @@ in
         cachix
         foundertype-fonts
         iosevka-source-code-pro
+        lxgw-wenkai
       ];
 
     sessionPath =
