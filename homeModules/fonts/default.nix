@@ -10,6 +10,8 @@ with lib;
       ./chinese.nix
       ./emoji.nix
       ./english.nix
+      ./japanese.nix
+      ./korean.nix
     ];
 
   options.fonts = {
@@ -18,6 +20,14 @@ with lib;
       default = true;
       description = ''
         Whether to use Fonts Modules.
+      '';
+    };
+
+    size = mkOption {
+      type = types.int;
+      default = 11;
+      description = ''
+        The default size of fonts.
       '';
     };
   };
