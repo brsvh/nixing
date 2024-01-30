@@ -146,7 +146,7 @@ in
     english = {
       enable = true;
       enableNerdFontIntegration = true;
-      flavour = "Source";
+      flavour = "Plex";
     };
 
     chinese = {

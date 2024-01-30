@@ -19,6 +19,7 @@ with lib;
     systemPackages = with pkgs; [
       git
       home-manager
+      ibm-plex
       jq
       nano
       sbctl
@@ -113,6 +114,13 @@ with lib;
 
     desktop = {
       flavour = "gnome3";
+
+      fonts = {
+        sansFontName = "IBM Plex Sans";
+        serifFontName = "IBM Plex Serif";
+        monoFontName = "IBM Plex Mono";
+      };
+
       keyboardLayout = "us";
     };
 
