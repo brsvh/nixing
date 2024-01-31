@@ -1,7 +1,5 @@
 { config
-, hardware
 , lib
-, modulesPath
 , pkgs
 , pkgs-stable
 , ...
@@ -9,100 +7,12 @@
 with builtins;
 with lib;
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      hardware.nixosModules.lenovo-thinkpad-x1-nano-gen1
-    ];
-
   environment = {
-    systemPackages = with pkgs; [
-      git
-      home-manager
-      ibm-plex
-      jq
-      nano
-      sbctl
-    ];
-
-    variables = {
-      "EDITOR" = "nano";
-    };
-  };
-
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = mkDefault ''
-        --delete-older-than 4w
-      '';
-    };
-
-    optimise = {
-      automatic = true;
-    };
-
-    settings = {
-      allowed-users =
-        [
-          "@users"
-        ];
-
-      experimental-features =
-        [
-          "ca-derivations"
-          "flakes"
-          "nix-command"
-          "repl-flake"
-        ];
-
-      sandbox = true;
-
-      trusted-users =
-        [
-          "@admin"
-          "@wheel"
-          "root"
-        ];
-
-      use-xdg-base-directories = true;
-    };
-  };
-
-  sops = {
-    age = {
-      keyFile = "/var/lib/sops/key.txt";
-      generateKey = true;
-      sshKeyPaths =
-        [
-          "/etc/ssh/ssh_host_ed25519_key"
-        ];
-    };
-
-    defaultSopsFile = ./secrets.yaml;
-
-    secrets = {
-      "dae/config.dae" = {
-        restartUnits = [ "dae.service" ];
-      };
-    };
-  };
-
-  users = {
-    users = {
-      bsc = {
-        isNormalUser = true;
-        description = "Burgess Chang";
-        extraGroups =
-          [
-            "audio"
-            "jackaudio"
-            "wheel"
-            "networkmanager"
-          ];
-      };
-    };
+    systemPackages = with pkgs;
+      [
+        ibm-plex
+        sbctl
+      ];
   };
 
   workstation = {
