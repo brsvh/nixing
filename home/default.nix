@@ -59,7 +59,7 @@ in
         modules =
           [
             brsvh-emacs.homeModules.twist
-            ./bsc/home.nix
+            ./bsc
             {
               nixpkgs = {
                 config = {
@@ -74,8 +74,6 @@ in
             }
           ];
         nixpkgs = nixpkgs-unstable;
-        specialArgs =
-          { home-manager = home-manager-unstable; };
         stateVersion = "23.11";
       };
     };
