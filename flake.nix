@@ -392,6 +392,7 @@
 
               homeModules = {
                 fonts = import ./homeModules/fonts;
+                home = import ./homeModules/home;
                 programs = import ./homeModules/programs;
                 services = import ./homeModules/services;
               };
