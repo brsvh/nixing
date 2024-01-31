@@ -67,8 +67,7 @@ in
         modules =
           [
             home-manager-unstable.nixosModules.home-manager
-            ./eustoma/configuration.nix
-            ./eustoma/disko.nix
+            ./eustoma
             {
               nixpkgs = {
                 config = {
