@@ -136,6 +136,13 @@ let
                           stateVersion
                           username;
                       };
+
+                      programs = {
+                        home-manager = {
+                          enable = true;
+                          path = mkForce "${cfg'.home-manager}";
+                        };
+                      };
                     }
                   ] ++
                   cfg'.modules;
