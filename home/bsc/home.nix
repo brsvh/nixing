@@ -109,6 +109,10 @@ in
           (setq mail-source-directory
                 "${config.accounts.email.maildirBasePath}"))
 
+        (use-package message
+          :init
+          (setq message-directory "${config.accounts.email.maildirBasePath}"))
+
         (use-package nnimap
           :config
           (setq nnimap-address "${currentEMail.imap.host}"
@@ -132,11 +136,17 @@ in
              then "'ssl"
              else "nil"
            }
-           smtpmail-local-domain "localdmain"))
+           smtpmail-local-domain "localdmain"
+           smtpmail-queue-dir "${config.accounts.email.maildirBasePath}/queued-mail/"))
+
+        (use-package smime
+          :config
+          (setq smime-certificate-directory "${config.accounts.email.maildirBasePath}/certs/"))
 
         (use-package gnus
           :config
-          (setq gnus-select-method '(nnimap "${currentEMail.imap.host}")))
+          (push '(nnimap "${currentEMail.imap.host}")
+                gnus-secondary-select-methods))
       '';
 
       overrides = {
@@ -205,6 +215,7 @@ in
       ];
 
     sessionVariables = {
+      MAILDIR = "${config.accounts.email.maildirBasePath}";
       XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin";
     };
   };
