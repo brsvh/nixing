@@ -19,10 +19,13 @@ with lib;
       ./password.nix
       ./shell.nix
       ./ssh.nix
+      ./TeX.nix
       ./tools.nix
     ];
 
   home = {
+    fullname = "Burgess Chang";
+
     packages = with pkgs;
       [
         cachix

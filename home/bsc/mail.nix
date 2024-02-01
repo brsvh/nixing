@@ -9,6 +9,7 @@ let
   user = config.home.username;
   profile = config.accounts.email.accounts."${user}";
   host = elemAt (strings.split "@" profile.address) 2;
+  imap = profile.imap;
 in
 {
   accounts = {
@@ -16,11 +17,11 @@ in
       accounts = {
         "${user}" = {
           primary = true;
-          realName = "Burgess Chang";
+          realName = config.home.fullname;
           address = "bsc@brsvh.org";
           userName = "bsc@brsvh.org";
           passwordCommand =
-            "pass ${host}/mail/${profile.userName}";
+            "pass ${imap.host}:${toString imap.port}/${profile.userName}";
 
           aliases =
             [
@@ -73,7 +74,7 @@ in
         };
       };
 
-      maildirBasePath = "${config.xdg.dataHome}/Mail/";
+      maildirBasePath = "${config.xdg.dataHome}/Mail";
     };
   };
 

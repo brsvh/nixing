@@ -38,15 +38,6 @@ in
     };
   };
 
-  home = {
-    packages = with pkgs;
-      [
-        foundertype-fonts
-        iosevka-source-code-pro
-        lxgw-wenkai
-      ];
-  };
-
   xdg = {
     configFile = {
       "fontconfig/conf.d/99-${user}-fonts.conf".text = ''
