@@ -6,7 +6,25 @@
 with builtins;
 with lib;
 {
+  home = {
+    packages = with pkgs;
+      [
+        agrep
+        findutils
+        gnugrep
+        jq
+        ripgrep
+      ];
+  };
+
   programs = {
+    fzf = {
+      enable = true;
+      enableBashIntegration = config.programs.bash.enable;
+      enableFishIntegration = config.programs.fish.enable;
+      enableZshIntegration = config.programs.zsh.enable;
+    };
+
     git = {
       enable = true;
       signing = {

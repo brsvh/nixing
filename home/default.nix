@@ -37,6 +37,7 @@ in
           [
             sops.homeManagerModules.sops
             nixing.homeModules.fonts
+            nixing.homeModules.home
             nixing.homeModules.programs
             nixing.homeModules.services
             {
