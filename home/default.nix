@@ -69,6 +69,7 @@ in
 
                 overlays =
                   [
+                    brsvh-emacs.overlays.default
                     nixing.overlays.unfree
                   ];
               };
