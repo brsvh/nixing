@@ -50,17 +50,6 @@ in
           :init
           (setq message-directory "${mailDir}"))
 
-        (use-package nnimap
-          :config
-          (setq nnimap-address "${profile.imap.host}"
-                nnimap-server-port ${toString profile.imap.port}
-                nnimap-user "${profile.userName}"
-                nnimap-stream ${
-                  if profile.smtp.tls.enable
-                  then "'ssl"
-                  else "'undecided"
-                }))
-
         (use-package smtpmail
           :config
           (setq
@@ -82,9 +71,28 @@ in
 
         (use-package gnus
           :config
-          (push '(nnimap "${profile.imap.host}")
+          (push '(nnimap "${profile.address}"
+                         (nnimap-address "${profile.imap.host}")
+                         (nnimap-server-port ${toString profile.imap.port})
+                         (nnimap-user "${profile.userName}")
+                         (nnimap-stream ${
+                           if profile.smtp.tls.enable
+                           then "ssl"
+                           else "undecided"
+                         }))
                 gnus-secondary-select-methods))
+
+        (use-package mu4e
+          :config
+          (setq mu4e-refile-folder "${user}/Archives.2024"))
       '';
+
+      mail = {
+        signature = ''
+          Burgess Chang
+          Pronouns: He/Him/His
+        '';
+      };
 
       overrides = {
         mu4e = _: _: {
