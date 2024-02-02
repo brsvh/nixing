@@ -24,7 +24,7 @@
 
   inputs = {
     brsvh-emacs = {
-      url = "github:brsvh/emacs.d/main";
+      url = "/home/bsc/emacs.d";
     };
     crane = {
       url = "github:ipetkov/crane/master";
@@ -343,6 +343,11 @@
                         value = "emacs";
                       }
                     ];
+
+                    packages =
+                      [
+                        inputs'.brsvh-emacs.packages.dependencies
+                      ];
                   };
                 };
 
