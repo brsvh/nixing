@@ -24,7 +24,7 @@
 
   inputs = {
     brsvh-emacs = {
-      url = "/home/bsc/emacs.d";
+      url = "github:brsvh/emacs.d/main";
     };
     crane = {
       url = "github:ipetkov/crane/master";
