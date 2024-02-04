@@ -60,142 +60,22 @@ in
             default = "Google";
 
             engines = {
-              "GitHub" = {
-                definedAliases = [ "@github" ];
-
-                urls =
-                  [
-                    {
-                      template = "https://github.com/search";
-                      parmas =
-                        [
-                          {
-                            name = "q";
-                            value = "{searchTerms}";
-                          }
-                        ];
-                    }
-                  ];
-
-                iconUpdateURL = "https://github.com/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-              };
-
-              "GitHub Code" = {
-                definedAliases = [ "@github-code" ];
-
-                urls =
-                  [
-                    {
-                      template = "https://github.com/search";
-                      parmas =
-                        [
-                          {
-                            name = "q";
-                            value = "{searchTerms}";
-                          }
-                          {
-                            name = "type";
-                            value = "code";
-                          }
-                        ];
-                    }
-                  ];
-
-                iconUpdateURL = "https://github.com/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-              };
-
-              "GitHub Repositories" = {
-                definedAliases = [ "@github-repo" ];
-
-                urls =
-                  [
-                    {
-                      template = "https://github.com/search";
-                      parmas =
-                        [
-                          {
-                            name = "q";
-                            value = "{searchTerms}";
-                          }
-                          {
-                            name = "type";
-                            value = "repositories";
-                          }
-                        ];
-                    }
-                  ];
-
-                iconUpdateURL = "https://github.com/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-              };
-
-              "GitLab" = {
-                definedAliases = [ "@gitlab" ];
-
-                urls =
-                  [
-                    {
-                      template = "https://gitlab.com/search";
-                      parmas =
-                        [
-                          {
-                            name = "search";
-                            value = "{searchTerms}";
-                          }
-                        ];
-                    }
-                  ];
-
-                iconUpdateURL = "https://gitlab.com/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-              };
-
-              "GitLab Projects" = {
-                definedAliases = [ "@gitlab-projects" ];
-
-                urls =
-                  [
-                    {
-                      template = "https://gitlab.com/search";
-                      parmas =
-                        [
-                          {
-                            name = "search";
-                            value = "{searchTerms}";
-                          }
-                          {
-                            name = "scope";
-                            value = "projects";
-                          }
-                        ];
-                    }
-                  ];
-
-                iconUpdateURL = "https://gitlab.com/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-              };
-
               "NixOS Options" = {
                 urls =
                   [
                     {
-                      template = "https://search.nixos.org/packages";
-                      params = [
-                        {
-                          name = "type";
-                          value = "options";
-                        }
-                        {
-                          name = "channel";
-                          value = "unstable";
-                        }
-                        {
-                          name = "query";
-                          value = "{searchTerms}";
-                        }
-                      ];
+                      template = "https://search.nixos.org/options";
+                      params =
+                        [
+                          {
+                            name = "query";
+                            value = "{searchTerms}";
+                          }
+                          {
+                            name = "channel";
+                            value = "unstable";
+                          }
+                        ];
                     }
                   ];
 
@@ -210,20 +90,17 @@ in
                   [
                     {
                       template = "https://search.nixos.org/packages";
-                      params = [
-                        {
-                          name = "type";
-                          value = "packages";
-                        }
-                        {
-                          name = "channel";
-                          value = "unstable";
-                        }
-                        {
-                          name = "query";
-                          value = "{searchTerms}";
-                        }
-                      ];
+                      params =
+                        [
+                          {
+                            name = "query";
+                            value = "{searchTerms}";
+                          }
+                          {
+                            name = "channel";
+                            value = "unstable";
+                          }
+                        ];
                     }
                   ];
 
