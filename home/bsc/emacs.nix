@@ -43,8 +43,7 @@ in
 
         (use-package mail-source
           :config
-          (setq mail-source-directory
-                "${mailDir}"))
+          (setq mail-source-directory "${mailDir}"))
 
         (use-package message
           :init
@@ -69,22 +68,9 @@ in
           :config
           (setq smime-certificate-directory "${mailDir}/certs/"))
 
-        (use-package gnus
-          :config
-          (push '(nnimap "${profile.address}"
-                         (nnimap-address "${profile.imap.host}")
-                         (nnimap-server-port ${toString profile.imap.port})
-                         (nnimap-user "${profile.userName}")
-                         (nnimap-stream ${
-                           if profile.smtp.tls.enable
-                           then "ssl"
-                           else "undecided"
-                         }))
-                gnus-secondary-select-methods))
-
         (use-package mu4e
           :config
-          (setq mu4e-refile-folder "${user}/Archives.2024"))
+          (setq mu4e-refile-folder "${user}/Archive"))
       '';
 
       mail = {
