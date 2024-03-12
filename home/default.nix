@@ -8,7 +8,7 @@
 with lib;
 let
   inherit (inputs)
-    brsvh-emacs
+    my-emacs
     emacs-overlay
     home-manager-stable
     home-manager-unstable
@@ -59,8 +59,8 @@ in
         home-manager = home-manager-unstable;
         modules =
           [
-            brsvh-emacs.homeModules.twist
             ./bsc
+            my-emacs.homeModules.my-emacs
             {
               nixpkgs = {
                 config = {
@@ -69,7 +69,7 @@ in
 
                 overlays =
                   [
-                    brsvh-emacs.overlays.default
+                    my-emacs.overlays.default
                     nixing.overlays.unfree
                   ];
               };

@@ -11,6 +11,12 @@ with lib;
       [
         foundertype-fonts
       ];
+
+    sessionVariables = {
+      TEXMFHOME = "${config.xdg.dataHome}/texmf";
+      TEXMFVAR = "${config.xdg.cacheHome}/texlive/texmf-var";
+      TEXMFCONFIG = "${config.xdg.configHome}/texlive/texmf-config";
+    };
   };
 
   programs = {

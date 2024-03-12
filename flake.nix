@@ -23,8 +23,8 @@
   };
 
   inputs = {
-    brsvh-emacs = {
-      url = "github:brsvh/emacs.d/main";
+    my-emacs = {
+      url = "sourcehut:~brsvh/my-emacs/main";
     };
     crane = {
       url = "github:ipetkov/crane/master";
@@ -300,16 +300,16 @@
                         category = "secrets";
                       }
                       {
+                        package = inputs'.my-emacs.packages.nogui;
+                        help = "The extensible, customizable GNU text editor";
+                        category = "development";
+                      }
+                      {
                         package = pkgs.git;
                         category = "development";
                       }
                       {
                         package = pkgs.nixUnstable;
-                        category = "development";
-                      }
-                      {
-                        package = inputs'.brsvh-emacs.packages.nogui;
-                        help = "The extensible, customizable GNU text editor";
                         category = "development";
                       }
                       {
@@ -337,16 +337,17 @@
                       };
                     };
 
-                    env = [
-                      {
-                        name = "EDITOR";
-                        value = "emacs";
-                      }
-                    ];
+                    env =
+                      [
+                        {
+                          name = "EDITOR";
+                          value = "emacs";
+                        }
+                      ];
 
                     packages =
                       [
-                        inputs'.brsvh-emacs.packages.dependencies
+                        inputs'.my-emacs.packages.dependencies
                       ];
                   };
                 };
