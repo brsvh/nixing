@@ -13,6 +13,7 @@ with lib;
         findutils
         gnugrep
         jq
+        obsidian
         ripgrep
       ];
   };
