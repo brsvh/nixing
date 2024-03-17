@@ -117,20 +117,6 @@
         };
       };
     };
-    kde = {
-      url = "github:nix-community/kde2nix/main";
-      inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nixpkgs = {
-          follows = "nixpkgs-unstable";
-        };
-        pre-commit-hooks = {
-          follows = "pre-commit";
-        };
-      };
-    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs = {
@@ -247,6 +233,20 @@
         };
       };
     };
+    tsangertype-fonts = {
+      url = "github:brsvh/tsangertype-fonts.nix";
+      inputs = {
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        treefmt = {
+          follows = "treefmt";
+        };
+      };
+    };
   };
 
   outputs =
@@ -256,6 +256,7 @@
     , nixpkgs
     , pre-commit
     , treefmt
+    , tsangertype-fonts
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake

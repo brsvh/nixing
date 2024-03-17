@@ -23,7 +23,7 @@ with lib;
     };
 
     desktop = {
-      flavour = "gnome3";
+      flavour = "plasma6";
 
       fonts = {
         sansFontName = "IBM Plex Sans";

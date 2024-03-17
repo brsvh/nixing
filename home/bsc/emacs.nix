@@ -28,6 +28,8 @@ in
           :no-require t
           :when (display-graphic-p)
           :init
+          (set-face-attribute 'default nil :font "${fontName "english"} ${fontSize}")
+
           (set-fontset-font t 'cjk-misc "${fontName "chinese"} ${fontSize}")
           (set-fontset-font t 'han "${fontName "chinese"} ${fontSize}")
           (set-fontset-font t 'hangul "${fontName "korean"} ${fontSize}")

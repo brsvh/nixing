@@ -18,13 +18,12 @@ in
       (
         mkIf withPlasma6 {
           services = {
-            xserver = {
-              desktopManager = {
-                plasma6 = {
-                  enable = true;
-                };
+            desktopManager = {
+              plasma6 = {
+                enable = true;
               };
-
+            };
+            xserver = {
               displayManager = {
                 sddm = {
                   enable = true;
@@ -37,18 +36,6 @@ in
             };
           };
         }
-      )
-      (
-        mkIf (withPlasma5 && withWayland)
-          {
-            services = {
-              xserver = {
-                displayManager = {
-                  defaultSession = mkDefault "plasmawayland";
-                };
-              };
-            };
-          }
       )
     ];
 }

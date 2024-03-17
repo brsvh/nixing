@@ -9,6 +9,7 @@ let
 
   withGnome3 = cfg.flavour == "gnome3";
   withPlasma5 = cfg.flavour == "plasma5";
+  withPlasma6 = cfg.flavour == "plasma6";
 
   withFcitx5 = cfg.inputMethod == "fcitx5";
   withIbus = cfg.inputMethod == "ibus";
@@ -36,7 +37,7 @@ in
         if withGnome3
         then "ibus"
         else
-          if withPlasma5
+          if (withPlasma5 || withPlasma6)
           then "fcitx5"
           else "ibus";
     in
