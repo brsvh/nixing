@@ -20,7 +20,7 @@ with lib;
       enableExtraSocket = true;
       enableSshSupport = true;
       enableFishIntegration = config.programs.fish.enable;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-qt;
     };
   };
 }

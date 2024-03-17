@@ -16,7 +16,8 @@ let
     nixpkgs-stable
     nixpkgs-unstable
     rust-overlay
-    sops;
+    sops
+    tsangertype-fonts;
 
   nixing = self;
 in
@@ -71,6 +72,7 @@ in
                   [
                     my-emacs.overlays.default
                     nixing.overlays.unfree
+                    tsangertype-fonts.overlays.default
                   ];
               };
             }

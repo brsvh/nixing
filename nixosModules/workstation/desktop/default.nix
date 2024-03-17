@@ -21,8 +21,10 @@ in
     [
       ./fonts.nix
       ./gnome3.nix
+      ./gpg.nix
       ./input-method.nix
       ./plasma5.nix
+      ./plasma6.nix
       ./xdg.nix
     ];
 
