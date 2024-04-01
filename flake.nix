@@ -24,7 +24,7 @@
 
   inputs = {
     my-emacs = {
-      url = "sourcehut:~brsvh/my-emacs/main";
+      url = "github:brsvh/my-emacs/main";
     };
     crane = {
       url = "github:ipetkov/crane/master";

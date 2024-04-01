@@ -430,18 +430,18 @@
         "treefmt": "treefmt"
       },
       "locked": {
-        "lastModified": 1711569703,
-        "narHash": "sha256-mJtHS500RBWP8s61rTv5wrHSu646L+EFie6Pqt3KoqA=",
-        "owner": "~brsvh",
+        "lastModified": 1711958676,
+        "narHash": "sha256-c7hlztBqMGjHaQ6h6+TjsjilhuUf00Y10fyQ9EKIBkg=",
+        "owner": "brsvh",
         "repo": "my-emacs",
-        "rev": "a5955a9dc9084ae18348df2c4a196d886f543005",
-        "type": "sourcehut"
+        "rev": "da51c9c35529e6a4b889ebddf72afc9326c28bd4",
+        "type": "github"
       },
       "original": {
-        "owner": "~brsvh",
+        "owner": "brsvh",
         "ref": "main",
         "repo": "my-emacs",
-        "type": "sourcehut"
+        "type": "github"
       }
     },
     "nix-straight": {
