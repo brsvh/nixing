@@ -20,6 +20,12 @@ let
   host = elemAt (strings.split "@" profile.address) 2;
 in
 {
+  home = {
+    sessionVariables = {
+      EDITOR = "emacsclient -c";
+    };
+  };
+
   programs = {
     my-emacs = {
       enable = true;

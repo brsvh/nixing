@@ -15,6 +15,12 @@ with lib;
       ];
   };
 
+  services = {
+    onlyoffice = {
+      enable = true;
+    };
+  };
+
   workstation = {
     audio = {
       system = "pipewire";

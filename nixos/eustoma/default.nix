@@ -18,6 +18,7 @@ with lib;
       ./secrets.nix
       ./tools.nix
       ./users.nix
+      ./virtualisation.nix
       ./workstation.nix
     ];
 }

@@ -9,7 +9,8 @@ with lib;
   home = {
     packages = with pkgs;
       [
-        foundertype-fonts
+        ghostscript
+        kile
       ];
 
     sessionVariables = {

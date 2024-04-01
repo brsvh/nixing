@@ -17,12 +17,20 @@ in
     [
       (
         mkIf withPlasma6 {
+          environment = {
+            systemPackages = with pkgs;
+              [
+                xdg-desktop-portal-gtk
+              ];
+          };
+
           services = {
             desktopManager = {
               plasma6 = {
                 enable = true;
               };
             };
+
             xserver = {
               displayManager = {
                 sddm = {

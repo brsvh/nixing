@@ -15,6 +15,7 @@ with lib;
           [
             "audio"
             "jackaudio"
+            "libvirtd"
             "wheel"
             "networkmanager"
           ];

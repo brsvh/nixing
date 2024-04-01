@@ -10,6 +10,10 @@ let
 in
 {
   programs = {
+    chromium = {
+      enable = false;
+    };
+
     firefox = {
       enable = true;
 

@@ -19,6 +19,10 @@ with lib;
   };
 
   programs = {
+    command-not-found = {
+      enable = true;
+    };
+
     fzf = {
       enable = true;
       enableBashIntegration = config.programs.bash.enable;

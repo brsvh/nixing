@@ -22,6 +22,18 @@ with lib;
       "dae/config.dae" = {
         restartUnits = [ "dae.service" ];
       };
+
+      "hercules-ci/binary-caches.json" = {
+        mode = "0440";
+        owner = "hercules-ci-agent";
+        restartUnits = [ "hercules-ci-agent.service" ];
+      };
+
+      "hercules-ci/cluster-join-token.key" = {
+        mode = "0440";
+        owner = "hercules-ci-agent";
+        restartUnits = [ "hercules-ci-agent.service" ];
+      };
     };
   };
 }

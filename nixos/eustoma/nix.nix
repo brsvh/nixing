@@ -5,6 +5,9 @@
 }:
 with builtins;
 with lib;
+let
+  scrt = config.sops.secrets;
+in
 {
   nix = {
     gc = {
@@ -43,6 +46,17 @@ with lib;
         ];
 
       use-xdg-base-directories = true;
+    };
+  };
+
+  services = {
+    hercules-ci-agent = {
+      enable = true;
+      settings = {
+        binaryCachesPath = scrt."hercules-ci/binary-caches.json".path;
+        clusterJoinTokenPath = scrt."hercules-ci/cluster-join-token.key".path;
+        concurrentTasks = 4;
+      };
     };
   };
 }

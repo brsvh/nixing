@@ -12,6 +12,7 @@ in
     [
       ./proxy
 
+      ./bluetooth.nix
       ./firewall.nix
       ./network-manager.nix
       ./openssh.nix

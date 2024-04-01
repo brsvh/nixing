@@ -51,7 +51,7 @@ in
           };
 
           offlineimap = {
-            enable = true;
+            enable = false;
             extraConfig = {
               account = {
                 autorefresh = 5;
@@ -69,7 +69,15 @@ in
           };
 
           mu = {
+            enable = false;
+          };
+
+          thunderbird = {
             enable = true;
+            profiles =
+              [
+                "${user}"
+              ];
           };
         };
       };
@@ -88,10 +96,19 @@ in
     offlineimap = {
       enable = profile.offlineimap.enable;
     };
+
+    thunderbird = {
+      enable = profile.thunderbird.enable;
+      profiles = {
+        "${user}" = {
+          isDefault = true;
+          withExternalGnupg = true;
+        };
+      };
+    };
   };
 
   services = {
-
     offlineimap = {
       enable = profile.offlineimap.enable;
     };
