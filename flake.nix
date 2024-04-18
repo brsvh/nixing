@@ -400,6 +400,17 @@
             free = import ./overlays/free.nix;
             unfree = import ./overlays/unfree.nix;
           };
+
+          templates = {
+            default = {
+              path = ./templates/default;
+              description = ''
+                Empty Nix flake environment.
+
+                Create flake by flake-parts, with devshell, pre-commit hook and treefmt.
+              '';
+            };
+          };
         };
       }
     );
