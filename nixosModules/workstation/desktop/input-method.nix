@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -19,11 +20,10 @@ in
 {
   options.workstation.desktop = {
     inputMethod = mkOption {
-      type = types.enum
-        [
-          "ibus"
-          "fcitx5"
-        ];
+      type = types.enum [
+        "ibus"
+        "fcitx5"
+      ];
       default = "fcitx5";
       description = ''
         The default input method.
@@ -34,60 +34,44 @@ in
   config =
     let
       im =
-        if withGnome3
-        then "ibus"
+        if withGnome3 then
+          "ibus"
+        else if (withPlasma5 || withPlasma6) then
+          "fcitx5"
         else
-          if (withPlasma5 || withPlasma6)
-          then "fcitx5"
-          else "ibus";
+          "ibus";
     in
-    mkIf cfg.enable
-      (
-        mkMerge
-          [
-            {
-              i18n = {
-                inputMethod = {
-                  enabled = cfg.inputMethod;
-                };
-              };
+    mkIf cfg.enable (mkMerge [
+      {
+        i18n = {
+          inputMethod = {
+            enabled = cfg.inputMethod;
+          };
+        };
 
-              workstation = {
-                desktop = {
-                  inputMethod = im;
-                };
-              };
-            }
-            (
-              mkIf (withIbus && withChinese)
-                {
-                  i18n = {
-                    inputMethod = {
-                      ibus = {
-                        engines = with pkgs.ibus-engines;
-                          [
-                            rime
-                          ];
-                      };
-                    };
-                  };
-                }
-            )
-            (
-              mkIf (withFcitx5 && withChinese)
-                {
-                  i18n = {
-                    inputMethod = {
-                      fcitx5 = {
-                        addons = with pkgs;
-                          [
-                            fcitx5-rime
-                          ];
-                      };
-                    };
-                  };
-                }
-            )
-          ]
-      );
+        workstation = {
+          desktop = {
+            inputMethod = im;
+          };
+        };
+      }
+      (mkIf (withIbus && withChinese) {
+        i18n = {
+          inputMethod = {
+            ibus = {
+              engines = with pkgs.ibus-engines; [ rime ];
+            };
+          };
+        };
+      })
+      (mkIf (withFcitx5 && withChinese) {
+        i18n = {
+          inputMethod = {
+            fcitx5 = {
+              addons = with pkgs; [ fcitx5-rime ];
+            };
+          };
+        };
+      })
+    ]);
 }

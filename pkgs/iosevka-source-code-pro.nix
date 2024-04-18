@@ -1,6 +1,4 @@
-{ iosevka
-, ...
-}:
+{ iosevka, ... }:
 iosevka.override {
   set = "source-code-pro";
 
@@ -20,7 +18,7 @@ iosevka.override {
     shape = 500
     menu = 3
     css = "condensed"
-    
+
     [buildPlans.iosevka-source-code-pro.variants.widths.Normal]
     shape = 600
     menu = 5

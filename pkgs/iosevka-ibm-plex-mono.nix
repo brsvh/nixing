@@ -1,6 +1,4 @@
-{ iosevka
-, ...
-}:
+{ iosevka, ... }:
 iosevka.override {
   set = "iosevka-ibm-plex-mono";
 
@@ -20,7 +18,7 @@ iosevka.override {
     shape = 500
     menu = 3
     css = "condensed"
-    
+
     [buildPlans.iosevka-ibm-plex-mono.variants.widths.Normal]
     shape = 600
     menu = 5

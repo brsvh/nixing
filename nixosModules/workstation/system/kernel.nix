@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -27,12 +28,13 @@ in
       };
 
       params = mkOption {
-        type = types.listOf (types.strMatching
-          ''([^"[:space:]]|"[^"]*")+'' //
-        {
-          name = "kernelParam";
-          description = "string, with spaces inside double quotes";
-        });
+        type = types.listOf (
+          types.strMatching ''([^"[:space:]]|"[^"]*")+''
+          // {
+            name = "kernelParam";
+            description = "string, with spaces inside double quotes";
+          }
+        );
         default = [ ];
         description = ''
           The Kernel parameters will be used.
@@ -49,28 +51,23 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        boot = {
-          kernelModules = cfg.kernel.modules;
-          kernelPackages = cfg.kernel.package;
-          kernelParams = cfg.kernel.params;
-        };
-      }
-      (
-        mkIf cfg.kernel.quiet
-          {
-            boot = {
-              kernelParams =
-                [
-                  "quiet"
-                  "loglevel=3"
-                  "systemd.show_status=auto"
-                  "rd.udev.log_level=3"
-                ];
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    {
+      boot = {
+        kernelModules = cfg.kernel.modules;
+        kernelPackages = cfg.kernel.package;
+        kernelParams = cfg.kernel.params;
+      };
+    }
+    (mkIf cfg.kernel.quiet {
+      boot = {
+        kernelParams = [
+          "quiet"
+          "loglevel=3"
+          "systemd.show_status=auto"
+          "rd.udev.log_level=3"
+        ];
+      };
+    })
+  ];
 }

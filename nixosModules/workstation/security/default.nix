@@ -1,9 +1,8 @@
 { ... }:
 {
-  imports =
-    [
-      ./firewall.nix
-      ./polkit.nix
-      ./rtkit.nix
-    ];
+  imports = [
+    ./firewall.nix
+    ./polkit.nix
+    ./rtkit.nix
+  ];
 }

@@ -1,7 +1,8 @@
-{ config
-, lib
-, withSystem
-, ...
+{
+  config,
+  lib,
+  withSystem,
+  ...
 }:
 with builtins;
 with lib;
@@ -9,10 +10,7 @@ let
   cfg = config.configurations;
 
   nixosOpts =
-    { config
-    , name
-    , ...
-    } @ opts:
+    { config, name, ... }@opts:
     let
       cfg' = config;
     in
@@ -97,42 +95,34 @@ let
       };
 
       config = {
-        finalNixOSConfiguration =
-          withSystem
-            cfg'.system
-            (
-              { system
-              , ...
-              } @ ctx:
-              cfg'.nixpkgs.lib.nixosSystem {
-                inherit system;
+        finalNixOSConfiguration = withSystem cfg'.system (
+          { system, ... }@ctx:
+          cfg'.nixpkgs.lib.nixosSystem {
+            inherit system;
 
-                modules =
-                  cfg.global.nixos.modules ++
-                  [
-                    {
-                      nixpkgs = {
-                        hostPlatform = system;
-                      };
-                      networking = {
-                        inherit (cfg') domain hostName;
-                      };
-                      system = {
-                        inherit (cfg') stateVersion;
-                      };
-                      time = {
-                        timeZone = cfg'.zone;
-                      };
-                    }
-                  ] ++
-                  cfg'.modules;
+            modules =
+              cfg.global.nixos.modules
+              ++ [
+                {
+                  nixpkgs = {
+                    hostPlatform = system;
+                  };
+                  networking = {
+                    inherit (cfg') domain hostName;
+                  };
+                  system = {
+                    inherit (cfg') stateVersion;
+                  };
+                  time = {
+                    timeZone = cfg'.zone;
+                  };
+                }
+              ]
+              ++ cfg'.modules;
 
-                specialArgs =
-                  recursiveUpdate
-                    cfg.global.nixos.specialArgs
-                    cfg'.specialArgs;
-              }
-            );
+            specialArgs = recursiveUpdate cfg.global.nixos.specialArgs cfg'.specialArgs;
+          }
+        );
       };
     };
 in
@@ -193,4 +183,4 @@ in
       };
     };
   };
-}  
+}

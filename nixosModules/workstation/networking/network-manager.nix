@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -10,17 +11,13 @@ let
   withNetworkManager = cfg.manager == "network-manager";
 in
 {
-  config = mkMerge
-    [
-      (
-        mkIf withNetworkManager
-          {
-            networking = {
-              networkmanager = {
-                enable = true;
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf withNetworkManager {
+      networking = {
+        networkmanager = {
+          enable = true;
+        };
+      };
+    })
+  ];
 }

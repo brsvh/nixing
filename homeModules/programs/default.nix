@@ -1,12 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 {
-  imports =
-    [
-      ./any-nix-shell.nix
-    ];
+  imports = [ ./any-nix-shell.nix ];
 }

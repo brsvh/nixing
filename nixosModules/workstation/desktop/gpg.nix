@@ -1,13 +1,8 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 {
   services = {
     dbus = {
-      packages = with pkgs;
-        [
-          gcr
-        ];
+      packages = with pkgs; [ gcr ];
     };
   };
 }

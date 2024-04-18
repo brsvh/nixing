@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -40,16 +41,15 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        boot = {
-          initrd = {
-            verbose = ! cfg.initrd.quiet;
-            availableKernelModules = cfg.initrd.modules.implication;
-            kernelModules = cfg.initrd.modules.explicitness;
-          };
+  config = mkMerge [
+    {
+      boot = {
+        initrd = {
+          verbose = !cfg.initrd.quiet;
+          availableKernelModules = cfg.initrd.modules.implication;
+          kernelModules = cfg.initrd.modules.explicitness;
         };
-      }
-    ];
+      };
+    }
+  ];
 }

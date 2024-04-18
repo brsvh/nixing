@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -13,16 +14,12 @@ in
 {
   config = mkIf withGnome3 {
     environment = {
-      systemPackages = with pkgs; [
-        gnome.adwaita-icon-theme
-      ];
+      systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
     };
 
     services = {
       udev = {
-        packages = with pkgs; [
-          gnome.gnome-settings-daemon
-        ];
+        packages = with pkgs; [ gnome.gnome-settings-daemon ];
       };
 
       xserver = {

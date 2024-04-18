@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -20,18 +21,25 @@ in
           realName = config.home.fullname;
           address = "bsc@brsvh.org";
           userName = "bsc@brsvh.org";
-          passwordCommand =
-            "pass ${imap.host}:${toString imap.port}/${profile.userName}";
+          passwordCommand = "pass ${imap.host}:${toString imap.port}/${profile.userName}";
 
-          aliases =
-            [
-              "open@brsvh.org"
-              "register@brsvh.org"
-            ];
+          aliases = [
+            "bsc@member.fsf.org"
+            "open@brsvh.org"
+            "register@brsvh.org"
+          ];
 
           gpg = {
             key = "78D74502D92E0218";
             signByDefault = true;
+          };
+
+          signature = {
+            text = ''
+              Burgess Chang
+              Pronouns: He/Him/His
+              OpenPGP: 7B740DB9F2AC6D3B226BC53078D74502D92E0218
+            '';
           };
 
           imap = {
@@ -73,11 +81,8 @@ in
           };
 
           thunderbird = {
-            enable = true;
-            profiles =
-              [
-                "${user}"
-              ];
+            enable = false;
+            profiles = [ "${user}" ];
           };
         };
       };
@@ -102,7 +107,7 @@ in
       profiles = {
         "${user}" = {
           isDefault = true;
-          withExternalGnupg = true;
+          withExternalGnupg = false;
         };
       };
     };

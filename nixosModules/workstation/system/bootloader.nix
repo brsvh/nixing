@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -33,10 +34,7 @@ in
       };
 
       flavour = mkOption {
-        type = types.enum
-          [
-            "systemd-boot"
-          ];
+        type = types.enum [ "systemd-boot" ];
         default = "systemd-boot";
         description = ''
           The bootloader flavour.
@@ -54,45 +52,35 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf withEFI
+  config = mkMerge [
+    (mkIf withEFI {
+      boot = {
+        loader = {
+          efi = {
+            canTouchEfiVariables = true;
+            efiSysMountPoint = cfg.bootloader.efiSysMountPoint;
+          };
+        };
+      };
+    })
+    (mkIf withSystemdBoot {
+      workstation = {
+        bootloaders = {
+          systemd-boot = {
+            enable = true;
+          };
+        };
+      };
+    })
+    (mkIf cfg.bootloader.secureboot {
+      boot = {
+        lanzaboote =
+          assert withSystemdBoot;
           {
-            boot = {
-              loader = {
-                efi = {
-                  canTouchEfiVariables = true;
-                  efiSysMountPoint = cfg.bootloader.efiSysMountPoint;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf withSystemdBoot
-          {
-            workstation = {
-              bootloaders = {
-                systemd-boot = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf cfg.bootloader.secureboot
-          {
-            boot = {
-              lanzaboote =
-                assert withSystemdBoot;
-                {
-                  enable = true;
-                  pkiBundle = "/etc/secureboot";
-                };
-            };
-          }
-      )
-    ];
+            enable = true;
+            pkiBundle = "/etc/secureboot";
+          };
+      };
+    })
+  ];
 }

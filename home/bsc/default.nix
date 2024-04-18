@@ -1,40 +1,34 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
 {
-  imports =
-    [
-      ./browser.nix
-      ./desktop.nix
-      ./emacs.nix
-      ./fonts.nix
-      ./gpg.nix
-      ./input-method.nix
-      ./mail.nix
-      ./nix.nix
-      ./password.nix
-      ./shell.nix
-      ./ssh.nix
-      ./TeX.nix
-      ./tools.nix
-    ];
+  imports = [
+    ./browser.nix
+    ./desktop.nix
+    ./emacs.nix
+    ./fonts.nix
+    ./gpg.nix
+    ./input-method.nix
+    ./mail.nix
+    ./nix.nix
+    ./password.nix
+    ./shell.nix
+    ./ssh.nix
+    ./TeX.nix
+    ./tools.nix
+  ];
 
   home = {
     fullname = "Burgess Chang";
 
-    packages = with pkgs;
-      [
-        cachix
-      ];
+    packages = with pkgs; [ cachix ];
 
-    sessionPath =
-      [
-        "${config.home.sessionVariables.XDG_BIN_HOME}"
-      ];
+    sessionPath = [ "${config.home.sessionVariables.XDG_BIN_HOME}" ];
 
     sessionVariables = {
       XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin";

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -39,47 +40,46 @@ in
     };
   };
 
-  config = mkIf cfg.enable
-    {
-      programs = {
-        offlineimap = {
-          enable = true;
-        };
+  config = mkIf cfg.enable {
+    programs = {
+      offlineimap = {
+        enable = true;
       };
+    };
 
-      systemd = {
-        user = {
-          services = {
-            offlineimap = {
-              Unit = {
-                Description = "Offlineimap: a software to dispose your mailbox(es) as a local Maildir(s)";
-              };
-              Service = {
-                Type = "oneshot";
-                ExecStart = "${prog.package}/bin/offlineimap -u syslog -o -1";
-                TimeoutStartSec = cfg.timeoutStartSec;
-              };
+    systemd = {
+      user = {
+        services = {
+          offlineimap = {
+            Unit = {
+              Description = "Offlineimap: a software to dispose your mailbox(es) as a local Maildir(s)";
+            };
+            Service = {
+              Type = "oneshot";
+              ExecStart = "${prog.package}/bin/offlineimap -u syslog -o -1";
+              TimeoutStartSec = cfg.timeoutStartSec;
             };
           };
+        };
 
-          timers = {
-            offlineimap = {
-              Unit = {
-                Description = "offlineimap timer";
-              };
+        timers = {
+          offlineimap = {
+            Unit = {
+              Description = "offlineimap timer";
+            };
 
-              Timer = {
-                Unit = "offlineimap.service";
-                OnCalendar = cfg.onCalendar;
-                Persistent = "true";
-              };
+            Timer = {
+              Unit = "offlineimap.service";
+              OnCalendar = cfg.onCalendar;
+              Persistent = "true";
+            };
 
-              Install = {
-                WantedBy = [ "timers.target" ];
-              };
+            Install = {
+              WantedBy = [ "timers.target" ];
             };
           };
         };
       };
     };
+  };
 }

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -52,31 +53,16 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.korean.enable
-          {
-            i18n = {
-              supportedLocales =
-                [
-                  "ko_KR.UTF-8/UTF-8"
-                ] ++ (
-                  optionals cfg.korean.EUC
-                    [
-                      "ko_KR.EUC-KR/EUC-KR"
-                    ]
-                );
-            };
-          }
-      )
-      (
-        mkIf primary
-          {
-            i18n = {
-              defaultLocale = cfg.korean.defaultLocale;
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.korean.enable {
+      i18n = {
+        supportedLocales = [ "ko_KR.UTF-8/UTF-8" ] ++ (optionals cfg.korean.EUC [ "ko_KR.EUC-KR/EUC-KR" ]);
+      };
+    })
+    (mkIf primary {
+      i18n = {
+        defaultLocale = cfg.korean.defaultLocale;
+      };
+    })
+  ];
 }

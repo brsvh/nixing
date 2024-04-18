@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -26,12 +27,10 @@ with lib;
         ovmf = {
           enable = true;
           packages = [
-            (
-              pkgs.OVMF.override {
-                secureBoot = true;
-                tpmSupport = true;
-              }
-            ).fd
+            (pkgs.OVMF.override {
+              secureBoot = true;
+              tpmSupport = true;
+            }).fd
           ];
         };
       };

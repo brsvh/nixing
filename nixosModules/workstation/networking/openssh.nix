@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -20,17 +21,13 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.openssh.enable
-          {
-            services = {
-              openssh = {
-                enable = true;
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.openssh.enable {
+      services = {
+        openssh = {
+          enable = true;
+        };
+      };
+    })
+  ];
 }

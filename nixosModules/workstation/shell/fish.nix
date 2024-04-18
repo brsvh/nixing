@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -10,15 +11,14 @@ let
   withFish = cfg.flavour == "fish";
 in
 {
-  config = mkIf withFish
-    {
-      programs = {
-        fish = {
-          enable = true;
-          interactiveShellInit = ''
-            set fish_greeting
-          '';
-        };
+  config = mkIf withFish {
+    programs = {
+      fish = {
+        enable = true;
+        interactiveShellInit = ''
+          set fish_greeting
+        '';
       };
     };
+  };
 }

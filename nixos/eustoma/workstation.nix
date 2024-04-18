@@ -1,18 +1,18 @@
-{ config
-, lib
-, pkgs
-, pkgs-stable
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-stable,
+  ...
 }:
 with builtins;
 with lib;
 {
   environment = {
-    systemPackages = with pkgs;
-      [
-        ibm-plex
-        sbctl
-      ];
+    systemPackages = with pkgs; [
+      ibm-plex
+      sbctl
+    ];
   };
 
   services = {
@@ -89,23 +89,19 @@ with lib;
 
       initrd = {
         modules = {
-          implication =
-            [
-              "xhci_pci"
-              "thunderbolt"
-              "nvme"
-              "usb_storage"
-              "sd_mod"
-            ];
+          implication = [
+            "xhci_pci"
+            "thunderbolt"
+            "nvme"
+            "usb_storage"
+            "sd_mod"
+          ];
         };
       };
 
       kernel = {
         package = pkgs.linuxPackages_zen;
-        modules =
-          [
-            "kvm-intel"
-          ];
+        modules = [ "kvm-intel" ];
       };
 
       startup = {
@@ -114,13 +110,12 @@ with lib;
 
       swap = {
         enable = true;
-        devices =
-          [
-            {
-              device = "/var/lib/swapfile";
-              size = 16 * 1024;
-            }
-          ];
+        devices = [
+          {
+            device = "/var/lib/swapfile";
+            size = 16 * 1024;
+          }
+        ];
       };
 
       zram = {
@@ -130,11 +125,10 @@ with lib;
     };
 
     video = {
-      drivers =
-        [
-          "modesetting"
-          "fbdev"
-        ];
+      drivers = [
+        "modesetting"
+        "fbdev"
+      ];
     };
   };
 }

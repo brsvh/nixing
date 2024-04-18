@@ -1,7 +1,4 @@
 { ... }:
 {
-  imports =
-    [
-      ./fullname.nix
-    ];
+  imports = [ ./fullname.nix ];
 }

@@ -1,17 +1,17 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
 {
   home = {
-    packages = with pkgs;
-      [
-        ghostscript
-        kile
-      ];
+    packages = with pkgs; [
+      ghostscript
+      kile
+    ];
 
     sessionVariables = {
       TEXMFHOME = "${config.xdg.dataHome}/texmf";
@@ -23,8 +23,7 @@ with lib;
   programs = {
     texlive = {
       enable = true;
-      extraPackages = tpkgs:
-        { inherit (tpkgs) scheme-full; };
+      extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
     };
   };
 }

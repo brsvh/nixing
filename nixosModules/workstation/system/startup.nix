@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -30,40 +31,32 @@ in
     };
   };
 
-
-  config = mkMerge
-    [
-      (
-        mkIf cfg.startup.quiet
-          {
-            workstation = {
-              system = {
-                console = {
-                  quiet = true;
-                };
-                initrd = {
-                  quiet = true;
-                };
-                kernel = {
-                  quiet = true;
-                };
-                startup = {
-                  plymouth = true;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf cfg.startup.plymouth
-          {
-            boot = {
-              plymouth = {
-                enable = true;
-                theme = "bgrt";
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.startup.quiet {
+      workstation = {
+        system = {
+          console = {
+            quiet = true;
+          };
+          initrd = {
+            quiet = true;
+          };
+          kernel = {
+            quiet = true;
+          };
+          startup = {
+            plymouth = true;
+          };
+        };
+      };
+    })
+    (mkIf cfg.startup.plymouth {
+      boot = {
+        plymouth = {
+          enable = true;
+          theme = "bgrt";
+        };
+      };
+    })
+  ];
 }

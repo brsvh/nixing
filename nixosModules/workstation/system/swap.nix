@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -21,12 +22,11 @@ in
 
       devices = mkOption {
         default = [ ];
-        example =
-          [
-            { device = "/dev/hda7"; }
-            { device = "/var/swapfile"; }
-            { label = "bigswap"; }
-          ];
+        example = [
+          { device = "/dev/hda7"; }
+          { device = "/var/swapfile"; }
+          { label = "bigswap"; }
+        ];
         description = ''
           The swap devices and swap files.
 
@@ -66,7 +66,13 @@ in
       algorithm = mkOption {
         default = "zstd";
         example = "lz4";
-        type = with types; either (enum [ "lzo" "lz4" "zstd" ]) str;
+        type =
+          with types;
+          either (enum [
+            "lzo"
+            "lz4"
+            "zstd"
+          ]) str;
         description = ''
           Compression algorithm.
         '';
@@ -74,24 +80,15 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.swap.enable
-          {
-            swapDevices = cfg.swap.devices;
-          }
-      )
-      (
-        mkIf cfg.zram.enable
-          {
-            zramSwap = {
-              algorithm = cfg.zram.algorithm;
-              enable = cfg.zram.enable;
-              memoryPercent = cfg.zram.percent;
-              priority = cfg.zram.priority;
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.swap.enable { swapDevices = cfg.swap.devices; })
+    (mkIf cfg.zram.enable {
+      zramSwap = {
+        algorithm = cfg.zram.algorithm;
+        enable = cfg.zram.enable;
+        memoryPercent = cfg.zram.percent;
+        priority = cfg.zram.priority;
+      };
+    })
+  ];
 }

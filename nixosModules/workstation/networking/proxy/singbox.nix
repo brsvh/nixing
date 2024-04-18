@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -23,14 +24,13 @@ in
     };
   };
 
-  config = mkIf (withClient && withSingbox)
-    {
-      services = {
-        sing-box = {
-          enable = true;
-          package = cfg.singbox;
-          settings = fromJSON (readFile cfg.client.config);
-        };
+  config = mkIf (withClient && withSingbox) {
+    services = {
+      sing-box = {
+        enable = true;
+        package = cfg.singbox;
+        settings = fromJSON (readFile cfg.client.config);
       };
     };
+  };
 }

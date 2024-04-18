@@ -1,7 +1,8 @@
-{ config
-, lib
-, withSystem
-, ...
+{
+  config,
+  lib,
+  withSystem,
+  ...
 }:
 with builtins;
 with lib;
@@ -9,10 +10,7 @@ let
   cfg = config.configurations;
 
   homeOpts =
-    { config
-    , name
-    , ...
-    } @ opts:
+    { config, name, ... }@opts:
     let
       cfg' = config;
     in
@@ -93,13 +91,10 @@ let
             `home.homeDirectory`.
           '';
           default =
-            if
-              (
-                with cfg'.nixpkgs;
-                legacyPackages.${cfg'.system}.stdenv.isDarwin
-              )
-            then "/Users/${cfg'.username}"
-            else "/home/${cfg'.username}";
+            if (with cfg'.nixpkgs; legacyPackages.${cfg'.system}.stdenv.isDarwin) then
+              "/Users/${cfg'.username}"
+            else
+              "/home/${cfg'.username}";
         };
 
         finalHomeConfiguration = mkOption {
@@ -111,43 +106,32 @@ let
       };
 
       config = {
-        finalHomeConfiguration =
-          withSystem
-            cfg'.system
-            (
-              { system
-              , ...
-              } @ ctx:
-              cfg'.home-manager.lib.homeManagerConfiguration {
-                pkgs = cfg'.nixpkgs.legacyPackages."${system}";
+        finalHomeConfiguration = withSystem cfg'.system (
+          { system, ... }@ctx:
+          cfg'.home-manager.lib.homeManagerConfiguration {
+            pkgs = cfg'.nixpkgs.legacyPackages."${system}";
 
-                extraSpecialArgs =
-                  recursiveUpdate
-                    cfg.global.home.specialArgs
-                    cfg'.specialArgs;
+            extraSpecialArgs = recursiveUpdate cfg.global.home.specialArgs cfg'.specialArgs;
 
-                modules =
-                  cfg.global.home.modules ++
-                  [
-                    {
-                      home = {
-                        inherit (cfg')
-                          homeDirectory
-                          stateVersion
-                          username;
-                      };
+            modules =
+              cfg.global.home.modules
+              ++ [
+                {
+                  home = {
+                    inherit (cfg') homeDirectory stateVersion username;
+                  };
 
-                      programs = {
-                        home-manager = {
-                          enable = true;
-                          path = mkForce "${cfg'.home-manager}";
-                        };
-                      };
-                    }
-                  ] ++
-                  cfg'.modules;
-              }
-            );
+                  programs = {
+                    home-manager = {
+                      enable = true;
+                      path = mkForce "${cfg'.home-manager}";
+                    };
+                  };
+                }
+              ]
+              ++ cfg'.modules;
+          }
+        );
       };
     };
 in
@@ -205,7 +189,6 @@ in
             default = { };
           };
         };
-
       };
 
       home = mkOption {

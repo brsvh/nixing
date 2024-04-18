@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -151,7 +152,6 @@ let
     recognizer/patterns/reverse_lookup:
 
   '';
-
 in
 {
   i18n = {
@@ -159,10 +159,7 @@ in
       enabled = "fcitx5";
 
       fcitx5 = {
-        addons = with pkgs;
-          [
-            fcitx5-rime
-          ];
+        addons = with pkgs; [ fcitx5-rime ];
       };
     };
   };

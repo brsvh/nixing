@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -17,16 +18,15 @@ let
   withTouchpad = cfg.touchpad;
 in
 {
-  imports =
-    [
-      ./fonts.nix
-      ./gnome3.nix
-      ./gpg.nix
-      ./input-method.nix
-      ./plasma5.nix
-      ./plasma6.nix
-      ./xdg.nix
-    ];
+  imports = [
+    ./fonts.nix
+    ./gnome3.nix
+    ./gpg.nix
+    ./input-method.nix
+    ./plasma5.nix
+    ./plasma6.nix
+    ./xdg.nix
+  ];
 
   options.workstation.desktop = {
     enable = mkOption {
@@ -38,12 +38,11 @@ in
     };
 
     flavour = mkOption {
-      type = types.enum
-        [
-          "gnome3"
-          "plasma5"
-          "plasma6"
-        ];
+      type = types.enum [
+        "gnome3"
+        "plasma5"
+        "plasma6"
+      ];
       default = "gnome3";
       description = ''
         The flavour of desktop environment.
@@ -51,11 +50,10 @@ in
     };
 
     displayServer = mkOption {
-      type = types.enum
-        [
-          "wayland"
-          "x11"
-        ];
+      type = types.enum [
+        "wayland"
+        "x11"
+      ];
       default = "wayland";
       description = ''
         The default display server protocol.
@@ -80,44 +78,37 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        programs = {
-          dconf = {
+  config = mkMerge [
+    {
+      programs = {
+        dconf = {
+          enable = true;
+        };
+      };
+
+      services = {
+        xserver = {
+          xkb = {
+            layout = config.workstation.desktop.keyboardLayout;
+          };
+        };
+      };
+    }
+    (mkIf withDisplayServer {
+      services = {
+        xserver = {
+          enable = true;
+        };
+      };
+    })
+    (mkIf withTouchpad {
+      services = {
+        xserver = {
+          libinput = {
             enable = true;
           };
         };
-
-        services = {
-          xserver = {
-            xkb = {
-              layout = config.workstation.desktop.keyboardLayout;
-            };
-          };
-        };
-      }
-      (
-        mkIf withDisplayServer
-          {
-            services = {
-              xserver = {
-                enable = true;
-              };
-            };
-          }
-      )
-      (
-        mkIf withTouchpad
-          {
-            services = {
-              xserver = {
-                libinput = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-    ];
+      };
+    })
+  ];
 }

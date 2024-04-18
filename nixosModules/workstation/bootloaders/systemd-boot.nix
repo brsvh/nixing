@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -23,31 +24,24 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf (cfg.systemd-boot.enable && withLanzaboote)
-          {
-            boot = {
-              loader = {
-                systemd-boot = {
-                  enable = mkForce false;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf (cfg.systemd-boot.enable && (! withLanzaboote))
-          {
-            boot = {
-              loader = {
-                systemd-boot = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf (cfg.systemd-boot.enable && withLanzaboote) {
+      boot = {
+        loader = {
+          systemd-boot = {
+            enable = mkForce false;
+          };
+        };
+      };
+    })
+    (mkIf (cfg.systemd-boot.enable && (!withLanzaboote)) {
+      boot = {
+        loader = {
+          systemd-boot = {
+            enable = true;
+          };
+        };
+      };
+    })
+  ];
 }

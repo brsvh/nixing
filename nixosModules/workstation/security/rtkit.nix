@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -20,13 +21,11 @@ in
     };
   };
 
-  config = mkIf
-    cfg.rtkit.enable
-    {
-      security = {
-        rtkit = {
-          enable = true;
-        };
+  config = mkIf cfg.rtkit.enable {
+    security = {
+      rtkit = {
+        enable = true;
       };
     };
+  };
 }

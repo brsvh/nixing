@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -21,34 +22,27 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf (withPipewire && cfg.enableJack)
-          {
-            services = {
-              pipewire = {
-                jack = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf (withPulseaudio && cfg.enableJack)
-          {
-            services = {
-              jack = {
-                jackd = {
-                  enable = true;
-                };
-                loopback = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf (withPipewire && cfg.enableJack) {
+      services = {
+        pipewire = {
+          jack = {
+            enable = true;
+          };
+        };
+      };
+    })
+    (mkIf (withPulseaudio && cfg.enableJack) {
+      services = {
+        jack = {
+          jackd = {
+            enable = true;
+          };
+          loopback = {
+            enable = true;
+          };
+        };
+      };
+    })
+  ];
 }

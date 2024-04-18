@@ -1,30 +1,29 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
   cfg = config.workstation.system.i18n;
 in
 {
-  imports =
-    [
-      ./chinese.nix
-      ./english.nix
-      ./japanese.nix
-      ./korean.nix
-    ];
+  imports = [
+    ./chinese.nix
+    ./english.nix
+    ./japanese.nix
+    ./korean.nix
+  ];
 
   options.workstation.system.i18n = {
     default = mkOption {
-      type = types.enum
-        [
-          "chinese"
-          "english"
-          "japanese"
-          "korean"
-        ];
+      type = types.enum [
+        "chinese"
+        "english"
+        "japanese"
+        "korean"
+      ];
       default = "english";
       example = "chinese";
       description = ''
@@ -47,16 +46,12 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        i18n = {
-          extraLocaleSettings = cfg.settings;
-          supportedLocales =
-            [
-              "C.UTF-8/UTF-8"
-            ];
-        };
-      }
-    ];
+  config = mkMerge [
+    {
+      i18n = {
+        extraLocaleSettings = cfg.settings;
+        supportedLocales = [ "C.UTF-8/UTF-8" ];
+      };
+    }
+  ];
 }

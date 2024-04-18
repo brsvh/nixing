@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -13,11 +14,10 @@ with lib;
       gc = {
         dates = "monthly";
         enable = true;
-        extraArgs =
-          [
-            "--delete-generation"
-            "--optimize"
-          ];
+        extraArgs = [
+          "--delete-generation"
+          "--optimize"
+        ];
       };
     };
   };

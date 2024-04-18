@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -26,21 +27,15 @@ in
     };
   };
 
-  config = mkIf cfg.enable
-    {
-      home = {
-        packages =
-          [
-            pkgs.any-nix-shell
-          ];
-      };
-
-      programs = {
-        fish.interactiveShellInit =
-          mkIf cfg.enableFishIntegration
-            ''
-              any-nix-shell fish --info-right | source
-            '';
-      };
+  config = mkIf cfg.enable {
+    home = {
+      packages = [ pkgs.any-nix-shell ];
     };
+
+    programs = {
+      fish.interactiveShellInit = mkIf cfg.enableFishIntegration ''
+        any-nix-shell fish --info-right | source
+      '';
+    };
+  };
 }

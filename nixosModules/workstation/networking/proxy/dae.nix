@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -22,14 +23,13 @@ in
     };
   };
 
-  config = mkIf (withClient && withDae)
-    {
-      services = {
-        dae = {
-          enable = true;
-          configFile = "${cfg.client.config}";
-          package = cfg.dae;
-        };
+  config = mkIf (withClient && withDae) {
+    services = {
+      dae = {
+        enable = true;
+        configFile = "${cfg.client.config}";
+        package = cfg.dae;
       };
     };
+  };
 }

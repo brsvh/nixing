@@ -1,21 +1,21 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
 {
   home = {
-    packages = with pkgs;
-      [
-        agrep
-        findutils
-        gnugrep
-        jq
-        obsidian
-        ripgrep
-      ];
+    packages = with pkgs; [
+      agrep
+      findutils
+      gnugrep
+      jq
+      obsidian
+      ripgrep
+    ];
   };
 
   programs = {

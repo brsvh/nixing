@@ -1,7 +1,4 @@
 { ... }:
 {
-  imports =
-    [
-      ./offlineimap.nix
-    ];
+  imports = [ ./offlineimap.nix ];
 }

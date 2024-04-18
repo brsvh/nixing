@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -11,14 +12,13 @@ with lib;
       bsc = {
         isNormalUser = true;
         description = "Burgess Chang";
-        extraGroups =
-          [
-            "audio"
-            "jackaudio"
-            "libvirtd"
-            "wheel"
-            "networkmanager"
-          ];
+        extraGroups = [
+          "audio"
+          "jackaudio"
+          "libvirtd"
+          "wheel"
+          "networkmanager"
+        ];
       };
     };
   };

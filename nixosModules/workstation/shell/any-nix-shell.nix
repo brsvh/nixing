@@ -1,17 +1,14 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
   cfg = config.programs.any-nix-shell;
 
-  initOption =
-    if cfg.interactiveOnly then
-      "interactiveShellInit"
-    else
-      "shellInit";
+  initOption = if cfg.interactiveOnly then "interactiveShellInit" else "shellInit";
 in
 {
   options = {
@@ -37,19 +34,15 @@ in
     };
   };
 
-  config = mkIf cfg.enable
-    {
-      environment = {
-        systemPackages =
-          [
-            pkgs.any-nix-shell
-          ];
-      };
-
-      programs = {
-        fish.${initOption} = ''
-          any-nix-shell fish --info-right | source
-        '';
-      };
+  config = mkIf cfg.enable {
+    environment = {
+      systemPackages = [ pkgs.any-nix-shell ];
     };
+
+    programs = {
+      fish.${initOption} = ''
+        any-nix-shell fish --info-right | source
+      '';
+    };
+  };
 }

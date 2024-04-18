@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -10,10 +11,7 @@ with lib;
     ssh = {
       enable = true;
 
-      includes =
-        [
-          "isrc/*"
-        ];
+      includes = [ "isrc/*" ];
 
       matchBlocks = {
         "github.com" = {

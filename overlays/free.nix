@@ -1,2 +1,1 @@
-final: prev:
-import ../pkgs/all-packages.nix final prev
+final: prev: import ../pkgs/all-packages.nix final prev

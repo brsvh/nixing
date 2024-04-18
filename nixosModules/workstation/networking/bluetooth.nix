@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -28,27 +29,20 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.bluetooth.enable
-          {
-            hardware = {
-              bluetooth = {
-                enable = true;
-              };
-            };
-          }
-      )
-      (
-        mkIf (cfg.bluetooth.enable && cfg.bluetooth.boot)
-          {
-            hardware = {
-              bluetooth = {
-                powerOnBoot = true;
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.bluetooth.enable {
+      hardware = {
+        bluetooth = {
+          enable = true;
+        };
+      };
+    })
+    (mkIf (cfg.bluetooth.enable && cfg.bluetooth.boot) {
+      hardware = {
+        bluetooth = {
+          powerOnBoot = true;
+        };
+      };
+    })
+  ];
 }

@@ -35,40 +35,36 @@
                   extraArgs = [ "-f" ];
                   subvolumes = {
                     "/gnu" = {
-                      mountOptions =
-                        [
-                          "compress=zstd"
-                          "noatime"
-                          "ssd"
-                        ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        "ssd"
+                      ];
                       mountpoint = "/gnu";
                       name = "gnu";
                     };
                     "/home" = {
-                      mountOptions =
-                        [
-                          "compress=zstd:1"
-                          "ssd"
-                        ];
+                      mountOptions = [
+                        "compress=zstd:1"
+                        "ssd"
+                      ];
                       mountpoint = "/home";
                       name = "home";
                     };
                     "/nix" = {
-                      mountOptions =
-                        [
-                          "compress=zstd:1"
-                          "noatime"
-                          "ssd"
-                        ];
+                      mountOptions = [
+                        "compress=zstd:1"
+                        "noatime"
+                        "ssd"
+                      ];
                       mountpoint = "/nix";
                       name = "nix";
                     };
                     "/nixos" = {
-                      mountOptions =
-                        [
-                          "compress=zstd:1"
-                          "ssd"
-                        ];
+                      mountOptions = [
+                        "compress=zstd:1"
+                        "ssd"
+                      ];
                       mountpoint = "/";
                       name = "nixos";
                     };

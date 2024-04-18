@@ -1,9 +1,10 @@
-{ config
-, inputs
-, lib
-, self
-, withSystem
-, ...
+{
+  config,
+  inputs,
+  lib,
+  self,
+  withSystem,
+  ...
 }:
 with builtins;
 with lib;
@@ -18,7 +19,8 @@ let
     nixpkgs-stable
     nixpkgs-unstable
     rust-overlay
-    sops;
+    sops
+    ;
 
   nixing = self;
 in
@@ -34,27 +36,25 @@ in
 
     global = {
       nixos = {
-        modules =
-          [
-            disko.nixosModules.disko
-            lanzaboote.nixosModules.lanzaboote
-            sops.nixosModules.sops
-            nixing.nixosModules.workstation
-            {
-              home-manager = {
-                useGlobalPkgs = mkDefault true;
-                useUserPackages = mkDefault true;
-              };
-              nixpkgs = {
-                overlays =
-                  [
-                    emacs-overlay.overlays.default
-                    rust-overlay.overlays.default
-                    nixing.overlays.free
-                  ];
-              };
-            }
-          ];
+        modules = [
+          disko.nixosModules.disko
+          lanzaboote.nixosModules.lanzaboote
+          sops.nixosModules.sops
+          nixing.nixosModules.workstation
+          {
+            home-manager = {
+              useGlobalPkgs = mkDefault true;
+              useUserPackages = mkDefault true;
+            };
+            nixpkgs = {
+              overlays = [
+                emacs-overlay.overlays.default
+                rust-overlay.overlays.default
+                nixing.overlays.free
+              ];
+            };
+          }
+        ];
         specialArgs = {
           inherit (inputs) hardware;
         };
@@ -64,28 +64,22 @@ in
     nixos = {
       "eustoma" = rec {
         domain = "brsvh.org";
-        modules =
-          [
-            home-manager-unstable.nixosModules.home-manager
-            ./eustoma
-            {
-              nixpkgs = {
-                config = {
-                  allowUnfree = true;
-                };
-
-                overlays =
-                  [
-                    nixing.overlays.unfree
-                  ];
+        modules = [
+          home-manager-unstable.nixosModules.home-manager
+          ./eustoma
+          {
+            nixpkgs = {
+              config = {
+                allowUnfree = true;
               };
-            }
-          ];
+
+              overlays = [ nixing.overlays.unfree ];
+            };
+          }
+        ];
         nixpkgs = nixpkgs-unstable;
         specialArgs = {
-          pkgs-stable = import nixpkgs-stable {
-            inherit system;
-          };
+          pkgs-stable = import nixpkgs-stable { inherit system; };
         };
         stateVersion = "23.11";
         system = "x86_64-linux";
@@ -95,39 +89,31 @@ in
   };
 
   perSystem =
-    { config
-    , system
-    , ...
-    }:
+    { config, system, ... }:
     {
       nixago = {
-        configs = mkMerge
-          [
-            {
-              ".sops.yaml" = {
-                output = ".sops.yaml";
-                format = "yaml";
-                data =
-                  let
-                    eustoma = {
-                      age = "age1lgy77wf7vxlvvv8lzsgmq6wgf43c4hl93ls2mw8pspmdcuzqvems7svu6t";
-                    };
-                  in
-                  {
-                    creation_rules = {
-                      "nixos/eustoma/secrets.yaml" = {
-                        path_regex = "^nixos/eustoma/secrets\.yaml$";
-                        key_groups = [
-                          {
-                            age = [ eustoma.age ];
-                          }
-                        ];
-                      };
+        configs = mkMerge [
+          {
+            ".sops.yaml" = {
+              output = ".sops.yaml";
+              format = "yaml";
+              data =
+                let
+                  eustoma = {
+                    age = "age1lgy77wf7vxlvvv8lzsgmq6wgf43c4hl93ls2mw8pspmdcuzqvems7svu6t";
+                  };
+                in
+                {
+                  creation_rules = {
+                    "nixos/eustoma/secrets.yaml" = {
+                      path_regex = "^nixos/eustoma/secrets\.yaml$";
+                      key_groups = [ { age = [ eustoma.age ]; } ];
                     };
                   };
-              };
-            }
-          ];
+                };
+            };
+          }
+        ];
       };
     };
 }

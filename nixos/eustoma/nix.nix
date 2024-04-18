@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -23,27 +24,22 @@ in
     };
 
     settings = {
-      allowed-users =
-        [
-          "@users"
-        ];
+      allowed-users = [ "@users" ];
 
-      experimental-features =
-        [
-          "ca-derivations"
-          "flakes"
-          "nix-command"
-          "repl-flake"
-        ];
+      experimental-features = [
+        "ca-derivations"
+        "flakes"
+        "nix-command"
+        "repl-flake"
+      ];
 
       sandbox = true;
 
-      trusted-users =
-        [
-          "@admin"
-          "@wheel"
-          "root"
-        ];
+      trusted-users = [
+        "@admin"
+        "@wheel"
+        "root"
+      ];
 
       use-xdg-base-directories = true;
     };

@@ -1,8 +1,9 @@
-{ fetchurl
-, lib
-, stdenv
-, symlinkJoin
-, ...
+{
+  fetchurl,
+  lib,
+  stdenv,
+  symlinkJoin,
+  ...
 }:
 with builtins;
 with lib;
@@ -21,7 +22,8 @@ let
 
   version = import ./version.nix;
 
-  mkFontDerivation = font: sha256:
+  mkFontDerivation =
+    font: sha256:
     mkDerivation {
       inherit version;
 
@@ -61,10 +63,7 @@ let
       };
     };
 
-  fontDerivations =
-    mapAttrsToList
-      (font: sha: (mkFontDerivation font sha))
-      shas;
+  fontDerivations = mapAttrsToList (font: sha: (mkFontDerivation font sha)) shas;
 in
 symlinkJoin rec {
   inherit version;

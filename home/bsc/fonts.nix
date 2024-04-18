@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -39,12 +40,11 @@ in
   };
 
   home = {
-    packages = with pkgs;
-      [
-        foundertype-fonts
-        lxgw-wenkai
-        tsangertype-fonts
-      ];
+    packages = with pkgs; [
+      foundertype-fonts
+      lxgw-wenkai
+      tsangertype-fonts
+    ];
   };
 
   xdg = {

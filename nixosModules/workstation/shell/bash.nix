@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -9,8 +10,7 @@ let
 
   desktop = config.workstation.desktop;
 
-  profileText = ''
-  '';
+  profileText = '''';
 
   rcText = ''
     case :$SHELLOPTS: in

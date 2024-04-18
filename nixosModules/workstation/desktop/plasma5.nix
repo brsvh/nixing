@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -13,43 +14,36 @@ let
   withPlasma5 = cfg.flavour == "plasma5";
 in
 {
-  config = mkMerge
-    [
-      (
-        mkIf withPlasma5
-          {
-            services = {
-              xserver = {
-                desktopManager = {
-                  plasma5 = {
-                    enable = true;
-                  };
-                };
+  config = mkMerge [
+    (mkIf withPlasma5 {
+      services = {
+        xserver = {
+          desktopManager = {
+            plasma5 = {
+              enable = true;
+            };
+          };
 
-                displayManager = {
-                  sddm = {
-                    enable = true;
+          displayManager = {
+            sddm = {
+              enable = true;
 
-                    wayland = {
-                      enable = withWayland;
-                    };
-                  };
-                };
+              wayland = {
+                enable = withWayland;
               };
             };
-          }
-      )
-      (
-        mkIf (withPlasma5 && withWayland)
-          {
-            services = {
-              xserver = {
-                displayManager = {
-                  defaultSession = mkDefault "plasmawayland";
-                };
-              };
-            };
-          }
-      )
-    ];
+          };
+        };
+      };
+    })
+    (mkIf (withPlasma5 && withWayland) {
+      services = {
+        xserver = {
+          displayManager = {
+            defaultSession = mkDefault "plasmawayland";
+          };
+        };
+      };
+    })
+  ];
 }

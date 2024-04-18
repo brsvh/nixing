@@ -2,24 +2,27 @@
   description = "Nixing - A place to collect things about Nix.";
 
   nixConfig = {
-    experimental-features =
-      [
-        "flakes"
-        "nix-command"
-        "repl-flake"
-      ];
+    experimental-features = [
+      "flakes"
+      "nix-command"
+      "repl-flake"
+    ];
 
-    extra-substituters =
-      [
-        "https://nix-community.cachix.org"
-        "https://brsvh.cachix.org"
-      ];
+    substituters = [
+      "https://mirrors.cernet.edu.cn/nix-channels/store"
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
+      "https://cache.nixos.org"
+    ];
 
-    extra-trusted-public-keys =
-      [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "brsvh.cachix.org-1:DqtlvqnpP9g39l8Eo74AXRftGx1KJLid/ViADTNgDNE="
-      ];
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://brsvh.cachix.org"
+    ];
+
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "brsvh.cachix.org-1:DqtlvqnpP9g39l8Eo74AXRftGx1KJLid/ViADTNgDNE="
+    ];
   };
 
   inputs = {
@@ -136,7 +139,7 @@
           follows = "nixpkgs";
         };
         pre-commit-hooks-nix = {
-          follows = "pre-commit";
+          follows = "git-hooks";
         };
         rust-overlay = {
           follows = "rust-overlay";
@@ -172,7 +175,7 @@
       };
     };
     nixpkgs = {
-      follows = "nixpkgs-stable";
+      follows = "nixpkgs-unstable";
     };
     nixpkgs-stable = {
       url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -180,8 +183,8 @@
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
-    pre-commit = {
-      url = "github:cachix/pre-commit-hooks.nix/master";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix/master";
       inputs = {
         flake-compat = {
           follows = "flake-compat";
@@ -250,174 +253,154 @@
   };
 
   outputs =
-    { devshell
-    , flake-parts
-    , nixago
-    , nixpkgs
-    , pre-commit
-    , treefmt
-    , tsangertype-fonts
-    , ...
-    } @ inputs:
-    flake-parts.lib.mkFlake
+    {
+      devshell,
+      flake-parts,
+      nixago,
+      nixpkgs,
+      git-hooks,
+      treefmt,
+      tsangertype-fonts,
+      ...
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { config, ... }:
+      with builtins;
+      with nixpkgs.lib;
       {
-        inherit inputs;
-      }
-      (
-        { config
-        , ...
-        }:
-          with builtins;
-          with nixpkgs.lib;
+        imports = [
+          devshell.flakeModule
+          git-hooks.flakeModule
+          treefmt.flakeModule
+
+          ./flakeModules/configurations
+          ./flakeModules/homeOptions.nix
+          ./flakeModules/nixago.nix
+
+          ./nixos
+          ./home
+        ];
+
+        perSystem =
           {
-            imports =
-              [
-                devshell.flakeModule
-                pre-commit.flakeModule
-                treefmt.flakeModule
+            config,
+            inputs',
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            devshells = {
+              default = {
+                name = "nixing:default";
 
-                ./flakeModules/configurations
-                ./flakeModules/homeOptions.nix
-                ./flakeModules/nixago.nix
+                commands = [
+                  {
+                    package = pkgs.age;
+                    category = "secrets";
+                  }
+                  {
+                    package = inputs'.my-emacs.packages.nogui;
+                    help = "The extensible, customizable GNU text editor";
+                    category = "development";
+                  }
+                  {
+                    package = pkgs.git;
+                    category = "development";
+                  }
+                  {
+                    package = pkgs.nixUnstable;
+                    category = "development";
+                  }
+                  {
+                    package = pkgs.sops;
+                    category = "secrets";
+                  }
+                  {
+                    package = pkgs.ssh-to-age;
+                    category = "secrets";
+                  }
+                ];
 
-                ./nixos
-                ./home
-              ];
-
-            perSystem =
-              { config
-              , inputs'
-              , pkgs
-              , system
-              , ...
-              }: {
-                devshells = {
-                  default = {
-                    name = "nixing:default";
-
-                    commands = [
-                      {
-                        package = pkgs.age;
-                        category = "secrets";
-                      }
-                      {
-                        package = inputs'.my-emacs.packages.nogui;
-                        help = "The extensible, customizable GNU text editor";
-                        category = "development";
-                      }
-                      {
-                        package = pkgs.git;
-                        category = "development";
-                      }
-                      {
-                        package = pkgs.nixUnstable;
-                        category = "development";
-                      }
-                      {
-                        package = pkgs.sops;
-                        category = "secrets";
-                      }
-                      {
-                        package = pkgs.ssh-to-age;
-                        category = "secrets";
-                      }
-                    ];
-
-                    devshell = {
-                      startup = {
-                        nixago = {
-                          text = (
-                            nixago.lib."${system}".makeAll
-                              (attrValues config.nixago.configs)
-                          ).shellHook;
-                        };
-
-                        pre-commit-hook = {
-                          text = config.pre-commit.installationScript;
-                        };
-                      };
+                devshell = {
+                  startup = {
+                    nixago = {
+                      text = (nixago.lib."${system}".makeAll (attrValues config.nixago.configs)).shellHook;
                     };
 
-                    env =
-                      [
-                        {
-                          name = "EDITOR";
-                          value = "emacs";
-                        }
-                      ];
-
-                    packages =
-                      [
-                        inputs'.my-emacs.packages.dependencies
-                      ];
-                  };
-                };
-
-                pre-commit = {
-                  check = {
-                    enable = true;
-                  };
-
-                  settings = {
-                    hooks = {
-                      nixpkgs-fmt = {
-                        enable = true;
-                      };
+                    pre-commit = {
+                      text = config.pre-commit.installationScript;
                     };
                   };
                 };
 
-                treefmt = {
-                  flakeFormatter = true;
+                env = [
+                  {
+                    name = "EDITOR";
+                    value = "emacs";
+                  }
+                ];
 
-                  projectRootFile = "flake.nix";
-
-                  programs = {
-                    nixpkgs-fmt = {
-                      enable = true;
-                    };
-                  };
-                };
-              };
-
-            systems =
-              [
-                "x86_64-linux"
-              ];
-
-            flake = {
-              flakeModules = {
-                configurations = ./configurations.nix;
-                homeOptions = ./homeOptions.nix;
-                nixago = ./nixago.nix;
-              };
-
-              homeConfigurations =
-                mapAttrs
-                  (_: cfg: cfg.finalHomeConfiguration)
-                  config.configurations.home;
-
-              homeModules = {
-                fonts = import ./homeModules/fonts;
-                home = import ./homeModules/home;
-                programs = import ./homeModules/programs;
-                services = import ./homeModules/services;
-              };
-
-              nixosConfigurations =
-                mapAttrs
-                  (_: cfg: cfg.finalNixOSConfiguration)
-                  config.configurations.nixos;
-
-              nixosModules = {
-                workstation = import ./nixosModules/workstation;
-              };
-
-              overlays = {
-                free = import ./overlays/free.nix;
-                unfree = import ./overlays/unfree.nix;
+                packages = [ inputs'.my-emacs.packages.dependencies ];
               };
             };
-          }
-      );
+
+            pre-commit = {
+              check = {
+                enable = true;
+              };
+
+              settings = {
+                hooks = {
+                  nixfmt = {
+                    enable = true;
+                    package = pkgs.nixfmt-rfc-style;
+                  };
+                };
+              };
+            };
+
+            treefmt = {
+              flakeFormatter = true;
+              projectRootFile = "flake.nix";
+              programs = {
+                nixfmt = {
+                  enable = true;
+                  package = pkgs.nixfmt-rfc-style;
+                };
+              };
+            };
+          };
+
+        systems = [ "x86_64-linux" ];
+
+        flake = {
+          flakeModules = {
+            configurations = ./configurations.nix;
+            homeOptions = ./homeOptions.nix;
+            nixago = ./nixago.nix;
+          };
+
+          homeConfigurations = mapAttrs (_: cfg: cfg.finalHomeConfiguration) config.configurations.home;
+
+          homeModules = {
+            fonts = import ./homeModules/fonts;
+            home = import ./homeModules/home;
+            programs = import ./homeModules/programs;
+            services = import ./homeModules/services;
+          };
+
+          nixosConfigurations = mapAttrs (_: cfg: cfg.finalNixOSConfiguration) config.configurations.nixos;
+
+          nixosModules = {
+            workstation = import ./nixosModules/workstation;
+          };
+
+          overlays = {
+            free = import ./overlays/free.nix;
+            unfree = import ./overlays/unfree.nix;
+          };
+        };
+      }
+    );
 }

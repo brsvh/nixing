@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -60,24 +61,22 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        let
-          sessionVariables = {
-            XDG_BIN_HOME = cfg.binHome;
-            XDG_CACHE_HOME = cfg.cacheHome;
-            XDG_CONFIG_HOME = cfg.configHome;
-            XDG_DATA_HOME = cfg.dataHome;
-            XDG_STATE_HOME = cfg.stateHome;
-          };
-        in
-        mkIf cfg.XDGBaseDirectory.enable
-          {
-            environment = {
-              inherit sessionVariables;
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (
+      let
+        sessionVariables = {
+          XDG_BIN_HOME = cfg.binHome;
+          XDG_CACHE_HOME = cfg.cacheHome;
+          XDG_CONFIG_HOME = cfg.configHome;
+          XDG_DATA_HOME = cfg.dataHome;
+          XDG_STATE_HOME = cfg.stateHome;
+        };
+      in
+      mkIf cfg.XDGBaseDirectory.enable {
+        environment = {
+          inherit sessionVariables;
+        };
+      }
+    )
+  ];
 }

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -20,17 +21,13 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.firewall.enable
-          {
-            networking = {
-              firewall = {
-                enable = true;
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.firewall.enable {
+      networking = {
+        firewall = {
+          enable = true;
+        };
+      };
+    })
+  ];
 }

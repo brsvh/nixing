@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with builtins;
 with lib;
@@ -17,10 +18,7 @@ in
     firefox = {
       enable = true;
 
-      nativeMessagingHosts = with pkgs;
-        [
-          kdePackages.plasma-browser-integration
-        ];
+      nativeMessagingHosts = with pkgs; [ kdePackages.plasma-browser-integration ];
 
       profiles = {
         "${user}" = {
@@ -70,23 +68,21 @@ in
 
             engines = {
               "NixOS Options" = {
-                urls =
-                  [
-                    {
-                      template = "https://search.nixos.org/options";
-                      params =
-                        [
-                          {
-                            name = "query";
-                            value = "{searchTerms}";
-                          }
-                          {
-                            name = "channel";
-                            value = "unstable";
-                          }
-                        ];
-                    }
-                  ];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                    ];
+                  }
+                ];
 
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nixopts" ];
@@ -95,23 +91,21 @@ in
               "Nix Packages" = {
                 definedAliases = [ "@nixpkgs" ];
 
-                urls =
-                  [
-                    {
-                      template = "https://search.nixos.org/packages";
-                      params =
-                        [
-                          {
-                            name = "query";
-                            value = "{searchTerms}";
-                          }
-                          {
-                            name = "channel";
-                            value = "unstable";
-                          }
-                        ];
-                    }
-                  ];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                    ];
+                  }
+                ];
 
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               };

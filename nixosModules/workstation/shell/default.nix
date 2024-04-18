@@ -1,19 +1,19 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
   cfg = config.workstation.shell;
 in
 {
-  imports =
-    [
-      ./any-nix-shell.nix
-      ./bash.nix
-      ./fish.nix
-    ];
+  imports = [
+    ./any-nix-shell.nix
+    ./bash.nix
+    ./fish.nix
+  ];
 
   options.workstation.shell = {
     any-nix-shell = mkOption {
@@ -25,11 +25,10 @@ in
     };
 
     flavour = mkOption {
-      type = types.enum
-        [
-          "bash"
-          "fish"
-        ];
+      type = types.enum [
+        "bash"
+        "fish"
+      ];
       default = "bash";
       description = ''
         The flavour of system shell.
@@ -45,34 +44,27 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        users = {
-          defaultUserShell = pkgs."${cfg.flavour}";
+  config = mkMerge [
+    {
+      users = {
+        defaultUserShell = pkgs."${cfg.flavour}";
+      };
+    }
+
+    (mkIf cfg.starship {
+      programs = {
+        starship = {
+          enable = true;
         };
-      }
+      };
+    })
 
-      (
-        mkIf cfg.starship
-          {
-            programs = {
-              starship = {
-                enable = true;
-              };
-            };
-          }
-      )
-
-      (
-        mkIf cfg.any-nix-shell
-          {
-            programs = {
-              any-nix-shell = {
-                enable = true;
-              };
-            };
-          }
-      )
-    ];
+    (mkIf cfg.any-nix-shell {
+      programs = {
+        any-nix-shell = {
+          enable = true;
+        };
+      };
+    })
+  ];
 }

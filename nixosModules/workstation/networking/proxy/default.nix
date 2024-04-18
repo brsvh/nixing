@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -15,12 +16,11 @@ let
   withV2rayA = withClient && cfg.client.flavour == "v2raya";
 in
 {
-  imports =
-    [
-      ./dae.nix
-      ./singbox.nix
-      ./v2ray.nix
-    ];
+  imports = [
+    ./dae.nix
+    ./singbox.nix
+    ./v2ray.nix
+  ];
 
   options.workstation.networking.proxy = {
     client = {
@@ -41,12 +41,11 @@ in
       };
 
       flavour = mkOption {
-        type = types.enum
-          [
-            "dae"
-            "singbox"
-            "v2ray"
-          ];
+        type = types.enum [
+          "dae"
+          "singbox"
+          "v2ray"
+        ];
         default = "dae";
         description = ''
           The flavour of proxy client.

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -23,40 +24,30 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.enableAlsa
-          {
-            sound = {
-              enable = true;
-            };
-          }
-      )
-      (
-        mkIf (cfg.enableAlsa && withPipewire)
-          {
-            services = {
-              pipewire = {
-                alsa = {
-                  enable = true;
-                  support32Bit = true;
-                };
-              };
-            };
-          }
-      )
-      (
-        mkIf (withPulseaudio && withJack)
-          {
-            services = {
-              jack = {
-                alsa = {
-                  enable = true;
-                };
-              };
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.enableAlsa {
+      sound = {
+        enable = true;
+      };
+    })
+    (mkIf (cfg.enableAlsa && withPipewire) {
+      services = {
+        pipewire = {
+          alsa = {
+            enable = true;
+            support32Bit = true;
+          };
+        };
+      };
+    })
+    (mkIf (withPulseaudio && withJack) {
+      services = {
+        jack = {
+          alsa = {
+            enable = true;
+          };
+        };
+      };
+    })
+  ];
 }

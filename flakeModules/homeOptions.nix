@@ -1,8 +1,9 @@
-{ config
-, flake-parts-lib
-, lib
-, self
-, ...
+{
+  config,
+  flake-parts-lib,
+  lib,
+  self,
+  ...
 }:
 with lib;
 let
@@ -40,14 +41,12 @@ in
       homeModules = mkOption {
         type = types.lazyAttrsOf types.unspecified;
         default = { };
-        apply =
-          mapAttrs
-            (k: v:
-              {
-                _file = "${toString self.outPath}/flake.nix#homeModules.${k}";
-                imports = [ v ];
-              }
-            );
+        apply = mapAttrs (
+          k: v: {
+            _file = "${toString self.outPath}/flake.nix#homeModules.${k}";
+            imports = [ v ];
+          }
+        );
         description = ''
           Home Manager modules.
 

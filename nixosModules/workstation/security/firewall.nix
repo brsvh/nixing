@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -20,15 +21,13 @@ in
     };
   };
 
-  config = mkIf
-    cfg.firewall.enable
-    {
-      workstation = {
-        networking = {
-          firewall = {
-            enable = true;
-          };
+  config = mkIf cfg.firewall.enable {
+    workstation = {
+      networking = {
+        firewall = {
+          enable = true;
         };
       };
     };
+  };
 }

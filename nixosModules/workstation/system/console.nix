@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -36,30 +37,23 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      {
-        console = {
-          earlySetup = true;
-          font = cfg.console.font;
-          keyMap = mkDefault cfg.console.keymap;
-        };
-      }
-      (
-        mkIf config.services.xserver.enable
-          {
-            console = {
-              useXkbConfig = true;
-            };
-          }
-      )
-      (
-        mkIf cfg.console.quiet
-          {
-            boot = {
-              consoleLogLevel = 3;
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    {
+      console = {
+        earlySetup = true;
+        font = cfg.console.font;
+        keyMap = mkDefault cfg.console.keymap;
+      };
+    }
+    (mkIf config.services.xserver.enable {
+      console = {
+        useXkbConfig = true;
+      };
+    })
+    (mkIf cfg.console.quiet {
+      boot = {
+        consoleLogLevel = 3;
+      };
+    })
+  ];
 }

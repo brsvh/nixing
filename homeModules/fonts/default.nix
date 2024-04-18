@@ -1,18 +1,18 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 {
-  imports =
-    [
-      ./chinese.nix
-      ./emoji.nix
-      ./english.nix
-      ./japanese.nix
-      ./korean.nix
-    ];
+  imports = [
+    ./chinese.nix
+    ./emoji.nix
+    ./english.nix
+    ./japanese.nix
+    ./korean.nix
+  ];
 
   options.fonts = {
     enable = mkOption {
@@ -32,12 +32,11 @@ with lib;
     };
   };
 
-  config = mkIf config.fonts.enable
-    {
-      fonts = {
-        fontconfig = {
-          enable = true;
-        };
+  config = mkIf config.fonts.enable {
+    fonts = {
+      fontconfig = {
+        enable = true;
       };
     };
+  };
 }

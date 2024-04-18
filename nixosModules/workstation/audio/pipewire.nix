@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -10,21 +11,20 @@ let
   withPipewire = cfg.system == "pipewire";
 in
 {
-  config = mkIf withPipewire
-    {
-      hardware = {
-        pulseaudio = {
-          enable = mkForce false;
-        };
+  config = mkIf withPipewire {
+    hardware = {
+      pulseaudio = {
+        enable = mkForce false;
       };
+    };
 
-      services = {
-        pipewire = {
+    services = {
+      pipewire = {
+        enable = true;
+        pulse = {
           enable = true;
-          pulse = {
-            enable = true;
-          };
         };
       };
     };
+  };
 }

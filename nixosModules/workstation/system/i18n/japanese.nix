@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
@@ -52,31 +53,18 @@ in
     };
   };
 
-  config = mkMerge
-    [
-      (
-        mkIf cfg.japanese.enable
-          {
-            i18n = {
-              supportedLocales =
-                [
-                  "ja_JP.UTF-8/UTF-8"
-                ] ++ (
-                  optionals cfg.japanese.EUC
-                    [
-                      "ja_JP.EUC-JP/EUC-JP"
-                    ]
-                );
-            };
-          }
-      )
-      (
-        mkIf primary
-          {
-            i18n = {
-              defaultLocale = cfg.japanese.defaultLocale;
-            };
-          }
-      )
-    ];
+  config = mkMerge [
+    (mkIf cfg.japanese.enable {
+      i18n = {
+        supportedLocales = [
+          "ja_JP.UTF-8/UTF-8"
+        ] ++ (optionals cfg.japanese.EUC [ "ja_JP.EUC-JP/EUC-JP" ]);
+      };
+    })
+    (mkIf primary {
+      i18n = {
+        defaultLocale = cfg.japanese.defaultLocale;
+      };
+    })
+  ];
 }
