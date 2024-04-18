@@ -286,6 +286,7 @@
             config,
             inputs',
             pkgs,
+            self',
             system,
             ...
           }:
