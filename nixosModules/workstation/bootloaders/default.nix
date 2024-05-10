@@ -1,4 +1,0 @@
-{ ... }:
-{
-  imports = [ ./systemd-boot.nix ];
-}

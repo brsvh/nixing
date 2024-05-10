@@ -1,2 +1,1 @@
-/.pre-commit-config.yaml
-/.sops.yaml
+# .gitignore --- Git untracked files -*- mode: gitignore; -*-
