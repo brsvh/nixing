@@ -39,5 +39,9 @@ with lib;
       userEmail = "bsc@brsvh.org";
       userName = "Burgess Chang";
     };
+
+    obs-studio = {
+      enable = true;
+    };
   };
 }
