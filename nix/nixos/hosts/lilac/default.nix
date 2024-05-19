@@ -21,6 +21,7 @@ in
   imports = [
     cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop
+    cell.nixosUsers.root
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
     hardware.nixosModules.common-gpu-nvidia-sync
@@ -187,11 +188,6 @@ in
 
         initialHashedPassword = "$6$cB3EK3Lynl./0Bio$bgH7P93D1lpgvEIJ3iks7Dk2IyNue7ria2aH8.xkZZ1PPooxkb7p/bEMN1UtJaV0TIeVr/eTY8oAN38vBgMKe0";
         isNormalUser = true;
-        shell = pkgs.fish;
-      };
-
-      root = {
-        initialHashedPassword = "$6$BnGvScsfnCRh3coN$yo.YsllSelnixuiWuiMFQYaJrneNqLrfUAhEOMw6CN/Od2kZSLdclJaa4h1TBtBP7NeWxBKsIsftFZQB46DUV.";
         shell = pkgs.fish;
       };
     };

@@ -255,6 +255,7 @@
             (devshells "devshells")
             (functions "nixosProfiles")
             (functions "nixosSuites")
+            (functions "nixosUsers")
             (nixago "nixago")
             (runnables "formatter")
           ])
