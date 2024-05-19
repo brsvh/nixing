@@ -26,6 +26,7 @@ in
     cell.nixosProfiles.network-manager
     cell.nixosProfiles.nix
     cell.nixosProfiles.systemd-boot
+    cell.nixosProfiles.touchpad
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
     hardware.nixosModules.common-gpu-nvidia-sync
@@ -155,10 +156,6 @@ in
   };
 
   services = {
-    libinput = {
-      enable = true;
-    };
-
     sshd = {
       enable = true;
     };
