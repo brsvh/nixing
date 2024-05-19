@@ -20,6 +20,7 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    cell.nixosProfiles.fish
     cell.nixosProfiles.firewall
     cell.nixosProfiles.gnome
     cell.nixosProfiles.network-manager
@@ -154,21 +155,12 @@ in
   };
 
   programs = {
-    fish = {
-      enable = true;
-
-      interactiveShellInit = ''
-        set fish_greeting
-      '';
-    };
-
     dconf = {
       enable = true;
     };
   };
 
   services = {
-
     libinput = {
       enable = true;
     };
