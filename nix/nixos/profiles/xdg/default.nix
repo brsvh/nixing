@@ -1,0 +1,7 @@
+{
+  xdg = {
+    portal = {
+      enable = true;
+    };
+  };
+}

@@ -211,12 +211,6 @@ in
     };
   };
 
-  xdg = {
-    portal = {
-      enable = true;
-    };
-  };
-
   zramSwap = {
     algorithm = "zstd";
     enable = true;

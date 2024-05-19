@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ cell.nixosProfiles.dconf ];
+  imports = [
+    cell.nixosProfiles.dconf
+    cell.nixosProfiles.xdg
+  ];
 
   environment = {
     systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
