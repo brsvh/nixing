@@ -116,6 +116,7 @@ with std.lib;
           age
           sops
           ssh-to-age
+          ssh-to-pgp
         ];
       }
       {
