@@ -195,6 +195,8 @@ in
     };
   };
 
+  swapDevices = [ { device = "/var/swapfile"; } ];
+
   system = {
     stateVersion = "24.05";
   };
@@ -230,5 +232,12 @@ in
     portal = {
       enable = true;
     };
+  };
+
+  zramSwap = {
+    algorithm = "zstd";
+    enable = true;
+    memoryPercent = 100;
+    priority = 5;
   };
 }
