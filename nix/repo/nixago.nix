@@ -120,9 +120,20 @@ with std.lib;
         ];
       }
       {
-        data = {
-          creation_rules = { };
-        };
+        data =
+          let
+            lilac = {
+              age = "age1g5777szdqk5all8tq823v5gzzjag5j3xk92gy44e5rqz9ktya4hsnjr8m9";
+            };
+          in
+          {
+            creation_rules = {
+              "nix/nixos/secrets/lilac/secrets.yaml" = {
+                path_regex = "^nix/nixos/secrets/lilac/secrets\.yaml$";
+                key_groups = [ { age = [ lilac.age ]; } ];
+              };
+            };
+          };
       };
 
   treefmt = dev.mkNixago cfg.treefmt {
