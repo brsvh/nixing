@@ -20,15 +20,8 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    cell.nixosProfiles.fish
-    cell.nixosProfiles.firewall
     cell.nixosProfiles.gnome
-    cell.nixosProfiles.network-manager
-    cell.nixosProfiles.nix
-    cell.nixosProfiles.openssh
-    cell.nixosProfiles.systemd-boot
-    cell.nixosProfiles.touchpad
-    cell.nixosProfiles.zram
+    cell.nixosSuites.laptop
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
     hardware.nixosModules.common-gpu-nvidia-sync
