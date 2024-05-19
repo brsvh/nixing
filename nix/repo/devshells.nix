@@ -36,6 +36,7 @@ in
       conform
       editorconfig
       lefthook
+      sops
       treefmt
     ];
   };

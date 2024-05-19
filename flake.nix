@@ -173,6 +173,17 @@
     paisano = {
       follows = "std/paisano";
     };
+    sops = {
+      url = "github:Mic92/sops-nix/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+      };
+    };
     std = {
       url = "github:divnix/std/main";
       inputs = {

@@ -6,5 +6,6 @@
 # nixago: ignore-linked-files
 /.conform.yaml
 /.editorconfig
+/.sops.yaml
 /lefthook.yml
 /treefmt.toml

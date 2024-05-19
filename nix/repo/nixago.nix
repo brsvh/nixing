@@ -106,6 +106,23 @@ with std.lib;
     };
   };
 
+  sops =
+    dev.mkNixago
+      {
+        data = { };
+        output = ".sops.yaml";
+        format = "yaml";
+        packages = with pkgs; [
+          sops
+          ssh-to-age
+        ];
+      }
+      {
+        data = {
+          creation_rules = { };
+        };
+      };
+
   treefmt = dev.mkNixago cfg.treefmt {
     data = {
       formatter = {
