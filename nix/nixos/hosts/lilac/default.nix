@@ -25,7 +25,6 @@ in
     cell.nixosUsers.changbingshan
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
-    hardware.nixosModules.common-gpu-nvidia-sync
   ];
 
   bee = {
@@ -81,14 +80,25 @@ in
         enable = true;
       };
 
+      open = true;
+
       powerManagement = {
-        enable = true;
+        enable = false;
         finegrained = false;
       };
 
       prime = {
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
+
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+
+        reverseSync = {
+          enable = true;
+        };
       };
     };
 
