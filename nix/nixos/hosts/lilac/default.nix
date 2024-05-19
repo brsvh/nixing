@@ -154,12 +154,6 @@ in
     fqdn = domainName;
   };
 
-  programs = {
-    dconf = {
-      enable = true;
-    };
-  };
-
   services = {
     libinput = {
       enable = true;

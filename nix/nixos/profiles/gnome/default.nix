@@ -1,5 +1,12 @@
-{ lib, pkgs, ... }:
 {
+  cell,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [ cell.nixosProfiles.dconf ];
+
   environment = {
     systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
   };
