@@ -254,6 +254,7 @@
           (with std.blockTypes; [
             (devshells "devshells")
             (nixago "nixago")
+            (runnables "formatter")
           ])
           ++ (with hive.blockTypes; [
             diskoConfigurations
@@ -276,6 +277,9 @@
           ]
         ];
 
-        formatter = harvest nixpkgs.legacyPackages [ "treefmt" ];
+        formatter = harvest self [
+          "repo"
+          "formatter"
+        ];
       };
 }
