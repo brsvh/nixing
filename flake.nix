@@ -50,17 +50,121 @@
         };
       };
     };
+    flake-utils = {
+      url = "github:numtide/flake-utils/main";
+      inputs = {
+        systems = {
+          follows = "nix-systems";
+        };
+      };
+    };
     nix-systems = {
       url = "github:nix-systems/x86_64-linux/main";
     };
   };
 
+  # Nix tools
+  inputs = {
+    blank = {
+      follows = "std/blank";
+    };
+    haumea = {
+      follows = "std/haumea";
+    };
+    devshell = {
+      url = "github:numtide/devshell/main";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+    nixago = {
+      url = "github:nix-community/nixago/master";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        nixago-exts = {
+          follows = "nixago-extensions";
+        };
+      };
+    };
+    nixago-extensions = {
+      url = "github:nix-community/nixago-extensions/master";
+      inputs = {
+        flake-utils = {
+          follows = "nixago/flake-utils";
+        };
+        nixago = {
+          follows = "nixago";
+        };
+        nixpkgs = {
+          follows = "nixago/nixpkgs";
+        };
+      };
+    };
+    paisano = {
+      follows = "std/paisano";
+    };
+    std = {
+      url = "github:divnix/std/main";
+      inputs = {
+        devshell = {
+          follows = "devshell";
+        };
+        lib = {
+          follows = "nixpkgs";
+        };
+        nixago = {
+          follows = "nixago";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+  };
+
   outputs =
-    inputs@{ flake-parts, nix-systems, ... }:
+    {
+      flake-parts,
+      nix-systems,
+      nixpkgs,
+      std,
+      ...
+    }@inputs:
     let
-      inherit (flake-parts.lib) mkFlake;
+      lib = nixpkgs.lib // builtins;
 
       systems = import nix-systems;
     in
-    mkFlake { inherit inputs; } { inherit systems; };
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      inherit systems;
+
+      imports = [ std.flakeModule ];
+
+      std = {
+        grow = {
+          cellsFrom = ./nix;
+
+          cellBlocks = with std.blockTypes; [ (devshells "devshells") ];
+        };
+
+        harvest = {
+          devShells = [
+            [
+              "repo"
+              "devshells"
+            ]
+          ];
+        };
+      };
+    };
 }
