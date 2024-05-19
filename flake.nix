@@ -253,6 +253,7 @@
         cellBlocks =
           (with std.blockTypes; [
             (devshells "devshells")
+            (functions "nixosProfiles")
             (nixago "nixago")
             (runnables "formatter")
           ])
