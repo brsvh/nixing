@@ -27,6 +27,7 @@ in
     cell.nixosProfiles.nix
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.touchpad
+    cell.nixosProfiles.zram
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
     hardware.nixosModules.common-gpu-nvidia-sync
@@ -209,12 +210,5 @@ in
         shell = pkgs.fish;
       };
     };
-  };
-
-  zramSwap = {
-    algorithm = "zstd";
-    enable = true;
-    memoryPercent = 100;
-    priority = 5;
   };
 }
