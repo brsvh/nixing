@@ -113,6 +113,7 @@ with std.lib;
         output = ".sops.yaml";
         format = "yaml";
         packages = with pkgs; [
+          age
           sops
           ssh-to-age
         ];
