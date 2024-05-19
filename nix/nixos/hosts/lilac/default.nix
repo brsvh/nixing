@@ -20,6 +20,7 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    cell.nixosProfiles.firewall
     cell.nixosProfiles.gnome
     cell.nixosProfiles.nix
     cell.nixosProfiles.systemd-boot
@@ -147,10 +148,6 @@ in
     inherit hostName;
 
     domain = domainName;
-
-    firewall = {
-      enable = true;
-    };
 
     fqdn = domainName;
 
