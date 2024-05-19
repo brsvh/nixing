@@ -21,6 +21,7 @@ in
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     cell.nixosProfiles.nix
+    cell.nixosProfiles.systemd-boot
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
     hardware.nixosModules.common-gpu-nvidia-sync
@@ -59,10 +60,6 @@ in
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
-      };
-
-      systemd-boot = {
-        enable = true;
       };
     };
   };
