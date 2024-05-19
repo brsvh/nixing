@@ -254,6 +254,7 @@
           (with std.blockTypes; [
             (devshells "devshells")
             (functions "nixosProfiles")
+            (functions "nixosSuites")
             (nixago "nixago")
             (runnables "formatter")
           ])
