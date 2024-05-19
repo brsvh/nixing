@@ -25,6 +25,7 @@ in
     cell.nixosProfiles.gnome
     cell.nixosProfiles.network-manager
     cell.nixosProfiles.nix
+    cell.nixosProfiles.openssh
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.touchpad
     cell.nixosProfiles.zram
@@ -157,10 +158,6 @@ in
   };
 
   services = {
-    sshd = {
-      enable = true;
-    };
-
     xserver = {
       videoDrivers = [ "nvidia" ];
     };
