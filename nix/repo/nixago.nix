@@ -127,12 +127,12 @@ with std.lib;
             };
           in
           {
-            creation_rules = {
-              "nix/nixos/secrets/lilac/secrets.yaml" = {
+            creation_rules = [
+              {
                 path_regex = "^nix/nixos/secrets/lilac/secrets\.yaml$";
                 key_groups = [ { age = [ lilac.age ]; } ];
-              };
-            };
+              }
+            ];
           };
       };
 
