@@ -22,7 +22,7 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
-    hardware.nixosModules.common-gpu-nvidia-nonprime
+    hardware.nixosModules.common-gpu-nvidia-sync
   ];
 
   bee = {
@@ -81,7 +81,25 @@ in
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
 
+    nvidia = {
+      modesetting = {
+        enable = true;
+      };
+
+      powerManagement = {
+        enable = true;
+        finegrained = false;
+      };
+
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
+
     opengl = {
+      enable = true;
+      driSupport = true;
       driSupport32Bit = lib.mkDefault true;
     };
   };
@@ -233,6 +251,8 @@ in
           enable = true;
         };
       };
+
+      videoDrivers = [ "nvidia" ];
     };
   };
 
