@@ -10,6 +10,29 @@
     ];
   };
 
+  # Home Manager
+  inputs = {
+    home-manager = {
+      follows = "home-manager-unstable";
+    };
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-stable";
+        };
+      };
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+      };
+    };
+  };
+
   # Nix packages
   inputs = {
     nixpkgs = {
@@ -70,6 +93,26 @@
     };
     haumea = {
       follows = "std/haumea";
+    };
+    hive = {
+      url = "github:divnix/hive/main";
+      inputs = {
+        colmena = {
+          follows = "colmena";
+        };
+        devshell = {
+          follows = "devshell";
+        };
+        nixago = {
+          follows = "nixago";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        std = {
+          follows = "std";
+        };
+      };
     };
     devshell = {
       url = "github:numtide/devshell/main";
@@ -132,48 +175,90 @@
     };
   };
 
+  # NixOS tools
+  inputs = {
+    colmena = {
+      url = "github:zhaofengli/colmena/main";
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixos";
+        };
+        stable = {
+          follows = "nixos-stable";
+        };
+      };
+    };
+    disko = {
+      url = "github:nix-community/disko/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+    hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+  };
+
   outputs =
     {
-      flake-parts,
+      hive,
       nix-systems,
       nixpkgs,
+      self,
       std,
       ...
     }@inputs:
     let
+      inherit (hive) collect growOn harvest;
+
+      collect' = collect // {
+        renamer = _: target: target;
+      };
+
       lib = nixpkgs.lib // builtins;
 
       systems = import nix-systems;
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      inherit systems;
+    growOn
+      {
+        inherit systems;
 
-      imports = [ std.flakeModule ];
+        cellsFrom = ./nix;
 
-      perSystem =
-        { pkgs, ... }:
-        {
-          formatter = pkgs.treefmt;
-        };
-
-      std = {
-        grow = {
-          cellsFrom = ./nix;
-
-          cellBlocks = with std.blockTypes; [
+        cellBlocks =
+          (with std.blockTypes; [
             (devshells "devshells")
             (nixago "nixago")
-          ];
-        };
+          ])
+          ++ (with hive.blockTypes; [
+            diskoConfigurations
+            nixosConfigurations
+          ]);
 
-        harvest = {
-          devShells = [
-            [
-              "repo"
-              "devshells"
-            ]
-          ];
+        inputs = inputs // {
+          inherit lib;
         };
+      }
+      {
+        diskoConfigurations = collect' self "diskoConfigurations";
+        nixosConfigurations = collect' self "nixosConfigurations";
+      }
+      {
+        devShells = harvest self [
+          [
+            "repo"
+            "devshells"
+          ]
+        ];
+
+        formatter = harvest nixpkgs.legacyPackages [ "treefmt" ];
       };
-    };
 }

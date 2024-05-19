@@ -30,6 +30,36 @@
         "type": "github"
       }
     },
+    "colmena": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixos"
+        ],
+        "stable": [
+          "nixos-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1711386353,
+        "narHash": "sha256-gWEpb8Hybnoqb4O4tmpohGZk6+aerAbJpywKcFIiMlg=",
+        "owner": "zhaofengli",
+        "repo": "colmena",
+        "rev": "cd65ef7a25cdc75052fbd04b120aeb066c3881db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zhaofengli",
+        "ref": "main",
+        "repo": "colmena",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "flake-utils": [
@@ -51,6 +81,27 @@
         "owner": "numtide",
         "ref": "main",
         "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716126753,
+        "narHash": "sha256-fdodsQ2AWreGj4arHk6cKcnqlWrNiLb64eRrHtMZ5cw=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "601be8412d2ab72f752448766fe0fb2f00d5c40c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "disko",
         "type": "github"
       }
     },
@@ -143,6 +194,22 @@
         "type": "github"
       }
     },
+    "hardware": {
+      "locked": {
+        "lastModified": 1716034089,
+        "narHash": "sha256-QBfab6V4TeQ6Y4NiXVrEATdQuhCNFNaXt/L1K/Zw+zc=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "b55712de78725c8fcde422ee0a0fe682046e73c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "haumea": {
       "inputs": {
         "nixpkgs": [
@@ -162,6 +229,86 @@
         "owner": "nix-community",
         "ref": "v0.2.2",
         "repo": "haumea",
+        "type": "github"
+      }
+    },
+    "hive": {
+      "inputs": {
+        "colmena": [
+          "colmena"
+        ],
+        "devshell": [
+          "devshell"
+        ],
+        "nixago": [
+          "nixago"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "paisano": [
+          "hive",
+          "std",
+          "paisano"
+        ],
+        "std": [
+          "std"
+        ]
+      },
+      "locked": {
+        "lastModified": 1711370182,
+        "narHash": "sha256-a8UK0PRMZWTN6Hu8f/ddwdtUyZsq8u/DYmySZUmpDfA=",
+        "owner": "divnix",
+        "repo": "hive",
+        "rev": "658417a0461bbef57ef109eec28b029c212de2a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "divnix",
+        "ref": "main",
+        "repo": "hive",
+        "type": "github"
+      }
+    },
+    "home-manager-stable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715381426,
+        "narHash": "sha256-wPuqrAQGdv3ISs74nJfGb+Yprm23U/rFpcHFFNWgM94=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "ab5542e9dbd13d0100f8baae2bc2d68af901f4b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-23.11",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715930644,
+        "narHash": "sha256-W9pyM3/vePxrffHtzlJI6lDS3seANQ+Nqp+i58O46LI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e3ad5108f54177e6520535768ddbf1e6af54b59d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -388,14 +535,23 @@
           "std",
           "blank"
         ],
+        "colmena": "colmena",
         "devshell": "devshell",
+        "disko": "disko",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
+        "hardware": "hardware",
         "haumea": [
           "std",
           "haumea"
         ],
+        "hive": "hive",
+        "home-manager": [
+          "home-manager-unstable"
+        ],
+        "home-manager-stable": "home-manager-stable",
+        "home-manager-unstable": "home-manager-unstable",
         "nix-systems": "nix-systems",
         "nixago": "nixago",
         "nixago-extensions": "nixago-extensions",
