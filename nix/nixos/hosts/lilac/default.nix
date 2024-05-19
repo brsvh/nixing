@@ -19,8 +19,7 @@ let
 in
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    cell.nixosProfiles.gnome
+    cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop
     disko.nixosModules.disko
     hardware.nixosModules.common-cpu-intel
