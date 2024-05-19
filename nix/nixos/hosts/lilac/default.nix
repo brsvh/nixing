@@ -75,9 +75,7 @@ in
     keyMap = lib.mkDefault "us";
   };
 
-  disko = {
-    devices = cell.diskoConfigurations.lilac;
-  };
+  disko = cell.diskoConfigurations.lilac.disko;
 
   environment = {
     systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];

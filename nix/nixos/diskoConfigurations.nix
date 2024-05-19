@@ -1,8 +1,12 @@
 { cell, inputs }:
 let
-  inherit (inputs.hive) findLoad;
+  inherit (inputs.haumea.lib) load transformers;
 in
-findLoad {
-  inherit cell inputs;
-  block = ./disko;
+load {
+  inputs = {
+    inherit cell inputs;
+  };
+
+  src = ./disko;
+  transformer = transformers.liftDefault;
 }
