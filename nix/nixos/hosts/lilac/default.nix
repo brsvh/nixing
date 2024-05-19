@@ -195,7 +195,7 @@ in
     };
   };
 
-  swapDevices = [ { device = "/var/swapfile"; } ];
+  swapDevices = [ { device = "/var/lib/swapfile"; } ];
 
   system = {
     stateVersion = "24.05";
