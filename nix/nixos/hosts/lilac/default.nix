@@ -161,10 +161,6 @@ in
       enable = true;
     };
 
-    udev = {
-      packages = with pkgs; [ gnome.gnome-settings-daemon ];
-    };
-
     xserver = {
       videoDrivers = [ "nvidia" ];
     };

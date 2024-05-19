@@ -21,6 +21,10 @@
       };
     };
 
+    udev = {
+      packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    };
+
     xserver = {
       enable = true;
 
