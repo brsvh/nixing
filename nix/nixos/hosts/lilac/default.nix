@@ -20,6 +20,7 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    cell.nixosProfiles.gnome
     cell.nixosProfiles.nix
     cell.nixosProfiles.systemd-boot
     disko.nixosModules.disko
@@ -71,10 +72,6 @@ in
   };
 
   disko = cell.diskoConfigurations.lilac.disko;
-
-  environment = {
-    systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
-  };
 
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
@@ -177,11 +174,6 @@ in
   };
 
   services = {
-    gnome = {
-      gnome-initial-setup = {
-        enable = lib.mkForce false;
-      };
-    };
 
     libinput = {
       enable = true;
@@ -196,20 +188,6 @@ in
     };
 
     xserver = {
-      enable = true;
-
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
-
-      displayManager = {
-        gdm = {
-          enable = true;
-        };
-      };
-
       videoDrivers = [ "nvidia" ];
     };
   };
