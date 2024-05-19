@@ -22,6 +22,7 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
     cell.nixosProfiles.firewall
     cell.nixosProfiles.gnome
+    cell.nixosProfiles.network-manager
     cell.nixosProfiles.nix
     cell.nixosProfiles.systemd-boot
     disko.nixosModules.disko
@@ -150,10 +151,6 @@ in
     domain = domainName;
 
     fqdn = domainName;
-
-    networkmanager = {
-      enable = true;
-    };
   };
 
   programs = {
