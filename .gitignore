@@ -2,3 +2,9 @@
 
 # std: ignore .cache directory
 /.cache/
+
+# nixago: ignore-linked-files
+/.conform.yaml
+/.editorconfig
+/lefthook.yml
+/treefmt.toml

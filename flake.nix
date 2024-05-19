@@ -150,11 +150,20 @@
 
       imports = [ std.flakeModule ];
 
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.treefmt;
+        };
+
       std = {
         grow = {
           cellsFrom = ./nix;
 
-          cellBlocks = with std.blockTypes; [ (devshells "devshells") ];
+          cellBlocks = with std.blockTypes; [
+            (devshells "devshells")
+            (nixago "nixago")
+          ];
         };
 
         harvest = {

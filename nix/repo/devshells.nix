@@ -31,5 +31,12 @@ in
     ];
 
     name = "nixing";
+
+    nixago = with cell.nixago; [
+      conform
+      editorconfig
+      lefthook
+      treefmt
+    ];
   };
 }
