@@ -13,6 +13,8 @@ in
   imports = [ cell.nixosProfiles.fish ];
 
   home-manager = {
+    backupFileExtension = "backup";
+
     users = {
       "${username}" = {
         imports = [ home.homeProfiles.xdg ];
