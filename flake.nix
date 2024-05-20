@@ -273,6 +273,7 @@
           ])
           ++ (with hive.blockTypes; [
             diskoConfigurations
+            homeConfigurations
             nixosConfigurations
           ]);
 
@@ -282,6 +283,7 @@
       }
       {
         diskoConfigurations = collect' self "diskoConfigurations";
+        homeConfigurations = collect' self "homeConfigurations";
         nixosConfigurations = collect' self "nixosConfigurations";
       }
       {
