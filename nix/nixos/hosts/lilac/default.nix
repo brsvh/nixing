@@ -57,7 +57,7 @@ in
     };
 
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
 
     loader = {
       efi = {
