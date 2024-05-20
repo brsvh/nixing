@@ -17,7 +17,11 @@ in
 
     users = {
       "${username}" = {
-        imports = [ home.homeProfiles.xdg ];
+        imports = [
+          home.homeProfiles.fish
+          home.homeProfiles.gnupg
+          home.homeProfiles.xdg
+        ];
 
         home = {
           inherit username;

@@ -3,7 +3,11 @@ let
   system = "x86_64-linux";
 in
 {
-  imports = [ cell.homeProfiles.xdg ];
+  imports = [
+    cell.homeProfiles.fish
+    cell.homeProfiles.gnupg
+    cell.homeProfiles.xdg
+  ];
 
   bee = {
     inherit system;
