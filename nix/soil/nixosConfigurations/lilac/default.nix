@@ -56,10 +56,18 @@ in
         "vmd"
         "xhci_pci"
       ];
+
+      verbose = false;
     };
 
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_zen;
+    kernelParams = [
+      "quiet"
+      "loglevel=3"
+      "systemd.show_status=auto"
+      "rd.udev.log_level=3"
+    ];
 
     loader = {
       efi = {
