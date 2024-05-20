@@ -264,6 +264,7 @@
         cellBlocks =
           (with std.blockTypes; [
             (devshells "devshells")
+            (functions "homeProfiles")
             (functions "nixosProfiles")
             (functions "nixosSecrets")
             (functions "nixosSuites")

@@ -1,12 +1,37 @@
-{ cell, pkgs, ... }:
+{
+  cell,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  inherit (inputs.cells) home;
+
+  username = "changbingshan";
+in
 {
   imports = [ cell.nixosProfiles.fish ];
+
+  home-manager = {
+    users = {
+      "${username}" = {
+        imports = [ home.homeProfiles.xdg ];
+
+        home = {
+          inherit username;
+
+          homeDirectory = "/home/${username}";
+          stateVersion = "24.05";
+        };
+      };
+    };
+  };
 
   users = {
     mutableUsers = true;
 
     users = {
-      changbingshan = {
+      "${username}" = {
         description = "Bingshan Chang";
 
         extraGroups = [
