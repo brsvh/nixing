@@ -265,6 +265,7 @@
           (with std.blockTypes; [
             (devshells "devshells")
             (functions "nixosProfiles")
+            (functions "nixosSecrets")
             (functions "nixosSuites")
             (functions "nixosUsers")
             (nixago "nixago")

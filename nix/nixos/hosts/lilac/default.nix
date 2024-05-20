@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   modulesPath,
@@ -19,6 +20,8 @@ let
 in
 {
   imports = [
+    cell.nixosProfiles.dae
+    cell.nixosSecrets.lilac
     cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop
     cell.nixosUsers.root
@@ -159,13 +162,13 @@ in
     domain = domainName;
 
     fqdn = domainName;
-
-    proxy = {
-      default = "http://192.168.0.100:7890";
-    };
   };
 
   services = {
+    dae = {
+      config = config.sops.secrets."dae/config.dae".path;
+    };
+
     xserver = {
       videoDrivers = [ "nvidia" ];
     };
