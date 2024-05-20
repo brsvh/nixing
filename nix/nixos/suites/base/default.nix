@@ -5,5 +5,6 @@
     cell.nixosProfiles.fish
     cell.nixosProfiles.nix
     cell.nixosProfiles.openssh
+    cell.nixosProfiles.tools
   ];
 }
