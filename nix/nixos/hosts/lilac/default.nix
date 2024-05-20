@@ -166,7 +166,7 @@ in
 
   services = {
     dae = {
-      config = config.sops.secrets."dae/config.dae".path;
+      configFile = config.sops.secrets."dae/config.dae".path;
     };
 
     xserver = {
