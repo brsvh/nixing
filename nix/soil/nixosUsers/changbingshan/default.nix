@@ -1,12 +1,5 @@
-{
-  cell,
-  inputs,
-  pkgs,
-  ...
-}:
+{ cell, pkgs, ... }:
 let
-  inherit (inputs.cells) home;
-
   username = "changbingshan";
 in
 {
@@ -18,9 +11,9 @@ in
     users = {
       "${username}" = {
         imports = [
-          home.homeProfiles.fish
-          home.homeProfiles.gnupg
-          home.homeProfiles.xdg
+          cell.homeProfiles.fish
+          cell.homeProfiles.gnupg
+          cell.homeProfiles.xdg
         ];
 
         home = {

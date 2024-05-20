@@ -4,5 +4,5 @@ let
 in
 findLoad {
   inherit cell inputs;
-  block = ./profiles;
+  block = ./.;
 }
