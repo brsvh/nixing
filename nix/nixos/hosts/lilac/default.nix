@@ -21,6 +21,7 @@ in
 {
   imports = [
     cell.nixosProfiles.dae
+    cell.nixosProfiles.hercules-ci-agent
     cell.nixosSecrets.lilac
     cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop
@@ -167,6 +168,13 @@ in
   services = {
     dae = {
       configFile = config.sops.secrets."dae/config.dae".path;
+    };
+
+    hercules-ci-agent = {
+      settings = {
+        binaryCachesPath = config.sops.secrets."hercules-ci/binary-caches.json".path;
+        clusterJoinTokenPath = config.sops.secrets."hercules-ci/cluster-join-token.key".path;
+      };
     };
 
     xserver = {
