@@ -14,6 +14,14 @@
     systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
   };
 
+  programs = {
+    gnupg = {
+      agent = {
+        pinentryPackage = pkgs.pinentry-gnome3;
+      };
+    };
+  };
+
   services = {
     gnome = {
       gnome-initial-setup = {
