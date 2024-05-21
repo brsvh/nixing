@@ -5,27 +5,6 @@ in
 {
   imports = [ cell.nixosProfiles.fish ];
 
-  home-manager = {
-    backupFileExtension = "backup";
-
-    users = {
-      "${username}" = {
-        imports = [
-          cell.homeProfiles.fish
-          cell.homeProfiles.gnupg
-          cell.homeProfiles.xdg
-        ];
-
-        home = {
-          inherit username;
-
-          homeDirectory = "/home/${username}";
-          stateVersion = "24.05";
-        };
-      };
-    };
-  };
-
   users = {
     mutableUsers = true;
 
