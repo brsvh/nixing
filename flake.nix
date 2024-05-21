@@ -29,39 +29,6 @@
     ];
   };
 
-  # Applications
-  inputs = {
-    my-emacs = {
-      url = "github:brsvh/my-emacs";
-      inputs = {
-        devshell = {
-          follows = "devshell";
-        };
-        emacs-overlay = {
-          follows = "emacs-overlay";
-        };
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        flake-parts = {
-          follows = "flake-parts";
-        };
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nix-systems = {
-          follows = "nix-systems";
-        };
-        nixpkgs-stable = {
-          follows = "nixpkgs-stable";
-        };
-        nixpkgs-unstable = {
-          follows = "nixpkgs-unstable";
-        };
-      };
-    };
-  };
-
   # Home Manager
   inputs = {
     home-manager = {
@@ -298,7 +265,12 @@
       ...
     }@inputs:
     let
-      inherit (hive) collect growOn harvest;
+      inherit (hive)
+        collect
+        growOn
+        harvest
+        pick
+        ;
 
       collect' = collect // {
         renamer = _: target: target;
@@ -317,12 +289,15 @@
         cellBlocks =
           (with std.blockTypes; [
             (devshells "devshells")
+            (functions "homeModules")
             (functions "homeProfiles")
+            (functions "nixosModules")
             (functions "nixosProfiles")
             (functions "nixosSecrets")
             (functions "nixosSuites")
             (functions "nixosUsers")
-            (installables "packages")
+            (functions "overlays")
+            (functions "packages")
             (nixago "nixago")
             (runnables "formatter")
           ])
@@ -359,6 +334,27 @@
           [
             "repo"
             "formatter"
+          ]
+        ];
+
+        homeModules = pick self [
+          [
+            "my-emacs"
+            "homeModules"
+          ]
+        ];
+
+        nixosModules = pick self [
+          [
+            "my-emacs"
+            "nixosModules"
+          ]
+        ];
+
+        overlays = pick self [
+          [
+            "my-emacs"
+            "overlays"
           ]
         ];
 

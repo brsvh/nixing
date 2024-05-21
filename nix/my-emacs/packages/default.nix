@@ -1,20 +1,15 @@
 { cell, inputs }:
 let
-  inherit (inputs) emacs-overlay lib nixpkgs;
+  inherit (inputs) lib nixpkgs;
 
-  projectRoot = inputs.self + "/.";
-
-  callPackage =
-    pkg: lib.callPackageWith (nixpkgs.appendOverlays [ emacs-overlay.overlays.default ]) pkg;
-
-  mkMyEmacsScope = callPackage ./my-emacs/package.nix { inherit projectRoot; };
+  pkgs = nixpkgs.appendOverlays [ cell.overlays.my-emacs ];
 in
-rec {
-  my-emacs = my-emacs-master;
+{
+  my-emacs-nogui = pkgs.my-emacs.nogui;
 
-  my-emacs-master = lib.makeOverridable mkMyEmacsScope { branch = "master"; };
+  my-emacs-pgtk = pkgs.my-emacs.default;
 
-  my-emacs-stable = my-emacs-master.override { branch = null; };
+  my-emacs-tools = pkgs.my-emacs.instruments;
 
-  my-emacs-unstable = my-emacs-master.override { branch = "unstable"; };
+  my-emacs-x11 = pkgs.my-emacs.x11;
 }

@@ -1,11 +1,6 @@
-{
-  cell,
-  inputs,
-  pkgs,
-  ...
-}:
+{ inputs, ... }:
 let
-  inherit (inputs) my-emacs;
+  inherit (inputs.cells) my-emacs;
 in
 {
   imports = [ my-emacs.homeModules.my-emacs ];

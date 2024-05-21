@@ -16,14 +16,17 @@
   parinfer-rust-emacs,
   projectRoot,
   runCommand,
+  source-code-pro,
+  source-sans-pro,
+  source-serif-pro,
   tree-sitter-grammars,
   xorg,
 }:
 with lib;
 {
   branch ? "master",
-  extraConfig ? "",
   extraBinaries ? [ ],
+  extraConfig ? "",
   extraEmacsPackages ? (epkgs: [ ]),
   extraFonts ? [ ],
   extraLibraries ? [ ],
@@ -55,7 +58,7 @@ let
     source-code-pro
     source-sans-pro
     source-serif-pro
-  ] ++ (import ./extra-fonts.nix) ++ extraFonts;
+  ] ++ (import ./extra-fonts.nix pkgs) ++ extraFonts;
 
   libraries =
     [ parinfer-rust-emacs ]

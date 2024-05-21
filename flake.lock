@@ -221,62 +221,6 @@
         "type": "github"
       }
     },
-    "git-hooks": {
-      "inputs": {
-        "flake-compat": [
-          "my-emacs",
-          "flake-compat"
-        ],
-        "gitignore": [
-          "my-emacs",
-          "gitignore"
-        ],
-        "nixpkgs": [
-          "my-emacs",
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "my-emacs",
-          "nixpkgs-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1716213921,
-        "narHash": "sha256-xrsYFST8ij4QWaV6HEokCUNIZLjjLP1bYC60K8XiBVA=",
-        "owner": "cachix",
-        "repo": "git-hooks.nix",
-        "rev": "0e8fcc54b842ad8428c9e705cb5994eaf05c26a0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cachix",
-        "ref": "master",
-        "repo": "git-hooks.nix",
-        "type": "github"
-      }
-    },
-    "gitignore": {
-      "inputs": {
-        "nixpkgs": [
-          "my-emacs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1709087332,
-        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "ref": "master",
-        "repo": "gitignore.nix",
-        "type": "github"
-      }
-    },
     "hardware": {
       "locked": {
         "lastModified": 1716173274,
@@ -413,71 +357,6 @@
       "original": {
         "owner": "divnix",
         "repo": "incl",
-        "type": "github"
-      }
-    },
-    "my-emacs": {
-      "inputs": {
-        "devshell": [
-          "devshell"
-        ],
-        "emacs-overlay": [
-          "emacs-overlay"
-        ],
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "git-hooks": "git-hooks",
-        "gitignore": "gitignore",
-        "nix-filter": "nix-filter",
-        "nix-systems": [
-          "nix-systems"
-        ],
-        "nixpkgs": [
-          "my-emacs",
-          "nixpkgs-unstable"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs-stable"
-        ],
-        "nixpkgs-unstable": [
-          "nixpkgs-unstable"
-        ],
-        "treefmt": "treefmt"
-      },
-      "locked": {
-        "lastModified": 1716293071,
-        "narHash": "sha256-h4T4Pl6LT5fYt48c7L6Gr8A6QFy3yaKUTIuaha9wBOY=",
-        "owner": "brsvh",
-        "repo": "my-emacs",
-        "rev": "4650410cc74fc6b7dcffe6f63042948b019cc16f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "brsvh",
-        "repo": "my-emacs",
-        "type": "github"
-      }
-    },
-    "nix-filter": {
-      "locked": {
-        "lastModified": 1710156097,
-        "narHash": "sha256-1Wvk8UP7PXdf8bCCaEoMnOT1qe5/Duqgj+rL8sRQsSM=",
-        "owner": "numtide",
-        "repo": "nix-filter",
-        "rev": "3342559a24e85fc164b295c3444e8a139924675b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "ref": "main",
-        "repo": "nix-filter",
         "type": "github"
       }
     },
@@ -701,7 +580,6 @@
         ],
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
-        "my-emacs": "my-emacs",
         "nix-systems": "nix-systems",
         "nixago": "nixago",
         "nixago-extensions": "nixago-extensions",
@@ -801,28 +679,6 @@
         "owner": "divnix",
         "ref": "main",
         "repo": "std",
-        "type": "github"
-      }
-    },
-    "treefmt": {
-      "inputs": {
-        "nixpkgs": [
-          "my-emacs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715940852,
-        "narHash": "sha256-wJqHMg/K6X3JGAE9YLM0LsuKrKb4XiBeVaoeMNlReZg=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "2fba33a182602b9d49f0b2440513e5ee091d838b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "ref": "main",
-        "repo": "treefmt-nix",
         "type": "github"
       }
     },

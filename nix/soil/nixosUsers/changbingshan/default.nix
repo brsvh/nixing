@@ -29,7 +29,7 @@ in
 
         programs = {
           my-emacs = {
-            package = pkgs.my-emacs.x11;
+            variant = "x11";
           };
         };
       };
