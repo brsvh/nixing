@@ -85,6 +85,10 @@ in
 
   disko = cell.diskoConfigurations.lilac.disko;
 
+  environment = {
+    systemPackages = with pkgs; [ config.bee.home.packages.home-manager ];
+  };
+
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
 
