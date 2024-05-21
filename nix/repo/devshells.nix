@@ -1,6 +1,6 @@
 { cell, inputs }:
 let
-  inherit (inputs) nixpkgs std;
+  inherit (inputs) nixpkgs std colmena;
 
   lib = nixpkgs.lib // builtins;
 
@@ -20,6 +20,10 @@ in
       }
 
       # Tool
+      {
+        package = colmena.packages.colmena;
+        category = "tool";
+      }
       {
         package = pkgs.fish;
         category = "tool";
