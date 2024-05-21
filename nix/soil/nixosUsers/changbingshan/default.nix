@@ -12,6 +12,7 @@ in
       "${username}" = {
         imports = [
           cell.homeProfiles.fish
+          cell.homeProfiles.gnome
           cell.homeProfiles.gnupg
           cell.homeProfiles.google-chrome
           cell.homeProfiles.my-emacs
