@@ -40,6 +40,7 @@ in
       conform
       editorconfig
       lefthook
+      mdbook
       sops
       treefmt
     ];

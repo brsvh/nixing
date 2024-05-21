@@ -106,6 +106,21 @@ with std.lib;
     };
   };
 
+  mdbook = dev.mkNixago cfg.mdbook {
+    data = {
+      book = {
+        language = "en";
+        multilingual = false;
+        src = "docs";
+        title = "nixing";
+      };
+
+      build = {
+        build-dir = "result-book";
+      };
+    };
+  };
+
   sops =
     dev.mkNixago
       {

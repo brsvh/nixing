@@ -2,7 +2,6 @@
 
 # nix: ignore build result
 /result
-/result-*
 
 # std: ignore .cache directory
 /.cache/
@@ -11,5 +10,9 @@
 /.conform.yaml
 /.editorconfig
 /.sops.yaml
+/book.toml
 /lefthook.yml
 /treefmt.toml
+
+# nixago-auto-created: mdbook-build-folder
+/result-book/**
