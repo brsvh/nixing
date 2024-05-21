@@ -14,12 +14,12 @@
 
   i18n = {
     inputMethod = lib.mkMerge [
-      (mkIf (config.i18n.inputMethod.enabled == "fcitx5") {
+      (lib.mkIf (config.i18n.inputMethod.enabled == "fcitx5") {
         fcitx5 = {
           addons = with pkgs; [ fcitx5-rime ];
         };
       })
-      (mkIf (config.i18n.inputMethod.enabled == "ibus") {
+      (lib.mkIf (config.i18n.inputMethod.enabled == "ibus") {
         ibus = {
           engines = with pkgs.ibus-engines; [ rime ];
         };
