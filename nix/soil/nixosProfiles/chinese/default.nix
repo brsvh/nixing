@@ -1,4 +1,10 @@
-{ cell, pkgs, ... }:
+{
+  cell,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [ cell.nixosProfiles.fontconfig ];
 
@@ -7,6 +13,19 @@
   };
 
   i18n = {
+    inputMethod = lib.mkMerge [
+      (mkIf (config.i18n.inputMethod.enabled == "fcitx5") {
+        fcitx5 = {
+          addons = with pkgs; [ fcitx5-rime ];
+        };
+      })
+      (mkIf (config.i18n.inputMethod.enabled == "ibus") {
+        ibus = {
+          engines = with pkgs.ibus-engines; [ rime ];
+        };
+      })
+    ];
+
     supportedLocales = [
       # BIG-5
       "zh_HK/BIG5-HKSCS"
