@@ -364,6 +364,10 @@
 
         packages = harvest self [
           [
+            "my-emacs"
+            "packages"
+          ]
+          [
             "soil"
             "packages"
           ]
