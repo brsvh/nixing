@@ -269,6 +269,7 @@
             (functions "nixosSecrets")
             (functions "nixosSuites")
             (functions "nixosUsers")
+            (installables "packages")
             (nixago "nixago")
             (runnables "formatter")
           ])
@@ -280,6 +281,10 @@
 
         inputs = inputs // {
           inherit lib;
+        };
+
+        nixpkgsConfig = {
+          allowUnfree = true;
         };
       }
       {
@@ -296,8 +301,17 @@
         ];
 
         formatter = harvest self [
-          "repo"
-          "formatter"
+          [
+            "repo"
+            "formatter"
+          ]
+        ];
+
+        packages = harvest self [
+          [
+            "soil"
+            "packages"
+          ]
         ];
       };
 }

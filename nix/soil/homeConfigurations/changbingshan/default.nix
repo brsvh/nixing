@@ -32,6 +32,8 @@ in
 
       homeDirectory = "/home/${username}";
 
+      packages = [ cell.packages.wemeet ];
+
       stateVersion = "24.05";
     };
 }
