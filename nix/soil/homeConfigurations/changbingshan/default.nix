@@ -12,6 +12,7 @@ in
 {
   imports = [
     cell.homeProfiles.chinese
+    cell.homeProfiles.english
     cell.homeProfiles.fish
     cell.homeProfiles.gnome
     cell.homeProfiles.gnupg
