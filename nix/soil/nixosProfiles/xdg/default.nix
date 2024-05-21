@@ -7,6 +7,7 @@
       XDG_STATE_HOME = "$HOME/.local/state";
 
       GNUPGHOME = "$XDG_STATE_HOME/gnupg";
+      XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
     };
   };
 
