@@ -17,6 +17,7 @@ in
           cell.homeProfiles.gnome
           cell.homeProfiles.gnupg
           cell.homeProfiles.google-chrome
+          cell.homeProfiles.japanese
           cell.homeProfiles.my-emacs
           cell.homeProfiles.xdg
         ];
