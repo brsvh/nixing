@@ -23,11 +23,16 @@ you did not recive it, see <http://www.wtfpl.net> for more details.
 
 There are some directories not licensed under WTFPL.
 
+- [lisp], you can redistribute it and/or modify it under the terms of
+  the GNU General Public License. You should have received a copy of it,
+  see the *COPYING.GPL* file for more details. If you did not recive it,
+  see <https://www.gnu.org/licenses/gpl-3.0.txt> for more details.
 - [nix/soil/packages/wemeet], you can redistribute it and/or modify it
   under the terms of the MIT License. You should have received a copy of
   it, see the *COPYING.MIT* file for more details. If you did not recive
   it, see <https://opensource.org/license/mit> for more details.
 
+[lisp]: ./lisp
 [nix/soil/packages/wemeet]: ./nix/soil/packages/wemeet/
 
 ## Thanks
