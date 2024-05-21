@@ -22,6 +22,7 @@ in
 {
   imports = [
     cell.nixosProfiles.dae
+    cell.nixosProfiles.libvirt
     # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
     # cell.nixosProfiles.hercules-ci-agent
     cell.nixosSecrets.lilac
