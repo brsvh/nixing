@@ -110,6 +110,50 @@
     blank = {
       follows = "std/blank";
     };
+    crane = {
+      url = "github:ipetkov/crane/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+    devshell = {
+      url = "github:numtide/devshell/main";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix/master";
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        gitignore = {
+          follows = "gitignore";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+      };
+    };
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
     haumea = {
       follows = "std/haumea";
     };
@@ -130,17 +174,6 @@
         };
         std = {
           follows = "std";
-        };
-      };
-    };
-    devshell = {
-      url = "github:numtide/devshell/main";
-      inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
         };
       };
     };
@@ -235,6 +268,32 @@
     hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/master";
+      inputs = {
+        crane = {
+          follows = "crane";
+        };
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        pre-commit-hooks-nix = {
+          follows = "git-hooks";
+        };
+        rust-overlay = {
+          follows = "rust-overlay";
+        };
+      };
+    };
   };
 
   # Overlays
@@ -250,6 +309,17 @@
         };
         nixpkgs-stable = {
           follows = "nixpkgs-stable";
+        };
+      };
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay/master";
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
         };
       };
     };

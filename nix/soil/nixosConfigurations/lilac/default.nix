@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (inputs) disko hardware;
+  inherit (inputs) disko hardware lanzaboote;
   inherit (inputs.cells) my-emacs unfree;
 
   # This device will not be exposed to the public network. The domain
@@ -23,6 +23,8 @@ in
   imports = [
     cell.nixosProfiles.dae
     cell.nixosProfiles.libvirt
+    # FIXME this profile will cause infinite recursion.
+    # cell.nixosProfiles.lanzaboote
     # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
     # cell.nixosProfiles.hercules-ci-agent
     cell.nixosSecrets.lilac
@@ -47,6 +49,7 @@ in
       };
 
       overlays = [
+        lanzaboote.overlays.default
         my-emacs.overlays.emacs
         unfree.overlays.unfree
       ];
