@@ -26,6 +26,12 @@ in
 
           stateVersion = "24.05";
         };
+
+        programs = {
+          my-emacs = {
+            package = pkgs.my-emacs.x11;
+          };
+        };
       };
     };
   };
