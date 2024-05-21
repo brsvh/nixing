@@ -158,9 +158,23 @@ with std.lib;
           command = "nixfmt";
           includes = [ "*.nix" ];
         };
+
+        shellcheck = {
+          command = "shellcheck";
+          includes = [ "*.sh" ];
+        };
+
+        shfmt = {
+          command = "shfmt";
+          includes = [ "*.sh" ];
+        };
       };
     };
 
-    packages = [ pkgs.nixfmt-rfc-style ];
+    packages = with pkgs; [
+      nixfmt-rfc-style
+      shellcheck
+      shfmt
+    ];
   };
 }
