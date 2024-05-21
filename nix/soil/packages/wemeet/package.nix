@@ -131,5 +131,6 @@ qt5.mkDerivation {
     license = licenses.unfree;
     platforms = lib.attrNames sourceInfo;
     maintainers = with maintainers; [ brsvh ];
+    mainProgram = "wemeetapp-force-x11";
   };
 }
