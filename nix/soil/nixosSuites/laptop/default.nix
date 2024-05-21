@@ -6,6 +6,7 @@
     cell.nixosProfiles.chinese
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall
+    cell.nixosProfiles.japanese
     cell.nixosProfiles.network-manager
     cell.nixosProfiles.pipewire
     cell.nixosProfiles.plymouth
