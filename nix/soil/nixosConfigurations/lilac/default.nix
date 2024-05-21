@@ -152,6 +152,14 @@ in
     # };
 
     xserver = {
+      displayManager = {
+        defaultSession = "gnome-xorg";
+
+        gdm = {
+          wayland = false;
+        };
+      };
+
       videoDrivers = [ "nvidia" ];
     };
   };
