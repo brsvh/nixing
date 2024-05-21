@@ -2,7 +2,7 @@
 let
   inherit (inputs) lib nixpkgs;
 
-  pkgs = nixpkgs.appendOverlays [ cell.overlays.my-emacs ];
+  pkgs = nixpkgs.appendOverlays [ cell.overlays.emacs ];
 in
 {
   my-emacs-nogui = pkgs.my-emacs.nogui;

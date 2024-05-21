@@ -46,7 +46,7 @@ in
       };
 
       overlays = [
-        my-emacs.overlays.my-emacs
+        my-emacs.overlays.emacs
         unfree.overlays.unfree
       ];
     };

@@ -4,16 +4,14 @@ let
 
   projectRoot = inputs.self + "/.";
 
-  callPackage =
-    pkg: lib.callPackageWith (nixpkgs.appendOverlays [ emacs-overlay.overlays.default ]) pkg;
-
-  mkMyEmacsScope = callPackage ./my-emacs/package.nix { inherit projectRoot; };
-in
-{
   my-emacs =
     final: prev:
-    (emacs-overlay.overlays.default final prev)
-    // rec {
+    let
+      prev' = prev.appendOverlays [ emacs-overlay.overlays.default ];
+
+      mkMyEmacsScope = prev'.callPackage ./my-emacs/package.nix { inherit projectRoot; };
+    in
+    rec {
       my-emacs = my-emacs-master;
 
       my-emacs-master = lib.makeOverridable mkMyEmacsScope { branch = "master"; };
@@ -22,4 +20,9 @@ in
 
       my-emacs-unstable = lib.makeOverridable mkMyEmacsScope { branch = "unstable"; };
     };
+in
+{
+  inherit my-emacs;
+
+  emacs = final: prev: (emacs-overlay.overlays.default final prev) // (my-emacs final prev);
 }
