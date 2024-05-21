@@ -1,11 +1,19 @@
-{ cell, config, ... }:
+{
+  cell,
+  config,
+  inputs,
+  ...
+}:
 let
+  inherit (inputs) my-emacs;
+
   system = "x86_64-linux";
 in
 {
   imports = [
     cell.homeProfiles.fish
     cell.homeProfiles.gnupg
+    cell.homeProfiles.my-emacs
     cell.homeProfiles.xdg
   ];
 
@@ -20,6 +28,8 @@ in
       config = {
         allowUnfree = true;
       };
+
+      overlays = [ my-emacs.overlays.default ];
     };
   };
 

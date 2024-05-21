@@ -13,6 +13,7 @@ in
         imports = [
           cell.homeProfiles.fish
           cell.homeProfiles.gnupg
+          cell.homeProfiles.my-emacs
           cell.homeProfiles.xdg
         ];
 

@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (inputs) disko hardware;
+  inherit (inputs) disko hardware my-emacs;
 
   # This device will not be exposed to the public network. The domain
   # name setting is fake, solely to automatically configure the correct
@@ -43,6 +43,8 @@ in
       config = {
         allowUnfree = true;
       };
+
+      overlays = [ my-emacs.overlays.default ];
     };
   };
 

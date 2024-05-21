@@ -135,6 +135,36 @@
         "type": "github"
       }
     },
+    "emacs-overlay": {
+      "inputs": {
+        "flake-utils": [
+          "my-emacs",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "my-emacs",
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "my-emacs",
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715305668,
+        "narHash": "sha256-kOZzP9qLA+wvHp53qGNfqjF9qZe7R/bVDrIzWmRNn5M=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "248d81eeb6153e7fe12f279f850b423b857516cf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -191,6 +221,66 @@
         "owner": "numtide",
         "ref": "main",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "git-hooks": {
+      "inputs": {
+        "flake-compat": [
+          "my-emacs",
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "my-emacs",
+          "flake-utils"
+        ],
+        "gitignore": [
+          "my-emacs",
+          "gitignore"
+        ],
+        "nixpkgs": [
+          "my-emacs",
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": [
+          "my-emacs",
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1714478972,
+        "narHash": "sha256-q//cgb52vv81uOuwz1LaXElp3XAe1TqrABXODAEF6Sk=",
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "rev": "2849da033884f54822af194400f8dff435ada242",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "ref": "master",
+        "repo": "git-hooks.nix",
+        "type": "github"
+      }
+    },
+    "gitignore": {
+      "inputs": {
+        "nixpkgs": [
+          "my-emacs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709087332,
+        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "ref": "master",
+        "repo": "gitignore.nix",
         "type": "github"
       }
     },
@@ -330,6 +420,69 @@
       "original": {
         "owner": "divnix",
         "repo": "incl",
+        "type": "github"
+      }
+    },
+    "my-emacs": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "emacs-overlay": "emacs-overlay",
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "git-hooks": "git-hooks",
+        "gitignore": "gitignore",
+        "nix-filter": "nix-filter",
+        "nix-systems": [
+          "nix-systems"
+        ],
+        "nixpkgs": [
+          "my-emacs",
+          "nixpkgs-unstable"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs-stable"
+        ],
+        "nixpkgs-unstable": [
+          "nixpkgs-unstable"
+        ],
+        "treefmt": "treefmt"
+      },
+      "locked": {
+        "lastModified": 1716290417,
+        "narHash": "sha256-6cAY20theGB4gGyyowMp488jUnTeDyxLjWNztQ6TNEE=",
+        "owner": "brsvh",
+        "repo": "my-emacs",
+        "rev": "c1f6f8a99efdce2aad54ed819bcdc19fcd468e34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brsvh",
+        "repo": "my-emacs",
+        "type": "github"
+      }
+    },
+    "nix-filter": {
+      "locked": {
+        "lastModified": 1710156097,
+        "narHash": "sha256-1Wvk8UP7PXdf8bCCaEoMnOT1qe5/Duqgj+rL8sRQsSM=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "3342559a24e85fc164b295c3444e8a139924675b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "main",
+        "repo": "nix-filter",
         "type": "github"
       }
     },
@@ -552,6 +705,7 @@
         ],
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
+        "my-emacs": "my-emacs",
         "nix-systems": "nix-systems",
         "nixago": "nixago",
         "nixago-extensions": "nixago-extensions",
@@ -651,6 +805,28 @@
         "owner": "divnix",
         "ref": "main",
         "repo": "std",
+        "type": "github"
+      }
+    },
+    "treefmt": {
+      "inputs": {
+        "nixpkgs": [
+          "my-emacs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1714058656,
+        "narHash": "sha256-Qv4RBm4LKuO4fNOfx9wl40W2rBbv5u5m+whxRYUMiaA=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "c6aaf729f34a36c445618580a9f95a48f5e4e03f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "main",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     },
