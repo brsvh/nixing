@@ -2,6 +2,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    cell.nixosProfiles.bash
     cell.nixosProfiles.fish
     cell.nixosProfiles.guix
     cell.nixosProfiles.nix
