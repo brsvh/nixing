@@ -9,6 +9,7 @@
     cell.nixosProfiles.pipewire
     cell.nixosProfiles.plymouth
     cell.nixosProfiles.rtkit
+    cell.nixosProfiles.starship
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.touchpad
     cell.nixosProfiles.zram
