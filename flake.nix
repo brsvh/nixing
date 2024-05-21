@@ -356,6 +356,10 @@
             "my-emacs"
             "overlays"
           ]
+          [
+            "unfree"
+            "overlays"
+          ]
         ];
 
         packages = harvest self [
@@ -364,7 +368,7 @@
             "packages"
           ]
           [
-            "soil"
+            "unfree"
             "packages"
           ]
         ];

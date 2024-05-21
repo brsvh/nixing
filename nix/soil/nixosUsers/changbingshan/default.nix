@@ -22,7 +22,7 @@ in
 
           homeDirectory = "/home/${username}";
 
-          packages = [ cell.packages.wemeet ];
+          packages = with pkgs; [ wemeet ];
 
           stateVersion = "24.05";
         };

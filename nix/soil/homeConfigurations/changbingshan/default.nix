@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (inputs.cells) my-emacs;
+  inherit (inputs.cells) my-emacs unfree;
 
   system = "x86_64-linux";
 in
@@ -29,7 +29,10 @@ in
         allowUnfree = true;
       };
 
-      overlays = [ my-emacs.overlays.default ];
+      overlays = [
+        my-emacs.overlays.my-emacs
+        unfree.overlays.unfree
+      ];
     };
   };
 
@@ -42,7 +45,7 @@ in
 
       homeDirectory = "/home/${username}";
 
-      packages = [ cell.packages.wemeet ];
+      packages = with pkgs; [ wemeet ];
 
       stateVersion = "24.05";
     };

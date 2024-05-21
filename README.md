@@ -33,7 +33,7 @@ There are some directories not licensed under WTFPL.
   it, see <https://opensource.org/license/mit> for more details.
 
 [lisp]: ./lisp
-[nix/soil/packages/wemeet]: ./nix/soil/packages/wemeet/
+[nix/unfree/overlays/wemeet]: ./nix/unfree/unfree/wemeet/
 
 ## Thanks
 
