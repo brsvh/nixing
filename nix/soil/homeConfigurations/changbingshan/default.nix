@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (inputs) my-emacs;
+  inherit (inputs) emacs-overlay my-emacs;
 
   system = "x86_64-linux";
 in
@@ -29,7 +29,10 @@ in
         allowUnfree = true;
       };
 
-      overlays = [ my-emacs.overlays.default ];
+      overlays = [
+        emacs-overlay.overlays.default
+        my-emacs.overlays.default
+      ];
     };
   };
 

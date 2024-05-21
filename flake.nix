@@ -29,6 +29,39 @@
     ];
   };
 
+  # Applications
+  inputs = {
+    my-emacs = {
+      url = "github:brsvh/my-emacs";
+      inputs = {
+        devshell = {
+          follows = "devshell";
+        };
+        emacs-overlay = {
+          follows = "emacs-overlay";
+        };
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nix-systems = {
+          follows = "nix-systems";
+        };
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+        nixpkgs-unstable = {
+          follows = "nixpkgs-unstable";
+        };
+      };
+    };
+  };
+
   # Home Manager
   inputs = {
     home-manager = {
@@ -237,31 +270,19 @@
     };
   };
 
-  # Applications
+  # Overlays
   inputs = {
-    my-emacs = {
-      url = "github:brsvh/my-emacs";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay/master";
       inputs = {
-        devshell = {
-          follows = "devshell";
-        };
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        flake-parts = {
-          follows = "flake-parts";
-        };
         flake-utils = {
           follows = "flake-utils";
         };
-        nix-systems = {
-          follows = "nix-systems";
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
         };
         nixpkgs-stable = {
           follows = "nixpkgs-stable";
-        };
-        nixpkgs-unstable = {
-          follows = "nixpkgs-unstable";
         };
       };
     };
