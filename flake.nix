@@ -395,14 +395,14 @@
       {
         devShells = harvest self [
           [
-            "repo"
+            "local"
             "devshells"
           ]
         ];
 
         formatter = harvest self [
           [
-            "repo"
+            "local"
             "formatter"
           ]
         ];
