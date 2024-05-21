@@ -11,6 +11,12 @@
     ];
   };
 
+  i18n = {
+    inputMethod = {
+      enabled = "fcitx5";
+    };
+  };
+
   services = {
     desktopManager = {
       plasma6 = {
