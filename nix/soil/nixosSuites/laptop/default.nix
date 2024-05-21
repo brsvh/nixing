@@ -1,6 +1,7 @@
 { cell, ... }:
 {
   imports = [
+    cell.nixosProfiles.alsa
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall
     cell.nixosProfiles.network-manager
