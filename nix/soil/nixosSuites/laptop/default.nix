@@ -2,6 +2,7 @@
 {
   imports = [
     cell.nixosProfiles.alsa
+    cell.nixosProfiles.bluetooth
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall
     cell.nixosProfiles.network-manager
