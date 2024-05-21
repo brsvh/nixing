@@ -6,6 +6,7 @@
     cell.nixosProfiles.guix
     cell.nixosProfiles.nix
     cell.nixosProfiles.openssh
+    cell.nixosProfiles.polkit
     cell.nixosProfiles.tools
   ];
 }
