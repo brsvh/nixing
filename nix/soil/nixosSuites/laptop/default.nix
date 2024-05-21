@@ -5,6 +5,7 @@
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall
     cell.nixosProfiles.network-manager
+    cell.nixosProfiles.pipewire
     cell.nixosProfiles.plymouth
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.touchpad
