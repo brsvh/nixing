@@ -21,6 +21,7 @@ in
     cell.homeProfiles.japanese
     cell.homeProfiles.korean
     cell.homeProfiles.my-emacs
+    cell.homeProfiles.obs-studio
     cell.homeProfiles.xdg
   ];
 

@@ -56,36 +56,51 @@ in
     };
   };
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "sd_mod"
-        "thunderbolt"
-        "usb_storage"
-        "vmd"
-        "xhci_pci"
+  boot =
+    let
+      kernelPackages = pkgs.linuxPackages_zen;
+    in
+    {
+      inherit kernelPackages;
+
+      extraModprobeConfig = ''
+        options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+      '';
+
+      extraModulePackages = with kernelPackages; [ v4l2loopback ];
+
+      initrd = {
+        availableKernelModules = [
+          "nvme"
+          "sd_mod"
+          "thunderbolt"
+          "usb_storage"
+          "vmd"
+          "xhci_pci"
+        ];
+
+        verbose = false;
+      };
+
+      kernelModules = [
+        "kvm-intel"
+        "v4l2loopback"
       ];
 
-      verbose = false;
-    };
+      kernelParams = [
+        "quiet"
+        "loglevel=3"
+        "systemd.show_status=auto"
+        "rd.udev.log_level=3"
+      ];
 
-    kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = [
-      "quiet"
-      "loglevel=3"
-      "systemd.show_status=auto"
-      "rd.udev.log_level=3"
-    ];
-
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+      loader = {
+        efi = {
+          canTouchEfiVariables = true;
+          efiSysMountPoint = "/boot/efi";
+        };
       };
     };
-  };
 
   console = {
     earlySetup = true;
