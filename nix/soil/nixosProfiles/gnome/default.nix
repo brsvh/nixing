@@ -18,12 +18,6 @@ in
     systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
   };
 
-  i18n = {
-    inputMethod = {
-      enabled = "ibus";
-    };
-  };
-
   programs = {
     gnupg = {
       agent = {

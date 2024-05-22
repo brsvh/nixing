@@ -1,11 +1,76 @@
 let
-  ibus = ''
-    patch:
-      style/horizontal: true
-      style/inline_preedit: false
+  fcitx5Config = ''
+    [Hotkey]
+    EnumerateWithTriggerKeys=True
+    EnumerateForwardKeys=
+    EnumerateBackwardKeys=
+    EnumerateSkipFirst=False
+    EnumerateGroupForwardKeys=
+    EnumerateGroupBackwardKeys=
+
+    [Hotkey/TriggerKeys]
+    0=Super+space
+    1=Zenkaku_Hankaku
+    2=Hangul
+
+    [Hotkey/AltTriggerKeys]
+    0=Shift_L
+
+    [Hotkey/ActivateKeys]
+    0=Hangul_Hanja
+
+    [Hotkey/DeactivateKeys]
+    0=Hangul_Romaja
+
+    [Hotkey/PrevPage]
+    0=Up
+
+    [Hotkey/NextPage]
+    0=Down
+
+    [Hotkey/PrevCandidate]
+    0=Shift+Tab
+
+    [Hotkey/NextCandidate]
+    0=Tab
+
+    [Hotkey/TogglePreedit]
+    0=Control+Alt+P
+
+    [Behavior]
+    ActiveByDefault=True
+    ShareInputState=No
+    PreeditEnabledByDefault=True
+    ShowInputMethodInformation=True
+    showInputMethodInformationWhenFocusIn=False
+    CompactInputMethodInformation=True
+    ShowFirstInputMethodInformation=True
+    DefaultPageSize=8
+    OverrideXkbOption=False
+    CustomXkbOption=
+    EnabledAddons=
+    DisabledAddons=
+    PreloadInputMethod=True
+    AllowInputMethodForPassword=False
+    ShowPreeditForPassword=False
+    AutoSavePeriod=30
   '';
 
-  luna_pinyin_simp = ''
+  fcitx5Profile = ''
+    [Groups/0]
+    Name=Default
+    Default Layout=us
+    DefaultIM=rime
+
+    [Groups/0/Items/0]
+    Name=rime
+    Layout=
+
+    [GroupOrder]
+    0=Default
+  '';
+
+  lunaPinyinSimpConfig = ''
     patch:punctuator/half_shape:
       "!": "！"
       '"':
@@ -62,7 +127,7 @@ let
 
   '';
 
-  rime = ''
+  rimeCustomConfig = ''
     patch:
       schema_list:
         - schema: "luna_pinyin_simp"
@@ -146,29 +211,21 @@ let
   '';
 in
 {
-  dconf = {
-    settings = {
-      "org/gnome/desktop/input-sources" = {
-        sources = [
-          (lib.hm.gvariant.mkTuple [
-            "ibus"
-            "rime"
-          ])
-        ];
+  i18n = {
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5 = {
+        addons = with pkgs; [ fcitx5-rime ];
       };
     };
   };
 
   xdg = {
-    configFile = {
-      "ibus/rime/default.custom.yaml".text = rime;
-      "ibus/rime/ibus_rime.custom.yaml".text = ibus;
-      "ibus/rime/luna_pinyin_simp.custom.yaml".text = luna_pinyin_simp;
-    };
-
     dataFile = {
-      "fcitx5/rime/default.custom.yaml".text = rime;
-      "fcitx5/rime/luna_pinyin_simp.custom.yaml".text = luna_pinyin_simp;
+      "fcitx5/config".text = fcitx5Config;
+      "fcitx5/profile".text = fcitx5Profile;
+      "fcitx5/rime/default.custom.yaml".text = rimeCustomConfig;
+      "fcitx5/rime/luna_pinyin_simp.custom.yaml".text = lunaPinyinSimpConfig;
     };
   };
 }

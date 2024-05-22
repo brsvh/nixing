@@ -51,19 +51,6 @@
   };
 
   i18n = {
-    inputMethod = lib.mkMerge [
-      (lib.mkIf (config.i18n.inputMethod.enabled == "fcitx5") {
-        fcitx5 = {
-          addons = with pkgs; [ fcitx5-rime ];
-        };
-      })
-      (lib.mkIf (config.i18n.inputMethod.enabled == "ibus") {
-        ibus = {
-          engines = with pkgs.ibus-engines; [ rime ];
-        };
-      })
-    ];
-
     supportedLocales = [
       # BIG-5
       "zh_HK/BIG5-HKSCS"

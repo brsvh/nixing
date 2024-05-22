@@ -12,7 +12,7 @@
 
   systemd = {
     user = {
-      sessionVariables = config.home.sessionVariables;
+      sessionVariables = lib.mkDefault config.home.sessionVariables;
     };
   };
 
