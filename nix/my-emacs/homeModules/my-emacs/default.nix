@@ -92,7 +92,7 @@ in
         "pgtk"
         "x11"
       ];
-      default = "pgkt";
+      default = "pgtk";
       description = mdDoc ''
         Which variant of my-emacs to use.
       '';
