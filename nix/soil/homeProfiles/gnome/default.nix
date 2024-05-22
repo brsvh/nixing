@@ -3,12 +3,6 @@
   gtk = {
     enable = true;
 
-    cursorTheme = {
-      name = "Vanilla-DMZ";
-      package = pkgs.vanilla-dmz;
-      size = 16;
-    };
-
     font = {
       name = config.fonts.fontconfig.english.defaultFont.sansSerif;
       size = 11;
