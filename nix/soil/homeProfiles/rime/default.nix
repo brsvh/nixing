@@ -146,6 +146,19 @@ let
   '';
 in
 {
+  dconf = {
+    settings = {
+      "org/gnome/desktop/input-sources" = {
+        sources = [
+          (lib.hm.gvariant.mkTuple [
+            "ibus"
+            "rime"
+          ])
+        ];
+      };
+    };
+  };
+
   xdg = {
     configFile = {
       "ibus/rime/default.custom.yaml".text = rime;
