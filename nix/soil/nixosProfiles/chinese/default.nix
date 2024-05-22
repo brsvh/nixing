@@ -6,7 +6,7 @@
   ...
 }:
 {
-  imports = [ cell.nixosProfiles.fontconfig ];
+  imports = [ cell.nixosProfiles.fonts ];
 
   fonts = {
     fontconfig = {
