@@ -25,6 +25,10 @@ in
         category = "tool";
       }
       {
+        package = pkgs.dconf2nix;
+        category = "tool";
+      }
+      {
         package = pkgs.fish;
         category = "tool";
       }
