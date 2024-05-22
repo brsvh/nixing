@@ -3,7 +3,10 @@
   imports = [ cell.nixosProfiles.fontconfig ];
 
   fonts = {
-    packages = with pkgs; [ noto-fonts-cjk ];
+    packages = with pkgs; [
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+    ];
   };
 
   i18n = {
