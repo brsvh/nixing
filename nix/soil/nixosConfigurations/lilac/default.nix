@@ -169,10 +169,6 @@ in
       configFile = config.sops.secrets."dae/config.dae".path;
     };
 
-    displayManager = {
-      defaultSession = "gnome-xorg";
-    };
-
     # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
     # hercules-ci-agent = {
     #   settings = {
@@ -182,12 +178,6 @@ in
     # };
 
     xserver = {
-      displayManager = {
-        gdm = {
-          wayland = false;
-        };
-      };
-
       videoDrivers = [ "nvidia" ];
     };
   };

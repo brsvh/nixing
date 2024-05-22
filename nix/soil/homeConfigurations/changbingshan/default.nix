@@ -71,9 +71,5 @@ in
       userEmail = "changbingshan@iscas.ac.cn";
       userName = fullname;
     };
-
-    my-emacs = {
-      variant = "x11";
-    };
   };
 }
