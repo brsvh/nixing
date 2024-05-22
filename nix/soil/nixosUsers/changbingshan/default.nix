@@ -12,6 +12,7 @@ in
       "${username}" = {
         imports = [
           cell.homeProfiles.chinese
+          cell.homeProfiles.direnv
           cell.homeProfiles.english
           cell.homeProfiles.fish
           cell.homeProfiles.gnome
