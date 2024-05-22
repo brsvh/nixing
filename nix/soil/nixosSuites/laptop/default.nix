@@ -6,6 +6,7 @@
     cell.nixosProfiles.chinese
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall
+    cell.nixosProfiles.fonts
     cell.nixosProfiles.japanese
     cell.nixosProfiles.korean
     cell.nixosProfiles.network-manager
