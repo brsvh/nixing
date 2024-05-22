@@ -2,15 +2,15 @@
   disko = {
     devices = {
       disk = {
-        system = {
-          type = "disk";
+        nvme0n1 = {
           device = "/dev/nvme0n1";
+          type = "disk";
 
           content = {
             type = "gpt";
 
             partitions = {
-              esp = {
+              efi = {
                 content = {
                   format = "vfat";
                   mountpoint = "/boot/efi";
@@ -23,7 +23,7 @@
                 type = "EF00";
               };
 
-              bsp = {
+              boot = {
                 content = {
                   format = "ext4";
                   mountpoint = "/boot";
@@ -36,7 +36,7 @@
                 type = "EF02";
               };
 
-              lsp = {
+              linux = {
                 content = {
                   extraArgs = [ "-f" ];
 
@@ -87,8 +87,8 @@
                   type = "btrfs";
                 };
 
-                size = "100%";
                 name = "linux";
+                size = "100%";
               };
             };
           };
