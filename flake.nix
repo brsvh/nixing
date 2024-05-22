@@ -423,6 +423,10 @@
 
         overlays = pick self [
           [
+            "fonts"
+            "overlays"
+          ]
+          [
             "my-emacs"
             "overlays"
           ]
@@ -433,6 +437,10 @@
         ];
 
         packages = harvest self [
+          [
+            "fonts"
+            "packages"
+          ]
           [
             "my-emacs"
             "packages"
