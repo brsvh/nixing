@@ -1,6 +1,8 @@
 { cell, pkgs, ... }:
 let
   username = "changbingshan";
+
+  fullname = "Bingshan Chang";
 in
 {
   imports = [ cell.nixosProfiles.fish ];
@@ -16,6 +18,7 @@ in
           cell.homeProfiles.direnv
           cell.homeProfiles.english
           cell.homeProfiles.fish
+          cell.homeProfiles.git
           cell.homeProfiles.gnome
           cell.homeProfiles.gnupg
           cell.homeProfiles.google-chrome
@@ -37,6 +40,16 @@ in
         };
 
         programs = {
+          git = {
+            signing = {
+              key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
+              signByDefault = true;
+            };
+
+            userEmail = "changbingshan@iscas.ac.cn";
+            userName = fullname;
+          };
+
           my-emacs = {
             variant = "x11";
           };
@@ -50,7 +63,7 @@ in
 
     users = {
       "${username}" = {
-        description = "Bingshan Chang";
+        description = fullname;
 
         extraGroups = [
           "audio"

@@ -8,6 +8,10 @@ let
   inherit (inputs.cells) my-emacs unfree;
 
   system = "x86_64-linux";
+
+  username = "changbingshan";
+
+  fullname = "Bingshan Chang";
 in
 {
   imports = [
@@ -16,6 +20,7 @@ in
     cell.homeProfiles.direnv
     cell.homeProfiles.english
     cell.homeProfiles.fish
+    cell.homeProfiles.git
     cell.homeProfiles.gnome
     cell.homeProfiles.gnupg
     cell.homeProfiles.google-chrome
@@ -45,17 +50,29 @@ in
     };
   };
 
-  home =
-    let
-      username = "changbingshan";
-    in
-    {
-      inherit username;
+  home = {
+    inherit username;
 
-      homeDirectory = "/home/${username}";
+    homeDirectory = "/home/${username}";
 
-      packages = with pkgs; [ wemeet ];
+    packages = with pkgs; [ wemeet ];
 
-      stateVersion = "24.05";
+    stateVersion = "24.05";
+  };
+
+  programs = {
+    git = {
+      signing = {
+        key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
+        signByDefault = true;
+      };
+
+      userEmail = "changbingshan@iscas.ac.cn";
+      userName = fullname;
     };
+
+    my-emacs = {
+      variant = "x11";
+    };
+  };
 }
