@@ -21,6 +21,7 @@ let
 in
 {
   imports = [
+    cell.nixosModules.fonts
     cell.nixosProfiles.dae
     cell.nixosProfiles.libvirt
     # FIXME this profile will cause infinite recursion.

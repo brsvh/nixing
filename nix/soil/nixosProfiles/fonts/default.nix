@@ -1,9 +1,9 @@
 { cell, pkgs, ... }:
 {
-  imports = [ cell.nixosModules.fonts ];
-
   fonts = {
     fontconfig = {
+      enable = true;
+
       emoji = {
         defaultFont = "Noto Color Emoji";
 

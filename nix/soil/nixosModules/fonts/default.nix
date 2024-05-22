@@ -346,6 +346,116 @@ let
         </fontconfig>
       '';
 
+    japanese =
+      let
+        inherit (config.fonts.fontconfig.japanese) defaultFont defaultFonts;
+      in
+      ''
+        <?xml version='1.0'?>
+        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+        <fontconfig>
+          <description>Japanese fonts</description>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ja</string>
+            </test>
+            <test name="family">
+              <string>serif</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.serif}</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ja</string>
+            </test>
+            <test name="family">
+              <string>sans-serif</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.sansSerif}</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ja</string>
+            </test>
+            <test name="family">
+              <string>monospace</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.monospace}</string>
+            </edit>
+          </match>
+
+          ${genPreferConfig defaultFonts.monospace "monospace"}
+
+          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
+
+          ${genPreferConfig defaultFonts.serif "serif"}
+
+        </fontconfig>
+      '';
+
+    korean =
+      let
+        inherit (config.fonts.fontconfig.korean) defaultFont defaultFonts;
+      in
+      ''
+        <?xml version='1.0'?>
+        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+        <fontconfig>
+          <description>Korean fonts</description>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ko</string>
+            </test>
+            <test name="family">
+              <string>serif</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.serif}</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ko</string>
+            </test>
+            <test name="family">
+              <string>sans-serif</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.sansSerif}</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test name="lang" compare="contains">
+              <string>ko</string>
+            </test>
+            <test name="family">
+              <string>monospace</string>
+            </test>
+            <edit name="family" mode="prepend">
+              <string>${defaultFont.monospace}</string>
+            </edit>
+          </match>
+
+          ${genPreferConfig defaultFonts.monospace "monospace"}
+
+          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
+
+          ${genPreferConfig defaultFonts.serif "serif"}
+
+        </fontconfig>
+      '';
+
     symbol =
       let
         inherit (config.fonts.fontconfig.symbol) defaultFont defaultFonts;
@@ -390,21 +500,29 @@ let
         ln -s ${optionalFC cfg.chinese.enable (mkFC "chinese" cfg.chinese.configText)} $dst/51-local-chinese.conf
         ln -s ${optionalFC cfg.emoji.enable (mkFC "chinese" cfg.emoji.configText)} $dst/51-local-emoji.conf
         ln -s ${optionalFC cfg.english.enable (mkFC "chinese" cfg.english.configText)} $dst/51-local-english.conf
+        ln -s ${optionalFC cfg.japanese.enable (mkFC "japanese" cfg.japanese.configText)} $dst/51-local-japanese.conf
+        ln -s ${optionalFC cfg.korean.enable (mkFC "korean" cfg.korean.configText)} $dst/51-local-korean.conf
         ln -s ${optionalFC cfg.symbol.enable (mkFC "chinese" cfg.symbol.configText)} $dst/51-local-symbol.conf
       '';
 in
 {
   options.fonts.fontconfig = {
     chinese =
-      (langModule "Chinese" [ pkgs.noto-fonts ] {
-        sansSerif = "Noto Sans CJK SC";
-        serif = "Noto Serif CJK SC";
-        monospace = "Noto Sans Mono";
-      })
+      (langModule "Chinese"
+        (with pkgs; [
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+        ])
+        {
+          sansSerif = "Noto Sans CJK SC";
+          serif = "Noto Serif CJK SC";
+          monospace = "Noto Sans Mono CJK SC";
+        }
+      )
       // {
         configText = lib.mkOption {
           type = with lib.types; str;
-          default = fontconfigs.english;
+          default = fontconfigs.chinese;
           readOnly = true;
           description = lib.mdDoc ''
             The fontconfig file of English fonts;
@@ -472,6 +590,52 @@ in
         };
       };
 
+    japanese =
+      (langModule "Japanese"
+        (with pkgs; [
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+        ])
+        {
+          sansSerif = "Noto Sans CJK JP";
+          serif = "Noto Serif CJK JP";
+          monospace = "Noto Sans Mono CJK JP";
+        }
+      )
+      // {
+        configText = lib.mkOption {
+          type = with lib.types; str;
+          default = fontconfigs.japanese;
+          readOnly = true;
+          description = lib.mdDoc ''
+            The fontconfig file of Japanese fonts;
+          '';
+        };
+      };
+
+    korean =
+      (langModule "Korean"
+        (with pkgs; [
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+        ])
+        {
+          sansSerif = "Noto Sans CJK KR";
+          serif = "Noto Serif CJK KR";
+          monospace = "Noto Sans Mono CJK KR";
+        }
+      )
+      // {
+        configText = lib.mkOption {
+          type = with lib.types; str;
+          default = fontconfigs.korean;
+          readOnly = true;
+          description = lib.mdDoc ''
+            The fontconfig file of Korean fonts;
+          '';
+        };
+      };
+
     symbol =
       let
         cfg = config.fonts.fontconfig.symbol;
@@ -479,7 +643,7 @@ in
       {
         configText = lib.mkOption {
           type = with lib.types; str;
-          default = fontconfigs.english;
+          default = fontconfigs.symbol;
           readOnly = true;
           description = lib.mdDoc ''
             The fontconfig file of English fonts;
@@ -489,7 +653,7 @@ in
         defaultFont = {
           monospace = lib.mkOption {
             type = with lib.types; str;
-            default = cfg.nerdFont.defaultFont.monospace;
+            default = cfg.nerdFonts.defaultFont.monospace;
             description = lib.mdDoc ''
               The default monospace symbol font name.
             '';
@@ -497,7 +661,7 @@ in
 
           sansSerif = lib.mkOption {
             type = with lib.types; str;
-            default = cfg.nerdFont.defaultFont.sansSerif;
+            default = cfg.nerdFonts.defaultFont.sansSerif;
             description = lib.mdDoc ''
               The default sans-serif symbol font name.
             '';
@@ -690,6 +854,16 @@ in
       (mkIf cfg.english.enable {
         fonts = {
           packages = cfg.english.fonts;
+        };
+      })
+      (mkIf cfg.japanese.enable {
+        fonts = {
+          packages = cfg.japanese.fonts;
+        };
+      })
+      (mkIf cfg.korean.enable {
+        fonts = {
+          packages = cfg.korean.fonts;
         };
       })
       (mkIf cfg.symbol.enable {
