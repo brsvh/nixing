@@ -11,6 +11,7 @@ in
     users = {
       "${username}" = {
         imports = [
+          cell.homeModules.fonts
           cell.homeProfiles.chinese
           cell.homeProfiles.direnv
           cell.homeProfiles.english
