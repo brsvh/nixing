@@ -1,6 +1,8 @@
 { config, ... }:
 {
   home = {
+    preferXdgDirectories = true;
+
     sessionPath = [ "${config.home.sessionVariables.XDG_BIN_HOME}" ];
 
     sessionVariables = {
