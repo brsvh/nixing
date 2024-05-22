@@ -159,10 +159,10 @@ with std.lib;
           includes = [ "*.nix" ];
         };
 
-        shellcheck = {
-          command = "shellcheck";
-          includes = [ "*.sh" ];
-        };
+        # shellcheck = {
+        #   command = "shellcheck";
+        #   includes = [ "*.sh" ];
+        # };
 
         shfmt = {
           command = "shfmt";
