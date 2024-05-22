@@ -26,6 +26,7 @@ in
           cell.homeProfiles.korean
           cell.homeProfiles.my-emacs
           cell.homeProfiles.obs-studio
+          cell.homeProfiles.ssh
           cell.homeProfiles.xdg
         ];
 
