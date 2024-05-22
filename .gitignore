@@ -1,11 +1,14 @@
 # .gitignore --- Git untracked files -*- mode: gitignore; -*-
 
 # nix: ignore build result
-/result
+/result/**/*
 
-# std: ignore .cache and .data directory
-/.cache/
-/.data/
+# std: ignore per-project directories
+/.bin/**/*
+/.cache/**/*
+/.config/**/*
+/.data/**/*
+/.run/**/*
 
 # nixago: ignore-linked-files
 /.conform.yaml
@@ -16,4 +19,4 @@
 /treefmt.toml
 
 # nixago-auto-created: mdbook-build-folder
-/result-book/**
+/result-book/**/*
