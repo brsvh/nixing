@@ -4,9 +4,13 @@
   pkgs,
   ...
 }:
+let
+  interfaceFontSize = "11";
+in
 {
   imports = [
     cell.nixosProfiles.dconf
+    cell.nixosProfiles.english
     cell.nixosProfiles.xdg
   ];
 
@@ -45,6 +49,17 @@
       desktopManager = {
         gnome = {
           enable = true;
+
+          extraGSettingsOverrides =
+            let
+              cfg = config.fonts.fontconfig.english.defaultFont;
+            in
+            lib.mkDefault ''
+              [org.gnome.desktop.interface]
+              font-name='${cfg.sansSerif} ${interfaceFontSize}'
+              document-font-name='${cfg.sansSerif} ${interfaceFontSize}'
+              monospace-font-name='${cfg.monospace} ${interfaceFontSize}'
+            '';
         };
       };
 
