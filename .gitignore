@@ -1,7 +1,7 @@
 # .gitignore --- Git untracked files -*- mode: gitignore; -*-
 
 # nix: ignore build result
-/result/**/*
+/result
 
 # std: ignore per-project directories
 /.bin/**/*
