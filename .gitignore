@@ -3,8 +3,9 @@
 # nix: ignore build result
 /result
 
-# std: ignore .cache directory
+# std: ignore .cache and .data directory
 /.cache/
+/.data/
 
 # nixago: ignore-linked-files
 /.conform.yaml
