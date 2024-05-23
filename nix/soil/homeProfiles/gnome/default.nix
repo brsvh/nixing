@@ -44,17 +44,4 @@
       package = pkgs.gnome.adwaita-icon-theme;
     };
   };
-
-  qt = {
-    enable = true;
-
-    platformTheme = {
-      name = "adwaita";
-    };
-
-    style = {
-      name = "adwaita";
-      package = pkgs.adwaita-qt6;
-    };
-  };
 }

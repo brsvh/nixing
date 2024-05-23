@@ -32,6 +32,12 @@ in
     };
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita";
+  };
+
   services = {
     gnome = {
       gnome-initial-setup = {
