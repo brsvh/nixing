@@ -15,7 +15,12 @@ in
   ];
 
   environment = {
-    systemPackages = with pkgs; [ gnome.adwaita-icon-theme ];
+    systemPackages =
+      (with pkgs.gnome; [ adwaita-icon-theme ])
+      ++ (with pkgs.gnomeExtensions; [
+        appindicator
+        kimpanel
+      ]);
   };
 
   programs = {
@@ -40,6 +45,8 @@ in
     xserver = {
       enable = true;
 
+      excludePackages = with pkgs; [ xterm ];
+
       desktopManager = {
         gnome = {
           enable = true;
@@ -53,6 +60,9 @@ in
               font-name='${cfg.sansSerif} ${interfaceFontSize}'
               document-font-name='${cfg.sansSerif} ${interfaceFontSize}'
               monospace-font-name='${cfg.monospace} ${interfaceFontSize}'
+
+              [org.gnome.shell]
+              enabled-extensions=['kimpanel@kde.org', 'appindicatorsupport@rgcjonas.gmail.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
             '';
         };
       };
