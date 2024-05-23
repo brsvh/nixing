@@ -412,11 +412,19 @@
             "my-emacs"
             "homeModules"
           ]
+          [
+            "soil"
+            "homeModules"
+          ]
         ];
 
         nixosModules = pick self [
           [
             "my-emacs"
+            "nixosModules"
+          ]
+          [
+            "soil"
             "nixosModules"
           ]
         ];
