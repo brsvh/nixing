@@ -3,8 +3,6 @@ let
   genJSON = name: value: (pkgs.formats.json { }).generate name value;
 in
 {
-  imports = [ cell.homeProfiles.fcitx5 ];
-
   i18n = {
     inputMethod = {
       fcitx5 = {
