@@ -72,5 +72,12 @@ in
       userEmail = "bsc@brsvh.org";
       userName = fullname;
     };
+
+    password-store = {
+      enable = true;
+      settings = {
+        PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
+      };
+    };
   };
 }
