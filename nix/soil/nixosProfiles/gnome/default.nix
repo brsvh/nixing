@@ -11,6 +11,7 @@ in
   imports = [
     cell.nixosProfiles.dconf
     cell.nixosProfiles.english
+    cell.nixosProfiles.fcitx5
     cell.nixosProfiles.xdg
   ];
 
