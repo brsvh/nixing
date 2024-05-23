@@ -64,6 +64,7 @@ let
         '';
         homepage = "https://foundertype.com";
         maintainers = with maintainers; [ brsvh ];
+        redistributable = false;
       };
     };
 
