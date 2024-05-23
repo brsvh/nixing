@@ -7,9 +7,27 @@
 with lib;
 let
   cfg = config.programs.my-emacs;
+
+  my-emacs = pkgs.writeScriptBin "my-emacs" ''
+    #!${pkgs.runtimeShell}
+    if [ -z "$1" ]; then
+      exec ${cfg.package}/bin/emacsclient --create-frame --alternate-editor ${cfg.package}/bin/emacs
+    else
+      exec ${cfg.package}/bin/emacsclient --alternate-editor ${cfg.package}/bin/emacs "$@"
+    fi
+  '';
 in
 {
   options.programs.my-emacs = {
+    defaultEditor = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        When enabled, configures emacsclient to be the default editor
+        using the EDITOR environment variable.
+      '';
+    };
+
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -122,7 +140,14 @@ in
     })
     {
       environment = {
-        systemPackages = [ cfg.package ] ++ cfg.scope.fonts;
+        systemPackages = [
+          cfg.package
+          my-emacs
+        ] ++ cfg.scope.fonts;
+
+        variables = {
+          EDITOR = mkIf cfg.defaultEditor (mkOverride 900 "my-emacs");
+        };
       };
     }
   ]);

@@ -7,6 +7,7 @@ in
 
   programs = {
     my-emacs = {
+      defaultEditor = true;
       enable = true;
     };
   };
