@@ -1,14 +1,14 @@
 {
   fetchurl,
   lib,
-  stdenv,
+  stdenvNoCC,
   xorg,
   ...
 }:
 with builtins;
 with lib;
 let
-  inherit (stdenv) mkDerivation;
+  inherit (stdenvNoCC) mkDerivation;
 
   license = {
     shortName = "foundertype-he-ula";
@@ -69,7 +69,7 @@ let
 
   fonts = mapAttrsToList (font: sha: (mkFontDerivation font sha)) shas;
 in
-stdenv.mkDerivation {
+mkDerivation {
   inherit version;
 
   pname = "foundertype-fonts";
