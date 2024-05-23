@@ -172,6 +172,27 @@ in
           };
         }
       );
+
+      "fcitx5/conf/clipboard.conf".source = pkgs.writeText "fcitx5_clipboard.conf" (
+        generators.toINIWithGlobalSection { } {
+          globalSection = {
+            "Number of entries" = 5;
+            ClearPasswordAfter = 30;
+            IgnorePasswordFromPasswordManager = false;
+            PastePrimaryKey = null;
+            ShowPassword = false;
+            TriggerKey = null;
+          };
+        }
+      );
+
+      "fcitx5/conf/notifications.conf".source = pkgs.writeText "fcitx5_notifications.conf" (
+        generators.toINIWithGlobalSection { } {
+          globalSection = {
+            HiddenNotifications = null;
+          };
+        }
+      );
     };
   };
 }
