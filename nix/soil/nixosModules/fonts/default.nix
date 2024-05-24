@@ -103,7 +103,7 @@ let
   fontconfigs = {
     chinese =
       let
-        inherit (config.fonts.fontconfig.english) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.chinese) defaultFont defaultFonts;
       in
       ''
         <?xml version='1.0'?>
