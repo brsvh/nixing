@@ -409,6 +409,10 @@
 
         homeModules = pick self [
           [
+            "fonts"
+            "homeModules"
+          ]
+          [
             "my-emacs"
             "homeModules"
           ]
@@ -419,6 +423,10 @@
         ];
 
         nixosModules = pick self [
+          [
+            "fonts"
+            "nixosModules"
+          ]
           [
             "my-emacs"
             "nixosModules"
