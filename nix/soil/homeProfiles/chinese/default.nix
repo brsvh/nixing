@@ -18,25 +18,28 @@ in
     fontconfig = {
       chinese = {
         defaultFont = {
-          sansSerif = "Source Han Sans SC";
-          serif = "Source Han Serif SC";
-          monospace = "Source Han Mono SC";
+          sansSerif = "TsangerXuanSanM W03";
+          serif = "FZShusong-Z01";
+          monospace = "LXGW WenKai Mono";
         };
 
         defaultFonts = {
           sansSerif = [
+            "TsangerXuanSanM W03"
             "Source Han Sans SC"
             "Source Han Sans HC"
             "Source Han Sans TC"
           ];
 
           serif = [
+            "FZShusong-Z01"
             "Source Han Serif SC"
             "Source Han Serif HC"
             "Source Han Serif TC"
           ];
 
           monospace = [
+            "LXGW WenKai Mono"
             "Source Han Mono SC"
             "Source Han Mono HC"
             "Source Han Mono TC"
@@ -47,6 +50,7 @@ in
 
         fonts = with pkgs; [
           foundertype-fonts
+          lxgw-wenkai
           source-han-sans
           source-han-serif
           source-han-mono
