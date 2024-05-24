@@ -18,14 +18,14 @@ in
     fontconfig = {
       chinese = {
         defaultFont = {
-          sansSerif = "TsangerXuanSanM W03";
+          sansSerif = "FZHei-B01";
           serif = "FZShusong-Z01";
           monospace = "LXGW WenKai Mono";
         };
 
         defaultFonts = {
           sansSerif = [
-            "TsangerXuanSanM W03"
+            "FZHei-B01"
             "Source Han Sans SC"
             "Source Han Sans HC"
             "Source Han Sans TC"
