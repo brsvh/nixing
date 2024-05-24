@@ -164,9 +164,9 @@ in
             "Vertical Candidate List" = false;
             DarkTheme = "default-dark";
             EnableFractionalScale = true;
-            Font = "${config.fonts.fontconfig.chinese.defaultFont.serif} 11";
+            Font = "${config.fonts.fontconfig.chinese.defaultFont.sansSerif} 11";
             ForceWaylandDPI = 0;
-            MenuFont = "${config.fonts.fontconfig.chinese.defaultFont.serif} 11";
+            MenuFont = "${config.fonts.fontconfig.chinese.defaultFont.sansSerif} 11";
             PerScreenDPI = true;
             PreferTextIcon = false;
             ShowLayoutNameInIcon = true;
