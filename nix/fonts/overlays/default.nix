@@ -1,5 +1,5 @@
 {
-  nonfree-fonts =
+  proprius-fonts =
     final: prev:
     let
       inherit (prev) callPackage;

@@ -2,7 +2,7 @@
 let
   inherit (inputs) lib nixpkgs;
 
-  pkgs = nixpkgs.appendOverlays [ cell.overlays.nonfree-fonts ];
+  pkgs = nixpkgs.appendOverlays [ cell.overlays.proprius-fonts ];
 in
 {
   foundertype-fonts = pkgs.foundertype-fonts;

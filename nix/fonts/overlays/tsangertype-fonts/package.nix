@@ -154,9 +154,11 @@ let
         drvs:
         with lib;
         let
-          cond = drv: licensePredicate drv "tsangertype-gpp-license";
+          commCond = drv: licensePredicate drv "tsangertype-gpc-license";
+
+          perCond = drv: licensePredicate drv "tsangertype-gpp-license";
         in
-        listOfFontsWithCond drvs cond;
+        (listOfFontsWithCond drvs perCond) ++ (listOfFontsWithCond drvs perCond);
 
       combine' =
         fontList:
@@ -170,16 +172,14 @@ let
 
       gratisProCommercium =
         let
-          comm = (listOfGratisProCommerciumFonts tsangertypeFonts);
+          comm = listOfGratisProCommerciumFonts tsangertypeFonts;
         in
         combine' comm { name = "tsangertype-gpc-fonts"; };
 
       # All fonts.
       gratisProPersona =
         let
-          comm = (listOfGratisProCommerciumFonts tsangertypeFonts);
-
-          per = (listOfGratisProPersonaFonts tsangertypeFonts) ++ comm;
+          per = listOfGratisProPersonaFonts tsangertypeFonts;
         in
         combine' per { name = "tsangertype-fonts"; };
     in
