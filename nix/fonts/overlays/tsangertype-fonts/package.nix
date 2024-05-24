@@ -131,7 +131,7 @@ let
           '';
         };
 
-      listOfFontsWithCond =
+      listFontsWithCond =
         # cond must be a conditional fucntion can check derivation.
         drvs: cond: with lib; attrValues (filterAttrs (n: v: isDerivation v && (cond v)) drvs);
 
@@ -143,14 +143,14 @@ let
           "shortName"
         ] "unknown" drv) == lic;
 
-      listOfGratisProCommerciumFonts =
+      listGratisProCommerciumFonts =
         drvs:
         let
           cond = drv: licensePredicate drv "tsangertype-gpc-license";
         in
-        listOfFontsWithCond drvs cond;
+        listFontsWithCond drvs cond;
 
-      listOfGratisProPersonaFonts =
+      listGratisProPersonaFonts =
         drvs:
         with lib;
         let
@@ -158,7 +158,9 @@ let
 
           perCond = drv: licensePredicate drv "tsangertype-gpp-license";
         in
-        (listOfFontsWithCond drvs perCond) ++ (listOfFontsWithCond drvs perCond);
+        (listFontsWithCond drvs perCond) ++ (listFontsWithCond drvs perCond);
+
+      listAllFonts = listGratisProPersonaFonts tsangertypeFonts;
 
       combine' =
         fontList:
@@ -172,16 +174,11 @@ let
 
       gratisProCommercium =
         let
-          comm = listOfGratisProCommerciumFonts tsangertypeFonts;
+          comm = listGratisProCommerciumFonts tsangertypeFonts;
         in
         combine' comm { name = "tsangertype-gpc-fonts"; };
 
-      # All fonts.
-      gratisProPersona =
-        let
-          per = listOfGratisProPersonaFonts tsangertypeFonts;
-        in
-        combine' per { name = "tsangertype-fonts"; };
+      gratisProPersona = combine' listAllFonts { name = "tsangertype-fonts"; };
     in
     tsangertypeFonts
     // {
@@ -190,9 +187,10 @@ let
         combine'
         gratisProCommercium
         gratisProPersona
-        listOfFontsWithCond
-        listOfGratisProCommerciumFonts
-        listOfGratisProPersonaFonts
+        listAllFonts
+        listFontsWithCond
+        listGratisProCommerciumFonts
+        listGratisProPersonaFonts
         ;
     };
 in
