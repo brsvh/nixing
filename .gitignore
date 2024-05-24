@@ -4,11 +4,11 @@
 /result
 
 # std: ignore per-project directories
-/.bin/**/*
-/.cache/**/*
-/.config/**/*
-/.data/**/*
-/.run/**/*
+/.bin/
+/.cache/
+/.config/
+/.data/
+/.run/
 
 # nixago: ignore-linked-files
 /.conform.yaml
