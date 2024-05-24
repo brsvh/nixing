@@ -46,11 +46,16 @@ in
         enable = true;
 
         fonts = with pkgs; [
+          foundertype-fonts
           source-han-sans
           source-han-serif
           source-han-mono
         ];
       };
+    };
+
+    tsangertype-fonts = {
+      enable = true;
     };
   };
 
