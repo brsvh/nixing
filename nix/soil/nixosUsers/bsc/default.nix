@@ -15,6 +15,7 @@ in
         { config, ... }:
         {
           imports = [
+            cell.homeProfiles.cachix
             cell.homeProfiles.chinese
             cell.homeProfiles.direnv
             cell.homeProfiles.english
