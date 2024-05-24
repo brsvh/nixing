@@ -13,7 +13,10 @@
 
         enable = true;
 
-        fonts = with pkgs; [ ibm-plex ];
+        fonts = with pkgs; [
+          ibm-plex
+          libertine
+        ];
       };
     };
   };
