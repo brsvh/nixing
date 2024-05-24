@@ -6,4 +6,8 @@ let
 in
 {
   foundertype-fonts = pkgs.foundertype-fonts;
+
+  tsangertype-fonts = pkgs.tsangertypeFonts.gratisProPersona;
+
+  tsangertype-gpc-fonts = pkgs.tsangertypeFonts.gratisProCommercium;
 }

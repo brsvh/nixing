@@ -6,5 +6,7 @@
     in
     {
       foundertype-fonts = callPackage ./foundertype-fonts/package.nix { };
+
+      tsangertypeFonts = callPackage ./tsangertype-fonts/package.nix { };
     };
 }
