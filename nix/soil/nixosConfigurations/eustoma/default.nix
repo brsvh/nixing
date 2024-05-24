@@ -1,4 +1,5 @@
 {
+  cell,
   config,
   inputs,
   lib,
@@ -8,7 +9,7 @@
 }:
 let
   inherit (inputs) disko hardware lanzaboote;
-  inherit (inputs.cells) my-emacs unfree;
+  inherit (inputs.cells) fonts my-emacs unfree;
 
   # This device will not be exposed to the public network. The domain
   # name setting is fake, solely to automatically configure the correct
@@ -30,6 +31,7 @@ in
     cell.nixosUsers.root
     cell.nixosUsers.bsc
     disko.nixosModules.disko
+    fonts.nixosModules.tsangertype-fonts
     hardware.nixosModules.lenovo-thinkpad-x1-nano-gen1
   ];
 
@@ -46,6 +48,7 @@ in
       };
 
       overlays = [
+        fonts.overlays.proprius-fonts
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
         unfree.overlays.unfree

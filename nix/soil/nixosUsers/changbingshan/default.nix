@@ -1,5 +1,12 @@
-{ cell, pkgs, ... }:
+{
+  cell,
+  inputs,
+  pkgs,
+  ...
+}:
 let
+  inherit (inputs.cells) fonts my-emacs;
+
   username = "changbingshan";
 
   fullname = "Bingshan Chang";
@@ -15,7 +22,6 @@ in
         { config, ... }:
         {
           imports = [
-            cell.homeModules.fonts
             cell.homeProfiles.chinese
             cell.homeProfiles.direnv
             cell.homeProfiles.english
@@ -26,6 +32,7 @@ in
             cell.homeProfiles.google-chrome
             cell.homeProfiles.japanese
             cell.homeProfiles.korean
+            cell.homeProfiles.modules
             cell.homeProfiles.my-emacs
             cell.homeProfiles.obs-studio
             cell.homeProfiles.ssh

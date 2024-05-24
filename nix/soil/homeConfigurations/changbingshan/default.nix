@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (inputs.cells) my-emacs unfree;
+  inherit (inputs.cells) fonts my-emacs unfree;
 
   system = "x86_64-linux";
 
@@ -15,7 +15,6 @@ let
 in
 {
   imports = [
-    cell.homeModules.fonts
     cell.homeProfiles.chinese
     cell.homeProfiles.direnv
     cell.homeProfiles.english
@@ -26,6 +25,7 @@ in
     cell.homeProfiles.google-chrome
     cell.homeProfiles.japanese
     cell.homeProfiles.korean
+    cell.homeProfiles.modules
     cell.homeProfiles.my-emacs
     cell.homeProfiles.obs-studio
     cell.homeProfiles.ssh
@@ -46,6 +46,7 @@ in
       };
 
       overlays = [
+        fonts.overlays.proprius-fonts
         my-emacs.overlays.emacs
         unfree.overlays.unfree
       ];
