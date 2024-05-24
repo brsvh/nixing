@@ -17,7 +17,7 @@ in
       '';
     };
 
-    excludeFonts = lib.mkOption {
+    excludedFonts = lib.mkOption {
       type = with lib.types; listOf package;
       default = with pkgs.tsangertypeFonts; [ ];
       description = lib.mdDoc ''
@@ -27,7 +27,7 @@ in
 
     fonts = lib.mkOption {
       type = with lib.types; listOf package;
-      default = with pkgs.tsangertypeFonts; listOfGratisProPersonaFonts tsangertypeFonts;
+      default = pkgs.tsangertypeFonts.listAllFonts;
       description = lib.mdDoc ''
         Available fonts.
 
