@@ -96,16 +96,15 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    mkdir -p $TMPDIR/native-lisp;
+    mkdir -p $TMPDIR/{.local,native-lisp};
 
     cp -r $src/{etc,lisp} $TMPDIR/;
 
     chmod -R u+w $TMPDIR;
 
+    rm $TMPDIR/lisp/.dir-locals.el
     mv $TMPDIR/lisp/{early-,}init.el $TMPDIR/;
     cat ${my-interlude} > $TMPDIR/lisp/my/my-interlude.el
-
-    mkdir -p $TMPDIR/.local;
 
     HOME=$TMPDIR
 
@@ -121,7 +120,7 @@ stdenv.mkDerivation {
 
     cp $TMPDIR/{early-,}init.el{,c} $out/;
     cp -r $TMPDIR/{etc,lisp,native-lisp} $out/;
-    cp $src/.dir-locals.el $out/;
+    cp $src/lisp/.dir-locals.el $out/;
 
     runHook postInstall
   '';
