@@ -1,0 +1,14 @@
+[book]
+authors = ["Burgess Chang"]
+description = "Burgess Chang's Nix collections"
+language = "en"
+multilingual = false
+title = "nixing"
+
+[build]
+extra-watch-dirs = ["."]
+
+[output.html]
+edit-url-template = "https://github.com/brsvh/nixing/edit/main/doc/{path}"
+git-repository-url = "https://github.com/brshv/nixing"
+site-url = "/nixing/"
