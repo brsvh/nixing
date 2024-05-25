@@ -1,10 +1,10 @@
 { cell, inputs, ... }:
 let
-  inherit (inputs.cells) fonts home-manager my-emacs;
+  inherit (inputs.cells) fonts my-emacs;
 in
 {
   imports = [
-    home-manager.homeModules.fonts
+    fonts.homeModules.fonts
     fonts.homeModules.tsangertype-fonts
     my-emacs.homeModules.my-emacs
   ];

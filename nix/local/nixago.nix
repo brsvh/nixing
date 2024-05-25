@@ -109,9 +109,10 @@ with std.lib;
   mdbook = dev.mkNixago cfg.mdbook {
     data = {
       book = {
+        authors = [ "Burgess Chang" ];
         language = "en";
         multilingual = false;
-        src = "docs";
+        src = "doc";
         title = "nixing";
       };
 

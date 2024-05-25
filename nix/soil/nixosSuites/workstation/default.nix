@@ -1,7 +1,7 @@
 { cell, inputs, ... }:
 let
   inherit (inputs) lanzaboote;
-  inherit (inputs.cells) fonts nixos;
+  inherit (inputs.cells) fonts my-emacs;
 in
 {
   imports = [
@@ -20,9 +20,10 @@ in
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.zram
     cell.nixosSuites.base
+    fonts.nixosModules.fonts
     fonts.nixosModules.tsangertype-fonts
     # FIXME this module will cause infinite recursion.
     # lanzaboote.nixosModules.lanzaboote;
-    nixos.nixosModules.fonts
+    my-emacs.nixosModules.my-emacs
   ];
 }
