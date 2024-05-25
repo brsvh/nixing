@@ -1,7 +1,7 @@
 repository:
   name: nixing
   description: A place to collect things about Nix, it is also where to keep my dotfiles.
-  homepage: https://brsvh.org/nixing
+  homepage: https://brsvh.github.io/nixing/
   topics: dotfiles, home-manager, nixos-configuration, nix-flake, nixos-flake, fonts, chinese-fonts
   private: false
 
