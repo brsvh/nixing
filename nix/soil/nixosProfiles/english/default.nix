@@ -7,9 +7,7 @@
       english = {
         defaultFont = {
           sansSerif = "IBM Plex Sans";
-
           serif = "IBM Plex Serif";
-
           monospace = "IBM Plex Mono";
         };
 

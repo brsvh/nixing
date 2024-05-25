@@ -17,29 +17,6 @@
           monospace = "LXGW WenKai Mono";
         };
 
-        defaultFonts = {
-          sansSerif = [
-            "FZHei-B01"
-            "Source Han Sans SC"
-            "Source Han Sans HC"
-            "Source Han Sans TC"
-          ];
-
-          serif = [
-            "FZShusong-Z01"
-            "Source Han Serif SC"
-            "Source Han Serif HC"
-            "Source Han Serif TC"
-          ];
-
-          monospace = [
-            "LXGW WenKai Mono"
-            "Source Han Mono SC"
-            "Source Han Mono HC"
-            "Source Han Mono TC"
-          ];
-        };
-
         enable = true;
 
         fonts = with pkgs; [

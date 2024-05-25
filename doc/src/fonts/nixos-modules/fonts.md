@@ -100,21 +100,6 @@ The default serif font for the `<language>` code.
 
 The default monospace font for the `<language>` code.
 
-### `config.fonts.fontconfig.<language>.defaultFonts.sansSerif`
-
-The list of sans serif fonts used for the `<language>` code, with
-display priority corresponding to their position in the list.
-
-### `config.fonts.fontconfig.<language>.defaultFonts.serif`
-
-The list of serif fonts used for the `<language>` code, with display
-priority corresponding to their position in the list.
-
-### `config.fonts.fontconfig.<language>.defaultFonts.monospace`
-
-The list of monospace fonts used for the `<language>` code, with display
-priority corresponding to their position in the list.
-
 ### `config.fonts.fontconfig.<language>.enable`
 
 Generate and install the fontconfig configuration file for the `<language>` code.
@@ -122,3 +107,33 @@ Generate and install the fontconfig configuration file for the `<language>` code
 ### `config.fonts.fontconfig.<language>.fonts`
 
 Fonts depended on by `<lanuage>`.
+
+### `config.fonts.fontconfig.emoji.defaultFonts.sansSerif`
+
+The list of sans serif fonts used for the emoji, with display priority
+corresponding to their position in the list.
+
+### `config.fonts.fontconfig.emoji.defaultFonts.serif`
+
+The list of serif fonts used for emoji, with display priority
+corresponding to their position in the list.
+
+### `config.fonts.fontconfig.emoji.defaultFonts.monospace`
+
+The list of monospace fonts used for emoji, with display priority
+corresponding to their position in the list.
+
+### `config.fonts.fontconfig.symbol.defaultFonts.sansSerif`
+
+The list of sans serif fonts used for the symbol, with display priority
+corresponding to their position in the list.
+
+### `config.fonts.fontconfig.symbol.defaultFonts.serif`
+
+The list of serif fonts used for symbol, with display priority
+corresponding to their position in the list.
+
+### `config.fonts.fontconfig.symbol.defaultFonts.monospace`
+
+The list of monospace fonts used for symbol, with display priority
+corresponding to their position in the list.

@@ -40,32 +40,6 @@ let
         };
       };
 
-      defaultFonts = {
-        monospace = lib.mkOption {
-          type = with lib.types; listOf str;
-          default = [ monospace ];
-          description = lib.mdDoc ''
-            Default monospace font(s).
-          '';
-        };
-
-        sansSerif = lib.mkOption {
-          type = with lib.types; listOf str;
-          default = [ sansSerif ];
-          description = lib.mdDoc ''
-            Default sans serif font(s).
-          '';
-        };
-
-        serif = lib.mkOption {
-          type = with lib.types; listOf str;
-          default = [ serif ];
-          description = lib.mdDoc ''
-            Default serif font(s).
-          '';
-        };
-      };
-
       enable = lib.mkOption {
         type = with lib.types; bool;
         default = false;
@@ -103,7 +77,7 @@ let
   fontconfigs = {
     chinese =
       let
-        inherit (config.fonts.fontconfig.chinese) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.chinese) defaultFont;
       in
       ''
         <?xml version='1.0'?>
@@ -234,12 +208,6 @@ let
             </edit>
           </match>
 
-          ${genPreferConfig defaultFonts.monospace "monospace"}
-
-          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
-
-          ${genPreferConfig defaultFonts.serif "serif"}
-
         </fontconfig>
       '';
 
@@ -269,7 +237,7 @@ let
 
     english =
       let
-        inherit (config.fonts.fontconfig.english) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.english) defaultFont;
       in
       ''
         <?xml version='1.0'?>
@@ -337,18 +305,12 @@ let
             </edit>
           </match>
 
-          ${genPreferConfig defaultFonts.monospace "monospace"}
-
-          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
-
-          ${genPreferConfig defaultFonts.serif "serif"}
-
         </fontconfig>
       '';
 
     japanese =
       let
-        inherit (config.fonts.fontconfig.japanese) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.japanese) defaultFont;
       in
       ''
         <?xml version='1.0'?>
@@ -392,18 +354,12 @@ let
             </edit>
           </match>
 
-          ${genPreferConfig defaultFonts.monospace "monospace"}
-
-          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
-
-          ${genPreferConfig defaultFonts.serif "serif"}
-
         </fontconfig>
       '';
 
     korean =
       let
-        inherit (config.fonts.fontconfig.korean) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.korean) defaultFont;
       in
       ''
         <?xml version='1.0'?>
@@ -446,12 +402,6 @@ let
               <string>${defaultFont.monospace}</string>
             </edit>
           </match>
-
-          ${genPreferConfig defaultFonts.monospace "monospace"}
-
-          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
-
-          ${genPreferConfig defaultFonts.serif "serif"}
 
         </fontconfig>
       '';
