@@ -119,6 +119,12 @@ with std.lib;
       build = {
         build-dir = "result-book";
       };
+
+      output = {
+        html = {
+          no-section-label = true;
+        };
+      };
     };
   };
 

@@ -1,4 +1,4 @@
-# unfree
+# apps
 
 This repository provides some non-free software that can be installed via the unfree overlay.
 
