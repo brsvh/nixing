@@ -17,11 +17,9 @@ in
   fonts = {
     fontconfig = {
       chinese = {
-        defaultFont = {
-          sansSerif = "FZHei-B01";
-          serif = "FZShusong-Z01";
-          monospace = "LXGW WenKai Mono";
-        };
+        sansSerif = "FZHei-B01";
+        serif = "FZShusong-Z01";
+        monospace = "LXGW WenKai Mono";
 
         enable = true;
 
@@ -141,14 +139,14 @@ in
             "Vertical Candidate List" = false;
             DarkTheme = "default-dark";
             EnableFractionalScale = true;
-            Font = "${config.fonts.fontconfig.chinese.defaultFont.sansSerif} 11";
+            Font = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             ForceWaylandDPI = 0;
-            MenuFont = "${config.fonts.fontconfig.chinese.defaultFont.sansSerif} 11";
+            MenuFont = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             PerScreenDPI = true;
             PreferTextIcon = false;
             ShowLayoutNameInIcon = true;
             Theme = "default";
-            TrayFont = "${config.fonts.fontconfig.chinese.defaultFont.sansSerif} 11";
+            TrayFont = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             TrayOutlineColor = "#000000";
             TrayTextColor = "#ffffff";
             UseAccentColor = true;

@@ -7,11 +7,6 @@
       emoji = {
         defaultFont = "Noto Color Emoji";
 
-        defaultFonts = [
-          "Noto Color Emoji"
-          "Twitter Color Emoji"
-        ];
-
         enable = true;
 
         fonts = with pkgs; [

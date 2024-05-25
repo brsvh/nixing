@@ -4,7 +4,7 @@
     enable = true;
 
     font = {
-      name = config.fonts.fontconfig.english.defaultFont.sansSerif;
+      name = config.fonts.fontconfig.english.sansSerif;
       size = 11;
     };
 

@@ -14,32 +14,6 @@ let
       serif,
     }@fontNames:
     {
-      defaultFont = {
-        monospace = lib.mkOption {
-          type = with lib.types; str;
-          default = monospace;
-          description = lib.mdDoc ''
-            The default monospace font name of ${lang}.
-          '';
-        };
-
-        sansSerif = lib.mkOption {
-          type = with lib.types; str;
-          default = sansSerif;
-          description = lib.mdDoc ''
-            The default sans font name of ${lang}.
-          '';
-        };
-
-        serif = lib.mkOption {
-          type = with lib.types; str;
-          default = serif;
-          description = lib.mdDoc ''
-            The default serif font name of ${lang}.
-          '';
-        };
-      };
-
       enable = lib.mkOption {
         type = with lib.types; bool;
         default = false;
@@ -52,7 +26,31 @@ let
         type = with lib.types; listOf package;
         default = fonts;
         description = lib.mdDoc ''
-          The fonts packages of ${lang} fontconfig will be used.
+          The fonts packages of ${lang} will be used.
+        '';
+      };
+
+      monospace = lib.mkOption {
+        type = with lib.types; str;
+        default = monospace;
+        description = lib.mdDoc ''
+          The default monospace font name of ${lang}.
+        '';
+      };
+
+      sansSerif = lib.mkOption {
+        type = with lib.types; str;
+        default = sansSerif;
+        description = lib.mdDoc ''
+          The default sans font name of ${lang}.
+        '';
+      };
+
+      serif = lib.mkOption {
+        type = with lib.types; str;
+        default = serif;
+        description = lib.mdDoc ''
+          The default serif font name of ${lang}.
         '';
       };
     };
@@ -77,352 +75,325 @@ let
   fontconfigs = {
     chinese =
       let
-        inherit (config.fonts.fontconfig.chinese) defaultFont;
+        inherit (config.fonts.fontconfig.chinese) sansSerif serif monospace;
       in
       ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>Chinese fonts</description>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>zh</string>
+          </test>
+          <test name="family">
+            <string>serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${serif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>zh</string>
-            </test>
-            <test name="family">
-              <string>serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>zh</string>
+          </test>
+          <test name="family">
+            <string>sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>zh</string>
-            </test>
-            <test name="family">
-              <string>sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>zh</string>
+          </test>
+          <test name="family">
+            <string>monospace</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${monospace}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>zh</string>
-            </test>
-            <test name="family">
-              <string>monospace</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.monospace}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>zh</string>
+          </test>
+          <test qual="any" name="family">
+            <string>system-ui</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>zh</string>
-            </test>
-            <test qual="any" name="family">
-              <string>system-ui</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>zh</string>
+          </test>
+          <test qual="any" name="family">
+            <string>ui-sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>zh</string>
-            </test>
-            <test qual="any" name="family">
-              <string>ui-sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>WenQuanYi Zen Hei</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>WenQuanYi Micro Hei</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>WenQuanYi Micro Hei</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>WenQuanYi Micro Hei Light</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>WenQuanYi Micro Hei Light</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>Microsoft YaHei</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>Microsoft YaHei</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>SimHei</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>SimHei</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>SimSun</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${serif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>SimSun</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test qual="any" name="family">
-              <string>SimSun-18030</string>
-            </test>
-            <edit name="family" mode="assign" binding="same">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
-
-        </fontconfig>
+        <match target="pattern">
+          <test qual="any" name="family">
+            <string>SimSun-18030</string>
+          </test>
+          <edit name="family" mode="assign" binding="same">
+            <string>${serif}</string>
+          </edit>
+        </match>
       '';
 
     emoji =
       let
-        inherit (config.fonts.fontconfig.emoji) defaultFont defaultFonts;
+        inherit (config.fonts.fontconfig.emoji) defaultFont;
       in
       ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>Emoji fonts</description>
-
-          <match>
-            <test qual="any" name="family">
-              <string>emoji</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont}</string>
-            </edit>
-          </match>
-
-          ${genPreferConfig defaultFonts "emoji"}
-
-        </fontconfig>
+        <match>
+          <test qual="any" name="family">
+            <string>emoji</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${defaultFont}</string>
+          </edit>
+        </match>
       '';
 
     english =
       let
-        inherit (config.fonts.fontconfig.english) defaultFont;
+        inherit (config.fonts.fontconfig.english) sansSerif serif monospace;
       in
       ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>English fonts</description>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>en</string>
+          </test>
+          <test qual="any" name="family">
+            <string>serif</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${serif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test qual="any" name="family">
-              <string>serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>en</string>
+          </test>
+          <test qual="any" name="family">
+            <string>sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test qual="any" name="family">
-              <string>sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>en</string>
+          </test>
+          <test qual="any" name="family">
+            <string>monospace</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${monospace}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test qual="any" name="family">
-              <string>monospace</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.monospace}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>en</string>
+          </test>
+          <test qual="any" name="family">
+            <string>system-ui</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test qual="any" name="family">
-              <string>system-ui</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test qual="any" name="family">
-              <string>ui-sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
-
-        </fontconfig>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>en</string>
+          </test>
+          <test qual="any" name="family">
+            <string>ui-sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend" binding="strong">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
       '';
 
     japanese =
       let
-        inherit (config.fonts.fontconfig.japanese) defaultFont;
+        inherit (config.fonts.fontconfig.japanese) sansSerif serif monospace;
       in
       ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>Japanese fonts</description>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ja</string>
+          </test>
+          <test name="family">
+            <string>serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${serif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ja</string>
-            </test>
-            <test name="family">
-              <string>serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ja</string>
+          </test>
+          <test name="family">
+            <string>sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ja</string>
-            </test>
-            <test name="family">
-              <string>sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ja</string>
-            </test>
-            <test name="family">
-              <string>monospace</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.monospace}</string>
-            </edit>
-          </match>
-
-        </fontconfig>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ja</string>
+          </test>
+          <test name="family">
+            <string>monospace</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${monospace}</string>
+          </edit>
+        </match>
       '';
 
     korean =
       let
-        inherit (config.fonts.fontconfig.korean) defaultFont;
+        inherit (config.fonts.fontconfig.korean) sansSerif serif monospace;
       in
       ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>Korean fonts</description>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ko</string>
+          </test>
+          <test name="family">
+            <string>serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${serif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.serif}</string>
-            </edit>
-          </match>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ko</string>
+          </test>
+          <test name="family">
+            <string>sans-serif</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${sansSerif}</string>
+          </edit>
+        </match>
 
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.sansSerif}</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>monospace</string>
-            </test>
-            <edit name="family" mode="prepend">
-              <string>${defaultFont.monospace}</string>
-            </edit>
-          </match>
-
-        </fontconfig>
-      '';
-
-    symbol =
-      let
-        inherit (config.fonts.fontconfig.symbol) defaultFont defaultFonts;
-      in
-      ''
-        <?xml version='1.0'?>
-        <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
-        <fontconfig>
-          <description>Symbol fonts</description>
-
-          ${genPreferConfig defaultFonts.monospace "monospace"}
-
-          ${genPreferConfig defaultFonts.sansSerif "sans-serif"}
-
-        </fontconfig>
+        <match target="pattern">
+          <test name="lang" compare="contains">
+            <string>ko</string>
+          </test>
+          <test name="family">
+            <string>monospace</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>${monospace}</string>
+          </edit>
+        </match>
       '';
   };
+
+  fcText =
+    let
+      cfg = config.fonts.fontconfig;
+
+      getFC = type: if cfg."${type}".enable then fontconfigs."${type}" else "";
+
+      getDF = type: if cfg."${type}".enable then fontconfigs."${type}" else null;
+    in
+    ''
+      <?xml version='1.0'?>
+      <!DOCTYPE fontconfig SYSTEM 'urn:fontconfig:fonts.dtd'>
+      <fontconfig>
+        <description>Local fontconfig</description>
+
+        ${getFC "emoji"}
+
+        ${getFC "english"}
+
+        ${getFC "chinese"}
+
+        ${getFC "japanese"}
+
+        ${getFC "korean"}
+
+      </fontconfig>
+    '';
 
   mkFC =
     name: config:
@@ -430,8 +401,6 @@ let
       pname = "fc-51-local-" + name + ".conf";
     in
     pkgs.writeText pname config;
-
-  optionalFC = cond: conf: if cond then conf else pkgs.emptyFile;
 
   fcPkg =
     let
@@ -447,18 +416,13 @@ let
         dst=$out/etc/fonts/conf.d
         mkdir -p $dst
 
-        ln -s ${optionalFC cfg.chinese.enable (mkFC "chinese" cfg.chinese.configText)} $dst/51-local-chinese.conf
-        ln -s ${optionalFC cfg.emoji.enable (mkFC "chinese" cfg.emoji.configText)} $dst/51-local-emoji.conf
-        ln -s ${optionalFC cfg.english.enable (mkFC "chinese" cfg.english.configText)} $dst/51-local-english.conf
-        ln -s ${optionalFC cfg.japanese.enable (mkFC "japanese" cfg.japanese.configText)} $dst/51-local-japanese.conf
-        ln -s ${optionalFC cfg.korean.enable (mkFC "korean" cfg.korean.configText)} $dst/51-local-korean.conf
-        ln -s ${optionalFC cfg.symbol.enable (mkFC "chinese" cfg.symbol.configText)} $dst/51-local-symbol.conf
+        ln -s ${mkFC "local-fontconfig" fcText} $dst/51-local-fontconfig.conf
       '';
 in
 {
   options.fonts.fontconfig = {
     chinese =
-      (langModule "Chinese"
+      langModule "Chinese"
         (with pkgs; [
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
@@ -467,42 +431,14 @@ in
           sansSerif = "Noto Sans CJK SC";
           serif = "Noto Serif CJK SC";
           monospace = "Noto Sans Mono CJK SC";
-        }
-      )
-      // {
-        configText = lib.mkOption {
-          type = with lib.types; str;
-          default = fontconfigs.chinese;
-          readOnly = true;
-          description = lib.mdDoc ''
-            The fontconfig file of English fonts;
-          '';
         };
-      };
 
     emoji = {
-      configText = lib.mkOption {
-        type = with lib.types; str;
-        default = fontconfigs.emoji;
-        readOnly = true;
-        description = lib.mdDoc ''
-          The fontconfig file of emoji fonts;
-        '';
-      };
-
       defaultFont = lib.mkOption {
         type = with lib.types; str;
         default = "Noto Color Emoji";
         description = lib.mdDoc ''
           The default emoji font name.
-        '';
-      };
-
-      defaultFonts = lib.mkOption {
-        type = with lib.types; listOf str;
-        default = [ config.fonts.fontconfig.emoji.defaultFont ];
-        description = lib.mdDoc ''
-          Default emoji font(s).
         '';
       };
 
@@ -523,25 +459,14 @@ in
       };
     };
 
-    english =
-      (langModule "English" [ pkgs.noto-fonts ] {
-        sansSerif = "Noto Sans";
-        serif = "Noto Serif";
-        monospace = "Noto Sans Mono";
-      })
-      // {
-        configText = lib.mkOption {
-          type = with lib.types; str;
-          default = fontconfigs.english;
-          readOnly = true;
-          description = lib.mdDoc ''
-            The fontconfig file of English fonts;
-          '';
-        };
-      };
+    english = langModule "English" [ pkgs.noto-fonts ] {
+      sansSerif = "Noto Sans";
+      serif = "Noto Serif";
+      monospace = "Noto Sans Mono";
+    };
 
     japanese =
-      (langModule "Japanese"
+      langModule "Japanese"
         (with pkgs; [
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
@@ -550,21 +475,10 @@ in
           sansSerif = "Noto Sans CJK JP";
           serif = "Noto Serif CJK JP";
           monospace = "Noto Sans Mono CJK JP";
-        }
-      )
-      // {
-        configText = lib.mkOption {
-          type = with lib.types; str;
-          default = fontconfigs.japanese;
-          readOnly = true;
-          description = lib.mdDoc ''
-            The fontconfig file of Japanese fonts;
-          '';
         };
-      };
 
     korean =
-      (langModule "Korean"
+      langModule "Korean"
         (with pkgs; [
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
@@ -573,67 +487,19 @@ in
           sansSerif = "Noto Sans CJK KR";
           serif = "Noto Serif CJK KR";
           monospace = "Noto Sans Mono CJK KR";
-        }
-      )
-      // {
-        configText = lib.mkOption {
-          type = with lib.types; str;
-          default = fontconfigs.korean;
-          readOnly = true;
-          description = lib.mdDoc ''
-            The fontconfig file of Korean fonts;
-          '';
         };
-      };
 
     symbol =
       let
         cfg = config.fonts.fontconfig.symbol;
       in
       {
-        configText = lib.mkOption {
+        defaultFont = lib.mkOption {
           type = with lib.types; str;
-          default = fontconfigs.symbol;
-          readOnly = true;
+          default = cfg.nerdFonts.defaultFont;
           description = lib.mdDoc ''
-            The fontconfig file of English fonts;
+            The default symobol font name.
           '';
-        };
-
-        defaultFont = {
-          monospace = lib.mkOption {
-            type = with lib.types; str;
-            default = cfg.nerdFonts.defaultFont.monospace;
-            description = lib.mdDoc ''
-              The default monospace symbol font name.
-            '';
-          };
-
-          sansSerif = lib.mkOption {
-            type = with lib.types; str;
-            default = cfg.nerdFonts.defaultFont.sansSerif;
-            description = lib.mdDoc ''
-              The default sans-serif symbol font name.
-            '';
-          };
-        };
-
-        defaultFonts = {
-          monospace = lib.mkOption {
-            type = with lib.types; listOf str;
-            default = [ cfg.defaultFont.monospace ];
-            description = lib.mdDoc ''
-              Default monospace font(s).
-            '';
-          };
-
-          sansSerif = lib.mkOption {
-            type = with lib.types; listOf str;
-            default = [ cfg.defaultFont.sansSerif ];
-            description = lib.mdDoc ''
-              Default sans serif font(s).
-            '';
-          };
         };
 
         enable = lib.mkOption {
@@ -648,7 +514,7 @@ in
           type = with lib.types; listOf package;
           default = with pkgs; [ cfg.nerdFonts.package ];
           description = lib.mdDoc ''
-            The fonts packages of symbol fontconfig will be used.
+            The fonts packages of symbol will be used.
           '';
         };
 
@@ -734,6 +600,14 @@ in
             };
           in
           {
+            defaultFont = lib.mkOption {
+              type = with lib.types; str;
+              default = "Symbols Nerd Font Mono";
+              description = lib.mdDoc ''
+                The default Nerd Font name.
+              '';
+            };
+
             package = lib.mkOption {
               type = with lib.types; package;
               default = with pkgs; (nerdfonts.override { fonts = cfg.nerdFonts.includePatches; });
@@ -756,24 +630,6 @@ in
               default = [ "NerdFontsSymbolsOnly" ];
               example = "[\"SourceCodePro\"]";
             };
-
-            defaultFont = {
-              monospace = lib.mkOption {
-                type = with lib.types; str;
-                default = "Symbols Nerd Font Mono";
-                description = lib.mdDoc ''
-                  The default monospace nerd font name.
-                '';
-              };
-
-              sansSerif = lib.mkOption {
-                type = with lib.types; str;
-                default = "Symbols Nerd Font";
-                description = lib.mdDoc ''
-                  The default sans-serif nerd font name.
-                '';
-              };
-            };
           };
       };
   };
@@ -788,6 +644,41 @@ in
         fonts = {
           fontconfig = {
             confPackages = [ fcPkg ];
+
+            defaultFonts = {
+              sansSerif =
+                let
+                  getLang = type: optional cfg."${type}".enable cfg."${type}".sansSerif;
+                in
+                (getLang "english")
+                ++ (getLang "chinese")
+                ++ (getLang "japanese")
+                ++ (getLang "korean")
+                ++ (optional cfg.emoji.enable cfg.emoji.defaultFont)
+                ++ (optional cfg.symbol.enable cfg.symbol.defaultFont);
+
+              serif =
+                let
+                  getLang = type: optional cfg."${type}".enable cfg."${type}".serif;
+                in
+                (getLang "english")
+                ++ (getLang "chinese")
+                ++ (getLang "japanese")
+                ++ (getLang "korean")
+                ++ (optional cfg.emoji.enable cfg.emoji.defaultFont)
+                ++ (optional cfg.symbol.enable cfg.symbol.defaultFont);
+
+              monospace =
+                let
+                  getLang = type: optional cfg."${type}".enable cfg."${type}".monospace;
+                in
+                (getLang "english")
+                ++ (getLang "chinese")
+                ++ (getLang "japanese")
+                ++ (getLang "korean")
+                ++ (optional cfg.emoji.enable cfg.emoji.defaultFont)
+                ++ (optional cfg.symbol.enable cfg.symbol.defaultFont);
+            };
           };
         };
       }

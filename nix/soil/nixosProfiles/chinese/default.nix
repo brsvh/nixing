@@ -11,11 +11,9 @@
   fonts = {
     fontconfig = {
       chinese = {
-        defaultFont = {
-          sansSerif = "FZHei-B01";
-          serif = "FZShusong-Z01";
-          monospace = "LXGW WenKai Mono";
-        };
+        sansSerif = "FZHei-B01";
+        serif = "FZShusong-Z01";
+        monospace = "LXGW WenKai Mono";
 
         enable = true;
 

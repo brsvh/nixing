@@ -60,7 +60,7 @@ in
 
           extraGSettingsOverrides =
             let
-              cfg = config.fonts.fontconfig.english.defaultFont;
+              cfg = config.fonts.fontconfig.english;
             in
             lib.mkDefault ''
               [org.gnome.desktop.interface]

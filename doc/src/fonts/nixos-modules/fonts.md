@@ -32,32 +32,9 @@
                   english.enable = true;
                   chinese = {
                     enable = true;
-
-                    defaultFont = {
-                      sansSerif = "Source Han Sans SC";
-                      serif = "Source Han Serif SC";
-                      monospace = "Source Han Mono SC";
-                    };
-
-                    defaultFonts = {
-                      sansSerif = [
-                        "Source Han Sans SC"
-                        "Source Han Sans HC"
-                        "Source Han Sans TC"
-                      ];
-
-                      serif = [
-                        "Source Han Serif SC"
-                        "Source Han Serif HC"
-                        "Source Han Serif TC"
-                      ];
-
-                      monospace = [
-                        "Source Han Mono SC"
-                        "Source Han Mono HC"
-                        "Source Han Mono TC"
-                      ];
-                    };
+                    monospace = "Source Han Mono SC";
+                    sansSerif = "Source Han Sans SC";
+                    serif = "Source Han Serif SC";
 
                     fonts = with pkgs; [
                       source-han-sans
@@ -84,19 +61,15 @@ Supported `<lanuage>` includes:
 - `japanese`, for `ja` language code.
 - `korean`, for `ko` language code.
 
-### `config.fonts.fontconfig.<language>.configText`
-
-The content of the fontconfig configuration file for the `<language>` code.
-
-### `config.fonts.fontconfig.<language>.defaultFont.sansSerif`
+### `config.fonts.fontconfig.<language>.sansSerif`
 
 The default sans serif font for the `<language>` code.
 
-### `config.fonts.fontconfig.<language>.defaultFont.serif`
+### `config.fonts.fontconfig.<language>.serif`
 
 The default serif font for the `<language>` code.
 
-### `config.fonts.fontconfig.<language>.defaultFont.monospace`
+### `config.fonts.fontconfig.<language>.monospace`
 
 The default monospace font for the `<language>` code.
 
@@ -108,32 +81,11 @@ Generate and install the fontconfig configuration file for the `<language>` code
 
 Fonts depended on by `<lanuage>`.
 
-### `config.fonts.fontconfig.emoji.defaultFonts.sansSerif`
+### `config.fonts.fontconfig.emoji.defaultFont`
 
-The list of sans serif fonts used for the emoji, with display priority
-corresponding to their position in the list.
+The default font used for the emoji.
 
-### `config.fonts.fontconfig.emoji.defaultFonts.serif`
 
-The list of serif fonts used for emoji, with display priority
-corresponding to their position in the list.
+### `config.fonts.fontconfig.symbol.defaultFont`
 
-### `config.fonts.fontconfig.emoji.defaultFonts.monospace`
-
-The list of monospace fonts used for emoji, with display priority
-corresponding to their position in the list.
-
-### `config.fonts.fontconfig.symbol.defaultFonts.sansSerif`
-
-The list of sans serif fonts used for the symbol, with display priority
-corresponding to their position in the list.
-
-### `config.fonts.fontconfig.symbol.defaultFonts.serif`
-
-The list of serif fonts used for symbol, with display priority
-corresponding to their position in the list.
-
-### `config.fonts.fontconfig.symbol.defaultFonts.monospace`
-
-The list of monospace fonts used for symbol, with display priority
-corresponding to their position in the list.
+The default font used for the symbol.
