@@ -1,4 +1,8 @@
-{ cell, ... }:
+{ cell, inputs, ... }:
+let
+  inherit (inputs) lanzaboote;
+  inherit (inputs.cells) fonts nixos;
+in
 {
   imports = [
     cell.nixosProfiles.alsa
@@ -16,5 +20,9 @@
     cell.nixosProfiles.systemd-boot
     cell.nixosProfiles.zram
     cell.nixosSuites.base
+    fonts.nixosModules.tsangertype-fonts
+    # FIXME this module will cause infinite recursion.
+    # lanzaboote.nixosModules.lanzaboote;
+    nixos.nixosModules.fonts
   ];
 }

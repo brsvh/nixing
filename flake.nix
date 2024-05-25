@@ -417,7 +417,7 @@
             "homeModules"
           ]
           [
-            "soil"
+            "home-manager"
             "homeModules"
           ]
         ];
@@ -432,7 +432,7 @@
             "nixosModules"
           ]
           [
-            "soil"
+            "nixos"
             "nixosModules"
           ]
         ];

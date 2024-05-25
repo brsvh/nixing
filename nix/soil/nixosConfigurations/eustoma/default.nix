@@ -3,12 +3,11 @@
   config,
   inputs,
   lib,
-  modulesPath,
   pkgs,
   ...
 }:
 let
-  inherit (inputs) disko hardware lanzaboote;
+  inherit (inputs) hardware lanzaboote;
   inherit (inputs.cells) fonts my-emacs unfree;
 
   # This device will not be exposed to the public network. The domain
@@ -22,7 +21,6 @@ let
 in
 {
   imports = [
-    cell.nixosModules.fonts
     cell.nixosProfiles.dae
     cell.nixosProfiles.libvirt
     cell.nixosSecrets.eustoma
@@ -30,8 +28,6 @@ in
     cell.nixosSuites.laptop
     cell.nixosUsers.root
     cell.nixosUsers.bsc
-    disko.nixosModules.disko
-    fonts.nixosModules.tsangertype-fonts
     hardware.nixosModules.lenovo-thinkpad-x1-nano-gen1
   ];
 

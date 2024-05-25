@@ -1,15 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  inputs,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (inputs) lanzaboote;
-in
-{
-  imports = [ lanzaboote.nixosModules.lanzaboote ];
-
   boot = {
     lanzaboote = {
       enable = true;
