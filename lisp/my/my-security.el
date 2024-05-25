@@ -55,7 +55,9 @@
      (prepend auth-sources) my-authinfo-gpg-file)
     (:also-load auth-source-pass)
     (:after auth-source-pass
-      (auth-source-pass-enable))))
+      (auth-source-pass-enable)))
+  (:after auth-source-pass
+    (my-path* (my-dir auth-source-pass-filename))))
 
 
 

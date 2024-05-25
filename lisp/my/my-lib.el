@@ -97,6 +97,9 @@ Allowable concepts (not quoted) are `cache', `config', `data' and
     (string-prefix-p a b)))
 
 ;;;###autoload
+(defalias 'my-dir 'file-name-as-directory)
+
+;;;###autoload
 (defun my-dirname (path)
   "Return the parent directory to PATH."
   (let ((s  (file-name-directory (directory-file-name (my-path path)))))
