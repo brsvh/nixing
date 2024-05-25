@@ -8,7 +8,7 @@
 }:
 let
   inherit (inputs) hardware lanzaboote;
-  inherit (inputs.cells) fonts my-emacs unfree;
+  inherit (inputs.cells) apps fonts my-emacs;
 
   # This device will not be exposed to the public network. The domain
   # name setting is fake, solely to automatically configure the correct
@@ -44,10 +44,10 @@ in
       };
 
       overlays = [
+        apps.overlays.unfree
         fonts.overlays.proprius-fonts
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
-        unfree.overlays.unfree
       ];
     };
   };

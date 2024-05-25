@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (inputs.cells) fonts my-emacs unfree;
+  inherit (inputs.cells) apps fonts my-emacs;
 
   system = "x86_64-linux";
 
@@ -49,7 +49,7 @@ in
       overlays = [
         fonts.overlays.proprius-fonts
         my-emacs.overlays.emacs
-        unfree.overlays.unfree
+        apps.overlays.unfree
       ];
     };
   };

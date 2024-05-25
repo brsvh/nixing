@@ -447,7 +447,7 @@
             "overlays"
           ]
           [
-            "unfree"
+            "apps"
             "overlays"
           ]
         ];
@@ -462,7 +462,7 @@
             "packages"
           ]
           [
-            "unfree"
+            "apps"
             "packages"
           ]
         ];
