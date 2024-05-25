@@ -158,7 +158,7 @@ let
 
           perCond = drv: licensePredicate drv "tsangertype-gpp-license";
         in
-        (listFontsWithCond drvs perCond) ++ (listFontsWithCond drvs perCond);
+        (listFontsWithCond drvs commCond) ++ (listFontsWithCond drvs perCond);
 
       listAllFonts = listGratisProPersonaFonts tsangertypeFonts;
 

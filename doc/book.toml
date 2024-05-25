@@ -10,6 +10,6 @@ extra-watch-dirs = ["."]
 
 [output.html]
 edit-url-template = "https://github.com/brsvh/nixing/edit/main/doc/{path}"
-git-repository-url = "https://github.com/brshv/nixing"
+git-repository-url = "https://github.com/brsvh/nixing"
 site-url = "/nixing/"
 no-section-label = true
