@@ -1,0 +1,52 @@
+name: Generate page
+
+on:
+  push:
+    paths:
+      - 'doc/**'
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  mdbook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nix
+        uses: nixbuild/nix-quick-install-action@v28
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup mdbook
+        run: nix develop  .#ci
+
+      - name: Generate pages
+        run: |
+          which mdbook
+          mdbook build
+
+      - name: Copy book to page branch
+        run: |
+          git checkout page || git checkout --orphan page
+          find . -mindepth 1 -maxdepth 1 ! -name 'result-book' ! -name '.git' -exec rm -rf {} +
+          mv result-book/* ./
+          rm result-book -r
+          git add .
+
+      - name: Push book
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: page
+          commit_message: "docs: auto update"
+          commit_author: Burgess Chang <bsc@brsvh.org>
+          commit_user_name: github-actions[bot]
+          commit_user_email:  github-actions[bot]@users.noreply.github.com

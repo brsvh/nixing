@@ -7,12 +7,17 @@ let
   pkgs = nixpkgs;
 in
 {
+  ci = std.lib.dev.mkShell {
+    name = "ci";
+    nixago = with cell.nixago; [ mdbook ];
+  };
+
   default = std.lib.dev.mkShell {
     commands = [
       # Development
       {
-        package = pkgs.git;
         category = "development";
+        package = pkgs.git;
       }
       {
         category = "development";
@@ -21,20 +26,20 @@ in
 
       # Tool
       {
+        category = "tool";
         package = colmena.packages.colmena;
-        category = "tool";
       }
       {
+        category = "tool";
         package = pkgs.dconf2nix;
-        category = "tool";
       }
       {
+        category = "tool";
         package = pkgs.fish;
-        category = "tool";
       }
       {
-        package = std.packages.std;
         category = "tool";
+        package = std.packages.std;
       }
     ];
 
