@@ -7,11 +7,6 @@ let
   pkgs = nixpkgs;
 in
 {
-  ci = std.lib.dev.mkShell {
-    name = "ci";
-    nixago = with cell.nixago; [ mdbook ];
-  };
-
   default = std.lib.dev.mkShell {
     commands = [
       # Development
