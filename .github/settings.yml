@@ -1,0 +1,18 @@
+repository:
+  name: nixing
+  description: A place to collect things about Nix, it is also where to keep my dotfiles.
+  homepage: https://brsvh.org/nixing
+  topics: dotfiles, home-manager, nixos-configuration, nix-flake, nixos-flake, fonts, chinese-fonts
+  private: false
+
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  has_downloads: false
+
+  default_branch: main
+
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  delete_branch_on_merge: true
