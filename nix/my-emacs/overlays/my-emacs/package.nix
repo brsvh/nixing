@@ -104,17 +104,17 @@ let
   emacsPackagesFor' =
     drv:
     (emacsPackagesFor drv).overrideScope (
-      finalEpkg: prevEpkg:
+      finalEpkgs: prevEpkgs:
       let
-        manualPackages = prevEpkg.manualPackages // {
+        manualPackages = prevEpkgs.manualPackages // {
           my = callPackage ./manual-packages {
-            inherit (prevEpkg) trivialBuild;
+            inherit prevEpkgs;
+            inherit (prevEpkgs) trivialBuild;
             emacs = drv;
-            passedPackages = prevEpkg;
           };
         };
       in
-      prevEpkg.override { inherit manualPackages; }
+      prevEpkgs.override { inherit manualPackages; }
     );
 
   getPlainEmacs = drv: (emacsPackagesFor' drv).emacsWithPackages dependencies;

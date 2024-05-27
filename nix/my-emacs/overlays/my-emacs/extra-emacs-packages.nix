@@ -11,9 +11,14 @@ with epkgs;
   dash
   diff-hl
   dired-git-info
+  eglot
+  eldoc
   embark
   embark-consult
+  external-completion
+  flymake
   gcmh
+  jsonrpc
   let-alist
   marginalia
   orderless
@@ -29,9 +34,13 @@ with epkgs;
   svg-lib
   transient
   vertico
+  xref
   yasnippet
 ])
-++ (with manualPackages; [ my.on ])
+++ (with manualPackages.my; [
+  eglot-booster
+  on
+])
 ++ (with melpaPackages; [
   aio
   apheleia

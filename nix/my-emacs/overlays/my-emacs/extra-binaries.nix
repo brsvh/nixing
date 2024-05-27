@@ -4,6 +4,7 @@ with pkgs;
   conform
   direnv
   editorconfig-checker
+  emacs-lsp-booster
   git-cliff
   graphviz
   lefthook

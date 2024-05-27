@@ -46,6 +46,8 @@
   (require 'company)
   (require 'consult-flymake)
   (require 'display-line-numbers)
+  (require 'eglot)
+  (require 'eglot-booster)
   (require 'electric)
   (require 'hl-line)
   (require 'hl-todo)
@@ -165,6 +167,16 @@
 
 (setup prog-mode
   (:hook #'apheleia-mode))
+
+
+
+;;;
+;; LSP:
+
+(setup eglot-booster
+  (:autoload eglot-booster-mode)
+  (:after eglot
+    (eglot-booster-mode +1)))
 
 
 
