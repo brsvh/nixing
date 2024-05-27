@@ -18,4 +18,5 @@ with pkgs;
   bintools
   clangUseLLVM
 ])
+++ (with nodePackages; [ prettier ])
 ++ (with python3Packages; [ grip ])

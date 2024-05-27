@@ -10,6 +10,20 @@ emacs: config:
 with builtins;
 with lib;
 let
+  tree-sitter-grammars-path = linkFarm "treesit-grammars" (
+    map
+      (drv: {
+        name = "lib${removeSuffix "-grammar" (getName drv)}${stdenv.targetPlatform.extensions.sharedLibrary}";
+        path = "${drv}/parser";
+      })
+      (
+        pipe pkgs.tree-sitter-grammars [
+          (filterAttrs (name: _: name != "recurseForDerivations"))
+          attrValues
+        ]
+      )
+  );
+
   my-interlude = writeText "my-interlude.el" ''
     ;;; my-interlude.el --- Interlude of My Emacs -*- lexical-binding: t; -*-
 
@@ -50,21 +64,7 @@ let
     (setup treesit-grammars
       (:snoc
        treesit-extra-load-path
-       "${
-         linkFarm "treesit-grammars" (
-           map
-             (drv: {
-               name = "lib${removeSuffix "-grammar" (getName drv)}${stdenv.targetPlatform.extensions.sharedLibrary}";
-               path = "${drv}/parser";
-             })
-             (
-               pipe pkgs.tree-sitter-grammars [
-                 (filterAttrs (name: _: name != "recurseForDerivations"))
-                 attrValues
-               ]
-             )
-         )
-       }"))
+       "${tree-sitter-grammars-path}"))
 
     (setup parinfer-rust
       (:set
@@ -108,9 +108,9 @@ stdenv.mkDerivation {
 
     HOME=$TMPDIR
 
-    find $TMPDIR -type f -name "*.el" -exec ${emacs}/bin/emacs --debug-init --no-init-file --no-site-file --eval "(progn (setq gc-cons-threshold most-positive-fixnum load-prefer-newer t) (push \"$TMPDIR/lisp\" load-path) (let ((default-directory \"$TMPDIR/lisp\")) (normal-top-level-add-subdirs-to-load-path)) (setq my-cache-directory \"$TMPDIR/.local\" my-config-directory \"$TMPDIR/.local\" my-data-directory \"$TMPDIR/.local\" my-state-directory \"$TMPDIR/.local\" my-prelude-inhibit-update-load-path t)) " --batch -f batch-byte-compile {} \;
+    find $TMPDIR -type f -name "*.el" -exec ${emacs}/bin/emacs --debug-init --no-init-file --no-site-file --eval "(progn (setq gc-cons-threshold most-positive-fixnum load-prefer-newer t) (push \"$TMPDIR/lisp\" load-path) (let ((default-directory \"$TMPDIR/lisp\")) (normal-top-level-add-subdirs-to-load-path)) (setq my-cache-directory \"$TMPDIR/.local\" my-config-directory \"$TMPDIR/.local\" my-data-directory \"$TMPDIR/.local\" my-state-directory \"$TMPDIR/.local\" my-prelude-inhibit-update-load-path t) (add-to-list 'treesit-extra-load-path \"${tree-sitter-grammars-path}\"))" --batch -f batch-byte-compile {} \;
 
-    find $TMPDIR -type f -name "*.el" -exec ${emacs}/bin/emacs --debug-init --no-init-file --no-site-file --eval "(progn (setq gc-cons-threshold most-positive-fixnum load-prefer-newer t) (push \"$TMPDIR/lisp\" load-path) (let ((default-directory \"$TMPDIR/lisp\")) (normal-top-level-add-subdirs-to-load-path)) (push "\"$TMPDIR/native-lisp/\"" native-comp-eln-load-path) (setq my-cache-directory \"$TMPDIR/.local\" my-config-directory \"$TMPDIR/.local\" my-data-directory \"$TMPDIR/.local\" my-state-directory \"$TMPDIR/.local\" my-prelude-inhibit-update-load-path t)) " --batch -f batch-native-compile {} \;
+    find $TMPDIR -type f -name "*.el" -exec ${emacs}/bin/emacs --debug-init --no-init-file --no-site-file --eval "(progn (setq gc-cons-threshold most-positive-fixnum load-prefer-newer t) (push \"$TMPDIR/lisp\" load-path) (let ((default-directory \"$TMPDIR/lisp\")) (normal-top-level-add-subdirs-to-load-path)) (push "\"$TMPDIR/native-lisp/\"" native-comp-eln-load-path) (setq my-cache-directory \"$TMPDIR/.local\" my-config-directory \"$TMPDIR/.local\" my-data-directory \"$TMPDIR/.local\" my-state-directory \"$TMPDIR/.local\" my-prelude-inhibit-update-load-path t) (add-to-list 'treesit-extra-load-path \"${tree-sitter-grammars-path}\")) " --batch -f batch-native-compile {} \;
   '';
 
   installPhase = ''

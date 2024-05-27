@@ -38,6 +38,7 @@
 (require 'my-programming-emacs-lisp)
 (require 'my-programming-lisp)
 (require 'my-programming-nix)
+(require 'my-programming-yaml)
 
 (cl-eval-when (compile)
   (require 'apheleia)
