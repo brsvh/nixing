@@ -82,6 +82,7 @@ in
 
         extraGroups = [
           "audio"
+          "docker"
           "jackaudio"
           "libvirtd"
           "wheel"

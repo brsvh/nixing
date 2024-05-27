@@ -22,6 +22,7 @@ in
 {
   imports = [
     cell.nixosProfiles.dae
+    cell.nixosProfiles.docker
     cell.nixosProfiles.hercules-ci-agent
     cell.nixosProfiles.libvirt
     cell.nixosSecrets.lilac
@@ -191,5 +192,11 @@ in
 
   time = {
     timeZone = "Asia/Shanghai";
+  };
+
+  virtualisation = {
+    docker = {
+      storageDriver = "btrfs";
+    };
   };
 }
