@@ -33,6 +33,7 @@ with epkgs;
 ])
 ++ (with manualPackages; [ my.on ])
 ++ (with melpaPackages; [
+  aio
   apheleia
   benchmark-init
   biblio
@@ -45,6 +46,7 @@ with epkgs;
   company
   consult-org-roam
   diredfl
+  docker
   doom-modeline
   emacsql
   embark-org-roam

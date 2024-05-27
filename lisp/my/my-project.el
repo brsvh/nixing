@@ -37,6 +37,8 @@
   (require 'diff-hl)
   (require 'diff-hl-flydiff)
   (require 'diff-hl-margin)
+  (require 'docker)
+  (require 'docker-core)
   (require 'envrc)
   (require 'files)
   (require 'git-cliff)
@@ -118,6 +120,16 @@
      (make-instance 'org-project-capture-project-backend))
     ;; Capture tasks across individual projects.
     (org-project-capture-per-project)))
+
+
+
+;;;
+;; Docker:
+
+(setup docker-core
+  (:autoload docker)
+  (:with-map ctl-c-p-map
+    (:keymap-set "d" #'docker)))
 
 
 
