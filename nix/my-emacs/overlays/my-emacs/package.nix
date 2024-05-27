@@ -108,9 +108,8 @@ let
       let
         manualPackages = prevEpkgs.manualPackages // {
           my = callPackage ./manual-packages {
-            inherit prevEpkgs;
-            inherit (prevEpkgs) trivialBuild;
             emacs = drv;
+            epkgs = prevEpkgs;
           };
         };
       in

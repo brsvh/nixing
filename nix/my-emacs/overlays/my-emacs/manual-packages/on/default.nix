@@ -1,12 +1,13 @@
 {
   fetchFromGitLab,
   lib,
-  trivialBuild,
+  emacs,
+  epkgs,
 }:
-trivialBuild rec {
-  pname = "on.el";
+let
+  inherit (epkgs) trivialBuild;
 
-  version = "0.1.0";
+  version = "0.1.0-2024-05-28";
 
   src = fetchFromGitLab {
     owner = "ajgrf";
@@ -16,8 +17,16 @@ trivialBuild rec {
   };
 
   meta = with lib; {
+    inherit (emacs.meta) platforms;
+
     description = "utility hooks and functions from Doom Emacs";
     homepage = "https://gitlab.com/ajgrf/on.el";
     license = licenses.mit;
+    maintainers = with maintainers; [ brsvh ];
   };
+in
+trivialBuild rec {
+  inherit meta src version;
+
+  pname = "on";
 }

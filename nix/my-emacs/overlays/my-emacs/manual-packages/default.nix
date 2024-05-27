@@ -1,16 +1,16 @@
 {
   emacs,
   pkgs,
-  prevEpkgs,
-  trivialBuild,
+  epkgs,
+  ...
 }:
 let
   inherit (pkgs) callPackage;
 
-  callPackage' = pkg: callPackage pkg { inherit emacs prevEpkgs; };
+  callPackage' = pkg: callPackage pkg { inherit emacs epkgs; };
 in
 {
   eglot-booster = callPackage' ./eglot-booster;
 
-  on = callPackage ./on { inherit trivialBuild; };
+  on = callPackage' ./on;
 }

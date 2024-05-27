@@ -2,11 +2,11 @@
   emacs,
   fetchFromGitHub,
   lib,
-  prevEpkgs,
+  epkgs,
   ...
 }:
 let
-  inherit (prevEpkgs) trivialBuild;
+  inherit (epkgs) trivialBuild;
 
   version = "0.0.1-2024-05-28";
 
@@ -33,7 +33,7 @@ trivialBuild rec {
 
   buildInputs = propagatedUserEnvPkgs;
 
-  propagatedUserEnvPkgs = with prevEpkgs; [
+  propagatedUserEnvPkgs = with epkgs; [
     eglot
     jsonrpc
     seq
