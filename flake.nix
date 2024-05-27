@@ -22,6 +22,21 @@
     ];
   };
 
+  # Applications
+  inputs = {
+    hercules-ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent/master";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+        flake-parts = {
+          follows = "flake-parts";
+        };
+      };
+    };
+  };
+
   # Home Manager
   inputs = {
     home-manager = {
@@ -84,6 +99,9 @@
           follows = "nixpkgs";
         };
       };
+    };
+    flake-parts-haskell = {
+      url = "github:srid/haskell-flake/0.4.0";
     };
     flake-utils = {
       url = "github:numtide/flake-utils/main";

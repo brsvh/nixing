@@ -221,6 +221,22 @@
         "type": "github"
       }
     },
+    "flake-parts-haskell": {
+      "locked": {
+        "lastModified": 1692741689,
+        "narHash": "sha256-CbNpheNJMTM9Wz5iTzdXmMtvfH9KvH/jNfv6N9roaqs=",
+        "owner": "srid",
+        "repo": "haskell-flake",
+        "rev": "c8622c8a259e18e0a1919462ce885380108a723c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "ref": "0.4.0",
+        "repo": "haskell-flake",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": [
@@ -309,6 +325,22 @@
         "type": "github"
       }
     },
+    "haskell-flake": {
+      "locked": {
+        "lastModified": 1684780604,
+        "narHash": "sha256-2uMZsewmRn7rRtAnnQNw1lj0uZBMh4m6Cs/7dV5YF08=",
+        "owner": "srid",
+        "repo": "haskell-flake",
+        "rev": "74210fa80a49f1b6f67223debdbf1494596ff9f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "ref": "0.3.0",
+        "repo": "haskell-flake",
+        "type": "github"
+      }
+    },
     "haumea": {
       "inputs": {
         "nixpkgs": [
@@ -328,6 +360,31 @@
         "owner": "nix-community",
         "ref": "v0.2.2",
         "repo": "haumea",
+        "type": "github"
+      }
+    },
+    "hercules-ci-agent": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "haskell-flake": "haskell-flake",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716205561,
+        "narHash": "sha256-PUJkw3Qa0hHkxQf8u9/ybzo3QJVTEvEPhSfp1hBblBM=",
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-agent",
+        "rev": "563357eae6bbbdf9073e933e9b18d63809207ce4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "ref": "master",
+        "repo": "hercules-ci-agent",
         "type": "github"
       }
     },
@@ -679,6 +736,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
+        "flake-parts-haskell": "flake-parts-haskell",
         "flake-utils": "flake-utils",
         "git-hooks": "git-hooks",
         "gitignore": "gitignore",
@@ -687,6 +745,7 @@
           "std",
           "haumea"
         ],
+        "hercules-ci-agent": "hercules-ci-agent",
         "hive": "hive",
         "home-manager": [
           "home-manager-unstable"

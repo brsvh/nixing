@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (inputs) hardware lanzaboote;
+  inherit (inputs) hardware hercules-ci-agent lanzaboote;
   inherit (inputs.cells) apps fonts my-emacs;
 
   # This device will not be exposed to the public network. The domain
@@ -22,9 +22,8 @@ in
 {
   imports = [
     cell.nixosProfiles.dae
+    cell.nixosProfiles.hercules-ci-agent
     cell.nixosProfiles.libvirt
-    # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
-    # cell.nixosProfiles.hercules-ci-agent
     cell.nixosSecrets.lilac
     cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop
@@ -48,6 +47,7 @@ in
       overlays = [
         apps.overlays.unfree
         fonts.overlays.proprius-fonts
+        hercules-ci-agent.overlays.default
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
       ];
@@ -166,13 +166,12 @@ in
       configFile = config.sops.secrets."dae/config.dae".path;
     };
 
-    # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
-    # hercules-ci-agent = {
-    #   settings = {
-    #     binaryCachesPath = config.sops.secrets."hercules-ci/binary-caches.json".path;
-    #     clusterJoinTokenPath = config.sops.secrets."hercules-ci/cluster-join-token.key".path;
-    #   };
-    # };
+    hercules-ci-agent = {
+      settings = {
+        binaryCachesPath = config.sops.secrets."hercules-ci/binary-caches.json".path;
+        clusterJoinTokenPath = config.sops.secrets."hercules-ci/cluster-join-token.key".path;
+      };
+    };
 
     xserver = {
       videoDrivers = [ "nvidia" ];

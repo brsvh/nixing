@@ -22,18 +22,17 @@ in
         restartUnits = [ "dae.service" ];
       };
 
-      # REVIEW re-enable after upstream compatibility with Cachix 1.7.3.
-      # "hercules-ci/binary-caches.json" = {
-      #   mode = "0440";
-      #   owner = "hercules-ci-agent";
-      #   restartUnits = [ "hercules-ci-agent.service" ];
-      # };
-      #
-      # "hercules-ci/cluster-join-token.key" = {
-      #   mode = "0440";
-      #   owner = "hercules-ci-agent";
-      #   restartUnits = [ "hercules-ci-agent.service" ];
-      # };
+      "hercules-ci/binary-caches.json" = {
+        mode = "0440";
+        owner = "hercules-ci-agent";
+        restartUnits = [ "hercules-ci-agent.service" ];
+      };
+
+      "hercules-ci/cluster-join-token.key" = {
+        mode = "0440";
+        owner = "hercules-ci-agent";
+        restartUnits = [ "hercules-ci-agent.service" ];
+      };
     };
   };
 }

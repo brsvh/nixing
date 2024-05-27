@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (inputs) hardware lanzaboote;
+  inherit (inputs) hardware hercules-ci-agent lanzaboote;
   inherit (inputs.cells) apps fonts my-emacs;
 
   # This device will not be exposed to the public network. The domain
@@ -22,6 +22,7 @@ in
 {
   imports = [
     cell.nixosProfiles.dae
+    cell.nixosProfiles.hercules-ci-agent
     cell.nixosProfiles.libvirt
     cell.nixosSecrets.eustoma
     cell.nixosSuites.gnome-workstation
@@ -46,6 +47,7 @@ in
       overlays = [
         apps.overlays.unfree
         fonts.overlays.proprius-fonts
+        hercules-ci-agent.overlays.default
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
       ];
@@ -132,6 +134,13 @@ in
   services = {
     dae = {
       configFile = config.sops.secrets."dae/config.dae".path;
+    };
+
+    hercules-ci-agent = {
+      settings = {
+        binaryCachesPath = config.sops.secrets."hercules-ci/binary-caches.json".path;
+        clusterJoinTokenPath = config.sops.secrets."hercules-ci/cluster-join-token.key".path;
+      };
     };
 
     xserver = {
