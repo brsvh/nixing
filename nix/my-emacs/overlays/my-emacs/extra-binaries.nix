@@ -15,9 +15,10 @@ with pkgs;
   texliveFull
   treefmt
 ]
-++ (with llvmPackages; [
-  bintools
-  clangUseLLVM
+++ (with llvmPackages_18; [
+  bintools-unwrapped
+  clang-unwrapped
+  mlir
 ])
 ++ (with nodePackages; [ prettier ])
 ++ (with python3Packages; [ grip ])

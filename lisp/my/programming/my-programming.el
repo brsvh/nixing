@@ -35,6 +35,7 @@
 ;;; Code:
 
 (require 'my-core)
+(require 'my-programming-cc)
 (require 'my-programming-docker)
 (require 'my-programming-emacs-lisp)
 (require 'my-programming-lisp)
