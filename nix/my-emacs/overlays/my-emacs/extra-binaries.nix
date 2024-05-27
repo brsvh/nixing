@@ -2,6 +2,7 @@ pkgs:
 with pkgs;
 [
   conform
+  direnv
   editorconfig-checker
   git-cliff
   graphviz

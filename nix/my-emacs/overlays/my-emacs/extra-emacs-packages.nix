@@ -48,6 +48,7 @@ with epkgs;
   doom-modeline
   emacsql
   embark-org-roam
+  envrc
   f
   frameshot
   git-cliff
@@ -56,6 +57,7 @@ with epkgs;
   grip-mode
   hl-todo
   ibuffer-project
+  inheritenv
   magit
   magit-section
   modus-themes

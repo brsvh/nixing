@@ -37,6 +37,7 @@
   (require 'diff-hl)
   (require 'diff-hl-flydiff)
   (require 'diff-hl-margin)
+  (require 'envrc)
   (require 'files)
   (require 'git-cliff)
   (require 'magit)
@@ -117,6 +118,19 @@
      (make-instance 'org-project-capture-project-backend))
     ;; Capture tasks across individual projects.
     (org-project-capture-per-project)))
+
+
+
+;;;
+;; Environment:
+
+(setup envrc
+  (:autoload envrc-global-mode)
+  (:first-ui envrc-global-mode)
+  (:when-loaded
+    (:with-map ctl-c-p-map
+      (:keymap-set
+       "e" envrc-command-map))))
 
 
 
