@@ -94,6 +94,10 @@ Return a list of font derivation from a given list of font derivations that grat
 
 ## Packages
 
+### `pkgs.foundertype-fonts`
+
+This is a part of the foudertype fonts, only includes the fonts required by the CTeX `founder` fontset. You need to obtain the authorization to use the font at <https://www.foundertype.com> before installation, and strictly comply with the FounderType Home Edition User License Agreement [^1].
+
 ### `pkgs.tsangertypeFonts.gratisProCommercium`
 
 All TsangerType fonts that permit commercial use.
@@ -394,8 +398,8 @@ It is link to all the following fonts.
 | `tsangertypeFonts.tsangertype-xinghansong-font`                 | 仓耳星汉宋             |
 | `tsangertypeFonts.tsangertype-xinxing-font`                     | 仓耳心星体             |
 | `tsangertypeFonts.tsangertype-xinyan-font`                      | 仓耳新颜体             |
-| `tsangertypeFonts.tsangertype-xinyue01-font`                    | 仓耳新悦体             |
-| `tsangertypeFonts.tsangertype-xinyue02-font`                    | 仓耳欣月体             |
+| `tsangertypeFonts.tsangertype-xinyue-01-font`                   | 仓耳新悦体             |
+| `tsangertypeFonts.tsangertype-xinyue-02-font`                   | 仓耳欣月体             |
 | `tsangertypeFonts.tsangertype-xiuxianxingshu-font`              | 仓耳绣线行书           |
 | `tsangertypeFonts.tsangertype-xiuzhen-font`                     | 仓耳秀蓁体             |
 | `tsangertypeFonts.tsangertype-xiyuan-font`                      | 仓耳细圆体             |
@@ -480,3 +484,5 @@ It is link to all the following fonts.
 | `tsangertypeFonts.tsangertype-zhuangyuankai-font`               | 仓耳状元楷             |
 | `tsangertypeFonts.tsangertype-zhuyan-font`                      | 仓耳竹言体             |
 | `tsangertypeFonts.tsangertype-zongheng-font`                    | 仓耳纵横体             |
+
+[^1]: https://www.foundertype.com/index.php/About/powerPer.html

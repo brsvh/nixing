@@ -131,17 +131,18 @@ There are some directories not licensed under WTFPL.
   it, see the *COPYING.MIT* file for more details. If you did not recive
   it, see <https://opensource.org/license/mit> for more details.
 
-[lisp]: lisp/
-[nix/unfree/overlays/wemeet]: nix/unfree/overlays/wemeet/
+[lisp]: ./lisp/
+[nix/unfree/overlays/wemeet]: ./nix/apps/overlays/wemeet/
 
 ## Thanks
 
 Thanks to these software in the Nix ecosystem.
 
-![colmena](https://img.shields.io/badge/Deploy_by-colmena-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fcolmena.cli.rs)
 ![disko](https://img.shields.io/badge/Power_by-disko-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fgithub.com%2Fnix-community%2Fdisko)
 ![Hive](https://img.shields.io/badge/Power_by-Hive-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fgithub.com%2Fdivnix%2Fhive)
 ![NixOS hardware](https://img.shields.io/badge/Power_by-NixOS_hardware-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fgithub.com%2FNixOS%2Fnixos-hardware)
 ![Standard](https://img.shields.io/badge/Power_by-Standard-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fstd.divnix.com%2F)
+
+![colmena](https://img.shields.io/badge/Deploy_by-colmena-black?logo=NixOS&labelColor=white&link=https%3A%2F%2Fcolmena.cli.rs)
 
 [^1]: What is dotfiles, <https://dotfiles.github.io>
