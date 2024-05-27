@@ -129,7 +129,7 @@ It is link to all the following fonts.
 | `tsangertypeFonts.tsangertype-yuyang-w05-font`            | 仓耳渔阳体W05    |
 | `tsangertypeFonts.tsangertypey-zhoukezhengdabangshu-font` | 仓耳周珂正大榜书 |
 
-### `pkgs.tsangertypeFonts.gratisProCommercium`
+### `pkgs.tsangertypeFonts.gratisProPersona`
 
 All TsangerType fonts that only permit personal use.
 
@@ -485,4 +485,4 @@ It is link to all the following fonts.
 | `tsangertypeFonts.tsangertype-zhuyan-font`                      | 仓耳竹言体             |
 | `tsangertypeFonts.tsangertype-zongheng-font`                    | 仓耳纵横体             |
 
-[^1]: https://www.foundertype.com/index.php/About/powerPer.html
+[^1]: <https://www.foundertype.com/index.php/About/powerPer.html>
