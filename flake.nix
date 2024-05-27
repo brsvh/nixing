@@ -364,6 +364,7 @@
             (functions "nixosUsers")
             (functions "overlays")
             (functions "packages")
+            (functions "templates")
             (nixago "nixago")
             (runnables "formatter")
           ])
@@ -460,6 +461,13 @@
           [
             "apps"
             "packages"
+          ]
+        ];
+
+        templates = pick self [
+          [
+            "repo"
+            "templates"
           ]
         ];
       };
