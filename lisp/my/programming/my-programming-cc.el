@@ -34,12 +34,25 @@
 
 (cl-eval-when (compile)
   (require 'cc-mode)
+  (require 'cmake-ts-mode)
   (require 'eglot))
 
 
 
 ;;;
 ;; Major modes:
+
+(setup cmake-ts-mode
+  (:autoload cmake-ts-mode)
+  (:with-mode cmake-ts-mode
+    (:file-match
+     "CMakeLists.txt\\'"
+     "\\.cmake\\'")))
+
+
+
+;;;
+;; LSP:
 
 (setup eglot
   (:autoload eglot-ensure))
