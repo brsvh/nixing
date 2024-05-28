@@ -62,6 +62,13 @@ in
     {
       inherit kernelPackages;
 
+      binfmt = {
+        emulatedSystems = [
+          "aarch64-linux"
+          "riscv64-linux"
+        ];
+      };
+
       extraModprobeConfig = ''
         options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
       '';
