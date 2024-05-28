@@ -61,7 +61,6 @@ with epkgs;
   embark-org-roam
   envrc
   f
-  frameshot
   git-cliff
   git-commit
   git-modes

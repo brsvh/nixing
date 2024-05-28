@@ -41,7 +41,6 @@
   (require 'doom-modeline)
   (require 'embark)
   (require 'embark-consult)
-  (require 'frameshot)
   (require 'help-fns)
   (require 'ibuffer)
   (require 'ibuffer-project)
@@ -266,9 +265,6 @@
     (:keymap-set
      ;; Select a buffer open in a new frame.
      "<remap> <switch-to-buffer-other-frame>" #'consult-buffer-other-frame)))
-
-(setup frameshot
-  (:keymap-set-into ctl-c-5-map "s" #'frameshot-take))
 
 
 
