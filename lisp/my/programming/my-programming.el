@@ -50,12 +50,15 @@
   (require 'eglot)
   (require 'eglot-booster)
   (require 'electric)
+  (require 'flymake)
   (require 'hl-line)
   (require 'hl-todo)
   (require 'page-break-lines)
   (require 'parinfer-rust-mode)
   (require 'prog-mode)
   (require 'rainbow-delimiters)
+  (require 'sideline)
+  (require 'sideline-flymake)
   (require 'smartparens))
 
 (defun my-inhibit-parinfer-rust-troublesome-modes (&rest _)
@@ -111,9 +114,20 @@
 (setup consult-flymake
   (:autoload consult-flymake))
 
+(setup sideline-flymake
+  (:autoload sideline-flymake)
+  (:when-loaded
+    (:set sideline-flymake-display-mode 'point)))
+
+(setup sideline
+  (:autoload sideline-mode)
+  (:when-loaded
+    (:set (append sideline-backends-right) 'sideline-flymake)))
+
 (setup flymake
   (:with-hook flymake-mode-hook
     (:hook
+     #'sideline-mode
      #'(lambda ()
          (:with-map flymake-mode-map
            (:keymap-set

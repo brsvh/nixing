@@ -66,6 +66,7 @@ with epkgs;
   git-modes
   grip-mode
   hl-todo
+  ht
   ibuffer-project
   inheritenv
   magit
@@ -89,6 +90,8 @@ with epkgs;
   rg
   s
   shrink-path
+  sideline
+  sideline-flymake
   smartparens
   string-inflection
   svg-tag-mode
