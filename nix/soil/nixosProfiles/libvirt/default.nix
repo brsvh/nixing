@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  environment = {
+    systemPackages = with pkgs; [ libguestfs ];
+  };
+
   programs = {
     virt-manager = {
       enable = true;
