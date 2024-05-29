@@ -53,7 +53,6 @@
   (require 'flymake)
   (require 'hl-line)
   (require 'hl-todo)
-  (require 'page-break-lines)
   (require 'parinfer-rust-mode)
   (require 'prog-mode)
   (require 'rainbow-delimiters)
@@ -81,9 +80,6 @@
 (setup hl-todo
   (:autoload hl-todo-mode))
 
-(setup page-break-lines
-  (:autoload page-break-lines-mode))
-
 (setup rainbow-delimiters
   (:autoload rainbow-delimiters-mode))
 
@@ -92,7 +88,6 @@
    #'display-line-numbers-mode ;; Show line numbers of buffer.
    #'hl-line-mode              ;; Highlight current line of buffer.
    #'hl-todo-mode              ;; Highlight TODO keywords.
-   #'page-break-lines-mode     ;; Display ^L  as tidy horizontal lines.
    #'rainbow-delimiters-mode)) ;; Colorful brackets highlighting.
 
 

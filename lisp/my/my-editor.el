@@ -38,6 +38,7 @@
   (require 'autorevert)
   (require 'consult)
   (require 'editorconfig)
+  (require 'form-feed)
   (require 'mwim)
   (require 'my-prelude)
   (require 'recentf)
@@ -87,6 +88,12 @@ shebang line or file path may exist now."
    column-number-mode
    ;; Display the current line number in Mode Line.
    line-number-mode))
+
+(setup form-feed
+  (:autoload form-feed-mode global-form-feed-mode)
+  (:first-buffer
+   ;; Display ^L glyphs as horizontal lines.
+   global-form-feed-mode))
 
 
 

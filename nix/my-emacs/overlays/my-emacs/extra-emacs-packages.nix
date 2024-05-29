@@ -39,6 +39,7 @@ with epkgs;
 ])
 ++ (with manualPackages.my; [
   eglot-booster
+  form-feed
   on
 ])
 ++ (with melpaPackages; [
@@ -82,7 +83,6 @@ with epkgs;
   org-roam
   org-roam-bibtex
   org-side-tree
-  page-break-lines
   pangu-spacing
   parsebib
   pdf-tools
