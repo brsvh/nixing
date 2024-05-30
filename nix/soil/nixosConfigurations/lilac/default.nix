@@ -70,6 +70,7 @@ in
       };
 
       extraModprobeConfig = ''
+        options kvm_intel nested=1
         options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
       '';
 
