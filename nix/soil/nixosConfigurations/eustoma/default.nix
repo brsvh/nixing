@@ -140,6 +140,12 @@ in
     fqdn = domainName;
   };
 
+  nix = {
+    extraOptions = ''
+      !include ${config.sops.secrets."tokens/nixAccessTokens.conf".path}
+    '';
+  };
+
   services = {
     dae = {
       configFile = config.sops.secrets."dae/config.dae".path;

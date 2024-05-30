@@ -33,6 +33,11 @@ in
         owner = "hercules-ci-agent";
         restartUnits = [ "hercules-ci-agent.service" ];
       };
+
+      "tokens/nixAccessTokens.conf" = {
+        mode = "0440";
+        group = "users";
+      };
     };
   };
 }
