@@ -1,11 +1,28 @@
 { pkgs, ... }:
 {
   environment = {
-    systemPackages = with pkgs; [ libguestfs ];
+    systemPackages = with pkgs; [
+      libguestfs
+      spice
+    ];
   };
 
   programs = {
     virt-manager = {
+      enable = true;
+    };
+  };
+
+  services = {
+    spice-autorandr = {
+      enable = true;
+    };
+
+    spice-vdagentd = {
+      enable = true;
+    };
+
+    spice-webdavd = {
       enable = true;
     };
   };
@@ -33,6 +50,10 @@
           ];
         };
       };
+    };
+
+    spiceUSBRedirection = {
+      enable = true;
     };
   };
 }
