@@ -29,6 +29,7 @@ in
             cell.homeProfiles.modules
             cell.homeProfiles.my-emacs
             cell.homeProfiles.obs-studio
+            cell.homeProfiles.office
             cell.homeProfiles.ssh
             cell.homeProfiles.texlive
             cell.homeProfiles.xdg
