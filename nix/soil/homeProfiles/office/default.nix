@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   home = {
-    packages = with pkgs; [ onlyoffice-bin_latest ];
+    packages = with pkgs; [
+      onlyoffice-bin_latest
+      wpsoffice
+    ];
   };
 }
