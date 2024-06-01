@@ -22,6 +22,7 @@ in
         { config, ... }:
         {
           imports = [
+            cell.homeProfiles.browser
             cell.homeProfiles.cachix
             cell.homeProfiles.chinese
             cell.homeProfiles.direnv

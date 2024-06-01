@@ -15,6 +15,7 @@ in
         { config, ... }:
         {
           imports = [
+            cell.homeProfiles.browser
             cell.homeProfiles.cachix
             cell.homeProfiles.chinese
             cell.homeProfiles.direnv
@@ -23,7 +24,6 @@ in
             cell.homeProfiles.git
             cell.homeProfiles.gnome
             cell.homeProfiles.gnupg
-            cell.homeProfiles.google-chrome
             cell.homeProfiles.japanese
             cell.homeProfiles.korean
             cell.homeProfiles.modules
