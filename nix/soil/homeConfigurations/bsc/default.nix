@@ -24,6 +24,7 @@ in
     cell.homeProfiles.git
     cell.homeProfiles.gnome
     cell.homeProfiles.gnupg
+    cell.homeProfiles.graphics
     cell.homeProfiles.japanese
     cell.homeProfiles.korean
     cell.homeProfiles.modules
