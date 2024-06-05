@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      onlyoffice-bin_latest
+      rnote
       wpsoffice
     ];
   };
