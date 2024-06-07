@@ -20,6 +20,7 @@ with epkgs;
   gcmh
   jsonrpc
   let-alist
+  lv
   marginalia
   orderless
   org
@@ -70,6 +71,7 @@ with epkgs;
   ht
   ibuffer-project
   inheritenv
+  lsp-mode
   magit
   magit-section
   modus-themes
@@ -92,6 +94,7 @@ with epkgs;
   shrink-path
   sideline
   sideline-flymake
+  sideline-lsp
   smartparens
   string-inflection
   svg-tag-mode

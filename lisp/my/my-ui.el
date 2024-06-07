@@ -52,6 +52,7 @@
   (require 'popper-echo)
   (require 'savehist)
   (require 'scroll-bar)
+  (require 'sideline)
   (require 'svg-tag-mode)
   (require 'switch-window)
   (require 'tab-bar)
@@ -230,6 +231,10 @@
     (:keymap-set
      ;; Select a buffer open in current window.
      "<remap> <switch-to-buffer>" #'consult-buffer)))
+
+(setup sideline
+  (:autoload global-sideline-mode sideline-mode)
+  (:first-buffer global-sideline-mode))
 
 (setup uniquify
   (:when-loaded

@@ -12,10 +12,6 @@ with pkgs;
   ripgrep
   texliveFull
 ]
-++ (with llvmPackages_18; [
-  bintools-unwrapped
-  clang-unwrapped
-  mlir
-])
+++ (with llvmPackages; [ clang-tools ])
 ++ (with nodePackages; [ prettier ])
 ++ (with python3Packages; [ grip ])

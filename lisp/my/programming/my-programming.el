@@ -58,6 +58,7 @@
   (require 'rainbow-delimiters)
   (require 'sideline)
   (require 'sideline-flymake)
+  (require 'sideline-lsp)
   (require 'smartparens))
 
 (defun my-inhibit-parinfer-rust-troublesome-modes (&rest _)
@@ -83,12 +84,16 @@
 (setup rainbow-delimiters
   (:autoload rainbow-delimiters-mode))
 
+(setup sideline
+  (:autoload sideline-mode))
+
 (setup prog-mode
   (:hook
    #'display-line-numbers-mode ;; Show line numbers of buffer.
    #'hl-line-mode              ;; Highlight current line of buffer.
    #'hl-todo-mode              ;; Highlight TODO keywords.
-   #'rainbow-delimiters-mode)) ;; Colorful brackets highlighting.
+   #'rainbow-delimiters-mode   ;; Colorful brackets highlighting.
+   #'sideline-mode))           ;; Sideline at current line.
 
 
 
@@ -114,15 +119,12 @@
   (:when-loaded
     (:set sideline-flymake-display-mode 'point)))
 
-(setup sideline
-  (:autoload sideline-mode)
-  (:when-loaded
-    (:set (append sideline-backends-right) 'sideline-flymake)))
-
 (setup flymake
   (:with-hook flymake-mode-hook
     (:hook
-     #'sideline-mode
+     #'(lambda ()
+         (:local-set
+          (append sideline-backends-right) 'sideline-flymake))
      #'(lambda ()
          (:with-map flymake-mode-map
            (:keymap-set
@@ -183,10 +185,19 @@
 ;;;
 ;; LSP:
 
+(setup sideline-lsp
+  (:autoload sideline-lsp))
+
 (setup eglot-booster
-  (:autoload eglot-booster-mode)
-  (:after eglot
-    (eglot-booster-mode +1)))
+  (:autoload eglot-booster-mode))
+
+(setup eglot
+  (:with-hook eglot-managed-mode-hook
+    (:hook
+     #'eglot-booster-mode
+     #'(lambda ()
+         (:local-set
+          (append sideline-backends-left) 'sideline-lsp)))))
 
 
 
