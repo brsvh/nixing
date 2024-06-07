@@ -24,7 +24,7 @@
       follows = "nixpkgs-unstable";
     };
     nixpkgs-stable = {
-      url = "github:NixOS/nixpkgs/nixos-23.11";
+      url = "github:NixOS/nixpkgs/nixos-24.05";
     };
     nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
