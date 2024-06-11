@@ -42,6 +42,7 @@
 (require 'my-programming-lisp)
 (require 'my-programming-typescript)
 (require 'my-programming-nix)
+(require 'my-programming-web)
 (require 'my-programming-yaml)
 
 (cl-eval-when (compile)

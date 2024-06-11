@@ -12,6 +12,7 @@ with pkgs;
   nixfmt-rfc-style
   ripgrep
   texliveFull
+  vscode-langservers-extracted
 ]
 ++ (with llvmPackages; [ clang-tools ])
 ++ (with nodePackages; [

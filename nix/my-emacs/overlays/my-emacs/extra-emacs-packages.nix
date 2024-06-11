@@ -111,7 +111,8 @@ with epkgs;
   markdown-mode
   org-contrib
   tablist
-  with-editor
+  web-mode
   wgrep
+  with-editor
   yasnippet-snippets
 ])
