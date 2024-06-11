@@ -58,13 +58,15 @@
   (require 'hl-line)
   (require 'hl-todo)
   (require 'parinfer-rust-mode)
+  (require 'popper)
   (require 'prog-mode)
   (require 'rainbow-delimiters)
   (require 'sideline)
   (require 'sideline-eldoc)
   (require 'sideline-flymake)
   (require 'sideline-lsp)
-  (require 'smartparens))
+  (require 'smartparens)
+  (require 'xref))
 
 (defun my-inhibit-parinfer-rust-troublesome-modes (&rest _)
   "Disable all `parinfer-rust-troublesome-modes' to inhibit warnings."
@@ -218,6 +220,14 @@
      #'(lambda ()
          (:local-set
           (append sideline-backends-left) 'sideline-lsp)))))
+
+
+
+;;;
+;; Reference:
+
+(setup xref
+  (:snoc popper-reference-buffers "\\*xref\\*"))
 
 
 
