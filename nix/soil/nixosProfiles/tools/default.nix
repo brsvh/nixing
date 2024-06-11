@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   environment = {
     systemPackages = with pkgs; [
@@ -19,7 +24,7 @@
 
   programs = {
     command-not-found = {
-      enable = true;
+      enable = false;
     };
 
     git = {
@@ -28,6 +33,13 @@
       lfs = {
         enable = true;
       };
+    };
+
+    nix-index = {
+      enable = true;
+      enableBashIntegration = lib.mkDefault true;
+      enableFishIntegration = lib.mkDefault config.programs.fish.enable;
+      enableZshIntegration = lib.mkDefault config.programs.zsh.enable;
     };
 
     nix-ld = {
