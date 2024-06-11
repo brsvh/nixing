@@ -51,6 +51,7 @@
   (require 'display-line-numbers)
   (require 'eglot)
   (require 'eglot-booster)
+  (require 'eldoc)
   (require 'electric)
   (require 'flymake)
   (require 'hl-line)
@@ -59,6 +60,7 @@
   (require 'prog-mode)
   (require 'rainbow-delimiters)
   (require 'sideline)
+  (require 'sideline-eldoc)
   (require 'sideline-flymake)
   (require 'sideline-lsp)
   (require 'smartparens))
@@ -107,6 +109,21 @@
 
 (setup prog-mode
   (:hook #'company-mode))
+
+
+
+;;;
+;; Documentation:
+
+(setup sideline-eldoc
+  (:autoload sideline-eldoc))
+
+(setup eldoc
+  (:with-mode eldoc-mode
+    (:hook
+     #'(lambda ()
+         (:local-set
+          (append sideline-backends-left) 'sideline-eldoc)))))
 
 
 

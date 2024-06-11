@@ -42,6 +42,7 @@ with epkgs;
   eglot-booster
   form-feed
   on
+  sideline-eldoc
 ])
 ++ (with melpaPackages; [
   aio

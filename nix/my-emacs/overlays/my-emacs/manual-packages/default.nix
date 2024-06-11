@@ -13,4 +13,6 @@ in
   eglot-booster = callPackage' ./eglot-booster;
 
   on = callPackage' ./on;
+
+  sideline-eldoc = callPackage' ./sideline-eldoc;
 }
