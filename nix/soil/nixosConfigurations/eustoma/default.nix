@@ -7,7 +7,13 @@
   ...
 }:
 let
-  inherit (inputs) hardware hercules-ci-agent lanzaboote;
+  inherit (inputs)
+    emacs-overlay
+    hardware
+    hercules-ci-agent
+    lanzaboote
+    ;
+
   inherit (inputs.cells) apps fonts my-emacs;
 
   # This device will not be exposed to the public network. The domain
@@ -47,6 +53,7 @@ in
 
       overlays = [
         apps.overlays.unfree
+        emacs-overlay.overlays.default
         fonts.overlays.proprius-fonts
         hercules-ci-agent.overlays.default
         lanzaboote.overlays.default
