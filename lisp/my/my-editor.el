@@ -46,6 +46,7 @@
   (require 'rg-ibuffer)
   (require 'saveplace)
   (require 'simple)
+  (require 'subword)
   (require 'tabify)
   (require 'yasnippet))
 
@@ -189,6 +190,10 @@ shebang line or file path may exist now."
     (:keymap-set
      "<remap> <move-beginning-of-line>" #'mwim-beginning-of-code-or-line
      "<remap> <move-end-of-line>" #'mwim-end-of-code-or-line)))
+
+(setup subword
+  (:autoload global-subword-mode subword-mode)
+  (:first-buffer global-subword-mode))
 
 
 
