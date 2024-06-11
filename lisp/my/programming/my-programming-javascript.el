@@ -41,9 +41,11 @@
 ;;;
 ;; Major modes:
 
-;; REVIEW Is the default major mode good?
 (setup js
-  (:autoload js-mode js-ts-mode))
+  (:autoload js-mode js-ts-mode)
+  (:with-mode js-ts-mode
+    (:file-match
+     "\\.js[mx]?\\'")))
 
 
 
