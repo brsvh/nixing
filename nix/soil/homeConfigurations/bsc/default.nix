@@ -32,6 +32,7 @@ in
     cell.homeProfiles.obs-studio
     cell.homeProfiles.ssh
     cell.homeProfiles.texlive
+    cell.homeProfiles.tools
     cell.homeProfiles.xdg
   ];
 
