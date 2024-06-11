@@ -14,5 +14,8 @@ with pkgs;
   texliveFull
 ]
 ++ (with llvmPackages; [ clang-tools ])
-++ (with nodePackages; [ prettier ])
+++ (with nodePackages; [
+  prettier
+  typescript-language-server
+])
 ++ (with python3Packages; [ grip ])

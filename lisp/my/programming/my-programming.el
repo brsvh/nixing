@@ -38,7 +38,9 @@
 (require 'my-programming-cc)
 (require 'my-programming-docker)
 (require 'my-programming-emacs-lisp)
+(require 'my-programming-javascript)
 (require 'my-programming-lisp)
+(require 'my-programming-typescript)
 (require 'my-programming-nix)
 (require 'my-programming-yaml)
 
