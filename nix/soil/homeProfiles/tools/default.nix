@@ -1,5 +1,30 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  home = {
+    packages = with pkgs; [
+      # debug
+      cntr
+
+      # development
+      jq
+
+      # network
+      curl
+
+      # search
+      agrep
+      fd
+      findutils
+      gnugrep
+      ripgrep
+    ];
+  };
+
   programs = {
     command-not-found = {
       enable = false;

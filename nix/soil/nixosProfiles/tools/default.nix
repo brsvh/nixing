@@ -7,6 +7,9 @@
 {
   environment = {
     systemPackages = with pkgs; [
+      # debug
+      cntr
+
       # development
       jq
 
