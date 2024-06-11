@@ -1,5 +1,7 @@
-{ cell, inputs, ... }:
+{ inputs, ... }:
 let
+  inherit (inputs) nix-index-database;
+
   inherit (inputs.cells) fonts my-emacs;
 in
 {
@@ -7,5 +9,6 @@ in
     fonts.homeModules.fonts
     fonts.homeModules.tsangertype-fonts
     my-emacs.homeModules.my-emacs
+    nix-index-database.hmModules.nix-index
   ];
 }

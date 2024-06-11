@@ -31,6 +31,7 @@ in
     cell.nixosProfiles.docker
     cell.nixosProfiles.hercules-ci-agent
     cell.nixosProfiles.libvirt
+    cell.nixosProfiles.modules
     cell.nixosSecrets.eustoma
     cell.nixosSuites.gnome-workstation
     cell.nixosSuites.laptop

@@ -527,6 +527,27 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718011381,
+        "narHash": "sha256-sFXI+ZANp/OC+MwfJoZgPSf4xMdtzQMe1pS3FGti4C8=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "88ad3d7501e22b2401dd72734b032b7baa794434",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "main",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nix-systems": {
       "locked": {
         "lastModified": 1680978846,
@@ -753,6 +774,7 @@
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
         "lanzaboote": "lanzaboote",
+        "nix-index-database": "nix-index-database",
         "nix-systems": "nix-systems",
         "nixago": "nixago",
         "nixago-extensions": "nixago-extensions",
