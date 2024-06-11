@@ -36,6 +36,7 @@ in
             cell.homeProfiles.korean
             cell.homeProfiles.modules
             cell.homeProfiles.my-emacs
+            cell.homeProfiles.node
             cell.homeProfiles.obs-studio
             cell.homeProfiles.office
             cell.homeProfiles.ssh
