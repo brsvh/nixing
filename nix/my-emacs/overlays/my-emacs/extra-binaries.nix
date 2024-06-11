@@ -8,6 +8,7 @@ with pkgs;
   graphviz
   mailutils
   multimarkdown
+  nil
   nixfmt-rfc-style
   ripgrep
   texliveFull

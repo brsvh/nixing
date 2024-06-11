@@ -33,6 +33,7 @@
 
 (cl-eval-when (compile)
   (require 'apheleia-formatters)
+  (require 'eglot)
   (require 'nix-ts-mode))
 
 
@@ -41,6 +42,7 @@
 ;; Major modes:
 
 (setup nix-ts-mode
+  (:autoload nix-ts-mode)
   (:with-mode nix-ts-mode
     (:file-match
      "\\.nix\\'")))
@@ -54,6 +56,22 @@
   (:when-loaded
     ;; REVIEW Remove this after radian-software/apheleia#300 is merged.
     (:set (append apheleia-mode-alist) '(nix-ts-mode . nixfmt))))
+
+
+
+;;;
+;; Language Server:
+
+(setup eglot
+  (:autoload eglot-ensure)
+  (:when-loaded
+    (:snoc
+     eglot-server-programs
+     '(nix-ts-mode . ("nil")))))
+
+(setup nix-ts-mode
+  (:with-hook nix-ts-mode-hook
+    (:hook #'eglot-ensure)))
 
 
 
