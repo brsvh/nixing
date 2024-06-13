@@ -142,7 +142,9 @@
   (:when-loaded
     (:with-map ctl-c-p-map
       (:keymap-set
-       "e" envrc-command-map))))
+       "e" envrc-command-map)))
+  (:snoc popper-reference-buffers
+         "\\*envrc\\*"))
 
 
 
