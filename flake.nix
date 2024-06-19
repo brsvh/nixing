@@ -337,9 +337,6 @@
     rust-overlay = {
       url = "github:oxalica/rust-overlay/master";
       inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
         nixpkgs = {
           follows = "nixpkgs";
         };
