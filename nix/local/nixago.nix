@@ -144,23 +144,31 @@ with std.lib;
       {
         data =
           let
-            lilac = {
-              age = "age1g5777szdqk5all8tq823v5gzzjag5j3xk92gy44e5rqz9ktya4hsnjr8m9";
+            bsc = {
+              age = "age1h8jgr473q6vj9e8kannr0ljzreu7whc46qhjfpjxxkl4w38ny5esz6mk0v";
             };
 
             eustoma = {
               age = "age1lgy77wf7vxlvvv8lzsgmq6wgf43c4hl93ls2mw8pspmdcuzqvems7svu6t";
             };
+
+            lilac = {
+              age = "age1g5777szdqk5all8tq823v5gzzjag5j3xk92gy44e5rqz9ktya4hsnjr8m9";
+            };
           in
           {
             creation_rules = [
+              {
+                path_regex = "^nix/soil/nixosSecrets/eustoma/secrets\.yaml$";
+                key_groups = [ { age = [ eustoma.age ]; } ];
+              }
               {
                 path_regex = "^nix/soil/nixosSecrets/lilac/secrets\.yaml$";
                 key_groups = [ { age = [ lilac.age ]; } ];
               }
               {
-                path_regex = "^nix/soil/nixosSecrets/eustoma/secrets\.yaml$";
-                key_groups = [ { age = [ eustoma.age ]; } ];
+                path_regex = "^nix/soil/userSecrets/bsc/secrets\.yaml$";
+                key_groups = [ { age = [ bsc.age ]; } ];
               }
             ];
           };

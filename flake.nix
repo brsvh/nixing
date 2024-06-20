@@ -388,6 +388,7 @@
             (functions "overlays")
             (functions "packages")
             (functions "templates")
+            (functions "userSecrets")
             (nixago "nixago")
             (runnables "formatter")
           ])

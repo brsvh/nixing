@@ -13,6 +13,7 @@ in
     cell.nixosProfiles.bash
     cell.nixosProfiles.fish
     cell.nixosProfiles.guix
+    cell.nixosProfiles.home-manager
     cell.nixosProfiles.nix
     cell.nixosProfiles.openssh
     cell.nixosProfiles.polkit

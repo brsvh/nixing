@@ -1,11 +1,17 @@
+{ pkgs, ... }:
 {
   home = {
     packages = with pkgs; [ microsoft-edge ];
   };
 
   programs = {
-    google-chrome = {
+    chromium = {
       enable = true;
+      commandLineArgs = [
+        "--enable-features=UseOzonePlatform"
+        "--gtk-version=4"
+        "--ozone-platform=wayland"
+      ];
     };
   };
 }
