@@ -1,5 +1,6 @@
 {
   cell,
+  config,
   lib,
   pkgs,
   ...
@@ -67,6 +68,9 @@ in
               font-name='${cfg.sansSerif} ${interfaceFontSize}'
               document-font-name='${cfg.sansSerif} ${interfaceFontSize}'
               monospace-font-name='${cfg.monospace} ${interfaceFontSize}'
+
+              [org/gnome/mutter]
+              dynamic-workspaces=true
 
               [org.gnome.shell]
               enabled-extensions=['kimpanel@kde.org', 'appindicatorsupport@rgcjonas.gmail.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
