@@ -32,7 +32,21 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
+  (require 'eldoc-box)
   (require 'parinfer-rust-mode))
+
+
+
+;;;
+;; Documentation:
+
+(setup eldoc-box
+  (:autoload eldoc-box-hover-at-point-mode eldoc-box-hover-mode))
+
+(setup eglot
+  (:with-hook emacs-lisp-mode-hook
+    (:hook
+     #' eldoc-box-hover-at-point-mode)))
 
 
 
