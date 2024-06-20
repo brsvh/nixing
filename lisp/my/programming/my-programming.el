@@ -53,6 +53,7 @@
   (require 'eglot)
   (require 'eglot-booster)
   (require 'eldoc)
+  (require 'eldoc-box)
   (require 'electric)
   (require 'flymake)
   (require 'hl-line)
@@ -62,7 +63,7 @@
   (require 'prog-mode)
   (require 'rainbow-delimiters)
   (require 'sideline)
-  (require 'sideline-eldoc)
+  ;; (require 'sideline-eldoc)
   (require 'sideline-flymake)
   (require 'sideline-lsp)
   (require 'smartparens)
@@ -118,15 +119,23 @@
 ;;;
 ;; Documentation:
 
-(setup sideline-eldoc
-  (:autoload sideline-eldoc))
+;; (setup sideline-eldoc
+;;   (:autoload sideline-eldoc))
 
-(setup eldoc
-  (:with-mode eldoc-mode
+;; (setup eldoc
+;;   (:with-mode eldoc-mode
+;;     (:hook
+;;      #'(lambda ()
+;;          (:local-set
+;;           (append sideline-backends-left) 'sideline-eldoc)))))
+
+(setup eldoc-box
+  (:autoload eldoc-box-hover-at-point-mode eldoc-box-hover-mode))
+
+(setup eglot
+  (:with-hook eglot-managed-mode-hook
     (:hook
-     #'(lambda ()
-         (:local-set
-          (append sideline-backends-left) 'sideline-eldoc)))))
+     #' eldoc-box-hover-at-point-mode)))
 
 
 

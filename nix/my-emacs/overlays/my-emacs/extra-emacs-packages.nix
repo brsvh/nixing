@@ -60,6 +60,7 @@ with epkgs;
   diredfl
   docker
   doom-modeline
+  eldoc-box
   emacsql
   embark-org-roam
   envrc
