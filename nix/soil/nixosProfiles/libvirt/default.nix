@@ -32,7 +32,7 @@
       enable = true;
 
       qemu = {
-        package = pkgs.qemu_kvm;
+        package = pkgs.qemu_full;
         runAsRoot = true;
 
         swtpm = {
