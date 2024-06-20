@@ -37,6 +37,7 @@
   (require 'anzu)
   (require 'autorevert)
   (require 'consult)
+  (require 'copyright)
   (require 'editorconfig)
   (require 'form-feed)
   (require 'mwim)
@@ -110,6 +111,17 @@ shebang line or file path may exist now."
   (:when-loaded
     (:set
      bookmark-default-file (my-data-path "bookmarks.el"))))
+
+
+
+;;;
+;; Copyright:
+
+(setup copyright
+  ;; TODO should I enable automatic update of copyright when saving?
+  (:set
+   copyright-names-regexp
+   (format "%s <%s>" user-full-name user-mail-address)))
 
 
 
