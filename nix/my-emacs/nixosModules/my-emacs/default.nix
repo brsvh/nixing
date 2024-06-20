@@ -103,6 +103,22 @@ in
       '';
     };
 
+    userMail = mkOption {
+      type = types.str;
+      # TODO set a default value
+      description = mdDoc ''
+        Customize `user-mail-address` of GNU Emacs.
+      '';
+    };
+
+    userName = mkOption {
+      type = types.str;
+      default = config.home.username;
+      description = mdDoc ''
+        Customize `user-full-name` of GNU Emacs.
+      '';
+    };
+
     variant = mkOption {
       type = types.enum [
         "nogui"
@@ -147,6 +163,15 @@ in
 
         variables = {
           EDITOR = mkIf cfg.defaultEditor (mkOverride 900 "my-emacs");
+        };
+      };
+
+      programs = {
+        my-emacs = {
+          extraConfig = ''
+            (setq user-full-name "${cfg.userName}"
+                  user-mail-address "${cfg.userMail}")
+          '';
         };
       };
     }
