@@ -6,10 +6,13 @@ with pkgs;
   emacs-lsp-booster
   git-cliff
   graphviz
+  guile
   mailutils
+  mitscheme
   multimarkdown
   nil
   nixfmt-rfc-style
+  racket-minimal
   ripgrep
   texliveFull
   vscode-langservers-extracted

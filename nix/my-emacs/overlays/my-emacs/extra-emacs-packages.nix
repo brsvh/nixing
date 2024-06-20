@@ -107,6 +107,10 @@ with epkgs;
   anzu
   edit-indirect
   editorconfig
+  geiser
+  geiser-guile
+  geiser-mit
+  geiser-racket
   hl-block-mode
   markdown-mode
   org-contrib
