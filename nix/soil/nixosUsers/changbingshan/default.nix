@@ -5,11 +5,9 @@
   ...
 }:
 let
-  inherit (inputs.cells) fonts my-emacs;
-
-  username = "changbingshan";
-
   fullname = "Bingshan Chang";
+  usermail = "changbingshan@iscas.ac.cn";
+  username = "changbingshan";
 in
 {
   imports = [ cell.nixosProfiles.fish ];
@@ -62,7 +60,12 @@ in
                 signByDefault = true;
               };
 
-              userEmail = "changbingshan@iscas.ac.cn";
+              userEmail = usermail;
+              userName = fullname;
+            };
+
+            my-emacs = {
+              userMail = usermail;
               userName = fullname;
             };
 

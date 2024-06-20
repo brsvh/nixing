@@ -1,8 +1,8 @@
 { cell, pkgs, ... }:
 let
-  username = "bsc";
-
   fullname = "Burgess Chang";
+  usermail = "bsc@brsvh.org";
+  username = "bsc";
 in
 {
   imports = [ cell.nixosProfiles.fish ];
@@ -54,7 +54,12 @@ in
                 signByDefault = true;
               };
 
-              userEmail = "bsc@brsvh.org";
+              userEmail = usermail;
+              userName = fullname;
+            };
+
+            my-emacs = {
+              userMail = usermail;
               userName = fullname;
             };
 
