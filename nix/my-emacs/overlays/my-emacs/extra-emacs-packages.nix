@@ -112,6 +112,7 @@ with epkgs;
   geiser-guile
   geiser-mit
   geiser-racket
+  haskell-mode
   hl-block-mode
   markdown-mode
   org-contrib
