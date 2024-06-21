@@ -97,6 +97,7 @@ with epkgs;
   sideline
   sideline-flymake
   sideline-lsp
+  simple-httpd
   smartparens
   string-inflection
   svg-tag-mode
