@@ -167,7 +167,7 @@ with std.lib;
                 key_groups = [ { age = [ lilac.age ]; } ];
               }
               {
-                path_regex = "^nix/soil/userSecrets/bsc/secrets\.yaml$";
+                path_regex = "^nix/soil/homeSecrets/bsc/secrets\.yaml$";
                 key_groups = [ { age = [ bsc.age ]; } ];
               }
             ];

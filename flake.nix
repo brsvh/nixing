@@ -388,7 +388,7 @@
             (functions "overlays")
             (functions "packages")
             (functions "templates")
-            (functions "userSecrets")
+            (functions "homeSecrets")
             (nixago "nixago")
             (runnables "formatter")
           ])

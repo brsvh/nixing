@@ -35,7 +35,7 @@ in
             cell.homeProfiles.texlive
             cell.homeProfiles.tools
             cell.homeProfiles.xdg
-            cell.userSecrets.bsc
+            cell.homeSecrets.bsc
           ];
 
           home = {

@@ -2,6 +2,7 @@
 {
   imports = [ cell.homeProfiles.ssh ];
 
+  # FIXME: it is necesscary to start sops-nix.service manually, too bad.
   sops = {
     age = {
       keyFile = "${config.xdg.configHome}/sops/key.txt";
