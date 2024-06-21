@@ -42,7 +42,6 @@ with epkgs;
   eglot-booster
   form-feed
   on
-  rpm-spec-mode
   sideline-eldoc
 ])
 ++ (with melpaPackages; [
