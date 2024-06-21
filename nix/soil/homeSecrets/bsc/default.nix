@@ -15,7 +15,6 @@
     secrets = {
       "google/api.conf" = {
         mode = "0440";
-        path = "${config.xdg.configHome}/environment.d/90-google.conf";
       };
     };
   };
