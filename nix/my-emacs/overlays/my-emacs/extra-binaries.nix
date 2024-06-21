@@ -17,7 +17,10 @@ with pkgs;
   texliveFull
   vscode-langservers-extracted
 ]
-++ (with haskellPackages; [ haskell-language-server ])
+++ (with haskellPackages; [
+  ghc
+  haskell-language-server
+])
 ++ (with llvmPackages; [ clang-tools ])
 ++ (with nodePackages; [
   prettier
