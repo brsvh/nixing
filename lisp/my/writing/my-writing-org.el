@@ -38,6 +38,7 @@
   (require 'citar-org-roam)
   (require 'elec-pair)
   (require 'embark)
+  (require 'font-lock)
   (require 'oc)
   (require 'oc-basic)
   (require 'oc-bibtex)
@@ -57,6 +58,7 @@
   (require 'org-roam-mode)
   (require 'org-roam-node)
   (require 'org-side-tree)
+  (require 'ox)
   (require 'ox-publish)
   (require 'valign)
   (require 'window))
@@ -150,6 +152,16 @@
      ;; Set height to 1/3 of current frame.
      (window-height 0.33))))
 
+(setup font-lock
+  (:when-loaded
+    (font-lock-add-keywords
+     'org-mode
+     '(("[[:multibyte:]]\\( \\)[/+*_=~][^a-zA-Z0-9/+*_=~\n]+?[/+*_=~]\\( \\)?[[:multibyte:]]?"
+        (1 (prog1 () (compose-region (match-beginning 1) (match-end 1) ""))))
+       ("[[:multibyte:]]?\\( \\)?[/+*_=~][^a-zA-Z0-9/+*_=~\n]+?[/+*_=~]\\( \\)[[:multibyte:]]"
+        (2 (prog1 () (compose-region (match-beginning 2) (match-end 2) "")))))
+     'append)))
+
 
 
 ;;;
@@ -236,6 +248,30 @@
                       (cons ?/ ?/)
                       (cons ?= ?=)
                       (cons ?~ ?~))))))
+
+
+
+;;;
+;; Export:
+
+(setup ox
+  (:when-loaded
+    (:set
+     (append org-export-filter-paragraph-functions)
+     #'(lambda (text _backend _info)
+         (let* ((text (replace-regexp-in-string
+                       "\\([[:multibyte:]]\\) *\n *\\([[:multibyte:]]\\)"
+                       "\\1\\2"
+                       text))
+                (text (replace-regexp-in-string
+                       "\\([[:multibyte:]]\\) \\(.*?\\) \\([[:multibyte:]]\\)"
+                       "\\1\\2\\3"
+                       text))
+                (text (replace-regexp-in-string
+                       "\\([[:multibyte:]]\\)\\(\\(?:<[^>]+>\\)?[a-z0-9A-Z-]+\\(?:<[^>]+>\\)?\\)\\([[:multibyte:]]\\)"
+                       "\\1 \\2 \\3"
+                       text)))
+           text)))))
 
 
 
