@@ -161,8 +161,6 @@ in
 
     opengl = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = lib.mkDefault true;
     };
   };
 
