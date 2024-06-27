@@ -106,6 +106,21 @@ let
     (emacsPackagesFor drv).overrideScope (
       finalEpkgs: prevEpkgs:
       let
+        elpaPackages = prevEpkgs.elpaPackages // {
+          org = prevEpkgs.org.overrideAttrs (prevAttrs: {
+            patches =
+              [ ]
+              ++ lib.optionals (lib.versionOlder prevAttrs.version "9.7.5") [
+                # security fix backported from 9.7.5
+                (pkgs.fetchpatch {
+                  url = "https://git.savannah.gnu.org/cgit/emacs/org-mode.git/patch/?id=f4cc61636947b5c2f0afc67174dd369fe3277aa8";
+                  hash = "sha256-bGgsnTSn6SMu1J8P2BfJjrKx2845FCsUB2okcIrEjDg=";
+                  stripLen = 1;
+                })
+              ];
+          });
+        };
+
         manualPackages = prevEpkgs.manualPackages // {
           my = callPackage ./manual-packages {
             emacs = drv;
@@ -113,7 +128,7 @@ let
           };
         };
       in
-      prevEpkgs.override { inherit manualPackages; }
+      prevEpkgs.override { inherit elpaPackages manualPackages; }
     );
 
   getPlainEmacs = drv: (emacsPackagesFor' drv).emacsWithPackages dependencies;
