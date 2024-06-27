@@ -87,6 +87,7 @@ with epkgs;
   org-roam
   org-roam-bibtex
   org-side-tree
+  ox-tufte
   pangu-spacing
   parsebib
   pdf-tools
@@ -115,6 +116,7 @@ with epkgs;
   geiser-racket
   haskell-mode
   hl-block-mode
+  htmlize
   markdown-mode
   org-contrib
   tablist

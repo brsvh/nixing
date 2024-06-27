@@ -60,6 +60,7 @@
   (require 'org-side-tree)
   (require 'ox)
   (require 'ox-publish)
+  (require 'ox-tufte)
   (require 'valign)
   (require 'window))
 
@@ -255,6 +256,7 @@
 ;; Export:
 
 (setup ox
+  (:also-load ox-tufte)
   (:when-loaded
     (:set
      (append org-export-filter-paragraph-functions)
