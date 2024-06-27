@@ -65,6 +65,7 @@ with epkgs;
   embark-org-roam
   envrc
   f
+  flymake-eslint
   git-cliff
   git-commit
   git-modes

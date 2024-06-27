@@ -33,8 +33,10 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
-  (require 'typescript-ts-mode)
-  (require 'eglot))
+  (require 'eglot)
+  (require 'flymake)
+  (require 'flymake-eslint)
+  (require 'typescript-ts-mode))
 
 
 
@@ -44,6 +46,20 @@
 ;; REVIEW Is the default major mode good?
 (setup typescript-ts-mode
   (:autoload tsx-ts-mode typescript-ts-mode))
+
+
+
+;;;
+;; Diagnostics:
+
+(setup flymake-eslint
+  (:autoload flymake-eslint-enable))
+
+(setup typescript-ts-mode
+  (:with-mode typescript-ts-mode
+    (:hook #'flymake-eslint-enable))
+  (:with-mode tsx-ts-mode
+    (:hook #'flymake-eslint-enable)))
 
 
 

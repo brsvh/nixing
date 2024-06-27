@@ -33,8 +33,10 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
-  (require 'js)
-  (require 'eglot))
+  (require 'eglot)
+  (require 'flymake)
+  (require 'flymake-eslint)
+  (require 'js))
 
 
 
@@ -45,7 +47,23 @@
   (:autoload js-mode js-ts-mode)
   (:with-mode js-ts-mode
     (:file-match
-     "\\.js[mx]?\\'")))
+     "\\.cjs\\'"
+     "\\.js[mx]?\\'"
+     "\\.mjs\\'")))
+
+
+
+;;;
+;; Diagnostics:
+
+(setup flymake-eslint
+  (:autoload flymake-eslint-enable))
+
+(setup js
+  (:with-mode js-ts-mode
+    (:hook #'flymake-eslint-enable))
+  (:with-mode js-mode
+    (:hook #'flymake-eslint-enable)))
 
 
 

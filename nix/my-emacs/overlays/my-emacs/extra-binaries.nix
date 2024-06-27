@@ -23,6 +23,7 @@ with pkgs;
 ])
 ++ (with llvmPackages; [ clang-tools ])
 ++ (with nodePackages; [
+  eslint
   prettier
   typescript-language-server
 ])
