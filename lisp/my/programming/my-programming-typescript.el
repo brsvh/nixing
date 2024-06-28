@@ -43,9 +43,14 @@
 ;;;
 ;; Major modes:
 
-;; REVIEW Is the default major mode good?
 (setup typescript-ts-mode
-  (:autoload tsx-ts-mode typescript-ts-mode))
+  (:autoload tsx-ts-mode typescript-ts-mode)
+  (:with-mode typescript-ts-mode
+    (:file-match
+     "\\.ts\\'"))
+  (:with-mode tsx-ts-mode
+    (:file-match
+     "\\.tsx\\'")))
 
 
 
