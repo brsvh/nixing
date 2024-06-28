@@ -64,7 +64,7 @@ in
               cfg = config.fonts.fontconfig.english;
             in
             lib.mkDefault ''
-              [org.gnome.desktop.interface]
+              [org/gnome/desktop/interface]
               font-name='${cfg.sansSerif} ${interfaceFontSize}'
               document-font-name='${cfg.sansSerif} ${interfaceFontSize}'
               monospace-font-name='${cfg.monospace} ${interfaceFontSize}'
@@ -72,8 +72,11 @@ in
               [org/gnome/mutter]
               dynamic-workspaces=true
 
-              [org.gnome.shell]
+              [org/gnome/shell]
               enabled-extensions=['kimpanel@kde.org', 'appindicatorsupport@rgcjonas.gmail.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+
+              [org/gnome/shell/app-switcher]
+              current-workspace-only=true
             '';
         };
       };
