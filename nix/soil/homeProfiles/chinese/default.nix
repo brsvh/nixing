@@ -38,6 +38,10 @@ in
     };
   };
 
+  home = {
+    packages = with pkgs; [ fcitx5-material-color ];
+  };
+
   i18n = {
     inputMethod = {
       enabled = "fcitx5";
@@ -145,7 +149,7 @@ in
             PerScreenDPI = true;
             PreferTextIcon = false;
             ShowLayoutNameInIcon = true;
-            Theme = "default";
+            Theme = "Material-Color-black";
             TrayFont = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             TrayOutlineColor = "#000000";
             TrayTextColor = "#ffffff";
