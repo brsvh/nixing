@@ -132,6 +132,10 @@ in
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
 
+    graphics = {
+      enable = true;
+    };
+
     nvidia = {
       modesetting = {
         enable = true;
@@ -157,10 +161,6 @@ in
           enable = true;
         };
       };
-    };
-
-    opengl = {
-      enable = true;
     };
   };
 

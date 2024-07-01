@@ -129,7 +129,7 @@ in
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
 
-    opengl = {
+    graphics = {
       enable = true;
     };
   };
