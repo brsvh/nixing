@@ -13,9 +13,10 @@
     chromium = {
       enable = true;
       commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--gtk-version=4"
-        "--ozone-platform=wayland"
+        # FIXME uncomment when fcitx5 is work
+        # "--enable-features=UseOzonePlatform"
+        # "--gtk-version=4"
+        # "--ozone-platform=wayland"
       ];
     };
   };
