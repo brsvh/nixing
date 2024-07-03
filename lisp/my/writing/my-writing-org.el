@@ -48,6 +48,7 @@
   (require 'org-clock)
   (require 'org-id)
   (require 'org-indent)
+  (require 'org-macs)
   (require 'org-modern)
   (require 'org-persist)
   (require 'org-registry)
@@ -63,6 +64,25 @@
   (require 'ox-tufte)
   (require 'valign)
   (require 'window))
+
+;; Ideas from Matthew Lee Hinman's blog.
+;; https://writequit.org/articles/emacs-org-mode-generate-ids.html
+(defun my/org-add-custom-id-at-point (&optional POM)
+  "Insert CUSTOM_ID property for the entry at POM.
+
+POM is an marker, or buffer position."
+  (interactive)
+  (let ((id (org-entry-get POM "CUSTOM_ID")))
+    (unless (and id (org-uuidgen-p id))
+      (setq id (org-id-new))
+      (org-entry-put POM "CUSTOM_ID" id)
+      (org-id-add-location id (buffer-file-name (buffer-base-buffer))))
+    id))
+
+(defun my/org-add-custom-id ()
+  "Add CUSTOM_ID properites for all headings in current buffer."
+  (interactive)
+  (org-map-entries #'my/org-add-custom-id-at-point))
 
 (defun my-writing-org-roam-db-fake-sync (fn &rest args)
   "Fake db sync around FN with ARGS."
@@ -285,7 +305,7 @@
     (:set
      org-id-locations-file (my-data-path "org/" "id-locations.el")
      ;; Link to entry with ID.
-     org-id-link-to-org-use-id 'create-if-interactive)))
+     org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)))
 
 
 
