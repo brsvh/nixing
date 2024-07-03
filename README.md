@@ -117,22 +117,8 @@ Then, import and use anything what you need.
 Unless otherwise specified, all work is free. You can redistribute it
 and/or modify it under the terms of the Do What The Fuck You Want To
 Public License, Version 2, as published by Sam Hocevar. You should have
-received a copy of it, see the *COPYING.WTFPL* file for more details. If
+received a copy of it, see the *COPYING* file for more details. If
 you did not recive it, see <http://www.wtfpl.net> for more details.
-
-There are some directories not licensed under WTFPL.
-
-- [lisp], you can redistribute it and/or modify it under the terms of
-  the GNU General Public License. You should have received a copy of it,
-  see the *COPYING.GPL* file for more details. If you did not recive it,
-  see <https://www.gnu.org/licenses/gpl-3.0.txt> for more details.
-- [nix/unfree/overlays/wemeet], you can redistribute it and/or modify it
-  under the terms of the MIT License. You should have received a copy of
-  it, see the *COPYING.MIT* file for more details. If you did not recive
-  it, see <https://opensource.org/license/mit> for more details.
-
-[lisp]: ./lisp/
-[nix/unfree/overlays/wemeet]: ./nix/apps/overlays/wemeet/
 
 ## Thanks
 
