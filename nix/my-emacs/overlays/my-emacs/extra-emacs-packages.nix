@@ -77,12 +77,14 @@ with epkgs;
   lsp-mode
   magit
   magit-section
+  mermaid-mode
   modus-themes
   mwim
   nerd-icons
   nerd-icons-dired
   nerd-icons-ibuffer
   nix-ts-mode
+  ob-mermaid
   org-category-capture
   org-project-capture
   org-roam

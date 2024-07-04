@@ -39,6 +39,7 @@
   (require 'elec-pair)
   (require 'embark)
   (require 'font-lock)
+  (require 'ob-mermaid)
   (require 'oc)
   (require 'oc-basic)
   (require 'oc-bibtex)
@@ -182,6 +183,16 @@ POM is an marker, or buffer position."
        ("[[:multibyte:]]?\\( \\)?[/+*_=~][^a-zA-Z0-9/+*_=~\n]+?[/+*_=~]\\( \\)[[:multibyte:]]"
         (2 (prog1 () (compose-region (match-beginning 2) (match-end 2) "")))))
      'append)))
+
+
+
+;;;
+;; Babel:
+
+(setup org
+  (:when-loaded
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 (list (cons 'mermaid t)))))
 
 
 

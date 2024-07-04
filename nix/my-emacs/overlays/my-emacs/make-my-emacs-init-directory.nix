@@ -59,12 +59,22 @@ let
     (require 'my-core)
 
     (cl-eval-when (compile)
+      (require 'mermaid-mode)
+      (require 'ob-mermaid)
       (require 'parinfer-rust-mode))
 
     (setup treesit-grammars
       (:snoc
        treesit-extra-load-path
        "${tree-sitter-grammars-path}"))
+
+    (setup mermaid-mode
+      (:set
+        mermaid-mmdc-location "${pkgs.mermaid-cli}/bin/mmdc"))
+
+    (setup ob-mermaid
+      (:set
+        ob-mermaid-cli-path "${pkgs.mermaid-cli}/bin/mmdc"))
 
     (setup parinfer-rust
       (:set

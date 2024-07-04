@@ -8,6 +8,7 @@ with pkgs;
   graphviz
   guile
   mailutils
+  mermaid-cli
   mitscheme
   multimarkdown
   nil

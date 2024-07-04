@@ -1,4 +1,4 @@
-;;; my-play.el --- Play of My Emacs -*- lexical-binding: t -*-
+;;; my-drawing.el --- Drawing support of My Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2024 Burgess Chang
 
@@ -25,39 +25,13 @@
 
 ;;; Commentary:
 
-;; The schedule of my Play.
-
+;; This file has enhanced my general drawing experience.
 ;;; Code:
 
-(require 'my-prelude)
 (require 'my-core)
+(require 'my-drawing-mermaid)
 
-
+;; TODO common settings
 
-(require 'my-comint)
-(require 'my-dired)
-(require 'my-editor)
-(require 'my-eshell)
-(require 'my-mule)
-(require 'my-project)
-(require 'my-security)
-(require 'my-ui)
-(require 'my-workflow)
-(require 'my-workspace)
-
-
-
-(require 'my-interlude)
-
-
-
-(require 'my-drawing)
-(require 'my-programming)
-(require 'my-writing)
-
-
-
-(require 'my-postlude)
-
-(provide 'my-play)
-;;; my-play.el ends here
+(provide 'my-drawing)
+;;; my-drawing.el ends here

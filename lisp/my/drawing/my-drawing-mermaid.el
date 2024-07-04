@@ -1,4 +1,4 @@
-;;; my-play.el --- Play of My Emacs -*- lexical-binding: t -*-
+;;; my-drawing-mermaid.el --- Mermaid support of My Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2024 Burgess Chang
 
@@ -25,39 +25,26 @@
 
 ;;; Commentary:
 
-;; The schedule of my Play.
-
+;; This file has enhanced my general drawing experience.
 ;;; Code:
 
-(require 'my-prelude)
 (require 'my-core)
 
-
-
-(require 'my-comint)
-(require 'my-dired)
-(require 'my-editor)
-(require 'my-eshell)
-(require 'my-mule)
-(require 'my-project)
-(require 'my-security)
-(require 'my-ui)
-(require 'my-workflow)
-(require 'my-workspace)
+(cl-eval-when (compile)
+  (require 'mermaid-mode))
 
 
 
-(require 'my-interlude)
+;;;
+;; Major mode:
+
+(setup mermaid-mode
+  (:with-mode mermaid-mode
+    (:file-match
+     "\\.mermaid\\'"
+     "\\.mmd\\'")))
 
 
 
-(require 'my-drawing)
-(require 'my-programming)
-(require 'my-writing)
-
-
-
-(require 'my-postlude)
-
-(provide 'my-play)
-;;; my-play.el ends here
+(provide 'my-drawing-mermaid)
+;;; my-drawing-mermaid.el ends here
