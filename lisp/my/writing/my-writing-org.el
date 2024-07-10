@@ -105,7 +105,9 @@ POM is an marker, or buffer position."
   (:set org-directory (my-path "~/org")))
 
 (setup org-indent
-  (:autoload org-indent-mode))
+  (:autoload org-indent-mode)
+  (:with-hook org-mode-hook
+    (:hook #'org-indent-mode)))
 
 (setup ol
   (:autoload org-store-link)
