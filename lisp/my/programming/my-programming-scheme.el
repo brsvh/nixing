@@ -1,4 +1,4 @@
-;;; my-programming-lisp.el --- Porgramming with Lisp -*- lexical-binding: t -*-
+;;; my-programming-scheme.el --- Porgramming with Scheme -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2024 Burgess Chang
 
@@ -25,24 +25,25 @@
 
 ;;; Commentary:
 
-;; This file has enhanced my Lisp-family programming experience.
+;; This file has enhanced my Scheme programming experience.
 
 ;;; Code:
 
 (require 'my-core)
 
 (cl-eval-when (compile)
-  (require 'parinfer-rust-mode))
+  (require 'parinfer-rust-mode)
+  (require 'scheme))
 
 
 
 ;;;
 ;; Parens editing:
 
-(setup lisp-mode
+(setup scheme-mode
   (:hook #'parinfer-rust-mode))
 
 
 
-(provide 'my-programming-lisp)
-;;; my-programming-lisp.el ends here
+(provide 'my-programming-scheme)
+;;; my-programming-scheme.el ends here
