@@ -13,6 +13,7 @@ with pkgs;
   multimarkdown
   nil
   nixfmt-rfc-style
+  pyright
   racket-minimal
   ripgrep
   texliveFull
@@ -28,4 +29,8 @@ with pkgs;
   prettier
   typescript-language-server
 ])
-++ (with python3Packages; [ grip ])
+++ (with python3Packages; [
+  black
+  grip
+  python
+])

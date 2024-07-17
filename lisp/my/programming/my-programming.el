@@ -41,6 +41,7 @@
 (require 'my-programming-haskell)
 (require 'my-programming-javascript)
 (require 'my-programming-lisp)
+(require 'my-programming-python)
 (require 'my-programming-scheme)
 (require 'my-programming-typescript)
 (require 'my-programming-nix)
