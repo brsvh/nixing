@@ -5,7 +5,6 @@ let
 in
 {
   imports = [
-    cell.nixosProfiles.alsa
     cell.nixosProfiles.chinese
     cell.nixosProfiles.english
     cell.nixosProfiles.firewall

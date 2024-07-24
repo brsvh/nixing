@@ -1,5 +1,0 @@
-{
-  sound = {
-    enable = true;
-  };
-}
