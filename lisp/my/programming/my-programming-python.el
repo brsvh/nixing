@@ -53,6 +53,8 @@
 
 ;; Activate `eglot' for all Python mode.
 (setup python
+  (:with-mode python-mode
+    (:hook #'eglot-ensure))
   (:with-mode python-ts-mode
     (:hook #'eglot-ensure)))
 
