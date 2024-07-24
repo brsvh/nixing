@@ -18,11 +18,14 @@ in
 
   environment = {
     systemPackages =
-      (with pkgs.gnome; [ adwaita-icon-theme ])
-      ++ (with pkgs.gnomeExtensions; [
-        appindicator
-        kimpanel
-      ]);
+      with pkgs;
+      (
+        [ adwaita-icon-theme ]
+        ++ (with gnomeExtensions; [
+          appindicator
+          kimpanel
+        ])
+      );
   };
 
   programs = {
