@@ -14,6 +14,20 @@ in
     cell.homeProfiles.rime
   ];
 
+  gtk = {
+    gtk2 = {
+      extraConfig = ''
+        gtk-im-module = "fcitx";
+      '';
+    };
+
+    gtk3 = {
+      extraConfig = {
+        gtk-im-module = "fcitx";
+      };
+    };
+  };
+
   fonts = {
     fontconfig = {
       chinese = {
