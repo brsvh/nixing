@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
   environment = {
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+
     systemPackages = with pkgs.kdePackages; [
       akonadi
       kaccounts-integration
@@ -29,7 +33,7 @@
         enable = true;
 
         wayland = {
-          enable = withWayland;
+          enable = true;
         };
       };
     };
