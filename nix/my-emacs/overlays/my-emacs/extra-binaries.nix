@@ -12,10 +12,14 @@ with pkgs;
   mitscheme
   multimarkdown
   nil
+  nix
   nixfmt-rfc-style
   pyright
   racket-minimal
   ripgrep
+  rust-analyzer
+  rustc
+  rustfmt
   texliveFull
   vscode-langservers-extracted
 ]
@@ -23,10 +27,14 @@ with pkgs;
   ghc
   haskell-language-server
 ])
-++ (with llvmPackages; [ clang-tools ])
+++ (with llvmPackages; [
+  clang
+  clang-tools
+])
 ++ (with nodePackages; [
   eslint
   prettier
+  typescript
   typescript-language-server
 ])
 ++ (with python3Packages; [
@@ -34,3 +42,4 @@ with pkgs;
   grip
   python
 ])
+++ (with rubyPackages; [ sass ])
