@@ -104,11 +104,6 @@ POM is an marker, or buffer position."
   (:autoload org-mode)
   (:set org-directory (my-path "~/org")))
 
-(setup org-indent
-  (:autoload org-indent-mode)
-  (:with-hook org-mode-hook
-    (:hook #'org-indent-mode)))
-
 (setup ol
   (:autoload org-store-link)
   (:keymap-set-into ctl-c-a-map "s" #'org-store-link))
@@ -144,6 +139,9 @@ POM is an marker, or buffer position."
 
      ;; Move What I Mean.
      org-special-ctrl-a/e t
+
+     ;; Enable `org-indent-mode' at startup.
+     org-startup-indented t
 
      ;; Insert tags after heading.
      org-tags-column 0)
