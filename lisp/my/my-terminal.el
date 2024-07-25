@@ -1,4 +1,4 @@
-;;; my-eshell.el --- `eshell' support of My Emacs -*- lexical-binding: t -*-
+;;; my-terminal.el --- `eshell' support of My Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2024 Burgess Chang
 
@@ -32,6 +32,7 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
+  (require 'eat)
   (require 'em-alias)
   (require 'esh-mode)
   (require 'my-prelude))
@@ -39,17 +40,25 @@
 
 
 ;;;
-;; Common settings:
+;; EAT:
+
+(setup eat
+  (:autoload eat-mode)
+  (:snoc popper-reference-buffers'eat-mode))
+
+
+
+;;;
+;; EShell:
 
 (setup eshell
   ;; Popup all `eshell-mode' buffers.
-  (:snoc popper-reference-buffers
-         'eshell-mode)
+  (:snoc popper-reference-buffers 'eshell-mode)
   (:set
    eshell-aliases-file (my-path my-etc-directory "eshell/aliases")
    eshell-directory-name (my-state-path "eshell/")))
 
 
 
-(provide 'my-eshell)
-;;; my-eshell.el ends here
+(provide 'my-terminal)
+;;; my-terminal.el ends here

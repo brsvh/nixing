@@ -111,6 +111,7 @@ with epkgs;
 ])
 ++ (with nongnuPackages; [
   anzu
+  eat
   edit-indirect
   editorconfig
   geiser
