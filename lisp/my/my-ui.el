@@ -425,7 +425,9 @@
      "C-~" #'popper-cycle
      "M-p" #'popper-toggle-type))
   (:when-loaded
-    (:set popper-window-height #'my-popper-fit-window-height)
+    (:set
+     popper-group-function #'popper-group-by-directory
+     popper-window-height #'my-popper-fit-window-height)
     ;; Close popups with `keyboard-quit'.
     (:advice-add
      keyboard-quit :before #'my-popper-close-with-keyboard-quit)
