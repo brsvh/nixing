@@ -90,6 +90,7 @@ with epkgs;
   org-roam
   org-roam-bibtex
   org-side-tree
+  ox-reveal
   ox-tufte
   pangu-spacing
   parsebib
