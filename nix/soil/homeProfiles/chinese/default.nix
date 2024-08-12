@@ -52,10 +52,6 @@ in
     };
   };
 
-  home = {
-    packages = with pkgs; [ fcitx5-material-color ];
-  };
-
   i18n = {
     inputMethod = {
       enabled = "fcitx5";
@@ -155,7 +151,7 @@ in
         generators.toINIWithGlobalSection { } {
           globalSection = {
             "Vertical Candidate List" = false;
-            DarkTheme = "default-dark";
+            DarkTheme = "plasma";
             EnableFractionalScale = true;
             Font = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             ForceWaylandDPI = 0;
@@ -163,7 +159,7 @@ in
             PerScreenDPI = true;
             PreferTextIcon = false;
             ShowLayoutNameInIcon = true;
-            Theme = "Material-Color-black";
+            Theme = "plasma";
             TrayFont = "${config.fonts.fontconfig.chinese.sansSerif} 11";
             TrayOutlineColor = "#000000";
             TrayTextColor = "#ffffff";
