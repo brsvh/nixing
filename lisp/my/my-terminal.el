@@ -35,7 +35,8 @@
   (require 'eat)
   (require 'em-alias)
   (require 'esh-mode)
-  (require 'my-prelude))
+  (require 'my-prelude)
+  (require 'project))
 
 
 
@@ -43,8 +44,11 @@
 ;; EAT:
 
 (setup eat
-  (:autoload eat-mode)
-  (:snoc popper-reference-buffers'eat-mode))
+  (:autoload eat-mode eat-project)
+  (:snoc popper-reference-buffers'eat-mode)
+  (:with-map project-prefix-map
+    (:keymap-set
+     "s" #'eat-project)))
 
 
 
