@@ -1,5 +1,17 @@
-{ pkgs, ... }:
 {
+  cell,
+  config,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    cell.nixosProfiles.dconf
+    cell.nixosProfiles.english
+    cell.nixosProfiles.fcitx5
+    cell.nixosProfiles.xdg
+  ];
+
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -15,10 +27,18 @@
     ];
   };
 
-  i18n = {
-    inputMethod = {
-      enabled = "fcitx5";
+  programs = {
+    gnupg = {
+      agent = {
+        pinentryPackage = pkgs.pinentry-qt;
+      };
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "kde";
+    style = "breeze";
   };
 
   services = {

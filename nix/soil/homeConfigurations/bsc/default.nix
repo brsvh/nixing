@@ -22,7 +22,7 @@ in
     cell.homeProfiles.english
     cell.homeProfiles.fish
     cell.homeProfiles.git
-    cell.homeProfiles.gnome
+    cell.homeProfiles.plasma
     cell.homeProfiles.gnupg
     cell.homeProfiles.graphics
     cell.homeProfiles.japanese

@@ -14,7 +14,6 @@
       enableExtraSocket = true;
       enableFishIntegration = config.programs.fish.enable;
       enableSshSupport = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
     };
   };
 }

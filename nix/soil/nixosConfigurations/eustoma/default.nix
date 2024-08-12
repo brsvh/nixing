@@ -33,7 +33,7 @@ in
     cell.nixosProfiles.libvirt
     cell.nixosProfiles.modules
     cell.nixosSecrets.eustoma
-    cell.nixosSuites.gnome-workstation
+    cell.nixosSuites.plasma-workstation
     cell.nixosSuites.laptop
     cell.nixosUsers.root
     cell.nixosUsers.bsc
@@ -123,7 +123,7 @@ in
   disko = cell.diskoConfigurations.eustoma.disko;
 
   environment = {
-    systemPackages = with pkgs; [ config.bee.home.packages.home-manager ];
+    systemPackages = [ config.bee.home.packages.home-manager ];
   };
 
   hardware = {

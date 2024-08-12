@@ -44,4 +44,10 @@
       package = pkgs.adwaita-icon-theme;
     };
   };
+
+  services = {
+    gpg-agent = {
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
+  };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   gtk = {
     enable = true;
@@ -9,7 +9,10 @@
       size = 24; # For 125% scaling.
     };
 
-    # TODO set default font and size.
+    font = {
+      name = config.fonts.fontconfig.english.sansSerif;
+      size = 11;
+    };
 
     gtk2 = {
       configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -68,6 +71,12 @@
     style = {
       package = with pkgs; kdePackages.breeze;
       name = "breeze";
+    };
+  };
+
+  services = {
+    gpg-agent = {
+      pinentryPackage = pkgs.pinentry-qt;
     };
   };
 }
