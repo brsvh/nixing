@@ -132,9 +132,6 @@
     devshell = {
       url = "github:numtide/devshell/main";
       inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
         nixpkgs = {
           follows = "nixpkgs";
         };
