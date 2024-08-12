@@ -12,11 +12,7 @@
   programs = {
     chromium = {
       enable = true;
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--enable-wayland-ime"
-        "--ozone-platform-hint=auto"
-      ];
+      commandLineArgs = [ ];
     };
   };
 }
