@@ -15,7 +15,6 @@
       commandLineArgs = [
         "--enable-features=UseOzonePlatform"
         "--enable-wayland-ime"
-        "--ozone-platform=wayland"
         "--ozone-platform-hint=auto"
       ];
     };
