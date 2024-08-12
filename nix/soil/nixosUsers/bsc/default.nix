@@ -49,6 +49,15 @@ in
           };
 
           programs = {
+            firefox = {
+              profiles = {
+                "${username}" = {
+                  id = 0;
+                  name = fullname;
+                };
+              };
+            };
+
             git = {
               signing = {
                 key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
