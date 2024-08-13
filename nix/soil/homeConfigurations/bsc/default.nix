@@ -2,6 +2,7 @@
   cell,
   config,
   inputs,
+  pkgs,
   ...
 }:
 let
@@ -19,6 +20,7 @@ in
     cell.homeProfiles.cachix
     cell.homeProfiles.chinese
     cell.homeProfiles.direnv
+    cell.homeProfiles.email
     cell.homeProfiles.english
     cell.homeProfiles.fish
     cell.homeProfiles.git
@@ -31,12 +33,54 @@ in
     cell.homeProfiles.my-emacs
     cell.homeProfiles.node
     cell.homeProfiles.obs-studio
+    cell.homeProfiles.password
     cell.homeProfiles.ssh
     cell.homeProfiles.texlive
     cell.homeProfiles.tools
     cell.homeProfiles.xdg
     cell.homeSecrets.bsc
   ];
+
+  accounts = {
+    email = {
+      accounts = {
+        "${username}" = {
+          address = "bsc@brsvh.org";
+
+          aliases = [
+            "open@brsvh.org"
+            "register@brsvh.org"
+          ];
+
+          gpg = {
+            key = "78D74502D92E0218";
+            signByDefault = true;
+          };
+
+          imap = {
+            host = "imappro.zoho.com";
+            port = 993;
+
+            tls = {
+              enable = true;
+            };
+          };
+
+          smtp = {
+            host = "smtppro.zoho.com";
+            port = 465;
+
+            tls = {
+              enable = true;
+            };
+          };
+
+          realName = fullname;
+          userName = "bsc@brsvh.org";
+        };
+      };
+    };
+  };
 
   bee = {
     inherit system;
