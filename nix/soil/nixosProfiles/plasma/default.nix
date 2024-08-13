@@ -1,9 +1,4 @@
-{
-  cell,
-  config,
-  pkgs,
-  ...
-}:
+{ cell, pkgs, ... }:
 {
   imports = [
     cell.nixosProfiles.dconf
@@ -14,6 +9,7 @@
 
   environment = {
     sessionVariables = {
+      GTK_USE_PORTAL = "1";
       NIXOS_OZONE_WL = "1";
     };
 
@@ -24,6 +20,7 @@
       kdepim-addons
       kdepim-runtime
       kleopatra
+      xdg-desktop-portal-kde
     ];
   };
 
