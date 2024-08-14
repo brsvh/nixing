@@ -79,4 +79,21 @@
       pinentryPackage = pkgs.pinentry-qt;
     };
   };
+
+  xdg = {
+    configFile = {
+      "gtkrc".text = ''
+        include /run/current-system/sw/share/themes/Breeze/gtk-2.0/gtkrc
+        include ${config.xdg.configHome}/gtk-2.0/gtkrc
+
+        gtk-theme-name="Breeze"
+      '';
+
+      # REVIEW ~/.config/gtkrc-2.0 is not in my GTK2_RC_FILES .
+      #        Should I include my gtk2 config?
+      "gtkrc-2.0".text = ''
+        gtk-alternative-button-order = 1
+      '';
+    };
+  };
 }
