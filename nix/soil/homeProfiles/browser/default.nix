@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 {
+  home = {
+    packages = with pkgs; [
+      google-chrome
+      microsoft-edge
+    ];
+  };
+
   programs = {
     firefox = {
       enable = true;
