@@ -86,7 +86,10 @@ in
 
             homeDirectory = "/home/${username}";
 
-            packages = with pkgs; [ wemeet ];
+            packages = with pkgs; [
+              feishu
+              wemeet
+            ];
 
             stateVersion = "24.05";
           };
