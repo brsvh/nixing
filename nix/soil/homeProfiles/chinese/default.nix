@@ -38,6 +38,7 @@ in
         enable = true;
 
         fonts = with pkgs; [
+          alibaba-puhuiti
           foundertype-fonts
           lxgw-wenkai
           source-han-sans
