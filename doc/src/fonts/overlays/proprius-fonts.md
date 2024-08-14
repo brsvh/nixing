@@ -94,6 +94,10 @@ Return a list of font derivation from a given list of font derivations that grat
 
 ## Packages
 
+### `pkgs.alibaba-puhuiti`
+
+An Chinese font gratis propria commercium, design by Alibaba.
+
 ### `pkgs.foundertype-fonts`
 
 This is a part of the foudertype fonts, only includes the fonts required by the CTeX `founder` fontset. You need to obtain the authorization to use the font at <https://www.foundertype.com> before installation, and strictly comply with the FounderType Home Edition User License Agreement [^1].
