@@ -87,6 +87,7 @@
         include ${config.xdg.configHome}/gtk-2.0/gtkrc
 
         gtk-theme-name="Breeze"
+        gtk-cursor-theme-name="Breeze"
       '';
 
       # REVIEW ~/.config/gtkrc-2.0 is not in my GTK2_RC_FILES .

@@ -37,6 +37,12 @@
       profiles = {
         "${config.home.username}" = {
           isDefault = true;
+
+          settings = {
+            "app.update.auto" = false;
+            "widget.use-xdg-desktop-portal.file-picker" = 1;
+          };
+
           withExternalGnupg = true;
         };
       };

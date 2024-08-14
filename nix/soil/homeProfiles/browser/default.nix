@@ -99,6 +99,7 @@
           settings = {
             "app.update.auto" = false;
             "browser.bookmarks.showMobileBookmarks" = true;
+            "widget.use-xdg-desktop-portal.file-picker" = 1;
           };
         };
       };
