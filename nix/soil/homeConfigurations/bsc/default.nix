@@ -44,40 +44,78 @@ in
   accounts = {
     email = {
       accounts = {
-        "${username}" = {
-          address = "bsc@brsvh.org";
+        "Burgess Chang" =
+          let
+            address = "bsc@brsvh.org";
+          in
+          {
+            inherit address;
 
-          aliases = [
-            "open@brsvh.org"
-            "register@brsvh.org"
-          ];
+            aliases = [
+              "open@brsvh.org"
+              "register@brsvh.org"
+            ];
 
-          gpg = {
-            key = "78D74502D92E0218";
-            signByDefault = true;
-          };
-
-          imap = {
-            host = "imappro.zoho.com";
-            port = 993;
-
-            tls = {
-              enable = true;
+            gpg = {
+              key = "78D74502D92E0218";
+              signByDefault = true;
             };
-          };
 
-          smtp = {
-            host = "smtppro.zoho.com";
-            port = 465;
+            imap = {
+              host = "imappro.zoho.com";
+              port = 993;
 
-            tls = {
-              enable = true;
+              tls = {
+                enable = true;
+              };
             };
+
+            smtp = {
+              host = "smtppro.zoho.com";
+              port = 465;
+
+              tls = {
+                enable = true;
+              };
+            };
+
+            realName = fullname;
+            userName = address;
           };
 
-          realName = fullname;
-          userName = "bsc@brsvh.org";
-        };
+        "Bingshan Chang" =
+          let
+            address = "changbingshan@iscas.ac.cn";
+          in
+          {
+            inherit address;
+
+            gpg = {
+              key = "78D74502D92E0218";
+              signByDefault = true;
+            };
+
+            imap = {
+              host = "mail.cstnet.cn";
+              port = 993;
+
+              tls = {
+                enable = true;
+              };
+            };
+
+            smtp = {
+              host = "mail.cstnet.cn";
+              port = 465;
+
+              tls = {
+                enable = true;
+              };
+            };
+
+            realName = "Bingshan Chang";
+            userName = address;
+          };
       };
     };
   };

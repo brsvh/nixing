@@ -3,17 +3,30 @@
   accounts = {
     email = {
       accounts = {
-        "${config.home.username}" = {
+        "Burgess Chang" = {
           passwordCommand = ''
-            pass ${config.accounts.email.accounts."${config.home.username}".imap.host}/${
-              config.accounts.email.accounts."${config.home.username}".userName
+            pass ${config.accounts.email.accounts."Burgess Chang".imap.host}/${
+              config.accounts.email.accounts."Burgess Chang".userName
             }"
           '';
           primary = true;
 
           thunderbird = {
             enable = true;
-            profiles = [ "${config.home.username}" ];
+            profiles = [ "Burgess Chang" ];
+          };
+        };
+
+        "Bingshan Chang" = {
+          passwordCommand = ''
+            pass ${config.accounts.email.accounts."Bingshan Chang".imap.host}/${
+              config.accounts.email.accounts."Bingshan Chang".userName
+            }"
+          '';
+
+          thunderbird = {
+            enable = true;
+            profiles = [ "Bingshan Chang" ];
           };
         };
       };
@@ -32,19 +45,22 @@
 
   programs = {
     thunderbird = {
-      enable = config.accounts.email.accounts."${config.home.username}".thunderbird.enable;
+      enable = true;
 
       profiles = {
-        "${config.home.username}" = {
+        "Burgess Chang" = {
           isDefault = true;
-
-          settings = {
-            "app.update.auto" = false;
-            "widget.use-xdg-desktop-portal.file-picker" = 1;
-          };
-
           withExternalGnupg = true;
         };
+
+        "Bingshan Chang" = {
+          withExternalGnupg = true;
+        };
+      };
+
+      settings = {
+        "app.update.auto" = false;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
     };
   };
