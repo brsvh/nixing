@@ -73,17 +73,66 @@
 
 POM is an marker, or buffer position."
   (interactive)
-  (let ((id (org-entry-get POM "CUSTOM_ID")))
-    (unless (and id (org-uuidgen-p id))
-      (setq id (org-id-new))
-      (org-entry-put POM "CUSTOM_ID" id)
-      (org-id-add-location id (buffer-file-name (buffer-base-buffer))))
-    id))
+  (when (derived-mode-p 'org-mode)
+    (let ((id (org-entry-get POM "CUSTOM_ID")))
+      (unless (and id (org-uuidgen-p id))
+        (setq id (org-id-new))
+        (org-entry-put POM "CUSTOM_ID" id)
+        (org-id-add-location id (buffer-file-name (buffer-base-buffer))))
+      id)))
 
 (defun my/org-add-custom-id ()
   "Add CUSTOM_ID properites for all headings in current buffer."
   (interactive)
-  (org-map-entries #'my/org-add-custom-id-at-point))
+  (when (derived-mode-p 'org-mode)
+    (org-map-entries #'my/org-add-custom-id-at-point)))
+
+(defun my-org-get-heading-min ()
+  "Return the position of first heading."
+  (save-excursion
+    (goto-char (point-min))
+    (re-search-forward org-outline-regexp-bol nil t)
+    (point)))
+
+(defun my-org-get-buffer-level-property (property)
+  "Return the position of a buffer level PROPERTY of `org-mode' buffer."
+  (save-excursion
+    (goto-char (point-min))
+    (re-search-forward (format "^#\\+%s:" property)
+                       (my-org-get-heading-min)
+                       t)
+    (point)))
+
+(defun my-org-set-buffer-level-property (property value &optional force pos)
+  "Set the buffer-level PROPERTY to VALUE in `org-mode' buffer.
+
+The POS would be auto seek, otherwise pass it.
+
+The VALUE of PROPERTY would be override If FORCE is true, othterwise
+nothing."
+  (when-let ((pos (or pos (my-org-get-buffer-level-property property))))
+    (save-excursion
+      (goto-char pos)
+      (if (looking-at-p " ")
+          (when force
+            (forward-char)
+            (delete-region (point) (line-end-position))
+            (insert value))
+        (insert (format "#+%s: %s\n" property value))))))
+
+(defun my/org-add-created-property (&rest _)
+  "Update the buffer-level CREATED property."
+  (interactive)
+  (when (derived-mode-p 'org-mode)
+    (let ((ts (format-time-string "[%Y-%m-%d %a %H:%M]")))
+      (my-org-set-buffer-level-property "CREATED" ts))))
+
+(defun my/org-update-last-modified-property (&rest _)
+  "Update the buffer-level LAST_MODIFIED property."
+  (interactive)
+  (when (derived-mode-p 'org-mode)
+    (let ((ts (format-time-string "[%Y-%m-%d %a %H:%M]")))
+      (my-org-set-buffer-level-property "LAST_MODIFIED" ts 'force))))
 
 (defun my-writing-org-roam-db-fake-sync (fn &rest args)
   "Fake db sync around FN with ARGS."
@@ -102,7 +151,13 @@ POM is an marker, or buffer position."
 
 (setup org
   (:autoload org-mode)
-  (:set org-directory (my-path "~/org")))
+  (:set org-directory (my-path "~/org"))
+  (:when-loaded
+    (:with-hook after-save-hook
+      (:hook
+       #'my/org-add-created-property
+       #'my/org-add-custom-id
+       #'my/org-update-last-modified-property))))
 
 (setup ol
   (:autoload org-store-link)
