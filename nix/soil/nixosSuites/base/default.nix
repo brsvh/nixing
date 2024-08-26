@@ -12,7 +12,8 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
     cell.nixosProfiles.bash
     cell.nixosProfiles.fish
-    cell.nixosProfiles.guix
+    # FIXME re-activate Guix after NixOS/nixpkgs#337090 is closed.
+    # cell.nixosProfiles.guix
     cell.nixosProfiles.nix
     cell.nixosProfiles.openssh
     cell.nixosProfiles.polkit
