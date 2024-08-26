@@ -411,8 +411,11 @@
 ;;;
 ;; Popup:
 
+(setup popper-echo
+  (:autoload popper-echo-mode popper-tab-line-mode))
+
 (setup popper
-  (:first-ui popper-mode popper-echo-mode)
+  (:first-ui popper-mode popper-tab-line-mode)
   (:snoc popper-reference-buffers
          "\\*Backtrace\\*"
          "\\*Compile-Log\\*"

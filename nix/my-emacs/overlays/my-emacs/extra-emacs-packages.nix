@@ -26,7 +26,6 @@ with epkgs;
   org
   org-modern
   persist
-  popper
   project
   queue
   rainbow-mode
@@ -38,6 +37,7 @@ with epkgs;
   xref
   yasnippet
 ])
+++ (with elpaDevelPackages; [ popper ])
 ++ (with manualPackages.my; [
   eglot-booster
   form-feed
