@@ -37,24 +37,19 @@
       url = "github:edolstra/flake-compat/master";
       flake = false;
     };
-    nix-systems = {
+    systems = {
       url = "github:nix-systems/default/main";
     };
   };
 
   outputs =
-    {
-      self,
-      nix-systems,
-      nixpkgs,
-      ...
-    }@inputs:
+    { self, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs.lib) genAttrs;
 
       lib = nixpkgs.lib // builtins;
 
-      systems = import nix-systems;
+      systems = import inputs.systems;
 
       eachSystem = # eachSystem :: (Pkgs -> a) -> a
         f:

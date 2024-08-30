@@ -36,9 +36,6 @@
     devshell = {
       url = "github:numtide/devshell/main";
       inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
         nixpkgs = {
           follows = "nixpkgs";
         };
@@ -52,11 +49,11 @@
       url = "github:numtide/flake-utils/main";
       inputs = {
         systems = {
-          follows = "nix-systems";
+          follows = "systems";
         };
       };
     };
-    nix-systems = {
+    systems = {
       url = "github:nix-systems/default/main";
     };
     treefmt = {
@@ -73,18 +70,15 @@
     {
       devshell,
       flake-utils,
-      nix-systems,
       nixpkgs,
       self,
       treefmt,
       ...
     }@inputs:
     let
-      inherit (nixpkgs.lib) genAttrs;
-
       lib = nixpkgs.lib // builtins;
 
-      systems = import nix-systems;
+      systems = import inputs.systems;
     in
     flake-utils.lib.eachSystem systems (
       system:
