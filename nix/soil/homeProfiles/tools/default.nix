@@ -7,21 +7,44 @@
 {
   home = {
     packages = with pkgs; [
+      # calculator
+      eva
+
       # debug
       cntr
 
       # development
       jq
 
+      # diff
+      delta
+
+      # file
+      bat
+      choose
+      eza
+      hex
+      rnr
+
       # network
       curl
+      dogdns
+
+      # process
+      procs
 
       # search
       agrep
       fd
       findutils
+      fzf
       gnugrep
+      # igrep
       ripgrep
+
+      # terminal
+      screen
+      zellij
     ];
   };
 
