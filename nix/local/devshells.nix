@@ -1,10 +1,15 @@
 { cell, inputs }:
 let
-  inherit (inputs) nixpkgs std colmena;
+  inherit (inputs)
+    colmena
+    nixpkgs
+    rust-overlay
+    std
+    ;
 
   lib = nixpkgs.lib // builtins;
 
-  pkgs = nixpkgs;
+  pkgs = nixpkgs.appendOverlays [ rust-overlay.overlays.default ];
 in
 {
   default = std.lib.dev.mkShell {
@@ -47,6 +52,31 @@ in
       mdbook
       sops
       treefmt
+    ];
+  };
+
+  cc = std.lib.dev.mkShell {
+    name = "cc";
+
+    packages = with pkgs.llvmPackages; ([
+      clang-tools
+      clang
+    ]);
+  };
+
+  rust = std.lib.dev.mkShell {
+    name = "rust";
+
+    packages = with pkgs; [ rust-bin.stable.latest.default ];
+  };
+
+  scheme = std.lib.dev.mkShell {
+    name = "scheme";
+
+    packages = with pkgs; [
+      chez
+      guile
+      mitscheme
     ];
   };
 }
