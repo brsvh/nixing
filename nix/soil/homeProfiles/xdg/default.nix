@@ -6,6 +6,16 @@
     sessionPath = [ "${config.home.sessionVariables.XDG_BIN_HOME}" ];
 
     sessionVariables = {
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+      CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
+      FFMPEG_DATADIR = "${config.xdg.configHome}/ffmpeg";
+      GOMODCACHE = "${config.xdg.cacheHome}/go";
+      GOPATH = "${config.xdg.dataHome}/go";
+      GRIP_HOME = "${config.xdg.configHome}/grip";
+      PLTUSERHOME = "${config.xdg.dataHome}/racket";
+      PYTHONPYCACHEPREFIX = "${config.xdg.cacheHome}/python";
+      PYTHONUSERBASE = "${config.xdg.dataHome}/python";
+      PYTHON_HISTORY = "${config.xdg.stateHome}/python/history";
       XDG_BIN_HOME = "${config.home.homeDirectory}/.local/bin";
     };
   };
