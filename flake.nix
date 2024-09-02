@@ -123,11 +123,6 @@
     };
     crane = {
       url = "github:ipetkov/crane/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
     };
     devshell = {
       url = "github:numtide/devshell/main";
