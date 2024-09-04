@@ -38,10 +38,10 @@
   (require 'epg)
   (require 'nsm))
 
-(defvar my-authinfo-file (my-data-path "authinfo")
+(defvar my-authinfo-file (my-config-path "authinfo")
   "My authinfo file.")
 
-(defvar my-authinfo-gpg-file (my-data-path "authinfo.gpg")
+(defvar my-authinfo-gpg-file (my-config-path "authinfo.gpg")
   "My authinfo.gpg file.")
 
 
@@ -52,7 +52,8 @@
 (setup auth-source
   (:when-loaded
     (:set
-     (prepend auth-sources) my-authinfo-gpg-file)
+     (prepend auth-sources) my-authinfo-gpg-file
+     (prepend auth-sources) my-authinfo-file)
     (:also-load auth-source-pass)
     (:after auth-source-pass
       (auth-source-pass-enable)))
