@@ -43,9 +43,9 @@ in
   bee = {
     inherit system;
 
-    home = inputs.home-manager-unstable;
+    home = inputs.home-manager;
 
-    pkgs = import inputs.nixos-unstable {
+    pkgs = import inputs.nixpkgs {
       inherit system;
 
       config = {

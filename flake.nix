@@ -107,11 +107,11 @@
       url = "github:numtide/flake-utils/main";
       inputs = {
         systems = {
-          follows = "nix-systems";
+          follows = "systems";
         };
       };
     };
-    nix-systems = {
+    systems = {
       url = "github:nix-systems/x86_64-linux/main";
     };
   };
@@ -336,7 +336,6 @@
   outputs =
     {
       hive,
-      nix-systems,
       nixpkgs,
       self,
       std,
@@ -356,7 +355,7 @@
 
       lib = nixpkgs.lib // builtins;
 
-      systems = import nix-systems;
+      systems = import inputs.systems;
     in
     growOn
       {
