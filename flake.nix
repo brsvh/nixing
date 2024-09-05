@@ -43,7 +43,7 @@
       follows = "home-manager-unstable";
     };
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs = {
         nixpkgs = {
           follows = "nixpkgs-stable";
@@ -66,10 +66,10 @@
       follows = "nixpkgs-unstable";
     };
     nixpkgs-stable = {
-      url = "github:NixOS/nixpkgs/nixos-23.11";
+      url = "github:NixOS/nixpkgs/nixos-24.05";
     };
     nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
   };
 
@@ -79,7 +79,7 @@
       follows = "nixos-unstable";
     };
     nixos-stable = {
-      url = "github:NixOS/nixpkgs/nixos-23.11";
+      url = "github:NixOS/nixpkgs/nixos-24.05";
     };
     nixos-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
