@@ -310,7 +310,7 @@
   # Overlays
   inputs = {
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay/master";
+      url = "github:brsvh/emacs-overlay/aa788863a1cb7fa28d4869097d83cf37603e3ae2";
       inputs = {
         flake-utils = {
           follows = "flake-utils";
