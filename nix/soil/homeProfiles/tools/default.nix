@@ -39,7 +39,7 @@
       findutils
       fzf
       gnugrep
-      # igrep
+      igrep
       ripgrep
 
       # terminal
