@@ -76,7 +76,6 @@ in
     packages = with pkgs; [
       chez
       guile
-      mitscheme
     ];
   };
 }
