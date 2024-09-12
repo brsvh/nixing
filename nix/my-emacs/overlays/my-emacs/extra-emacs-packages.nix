@@ -67,7 +67,6 @@ with epkgs;
   f
   flymake-eslint
   git-cliff
-  git-commit
   git-modes
   grip-mode
   hl-todo
