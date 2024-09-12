@@ -14,5 +14,7 @@ in
 
   on = callPackage' ./on;
 
+  pangu-spacing = callPackage' ./pangu-spacing;
+
   sideline-eldoc = callPackage' ./sideline-eldoc;
 }

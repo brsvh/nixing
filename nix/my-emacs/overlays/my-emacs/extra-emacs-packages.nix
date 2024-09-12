@@ -42,6 +42,7 @@ with epkgs;
   eglot-booster
   form-feed
   on
+  pangu-spacing
   sideline-eldoc
 ])
 ++ (with melpaPackages; [
@@ -91,7 +92,9 @@ with epkgs;
   org-side-tree
   ox-reveal
   ox-tufte
-  pangu-spacing
+  # REVIEW Use melpa's pangu-spacing once coldnew/pangu-spacing#45 has been
+  #        resolved.
+  # pangu-spacing
   parsebib
   pdf-tools
   rainbow-delimiters
