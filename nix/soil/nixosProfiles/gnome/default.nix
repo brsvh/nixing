@@ -54,7 +54,7 @@ in
     };
 
     udev = {
-      packages = with pkgs; [ gnome.gnome-settings-daemon ];
+      packages = with pkgs; [ gnome-settings-daemon ];
     };
 
     xserver = {
