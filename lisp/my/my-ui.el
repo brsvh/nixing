@@ -53,6 +53,7 @@
   (require 'savehist)
   (require 'scroll-bar)
   (require 'sideline)
+  (require 'spacious-padding)
   (require 'svg-tag-mode)
   (require 'switch-window)
   (require 'tab-bar)
@@ -270,6 +271,16 @@
     (:keymap-set
      ;; Select a buffer open in a new frame.
      "<remap> <switch-to-buffer-other-frame>" #'consult-buffer-other-frame)))
+
+;; Set more padding in the Frame.
+(setup spacious-padding
+  (:autoload spacious-padding-mode)
+  (:first-ui spacious-padding-mode)
+  (:when-loaded
+    (:set spacious-padding-widths
+          '( :internal-border-width 8
+             :mode-line-width 6
+             :right-divider-width 8))))
 
 
 

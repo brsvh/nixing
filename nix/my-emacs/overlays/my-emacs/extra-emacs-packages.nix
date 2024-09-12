@@ -31,6 +31,7 @@ with epkgs;
   rainbow-mode
   seq
   setup
+  spacious-padding
   svg-lib
   transient
   vertico
