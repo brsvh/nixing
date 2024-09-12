@@ -128,7 +128,7 @@ in
   disko = cell.diskoConfigurations.lilac.disko;
 
   environment = {
-    systemPackages = with pkgs; [ config.bee.home.packages.home-manager ];
+    systemPackages = [ config.bee.home.packages.home-manager ];
   };
 
   hardware = {
@@ -168,6 +168,12 @@ in
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
+  };
+
+  nix = {
+    extraOptions = ''
+      !include ${config.sops.secrets."tokens/nixAccessTokens.conf".path}
+    '';
   };
 
   networking = {
