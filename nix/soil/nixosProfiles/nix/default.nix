@@ -2,7 +2,7 @@
 {
   nix = {
     gc = {
-      automatic = true;
+      automatic = false;
       dates = "weekly";
 
       options = lib.mkDefault ''
@@ -39,6 +39,17 @@
       ];
 
       use-xdg-base-directories = true;
+    };
+  };
+
+  programs = {
+    nh = {
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 4w --keep 10";
+      };
+
+      enable = true;
     };
   };
 }

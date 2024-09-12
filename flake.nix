@@ -88,6 +88,9 @@
 
   # Nix libraries
   inputs = {
+    filter = {
+      url = "github:numtide/nix-filter/main";
+    };
     flake-compat = {
       url = "github:edolstra/flake-compat/master";
       flake = false;
@@ -180,6 +183,26 @@
         };
         std = {
           follows = "std";
+        };
+      };
+    };
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien/master";
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+        flake-utils = {
+          follows = "flake-utils";
+        };
+        nix-filter = {
+          follows = "filter";
+        };
+        nix-index-database = {
+          follows = "nix-index-database";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
         };
       };
     };

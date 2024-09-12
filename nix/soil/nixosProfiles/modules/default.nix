@@ -1,7 +1,9 @@
 { inputs, ... }:
 let
-  inherit (inputs) nix-index-database;
+  inherit (inputs) nh nix-index-database;
 in
 {
-  imports = [ nix-index-database.nixosModules.nix-index ];
+  imports = [
+    nix-index-database.nixosModules.nix-index
+  ];
 }

@@ -30,6 +30,12 @@
       curl
       dogdns
 
+      # nix
+      nix-alien
+      nix-output-monitor
+      nix-tree
+      nvd
+
       # process
       procs
 

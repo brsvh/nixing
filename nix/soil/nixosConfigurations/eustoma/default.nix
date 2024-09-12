@@ -12,6 +12,7 @@ let
     hardware
     hercules-ci-agent
     lanzaboote
+    nix-alien
     ;
 
   inherit (inputs.cells) apps fonts my-emacs;
@@ -59,6 +60,7 @@ in
         hercules-ci-agent.overlays.default
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
+        nix-alien.overlays.default
       ];
     };
   };
