@@ -8,7 +8,7 @@
         enable = true;
 
         extraArgs = [
-          "--delete-generation"
+          "--delete-generations"
           "--optimize"
         ];
       };
