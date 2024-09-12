@@ -43,12 +43,66 @@ in
             cell.homeProfiles.xdg
           ];
 
+          accounts = {
+            email = {
+              accounts = {
+                "${fullname}" =
+                  let
+                    address = "changbingshan@iscas.ac.cn";
+                  in
+                  rec {
+                    inherit address;
+
+                    gpg = {
+                      key = "78D74502D92E0218";
+                      signByDefault = true;
+                    };
+
+                    imap = {
+                      host = "mail.cstnet.cn";
+                      port = 993;
+
+                      tls = {
+                        enable = true;
+                      };
+                    };
+
+                    passwordCommand = ''
+                      pass ${imap.host}/${userName}"
+                    '';
+
+                    primary = true;
+                    realName = fullname;
+
+                    smtp = {
+                      host = "mail.cstnet.cn";
+                      port = 465;
+
+                      tls = {
+                        enable = true;
+                      };
+                    };
+
+                    thunderbird = {
+                      enable = true;
+                      profiles = [ "${fullname}" ];
+                    };
+
+                    userName = address;
+                  };
+              };
+            };
+          };
+
           home = {
             inherit username;
 
             homeDirectory = "/home/${username}";
 
-            packages = with pkgs; [ wemeet ];
+            packages = with pkgs; [
+              feishu
+              wemeet
+            ];
 
             stateVersion = "24.05";
           };
@@ -73,6 +127,15 @@ in
               enable = true;
               settings = {
                 PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
+              };
+            };
+
+            thunderbird = {
+              profiles = {
+                "${fullname}" = {
+                  isDefault = true;
+                  withExternalGnupg = true;
+                };
               };
             };
           };

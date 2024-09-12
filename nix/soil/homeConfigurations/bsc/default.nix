@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (inputs) nh nix-alien;
+  inherit (inputs) nix-alien;
 
   inherit (inputs.cells) apps fonts my-emacs;
 
@@ -46,11 +46,11 @@ in
   accounts = {
     email = {
       accounts = {
-        "Burgess Chang" =
+        "${fullname}" =
           let
             address = "bsc@brsvh.org";
           in
-          {
+          rec {
             inherit address;
 
             aliases = [
@@ -72,6 +72,13 @@ in
               };
             };
 
+            passwordCommand = ''
+              pass ${imap.host}/${userName}"
+            '';
+
+            primary = true;
+            realName = fullname;
+
             smtp = {
               host = "smtppro.zoho.com";
               port = 465;
@@ -81,41 +88,11 @@ in
               };
             };
 
-            realName = fullname;
-            userName = address;
-          };
-
-        "Bingshan Chang" =
-          let
-            address = "changbingshan@iscas.ac.cn";
-          in
-          {
-            inherit address;
-
-            gpg = {
-              key = "78D74502D92E0218";
-              signByDefault = true;
+            thunderbird = {
+              enable = true;
+              profiles = [ "${fullname}" ];
             };
 
-            imap = {
-              host = "mail.cstnet.cn";
-              port = 993;
-
-              tls = {
-                enable = true;
-              };
-            };
-
-            smtp = {
-              host = "mail.cstnet.cn";
-              port = 465;
-
-              tls = {
-                enable = true;
-              };
-            };
-
-            realName = "Bingshan Chang";
             userName = address;
           };
       };
@@ -138,7 +115,6 @@ in
         apps.overlays.unfree
         fonts.overlays.proprius-fonts
         my-emacs.overlays.emacs
-        nh.overlays.default
         nix-alien.overlays.default
       ];
     };
@@ -172,6 +148,15 @@ in
       enable = true;
       settings = {
         PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
+      };
+    };
+
+    thunderbird = {
+      profiles = {
+        "${fullname}" = {
+          isDefault = true;
+          withExternalGnupg = true;
+        };
       };
     };
   };
