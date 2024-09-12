@@ -5,6 +5,8 @@
   ...
 }:
 let
+  inherit (inputs) nix-alien;
+
   inherit (inputs.cells) apps fonts my-emacs;
 
   system = "x86_64-linux";
@@ -54,6 +56,7 @@ in
         apps.overlays.unfree
         fonts.overlays.proprius-fonts
         my-emacs.overlays.emacs
+        nix-alien.overlays.default
       ];
     };
   };
