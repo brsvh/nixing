@@ -1,13 +1,10 @@
 { cell, inputs }:
 let
   inherit (inputs)
-    colmena
     nixpkgs
     rust-overlay
     std
     ;
-
-  lib = nixpkgs.lib // builtins;
 
   pkgs = nixpkgs.appendOverlays [ rust-overlay.overlays.default ];
 in
@@ -21,13 +18,13 @@ in
       }
       {
         category = "development";
-        package = pkgs.nixVersions.latest;
+        package = pkgs.nixVersions.stable;
       }
 
       # Tool
       {
         category = "tool";
-        package = colmena.packages.colmena;
+        package = pkgs.colmena;
       }
       {
         category = "tool";
