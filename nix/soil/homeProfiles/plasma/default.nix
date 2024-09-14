@@ -65,6 +65,12 @@
     };
   };
 
+  home = {
+    packages = with pkgs; [
+      wezterm
+    ];
+  };
+
   qt = {
     enable = false;
     platformTheme = "kde";

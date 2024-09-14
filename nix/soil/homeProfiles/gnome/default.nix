@@ -45,6 +45,12 @@
     };
   };
 
+  home = {
+    packages = with pkgs; [
+      wezterm
+    ];
+  };
+
   services = {
     gpg-agent = {
       pinentryPackage = pkgs.pinentry-gnome3;
