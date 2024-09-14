@@ -7,6 +7,7 @@ with pkgs;
   git-cliff
   graphviz
   guile
+  lua-language-server
   mailutils
   mermaid-cli
   mitscheme
@@ -20,6 +21,7 @@ with pkgs;
   rust-analyzer
   rustc
   rustfmt
+  stylua
   texliveFull
   vscode-langservers-extracted
 ]

@@ -125,6 +125,7 @@ with epkgs;
   haskell-mode
   hl-block-mode
   htmlize
+  lua-mode
   markdown-mode
   org-contrib
   tablist
