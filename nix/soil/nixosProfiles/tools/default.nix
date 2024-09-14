@@ -7,21 +7,53 @@
 {
   environment = {
     systemPackages = with pkgs; [
+      # calculator
+      eva
+
       # debug
       cntr
 
       # development
       jq
 
+      # diff
+      delta
+
+      # file
+      bat
+      choose
+      eza
+      hex
+      rnr
+
+      # monitor
+      btop
+
       # network
       curl
+      dogdns
+
+      # nix
+      nix-alien
+      nix-output-monitor
+      nix-tree
+      nvd
+
+      # process
+      procs
 
       # search
       agrep
       fd
       findutils
+      fzf
       gnugrep
+      igrep
       ripgrep
+
+      # terminal
+      screen
+      zellij
     ];
   };
 

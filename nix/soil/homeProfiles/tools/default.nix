@@ -26,6 +26,9 @@
       hex
       rnr
 
+      # monitor
+      btop
+
       # network
       curl
       dogdns
