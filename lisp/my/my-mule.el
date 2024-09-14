@@ -35,6 +35,7 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
+  (require 'rx)
   (require 'pangu-spacing))
 
 
