@@ -13,11 +13,11 @@ in
   xdg = {
     configFile = {
       "my-emacs/authinfo" = {
-        source = projectRoot + "etc/authinfo/authinfo";
+        source = projectRoot + "/etc/authinfo/authinfo";
       };
 
       "my-emacs/authinfo.gpg" = {
-        source = projectRoot + "etc/authinfo/authinfo.gpg";
+        source = projectRoot + "/etc/authinfo/authinfo.gpg";
       };
     };
   };
