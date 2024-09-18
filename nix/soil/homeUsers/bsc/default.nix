@@ -68,6 +68,18 @@ in
           primary = true;
           realName = fullname;
 
+          signature = {
+            text = ''
+              ---
+              Burgess Chang
+              Nanjing, China
+
+              Pronoun: He/Him/His
+              Homepage: https://bsc@brsvh.org
+              GPG: 7B74 0DB9 F2AC 6D3B 226B  C530 78D7 4502 D92E 0218
+            '';
+          };
+
           smtp = {
             host = "smtppro.zoho.com";
             port = 465;
@@ -122,8 +134,26 @@ in
     };
 
     my-emacs = {
-      userMail = usermail;
-      userName = fullname;
+      extraConfig =
+        let
+          mailProfile = config.accounts.email.accounts."${fullname}";
+        in
+        ''
+          (require 'my-core)
+
+          (cl-eval-when (compile)
+            (require 'message))
+
+          (setup emacs
+            (:set
+             user-full-name "${mailProfile.realName}"
+             user-mail-address "${mailProfile.address}"))
+
+          (setup message
+            (:when-loaded
+             (:set
+              message-signature "${mailProfile.signature.text}")))
+        '';
     };
 
     password-store = {
