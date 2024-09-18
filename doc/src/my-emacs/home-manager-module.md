@@ -81,14 +81,6 @@ Extra library packages will be add to `my-emacs`.
 
 `my-emacs` package scope will be used.
 
-### `programs.my-emacs.userMail`
-
-Customize `user-mail-address` of GNU Emacs.
-
-### `programs.my-emacs.userName`
-
-Customize `user-full-name` of GNU Emacs.
-
 ### `programs.my-emacs.variant`
 
 Which variant of `my-emacs` to use.
