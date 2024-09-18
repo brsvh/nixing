@@ -19,8 +19,6 @@ stdenv.mkDerivation {
 
   name = "my-" + vanillaEmacs.name;
 
-  preferLocalBuild = true;
-
   buildInputs = [
     initDirectory
     plainEmacs
