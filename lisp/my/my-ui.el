@@ -274,6 +274,7 @@
 
 ;; Set more padding in the Frame.
 (setup spacious-padding
+  (:quit)
   (:autoload spacious-padding-mode)
   (:first-ui spacious-padding-mode)
   (:when-loaded
