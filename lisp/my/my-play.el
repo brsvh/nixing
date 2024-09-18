@@ -37,6 +37,7 @@
 (require 'my-comint)
 (require 'my-dired)
 (require 'my-editor)
+(require 'my-email)
 (require 'my-mule)
 (require 'my-project)
 (require 'my-security)
