@@ -391,6 +391,7 @@
             (devshells "devshells")
             (functions "homeModules")
             (functions "homeProfiles")
+            (functions "homeUsers")
             (functions "nixosModules")
             (functions "nixosProfiles")
             (functions "nixosSecrets")
