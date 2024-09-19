@@ -85,11 +85,16 @@
                                          :user address)))
          (user (url-hexify-string address))
          (rhost (plist-get rinfo :host))
+         (rcred (auth-source-user-and-password rhost))
          (shost (plist-get sinfo :host)))
     (when rhost
       (setq my-email-recive-server-host rhost
-            my-email-recive-url (format "%s://%s@%s:%s"
-                                        rproto user rhost rport)))
+            my-email-recive-url (format "%s://%s:%s@%s:%s"
+                                        rproto
+                                        user
+                                        (cadr rcred)
+                                        rhost
+                                        rport)))
     (when shost
       (setq my-email-send-server-host shost))))
 
