@@ -1,5 +1,14 @@
-{ config, pkgs, ... }:
 {
+  cell,
+  config,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    cell.homeProfiles.terminal
+  ];
+
   gtk = {
     enable = true;
 
@@ -43,12 +52,6 @@
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
     };
-  };
-
-  home = {
-    packages = with pkgs; [
-      wezterm
-    ];
   };
 
   services = {

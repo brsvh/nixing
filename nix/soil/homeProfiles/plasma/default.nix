@@ -1,5 +1,14 @@
-{ config, pkgs, ... }:
 {
+  cell,
+  config,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    cell.homeProfiles.terminal
+  ];
+
   gtk = {
     enable = true;
 
@@ -63,12 +72,6 @@
       name = "Breeze";
       package = pkgs.kdePackages.breeze-gtk;
     };
-  };
-
-  home = {
-    packages = with pkgs; [
-      wezterm
-    ];
   };
 
   qt = {

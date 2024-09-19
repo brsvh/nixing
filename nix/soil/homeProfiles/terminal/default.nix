@@ -1,0 +1,7 @@
+{
+  programs = {
+    foot = {
+      enable = true;
+    };
+  };
+}
