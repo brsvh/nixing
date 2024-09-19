@@ -133,6 +133,11 @@ in
           mailProfile = config.accounts.email.accounts."${fullname}";
         in
         ''
+          (require 'my-core)
+
+          (cl-eval-when (compile)
+            (require 'message))
+
           (setup emacs
             (:set
              user-full-name "${mailProfile.realName}"
