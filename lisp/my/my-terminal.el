@@ -45,7 +45,7 @@
 
 (setup eat
   (:autoload eat-mode eat-project)
-  (:snoc popper-reference-buffers'eat-mode)
+  (:snoc popper-reference-buffers 'eat-mode)
   (:with-map project-prefix-map
     (:keymap-set
      "s" #'eat-project)))
