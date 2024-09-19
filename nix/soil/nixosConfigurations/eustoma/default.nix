@@ -10,7 +10,6 @@ let
   inherit (inputs)
     emacs-overlay
     hardware
-    hercules-ci-agent
     lanzaboote
     nix-alien
     ;
@@ -30,7 +29,6 @@ in
   imports = [
     cell.nixosProfiles.dae
     cell.nixosProfiles.docker
-    cell.nixosProfiles.hercules-ci-agent
     cell.nixosProfiles.libvirt
     cell.nixosProfiles.modules
     cell.nixosSecrets.eustoma
@@ -57,7 +55,6 @@ in
         apps.overlays.unfree
         emacs-overlay.overlays.default
         fonts.overlays.proprius-fonts
-        hercules-ci-agent.overlays.default
         lanzaboote.overlays.default
         my-emacs.overlays.emacs
         nix-alien.overlays.default
@@ -157,13 +154,6 @@ in
   services = {
     dae = {
       configFile = config.sops.secrets."dae/config.dae".path;
-    };
-
-    hercules-ci-agent = {
-      settings = {
-        binaryCachesPath = config.sops.secrets."hercules-ci/binary-caches.json".path;
-        clusterJoinTokenPath = config.sops.secrets."hercules-ci/cluster-join-token.key".path;
-      };
     };
 
     xserver = {
