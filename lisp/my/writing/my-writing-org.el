@@ -88,37 +88,58 @@ POM is an marker, or buffer position."
     (org-map-entries #'my/org-add-custom-id-at-point)))
 
 (defun my-org-get-heading-min ()
-  "Return the position of first heading."
+  "Return the position of first heading, or nil if none."
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward org-outline-regexp-bol nil t)
-    (point)))
+    (when (re-search-forward org-outline-regexp-bol nil t)
+      (pos-bol))))
+
+(defun my-org-get-property-end ()
+  "Return the position at the end of the last buffer-level property.
+If no properties are found, return `point-min`."
+  (save-excursion
+    (goto-char (point-min))
+    (let ((end (point-min)))
+      (while (looking-at-p "^#\\+\\(\\w+\\):")
+        (setq end (line-end-position))
+        (forward-line 1))
+      end)))
 
 (defun my-org-get-buffer-level-property (property)
-  "Return the position of a buffer level PROPERTY of `org-mode' buffer."
+  "Return the position of a buffer level PROPERTY, or nil if not found."
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward (format "^#\\+%s:" property)
-                       (my-org-get-heading-min)
-                       t)
-    (point)))
+    (when (re-search-forward (format "^#\\+%s:" property)
+                             (or (my-org-get-heading-min) (point-max))
+                             t)
+      (match-beginning 0))))
 
 (defun my-org-set-buffer-level-property (property value &optional force pos)
   "Set the buffer-level PROPERTY to VALUE in `org-mode' buffer.
 
-The POS would be auto seek, otherwise pass it.
+If FORCE is non-nil, override existing value.
 
-The VALUE of PROPERTY would be override If FORCE is true, othterwise
-nothing."
-  (when-let ((pos (or pos (my-org-get-buffer-level-property property))))
-    (save-excursion
-      (goto-char pos)
-      (if (looking-at-p " ")
-          (when force
-            (forward-char)
-            (delete-region (point) (line-end-position))
-            (insert value))
-        (insert (format "#+%s: %s\n" property value))))))
+If POS is provided, use that position; otherwise, automatically seek.
+
+If the PROPERTY already has the same VALUE, do nothing."
+  (save-excursion
+    (let ((pos (or pos (my-org-get-buffer-level-property property)))
+          (reexp (format "^#\\+%s:\\(.*\\)$" property)))
+      (if pos
+          (progn
+            (goto-char pos)
+            (let ((current-value (progn
+                                   (re-search-forward reexp)
+                                   (string-trim (match-string 1)))))
+              (when (or force (not (string= current-value value)))
+                (delete-region (line-beginning-position)
+                               (line-end-position))
+                (insert (format "#+%s: %s" property value)))))
+        (goto-char (my-org-get-property-end))
+        (unless (or (eq (point) (point-min))
+                    (looking-back "^\\s-*$" nil))
+          (insert "\n"))
+        (insert (format "#+%s: %s" property value))))))
 
 (defun my/org-add-created-property (&rest _)
   "Update the buffer-level CREATED property."
@@ -133,6 +154,12 @@ nothing."
   (when (derived-mode-p 'org-mode)
     (let ((ts (format-time-string "[%Y-%m-%d %a %H:%M]")))
       (my-org-set-buffer-level-property "LAST_MODIFIED" ts 'force))))
+
+(defun my-org-setup-save-functions (&rest _)
+  "Run `my-org-save-functions'."
+  (add-hook 'before-save-hook #'my/org-add-custom-id nil t)
+  (add-hook 'before-save-hook #'my/org-add-created-property nil t)
+  (add-hook 'before-save-hook #'my/org-update-last-modified-property nil t))
 
 (defun my-writing-org-roam-db-fake-sync (fn &rest args)
   "Fake db sync around FN with ARGS."
@@ -153,11 +180,9 @@ nothing."
   (:autoload org-mode)
   (:set org-directory (my-path "~/org"))
   (:when-loaded
-    (:with-hook after-save-hook
+    (:with-hook org-mode-hook
       (:hook
-       #'my/org-add-created-property
-       #'my/org-add-custom-id
-       #'my/org-update-last-modified-property))))
+       #'my-org-setup-save-functions))))
 
 (setup ol
   (:autoload org-store-link)
