@@ -124,14 +124,14 @@ If POS is provided, use that position; otherwise, automatically seek.
 If the PROPERTY already has the same VALUE, do nothing."
   (save-excursion
     (let ((pos (or pos (my-org-get-buffer-level-property property)))
-          (reexp (format "^#\\+%s:\\(.*\\)$" property)))
+          (regexp (format "^#\\+%s:\\(.*\\)$" property)))
       (if pos
           (progn
             (goto-char pos)
             (let ((current-value (progn
-                                   (re-search-forward reexp)
+                                   (re-search-forward regexp)
                                    (string-trim (match-string 1)))))
-              (when (or force (not (string= current-value value)))
+              (when (or force (not current-value))
                 (delete-region (line-beginning-position)
                                (line-end-position))
                 (insert (format "#+%s: %s" property value)))))
