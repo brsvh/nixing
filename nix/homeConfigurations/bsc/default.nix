@@ -139,7 +139,7 @@
 
           (setup mu4e-update
             (:when-loaded
-              (:set mu4e-get-mail-command "offlineimap")))
+              (:set mu4e-get-mail-command "offlineimap -u basic -o || true")))
 
           (setup sendmail
             (:when-loaded
