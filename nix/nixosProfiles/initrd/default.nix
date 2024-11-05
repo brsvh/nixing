@@ -1,0 +1,7 @@
+{
+  boot = {
+    initrd = {
+      verbose = false;
+    };
+  };
+}

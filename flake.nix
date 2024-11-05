@@ -1,510 +1,365 @@
 {
-  description = ''
-    nixing - a place to collect things about Nix/NixOS
-  '';
+  description = "shelf - collect things about Nix/NixOS";
 
   nixConfig = {
     experimental-features = [
+      "ca-derivations"
       "flakes"
       "nix-command"
     ];
 
     extra-substituters = [
       "https://brsvh.cachix.org"
-      "https://colmena.cachix.org"
+      "https://hercules-ci.cachix.org"
       "https://nix-community.cachix.org"
+      "https://numtide.cachix.org"
     ];
 
     extra-trusted-public-keys = [
       "brsvh.cachix.org-1:DqtlvqnpP9g39l8Eo74AXRftGx1KJLid/ViADTNgDNE="
-      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+      "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
     ];
   };
 
-  # Applications
-  inputs = {
-    hercules-ci-agent = {
-      url = "github:hercules-ci/hercules-ci-agent/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-        flake-parts = {
-          follows = "flake-parts";
-        };
-      };
-    };
-  };
-
-  # Home Manager
-  inputs = {
-    home-manager = {
-      follows = "home-manager-unstable";
-    };
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs-stable";
-        };
-      };
-    };
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs-unstable";
-        };
-      };
-    };
-  };
-
-  # Nix packages
+  # Channels
   inputs = {
     nixpkgs = {
       follows = "nixpkgs-unstable";
     };
+
+    nixpkgs-darwin = {
+      url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    };
+
     nixpkgs-stable = {
       url = "github:NixOS/nixpkgs/nixos-24.05";
     };
-    nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    };
-  };
 
-  # NixOS packages
-  inputs = {
-    nixos = {
-      follows = "nixos-unstable";
-    };
-    nixos-stable = {
-      url = "github:NixOS/nixpkgs/nixos-24.05";
-    };
-    nixos-unstable = {
+    nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
   };
 
-  # Nix libraries
+  # Libraries
   inputs = {
-    filter = {
-      url = "github:numtide/nix-filter/main";
+    browser = {
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+
+        systems = {
+          follows = "x86_64-linux";
+        };
+      };
+
+      url = "github:nix-community/browser-previews/main";
     };
+
+    darwin = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-darwin";
+        };
+      };
+
+      url = "github:lnl7/nix-darwin/master";
+    };
+
+    devshell = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+
+      url = "github:numtide/devshell/main";
+    };
+
+    crane = {
+      url = "github:ipetkov/crane/master";
+    };
+
+    disko = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+
+      url = "github:nix-community/disko/master";
+    };
+
+    facter = {
+      url = "github:numtide/nixos-facter-modules/main";
+    };
+
     flake-compat = {
       url = "github:edolstra/flake-compat/master";
       flake = false;
     };
+
     flake-parts = {
-      url = "github:hercules-ci/flake-parts/main";
       inputs = {
         nixpkgs-lib = {
           follows = "nixpkgs";
         };
       };
+
+      url = "github:hercules-ci/flake-parts/main";
     };
-    flake-parts-haskell = {
-      url = "github:srid/haskell-flake/0.4.0";
-    };
+
     flake-utils = {
-      url = "github:numtide/flake-utils/main";
       inputs = {
         systems = {
-          follows = "systems";
+          follows = "default-linux";
         };
       };
-    };
-    systems = {
-      url = "github:nix-systems/x86_64-linux/main";
-    };
-  };
 
-  # Nix tools
-  inputs = {
-    blank = {
-      follows = "std/blank";
+      url = "github:numtide/flake-utils/main";
     };
-    crane = {
-      url = "github:ipetkov/crane/master";
-    };
-    devshell = {
-      url = "github:numtide/devshell/main";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
+
     git-hooks = {
-      url = "github:cachix/git-hooks.nix/master";
       inputs = {
         flake-compat = {
           follows = "flake-compat";
         };
+
         gitignore = {
           follows = "gitignore";
         };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-        nixpkgs-stable = {
-          follows = "nixpkgs-stable";
-        };
-      };
-    };
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
-    haumea = {
-      follows = "std/haumea";
-    };
-    hive = {
-      url = "github:divnix/hive/main";
-      inputs = {
-        colmena = {
-          follows = "colmena";
-        };
-        devshell = {
-          follows = "devshell";
-        };
-        nixago = {
-          follows = "nixago";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-        paisano = {
-          follows = "std/paisano";
-        };
-        std = {
-          follows = "std";
-        };
-      };
-    };
-    nix-alien = {
-      url = "github:thiagokokada/nix-alien/master";
-      inputs = {
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nix-filter = {
-          follows = "filter";
-        };
-        nix-index-database = {
-          follows = "nix-index-database";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
-    nixago = {
-      url = "github:nix-community/nixago/master";
-      inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-        nixago-exts = {
-          follows = "nixago-extensions";
-        };
-      };
-    };
-    nixago-extensions = {
-      url = "github:nix-community/nixago-extensions/master";
-      inputs = {
-        flake-utils = {
-          follows = "nixago/flake-utils";
-        };
-        nixago = {
-          follows = "nixago";
-        };
-        nixpkgs = {
-          follows = "nixago/nixpkgs";
-        };
-      };
-    };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database/main";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs-unstable";
-        };
-      };
-    };
-    paisano = {
-      follows = "std/paisano";
-    };
-    sops = {
-      url = "github:Mic92/sops-nix/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs-unstable";
-        };
-        nixpkgs-stable = {
-          follows = "nixpkgs-stable";
-        };
-      };
-    };
-    std = {
-      url = "github:divnix/std/main";
-      inputs = {
-        devshell = {
-          follows = "devshell";
-        };
-        lib = {
-          follows = "nixpkgs";
-        };
-        nixago = {
-          follows = "nixago";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
-  };
 
-  # NixOS tools
-  inputs = {
-    colmena = {
-      url = "github:zhaofengli/colmena/main";
-      inputs = {
-        flake-compat = {
-          follows = "flake-compat";
-        };
-        flake-utils = {
-          follows = "flake-utils";
-        };
         nixpkgs = {
-          follows = "nixos";
+          follows = "nixpkgs";
         };
-        stable = {
-          follows = "nixos-stable";
+
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
         };
       };
+
+      url = "github:cachix/git-hooks.nix/master";
     };
-    disko = {
-      url = "github:nix-community/disko/master";
+
+    gitignore = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+
+      url = "github:hercules-ci/gitignore.nix/master";
+    };
+
+    haumea = {
+      url = "github:nix-community/haumea/main";
+
       inputs = {
         nixpkgs = {
           follows = "nixpkgs";
         };
       };
     };
-    hardware = {
-      url = "github:NixOS/nixos-hardware/master";
+
+    home-manager = {
+      follows = "home-manager-unstable";
     };
+
+    home-manager-stable = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-stable";
+        };
+      };
+
+      url = "github:nix-community/home-manager/release-24.05";
+    };
+
+    home-manager-unstable = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+      };
+
+      url = "github:nix-community/home-manager/master";
+    };
+
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/master";
       inputs = {
         crane = {
           follows = "crane";
         };
+
         flake-compat = {
           follows = "flake-compat";
         };
+
         flake-parts = {
           follows = "flake-parts";
         };
+
         nixpkgs = {
           follows = "nixpkgs";
         };
+
         pre-commit-hooks-nix = {
           follows = "git-hooks";
         };
+
         rust-overlay = {
           follows = "rust-overlay";
         };
       };
+
+      url = "github:nix-community/lanzaboote/master";
+    };
+
+    nix-alien = {
+      inputs = {
+        flake-compat = {
+          follows = "flake-compat";
+        };
+
+        flake-utils = {
+          follows = "flake-utils";
+        };
+
+        nix-filter = {
+          follows = "nix-filter";
+        };
+
+        nix-index-database = {
+          follows = "nix-index-database";
+        };
+
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+
+      url = "github:thiagokokada/nix-alien/master";
+    };
+
+    nix-filter = {
+      url = "github:numtide/nix-filter/main";
+    };
+
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/v0.4.1";
+    };
+
+    nix-index-database = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+
+      url = "github:nix-community/nix-index-database/main";
+    };
+
+    nixago = {
+      inputs = {
+        flake-utils = {
+          follows = "flake-utils";
+        };
+
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+
+        nixago-exts = {
+          follows = "nixago-extensions";
+        };
+      };
+
+      url = "github:nix-community/nixago/master";
+    };
+
+    nixago-extensions = {
+      inputs = {
+        flake-utils = {
+          follows = "nixago/flake-utils";
+        };
+
+        nixago = {
+          follows = "nixago";
+        };
+
+        nixpkgs = {
+          follows = "nixago/nixpkgs";
+        };
+      };
+
+      url = "github:nix-community/nixago-extensions/master";
+    };
+
+    oh-my-rime = {
+      flake = false;
+      url = "github:Mintimate/oh-my-rime/main";
+    };
+
+    sops = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs-unstable";
+        };
+
+        nixpkgs-stable = {
+          follows = "nixpkgs-stable";
+        };
+      };
+
+      url = "github:Mic92/sops-nix/master";
     };
   };
 
   # Overlays
   inputs = {
-    emacs-overlay = {
-      url = "github:brsvh/emacs-overlay/aa788863a1cb7fa28d4869097d83cf37603e3ae2";
-      inputs = {
-        flake-utils = {
-          follows = "flake-utils";
-        };
-        nixpkgs = {
-          follows = "nixpkgs-unstable";
-        };
-        nixpkgs-stable = {
-          follows = "nixpkgs-stable";
-        };
-      };
-    };
     rust-overlay = {
-      url = "github:oxalica/rust-overlay/master";
       inputs = {
         nixpkgs = {
           follows = "nixpkgs";
         };
       };
+
+      url = "github:oxalica/rust-overlay/master";
+    };
+  };
+
+  # Systems
+  inputs = {
+    default-linux = {
+      url = "github:nix-systems/default-linux/main";
+    };
+
+    x86_64-linux = {
+      url = "github:nix-systems/x86_64-linux/main";
     };
   };
 
   outputs =
-    {
-      hive,
-      nixpkgs,
-      self,
-      std,
+    inputs@{
+      default-linux,
+      flake-parts,
       ...
-    }@inputs:
-    let
-      inherit (hive)
-        collect
-        growOn
-        harvest
-        pick
-        ;
-
-      collect' = collect // {
-        renamer = _: target: target;
-      };
-
-      lib = nixpkgs.lib // builtins;
-
-      systems = import inputs.systems;
-    in
-    growOn
+    }:
+    flake-parts.lib.mkFlake
       {
-        inherit systems;
-
-        cellsFrom = ./nix;
-
-        cellBlocks =
-          (with std.blockTypes; [
-            (devshells "devshells")
-            (functions "homeModules")
-            (functions "homeProfiles")
-            (functions "homeUsers")
-            (functions "nixosModules")
-            (functions "nixosProfiles")
-            (functions "nixosSecrets")
-            (functions "nixosSuites")
-            (functions "nixosUsers")
-            (functions "overlays")
-            (functions "packages")
-            (functions "templates")
-            (functions "homeSecrets")
-            (nixago "nixago")
-            (runnables "formatter")
-          ])
-          ++ (with hive.blockTypes; [
-            colmenaConfigurations
-            diskoConfigurations
-            homeConfigurations
-            nixosConfigurations
-          ]);
-
-        inputs = inputs // {
-          inherit lib;
-        };
-
-        nixpkgsConfig = {
-          allowUnfree = true;
-        };
+        inherit inputs;
       }
       {
-        colmenaHive = collect' self "colmenaConfigurations";
-        diskoConfigurations = collect' self "diskoConfigurations";
-        homeConfigurations = collect' self "homeConfigurations";
-        nixosConfigurations = collect' self "nixosConfigurations";
-      }
-      {
-        devShells = harvest self [
-          [
-            "local"
-            "devshells"
-          ]
+        imports = [
+          ./nix/flakeModule.nix
         ];
 
-        formatter = harvest self [
-          [
-            "local"
-            "formatter"
-          ]
-        ];
-
-        homeModules = pick self [
-          [
-            "fonts"
-            "homeModules"
-          ]
-          [
-            "my-emacs"
-            "homeModules"
-          ]
-          [
-            "home-manager"
-            "homeModules"
-          ]
-        ];
-
-        nixosModules = pick self [
-          [
-            "fonts"
-            "nixosModules"
-          ]
-          [
-            "my-emacs"
-            "nixosModules"
-          ]
-          [
-            "nixos"
-            "nixosModules"
-          ]
-        ];
-
-        overlays = pick self [
-          [
-            "fonts"
-            "overlays"
-          ]
-          [
-            "my-emacs"
-            "overlays"
-          ]
-          [
-            "apps"
-            "overlays"
-          ]
-        ];
-
-        packages = harvest self [
-          [
-            "fonts"
-            "packages"
-          ]
-          [
-            "my-emacs"
-            "packages"
-          ]
-          [
-            "apps"
-            "packages"
-          ]
-        ];
-
-        templates = pick self [
-          [
-            "repo"
-            "templates"
-          ]
-        ];
+        systems = import default-linux;
       };
 }
