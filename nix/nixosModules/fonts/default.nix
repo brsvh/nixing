@@ -38,7 +38,7 @@ in
       fonts = {
         fontconfig = {
           confPackages = [
-            cfg._configFile
+            cfg._configPackage
           ];
 
           defaultFonts = {
