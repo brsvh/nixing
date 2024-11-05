@@ -51,6 +51,10 @@ in
 
   programs = {
     emacs = {
+      dirLocals = ''
+        ((emacs-lisp-mode . ((elisp-flymake-byte-compile-load-path . load-path))))
+      '';
+
       enable = true;
 
       extraDependencies =

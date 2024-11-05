@@ -17,7 +17,7 @@ let
     ;;; Directory Local Variables            -*- no-byte-compile: t -*-
     ;;; For more information see (info "(emacs) Directory Variables")
 
-    ((emacs-lisp-mode . ((elisp-flymake-byte-compile-load-path . load-path))))
+    ${config.programs.emacs.dirLocals}
   '';
 
   earlyInit = ''
@@ -91,7 +91,7 @@ let
         writeScriptBin
         ;
 
-      emacs = config.programs.emacs.package;
+      emacs = config.programs.emacs.finalPackage;
     in
     writeScriptBin "emacs" ''
       #!${runtimeShell}
@@ -107,6 +107,16 @@ in
   options = {
     programs = {
       emacs = {
+        dirLocals = mkOption {
+          default = "";
+
+          description = mdDoc ''
+            The .dir-locals.el will be add to .config/emacs.
+          '';
+
+          type = types.lines;
+        };
+
         extraDependencies = mkOption {
           default = [ ];
 
