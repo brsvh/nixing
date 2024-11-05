@@ -4,7 +4,7 @@
 
 ;; Author: Burgess Chang <bsc@brsvh.org>
 ;; Keywords: local
-;; Package-Requires: ((dired-git-info "0.3.1") (diredfl "0.5") (emacs "29.1") (nerd-icons-dired "0.0.1") (my-core "0.2.0"))
+;; Package-Requires: ((dired-git-info "0.3.1") (dired-open "0.0.1") (diredfl "0.5") (emacs "29.1") (nerd-icons-dired "0.0.1") (my-core "0.2.0"))
 ;; URL: https://github.com/brsvh/shelf
 ;; Version: 0.2.0
 
@@ -36,6 +36,7 @@
   (require 'dired)
   (require 'dired-aux)
   (require 'dired-git-info)
+  (require 'dired-open)
   (require 'dired-x)
   (require 'diredfl)
   (require 'nerd-icons-dired))
@@ -65,6 +66,9 @@
 
 ;;;
 ;; Core:
+
+(setup dired-open
+  (:autoload dired-open-xdg))
 
 (setup dired
   (:when-loaded
@@ -100,7 +104,10 @@
            ("\\.html?\\'" "xdg-open")
            ("\\.md\\'" "xdg-open")
            ("\\.tex\\'" "xdg-open")
-           ("\\.pdf\\'" "xdg-open")))))))
+           ("\\.pdf\\'" "xdg-open")))))
+    (:with-map dired-mode-map
+      (:keymap-set
+       "M-<return>" #'dired-open-xdg))))
 
 
 

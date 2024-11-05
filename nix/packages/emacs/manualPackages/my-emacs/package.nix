@@ -14,6 +14,7 @@
   dash,
   diff-hl,
   dired-git-info,
+  dired-open,
   diredfl,
   doom-modeline,
   eat,
@@ -180,6 +181,7 @@ trivialBuild rec {
     dash
     diff-hl
     dired-git-info
+    dired-open
     diredfl
     doom-modeline
     eat
