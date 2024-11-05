@@ -361,7 +361,7 @@ let
 
         <match>
           <test qual="any" name="family">
-            <string>monospace<</string>
+            <string>monospace</string>
           </test>
           <edit name="family" mode="prepend" binding="strong">
             <string>${defaultMonoFont}</string>
