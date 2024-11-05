@@ -5,7 +5,7 @@
 }:
 let
   inherit (lib)
-    mkDefault
+    mkAfter
     ;
 in
 {
@@ -32,7 +32,7 @@ in
 
   systemd = {
     user = {
-      sessionVariables = mkDefault config.home.sessionVariables;
+      sessionVariables = mkAfter config.home.sessionVariables;
     };
   };
 
