@@ -104,13 +104,13 @@
     username = "changbingshan";
   };
 
-  programs = {
-    emacs = {
-      extraInitConfig =
-        let
-          user = config.accounts.email.accounts."${config.home.username}";
-        in
-        ''
+  programs =
+    let
+      user = config.accounts.email.accounts."${config.home.username}";
+    in
+    {
+      emacs = {
+        extraInitConfig = ''
           (setup emacs
             (:set
              user-full-name "${user.realName}"
@@ -147,16 +147,16 @@
               (:set
                mail-user-agent 'mu4e-user-agent)))
         '';
-    };
-
-    git = {
-      signing = {
-        key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
-        signByDefault = true;
       };
 
-      userEmail = "changbingshan@iscas.ac.cn";
-      userName = "Bingshan Chang";
+      git = {
+        signing = {
+          key = "7B740DB9F2AC6D3B226BC53078D74502D92E0218";
+          signByDefault = true;
+        };
+
+        userEmail = user.address;
+        userName = user.realName;
+      };
     };
-  };
 }
