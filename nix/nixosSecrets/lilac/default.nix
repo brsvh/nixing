@@ -21,6 +21,12 @@ in
     dae = {
       configFile = config.sops.secrets."dae/config.dae".path;
     };
+
+    hercules-ci-agent = {
+      settings = {
+        staticSecretsDirectory = "/run/secrets/hercules-ci-agent";
+      };
+    };
   };
 
   sops = {
@@ -41,7 +47,7 @@ in
         ];
       };
 
-      "hercules-ci/binary-caches.json" = {
+      "hercules-ci-agent/binary-caches.json" = {
         mode = "0440";
         owner = "hercules-ci-agent";
 
@@ -50,7 +56,7 @@ in
         ];
       };
 
-      "hercules-ci/cluster-join-token.key" = {
+      "hercules-ci-agent/cluster-join-token.key" = {
         mode = "0440";
         owner = "hercules-ci-agent";
 

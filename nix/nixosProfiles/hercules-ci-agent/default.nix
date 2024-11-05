@@ -14,7 +14,7 @@
       enable = true;
 
       settings = {
-        concurrentTasks = 4;
+        concurrentTasks = 8;
       };
     };
   };
