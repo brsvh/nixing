@@ -485,7 +485,7 @@ in
   options = {
     fonts = {
       fontconfig = {
-        _configFile = mkOption {
+        _configPackage = mkOption {
           default = fc;
 
           description = ''

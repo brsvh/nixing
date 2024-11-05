@@ -54,7 +54,7 @@ in
       xdg = {
         configFile = {
           "fontconfig/conf.d/51-local-fontconfig.conf" = {
-            source = cfg._configFile;
+            source = "${cfg._configPackage}/etc/fonts/conf.d/51-local-fontconfig.conf";
           };
         };
 
