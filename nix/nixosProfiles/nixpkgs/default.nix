@@ -6,10 +6,8 @@
 let
   inherit (inputs)
     browser
-    emacs-overlay
     nix-alien
     nixpkgs
-    rust-overlay
     ;
 in
 {
@@ -30,6 +28,7 @@ in
       nix-alien.overlays.default
       self.overlays.epkgs
       self.overlays.fonts
+      self.overlays.nixpkgs
       (
         final: prev:
         let

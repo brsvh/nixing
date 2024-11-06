@@ -88,6 +88,7 @@ let
     nix-alien.overlays.default
     self.overlays.epkgs
     self.overlays.fonts
+    self.overlays.nixpkgs
     (
       final: prev:
       let
@@ -129,6 +130,7 @@ in
     overlays = {
       epkgs = final: prev: import my.overlays.epkgs final prev;
       fonts = final: prev: import my.overlays.fonts final prev;
+      nixpkgs = final: prev: import my.overlays.nixpkgs final prev;
     };
 
     templates = {
