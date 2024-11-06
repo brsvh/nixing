@@ -32,12 +32,18 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
+  (require 'mu4e-marker-icons)
   (require 'mu4e-update))
 
 
 
 ;;;
 ;; mu:
+
+(setup mu4e-marker-icons
+  (:autoload mu4e-marker-icons-mode)
+  (:after mu4e
+    (mu4e-marker-icons-mode +1)))
 
 (setup mu4e-update
   (:snoc
