@@ -347,8 +347,8 @@
 
   outputs =
     inputs@{
-      default-linux,
       flake-parts,
+      x86_64-linux,
       ...
     }:
     flake-parts.lib.mkFlake
@@ -360,6 +360,6 @@
           ./nix/flakeModule.nix
         ];
 
-        systems = import default-linux;
+        systems = import x86_64-linux;
       };
 }
