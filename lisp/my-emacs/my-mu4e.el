@@ -46,6 +46,11 @@
   (:autoload mu4e~headers-flags-str)
   (:when-loaded
     (:set
+     ;; Change default header date format, prefered to use locales' date
+     ;; and time format.
+     mu4e-headers-date-format "%x %X"
+
+     ;; Show less fields.
      mu4e-headers-fields
      '(( :human-date . 25)
        ( :flags . 8)
