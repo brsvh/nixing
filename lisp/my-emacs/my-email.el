@@ -47,7 +47,10 @@
 
 (setup mu4e-update
   (:snoc
-   popper-reference-buffers "\\*mu4e-update\\*"))
+   popper-reference-buffers "\\*mu4e-update\\*")
+  (:when-loaded
+    (:set
+     mu4e-update-interval 300)))
 
 
 
