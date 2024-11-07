@@ -42,10 +42,25 @@
 ;;;
 ;; mu:
 
+(setup mu4e-headers
+  (:autoload mu4e~headers-flags-str)
+  (:when-loaded
+    (:set
+     mu4e-headers-fields
+     '(( :human-date . 25)
+       ( :flags . 8)
+       ( :from . 22)
+       ( :subject)))))
+
 (setup mu4e-marker-icons
   (:autoload mu4e-marker-icons-mode)
   (:after mu4e
     (mu4e-marker-icons-mode +1)))
+
+(setup mu4e-thread
+  (:when-loaded
+    (:with-map mu4e-thread-mode-map
+      (:keymap-unset "C-<tab>" t))))
 
 (setup mu4e-update
   (:snoc
