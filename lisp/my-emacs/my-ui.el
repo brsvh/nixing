@@ -251,6 +251,16 @@
 
 
 ;;;
+;; Core:
+
+(setup emacs
+  (:set
+   ;; Inhibit using dialog boxes.
+   use-dialog-box nil))
+
+
+
+;;;
 ;; Frame:
 
 (setup menu-bar
