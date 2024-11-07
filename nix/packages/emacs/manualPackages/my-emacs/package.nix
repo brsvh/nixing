@@ -142,6 +142,32 @@ let
                                   load-path))))
   '';
 
+  funcs = writeText "funcs.sh" ''
+    addToEmacsLoadPath() {
+      local lispDir="$1"
+      if [[ -d $lispDir && ''\${EMACSLOADPATH-} != *"$lispDir":* ]] ; then
+        # It turns out, that the trailing : is actually required
+        # see https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Search.html
+        export EMACSLOADPATH="$lispDir:''\${EMACSLOADPATH-}"
+      fi
+    }
+
+    addToEmacsNativeLoadPath() {
+      local nativeDir="$1"
+      if [[ -d $nativeDir && ''\${EMACSNATIVELOADPATH-} != *"$nativeDir":* ]]; then
+        export EMACSNATIVELOADPATH="$nativeDir:''\${EMACSNATIVELOADPATH-}"
+      fi
+    }
+
+    addEmacsVars () {
+      addToEmacsLoadPath "$1/share/emacs/site-lisp"
+
+      if [ -n "''\${addEmacsNativeLoadPath:-}" ]; then
+        addToEmacsNativeLoadPath "$1/share/emacs/native-lisp"
+      fi
+    }
+  '';
+
   treeSitterGrammarsPath = linkFarm "treesit-grammars" (
     map
       (drv: {
@@ -277,18 +303,44 @@ trivialBuild rec {
   buildPhase = ''
     runHook preBuild
 
-    emacs -l package -l "${mk}" -f package-initialize --eval "(mk-subdirs-expr \"$PWD\")(add-to-list 'treesit-extra-load-path \"${treeSitterGrammarsPath}\")" -L . --batch -f batch-byte-compile **/*.el
-
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
 
-    LISPDIR=$out/share/emacs/site-lisp
-    mkdir -p $LISPDIR
-    cp -r * $LISPDIR
+    mkdir -p $out/share/emacs/site-lisp
+    cp -r $src $out/share/emacs/site-lisp/my-emacs
+    chmod -R u+w $out/share/emacs/site-lisp/my-emacs
 
-    runHook postInstall
+    find $out/share/emacs -type f -name "*.el" -not -name ".dir-locals.el" -print0 \
+      | xargs --verbose -0 -I {} -n 1 -P $NIX_BUILD_CORES sh -c \
+        "emacs \
+          --batch \
+          -l package \
+          -l \"${mk}\" \
+          -f package-initialize \
+          --eval \"(mk-subdirs-expr \\\"$PWD\\\")\" \
+          -L . \
+          --eval \"(add-to-list 'treesit-extra-load-path \\\"${treeSitterGrammarsPath}\\\")\" \
+          -f batch-byte-compile {}"
+
+    # runHook postInstall
+    # See https://github.com/NixOS/nixpkgs/blob/a842d95951d8aecbfb9350f7e5e9b68b473e796c/pkgs/applications/editors/emacs/build-support/generic.nix#L82-L102
+    mkdir -p $out/share/emacs/native-lisp
+    source ${funcs}
+    addEmacsVars "$out"
+
+    find $out/share/emacs -type f -name "*.el" -not -name ".dir-locals.el" -print0 \
+      | xargs --verbose -0 -I {} -n 1 -P $NIX_BUILD_CORES sh -c \
+          "emacs \
+             --batch \
+             -f package-activate-all \
+             --eval \"(setq native-comp-eln-load-path (cdr native-comp-eln-load-path))\" \
+             --eval \"(let ((default-directory \\\"$out/share/emacs/site-lisp\\\")) (normal-top-level-add-subdirs-to-load-path))\" \
+             --eval \"(setq large-file-warning-threshold nil)\" \
+             --eval \"(setq byte-compile-error-on-warn nil)\" \
+             --eval \"(add-to-list 'treesit-extra-load-path \\\"${treeSitterGrammarsPath}\\\")\" \
+             -f batch-native-compile {}"
   '';
 }
