@@ -54,6 +54,7 @@
   mermaid-mode,
   modus-themes,
   mu4e,
+  mu4e-alert,
   mu4e-marker-icons,
   mwim,
   nerd-icons,
@@ -220,6 +221,7 @@ trivialBuild rec {
     mermaid-mode
     modus-themes
     mu4e
+    mu4e-alert
     mu4e-marker-icons
     mwim
     nerd-icons

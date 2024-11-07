@@ -4,7 +4,7 @@
 
 ;; Author: Burgess Chang <bsc@brsvh.org>
 ;; Keywords: extensions
-;; Package-Requires: ((emacs "29.1") (mu4e "1.12.7"))
+;; Package-Requires: ((emacs "29.1") (mu4e "1.12.7") (my-core "0.2.0"))
 ;; URL: https://github.com/brsvh/my-emacs
 ;; Version: 0.1.50
 
@@ -32,6 +32,7 @@
 (require 'my-core)
 
 (cl-eval-when (compile)
+  (require 'mu4e-alert)
   (require 'mu4e-marker-icons)
   (require 'mu4e-update)
   (require 'simple))
@@ -61,6 +62,21 @@
   (:when-loaded
     (:set
      mail-user-agent 'mu4e-user-agent)))
+
+
+
+;;;
+;; Notification:
+
+(setup mu4e-alert
+  (:autoload mu4e-alert-enable-notifications))
+
+(setup mu4e
+  (:when-loaded
+    (:also-load mu4e-alert)
+    (:when-os (linux)
+      (:set mu4e-alert-set-default-style 'notifications)
+      (mu4e-alert-enable-notifications))))
 
 
 
