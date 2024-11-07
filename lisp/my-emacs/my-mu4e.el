@@ -1,10 +1,10 @@
-;;; my-email.el --- E-Mail support of My Emacs -*- lexical-binding: t -*-
+;;; my-mu4e.el --- `mu4e' enhancements of My Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022-2024 Burgess Chang
 
 ;; Author: Burgess Chang <bsc@brsvh.org>
 ;; Keywords: extensions
-;; Package-Requires: ((emacs "29.1"))
+;; Package-Requires: ((emacs "29.1") (mu4e "1.12.7"))
 ;; URL: https://github.com/brsvh/my-emacs
 ;; Version: 0.1.50
 
@@ -33,7 +33,8 @@
 
 (cl-eval-when (compile)
   (require 'mu4e-marker-icons)
-  (require 'mu4e-update))
+  (require 'mu4e-update)
+  (require 'simple))
 
 
 
@@ -50,9 +51,18 @@
    popper-reference-buffers "\\*mu4e-update\\*")
   (:when-loaded
     (:set
+     ;; Hide annoying "mu4e Retrieving mail..." msg in mini buffer:
+     mu4e-hide-index-messages nil
+
+     ;; Retrieving and indexing messages every 5 minutes.
      mu4e-update-interval 300)))
+
+(setup simple
+  (:when-loaded
+    (:set
+     mail-user-agent 'mu4e-user-agent)))
 
 
 
-(provide 'my-email)
-;;; my-email.el ends here
+(provide 'my-mu4e)
+;;; my-mu4e.el ends here

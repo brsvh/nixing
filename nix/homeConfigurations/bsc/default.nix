@@ -111,11 +111,17 @@
 
   programs =
     let
-      user = config.accounts.email.accounts."${config.home.username}";
+      inherit (config.home)
+        username
+        ;
+
+      user = config.accounts.email.accounts."${username}";
     in
     {
       emacs = {
         extraInitConfig = ''
+          (require 'my-mu4e)
+
           (setup emacs
             (:set
              user-full-name "${user.realName}"
@@ -133,9 +139,35 @@
                "m" #'mu4e))
             (:when-loaded
               (:set
-               mu4e-sent-folder   "/${config.home.username}/Sent"
-               mu4e-drafts-folder "/${config.home.username}/Drafts"
-               mu4e-trash-folder  "/${config.home.username}/Trash")))
+               mu4e-sent-folder   "/${username}/Sent"
+               mu4e-drafts-folder "/${username}/Drafts"
+               mu4e-trash-folder  "/${username}/Trash")))
+
+          (setup mu4e-bookmarks
+            (:when-loaded
+              (:set
+               mu4e-bookmarks
+               '(( :name "${user.realName}'s inbox"
+                   :query "maildir:/${username}/INBOX"
+                   :key ?i)
+                 ( :name "${user.realName}'s drafts"
+                   :query "maildir:/${username}/Drafts"
+                   :key ?d)
+                 ( :name "Unread messages"
+                   :query "flag:unread AND NOT flag:trashed"
+                   :key ?u)
+                 ( :name "Today's messages"
+                   :query "date:today..now"
+                   :key ?t)
+                 ( :name "Last 3 days"
+                   :query "date:3d..now"
+                   :key ?3)
+                 ( :name "Last 7 days"
+                   :query "date:7d..now"
+                   :key ?7)
+                 ( :name "${user.realName}'s sent messages"
+                   :query "maildir:/${username}/Sent"
+                   :key ?s)))))
 
           (setup mu4e-update
             (:when-loaded
@@ -146,11 +178,6 @@
               (:set
                send-mail-function 'sendmail-send-it
                sendmail-program "msmtp")))
-
-          (setup simple
-            (:when-loaded
-              (:set
-               mail-user-agent 'mu4e-user-agent)))
         '';
       };
 
