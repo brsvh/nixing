@@ -89,14 +89,15 @@
 ;; Notification:
 
 (setup mu4e-alert
-  (:autoload mu4e-alert-enable-notifications))
-
-(setup mu4e
+  (:autoload mu4e-alert-enable-notifications)
   (:when-loaded
-    (:also-load mu4e-alert)
     (:when-os (linux)
       (:set mu4e-alert-set-default-style 'notifications)
       (mu4e-alert-enable-notifications))))
+
+(setup mu4e
+  (:when-loaded
+    (:also-load mu4e-alert)))
 
 
 
