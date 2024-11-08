@@ -239,8 +239,8 @@ in
           ];
         };
 
-      output = ".sops.yaml";
       format = "yaml";
+      output = ".sops.yaml";
 
       packages = with pkgs; [
         age
