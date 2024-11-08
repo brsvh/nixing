@@ -83,6 +83,8 @@
 
 (setup org-agenda
   (:autoload org-agenda)
+  (:snoc popper-reference-buffers
+         "\\*Org Agenda\\*$")
   (:with-map ctl-c-a-map
     (:keymap-set
      ;; Show agenda.
